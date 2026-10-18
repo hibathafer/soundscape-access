@@ -8,6 +8,7 @@ import '../direction/probe.dart';
 import '../session/controller.dart';
 import '../session/vibration_service.dart';
 import '../theme.dart';
+import '../ui/flash.dart';
 
 /// The one and only screen — prd.md > Screens and Layout.
 /// Large Start/Stop at the center, small vibration toggle, live area beneath.
@@ -260,7 +261,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final active = _session.sessionActive;
-    final level = _session.currentLevel;
 
     return Scaffold(
       backgroundColor: SoundscapeColors.background,
@@ -276,34 +276,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
             ),
             const SizedBox(height: 8),
-            // Live area: slice 3 fills it with the directional flash.
+            // Live area: slice 3 fills it with the sound pulse (the kernel).
             Expanded(
-              child: Center(
-                child: active
-                    ? Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 160 + 200 * level,
-                            height: 160 + 200 * level,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: proximityColor(level).withValues(
-                                alpha: (0.15 + 0.6 * level).clamp(0.0, 1.0)),
+              child: active
+                  ? Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // The kernel: center-expanding pulse, whole area.
+                        Positioned.fill(
+                          child: SoundPulse(
+                            strength: _session.pulseStrength,
+                            onset: _session.pulseOnset,
+                            rhythm: _session.pulseRhythm,
+                            strike: _session.pulseStrike,
+                          ),
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              _session.pulseStrength > 0
+                                  ? 'Sound — level '
+                                      '${(_session.pulseStrength * 100).round()}%'
+                                  : 'Listening…',
+                              style: const TextStyle(
+                                  color: SoundscapeColors.muted, fontSize: 15),
                             ),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'Listening… level ${(level * 100).round()}%',
-                            style: const TextStyle(
-                                color: SoundscapeColors.muted, fontSize: 15),
-                          ),
-                          const SizedBox(height: 14),
-                          // Slice-2 research readout (temporary debug panel).
-                          if (_probeRunning) _buildProbePanel(),
-                        ],
-                      )
-                    : Text(
+                            const SizedBox(height: 14),
+                            // Slice-2 research readout (temporary debug panel).
+                            if (_probeRunning) _buildProbePanel(),
+                          ],
+                        ),
+                      ],
+                    )
+                  : Text(
                         _permissionBlocked
                             ? 'The microphone is blocked — allow it in '
                                 'Settings to start.'
@@ -312,7 +318,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: const TextStyle(
                             color: SoundscapeColors.muted, fontSize: 16),
                       ),
-              ),
             ),
             // Vibration toggle (manual, simple — prd.md > Vibration).
             SwitchListTile.adaptive(

@@ -46,7 +46,7 @@ PRD ref: `prd.md > The Core Journey`.
 |---|---|---|---|
 | **Flutter + Dart** (learner's choice) | One codebase → Android + iOS; UI framework | Learner: "I want to settle on one language and develop myself" | Platform-specific features (mic, vibration, background) need plugins/bridges — more moving parts than pure native |
 | **YAMNet via `tflite_flutter`** (learner-agreed) | On-device sound classification model (TensorFlow Lite) | Free, offline, private; classes cover our five categories | Medium accuracy — proves the idea, not perfect on every device |
-| **Android (Kotlin) bridge in `android/`** | Host-side code for two-mic capture + foreground service | Android 14 requires real service/permission plumbing Flutter can't do alone | Some logic lives outside Dart — documented below |
+| **Android (Kotlin) bridge in `android/`** | Host-side code for mic capture + foreground service | Android 14 requires real service/permission plumbing Flutter can't do alone | Some logic lives outside Dart — documented below |
 | **`vibration` package** | Simple on/off haptics | Matches the "manual, simple" decision; no patterns | None for this scope |
 
 Documentation links:
@@ -61,7 +61,7 @@ Documentation links:
 
 ## Where It Runs and How Someone Tries It
 
-- **Runtime:** Android app on a real phone. Test device: **Xiaomi 12T Pro, Android 14 (SDK 34)**, connected via USB debugging (verified present: Flutter SDK + ADB on the dev machine). An emulator may be used for pure UI work — it has no real dual-mic setup, so **direction and classification tests run on the real device**.
+- **Runtime:** Android app on a real phone. Test device: **Xiaomi 12T Pro, Android 14 (SDK 34)**, connected via USB debugging (verified present: Flutter SDK + ADB on the dev machine). An emulator may be used for pure UI work — it has no real microphone, so **pulse and classification tests run on the real device**.
 - **Start (developer):** connect the phone → `flutter run` → app installs and opens.
 - **Start (for the demo video / a reviewer):** `flutter build apk` → install the APK on the phone → open **Soundscape Access** → press Start.
 - **Demo recording:** local screen recording of the phone (no deployment needed). Submission requires **a short demo video + a public GitHub repository**; deployment is optional and not chosen here (can be revisited in `6-ship`).
@@ -125,7 +125,7 @@ soundscape-access/
 ├── android/                    # Android host: manifest, permissions, Kotlin bridge
 │   └── app/src/main/
 │       ├── AndroidManifest.xml # RECORD_AUDIO, FOREGROUND_SERVICE(_MICROPHONE), VIBRATE; service type=microphone
-│       └── kotlin/…/           # dual-mic AudioRecord bridge + foreground service
+│       └── kotlin/…/           # AudioRecord bridge + foreground service
 ├── lib/
 │   ├── main.dart               # app entry; dark theme
 │   ├── ui/
