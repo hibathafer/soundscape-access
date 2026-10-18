@@ -23,25 +23,25 @@ Build mode: **fast with learn explanations** — learner chose a hybrid: fast ex
   Learner check: Open the app on your phone, grant the mic permission, press Start, see the "Working now" toast, turn the vibration toggle on and make a sound — feel a buzz; press Stop and confirm it all goes quiet.
   Commit: `Add app shell, permission flow, and live capture session`
 
-- [ ] **2. Direction probe on the real device (critical risk)**
-  Becomes usable: A debug readout while the session runs shows live input levels per microphone source (top/bottom), so we can see on screen what the phone actually hears from a known side. Runnable evidence for or against the direction approach.
+- [x] **2. Direction probe on the real device (critical risk)**
+  Becomes usable: A debug readout while the session runs shows live input levels per microphone source, so we can see on screen what the phone actually hears. Runnable evidence for or against the direction approach. **Result: answered — four rounds proved no directional signal is obtainable on this device; the kernel was revised by learner decision (see Revisions). The probe stayed in the app as research tooling.**
   Why now: This is the spec's recorded "one useful unknown" — two-mic direction on the Xiaomi 12T Pro. Risk-first: if it fails, we revise the plan while almost nothing is built. The spec explicitly makes this build step 1 of the direction work.
-  PRD ref: `prd.md > Directional flash`
-  Spec ref: `spec.md > Components` (Direction Estimator), `spec.md > Decisions and Open Issues` (One useful unknown), `spec.md > Important Failure Modes` (Direction unusable)
-  Build: Kotlin bridge exposing Android `AudioRecord` source levels to Dart; a temporary debug panel printing/plotting per-source levels while the session runs; test protocol: play a sound from a known side, observe the difference. Record the outcome in `spec.md > Decisions and Open Issues`.
-  Verify (mechanical): `flutter analyze` → no issues; run on device; logcat/debug panel prints numeric levels for the available mic sources while a test sound plays — numbers must visibly differ between sides, or the failure is honestly captured and escalated as a plan revision.
-  Learner check: With the debug panel open, play the horn sample from above/below (and left/right if available) and read the numbers with me — do they move apart when the side changes?
-  Commit: `Add two-mic direction probe with on-device readout`
+  PRD ref: `prd.md > Open Questions` (direction — resolved)
+  Spec ref: `spec.md > Decisions and Open Issues` (One useful unknown + OUTCOME), `spec.md > Important Failure Modes` (Direction unusable)
+  Build: Kotlin bridge exposing Android `AudioRecord` source levels to Dart; a temporary debug panel printing/plotting per-source levels while the session runs; test protocol: play a sound from a known side, observe the difference. Record the outcome in `spec.md > Decisions and Open Issues`. Rounds 2–4 widened the search (more sources, stereo, device selection, source × device matrix, phase-marker protocol) after the learner asked for honest retries.
+  Verify (mechanical): `flutter analyze` → no issues; run on device; logcat/debug panel prints numeric levels for the available mic sources while a test sound plays — numbers must visibly differ between sides, or the failure is honestly captured and escalated as a plan revision. **Done: failure captured with 4 rounds of timestamped evidence (`probe_log*.txt`).**
+  Learner check: With the debug panel open, play the horn sample from above/below (and left/right if available) and read the numbers with me — do they move apart when the side changes? **Done across 4 learner-run protocols.**
+  Commit: `Add two-mic direction probe with on-device readout`, `Add device-selection direction probe round 3 (slice 2, decisive)`
 
-- [ ] **3. The kernel ignites — directional flash from real sounds**
-  Becomes usable: With the session running, a real sound produces the live flash: it starts on the sound's side, strongest toward the source, colored by proximity (red very close / orange farther), and fades away as the sound stops or moves. The distinctive thing about this product now exists on screen.
-  Why now: The unique kernel comes early, not last (`scope.md > The Unique Kernel`); slices 1–2 feed it everything it needs (events + direction), and seeing it live is what early learner feedback should shape.
-  PRD ref: `prd.md > Directional flash`, `prd.md > Look and Feel` (color semantics)
-  Spec ref: `spec.md > Components` (Visual Feedback — Flash + Bubbles), `spec.md > Look and Feel`
-  Build: Flash renderer over the live area (side, strength-driven gradient, proximity color from level), fade-out as levels drop, direction input from slice 2's result (or the agreed degraded form if the probe forced a revision); wire the session's events to it.
-  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → unit tests pass for event → side/color/fade mapping; build + install on device; play a sound from one side and confirm (via screenshot/logcat events) the rendered side matches.
-  Learner check: Start the session, play the horn from the right — the flash should ignite on the right in red/orange and fade when the sound stops. Tell me if the direction, strength, and fade feel right.
-  Commit: `Add directional flash with proximity colors and fade`
+- [ ] **3. The kernel ignites — the sound pulse (visual vocabulary)**
+  Becomes usable: With the session running, every real sound ignites the center-expanding pulse: brightness/size follow the sound's strength, color follows loudness (red very loud / orange moderate), a sudden sound produces a sharp fast flash while a gradual one fades in softly, a repeating sound (knocking, beeps) re-strikes the pulse with each ring while a continuous sound holds one sustained pulse, and everything fades back to calm when the sound stops. The distinctive thing about this product now exists on screen — honestly, with no direction claim.
+  Why now: The unique kernel comes early, not last (`scope.md > The Unique Kernel`); slices 1–2 feed it everything it needs (level stream + the documented decision to describe *behavior*, not direction), and seeing it live is what early learner feedback should shape.
+  PRD ref: `prd.md > Sound pulse (the visual vocabulary)`, `prd.md > Look and Feel` (color semantics)
+  Spec ref: `spec.md > Components` (Visual Feedback — Pulse + Bubbles, Sound Behavior Analyzer), `spec.md > Look and Feel`
+  Build: `lib/analyze/behavior.dart` — pure-Dart analyzer over the level stream: onset classification (rise rate), repetition detection (peak intervals), sustain/decay envelope; unit tests with synthetic streams. `lib/ui/flash.dart` — pulse renderer (center-out expansion, strength→brightness/size, loudness→color, onset→sharpness, rhythm→re-strike, fade-out). Wire session events to it.
+  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → analyzer tests pass (sudden vs gradual streams, repeated peaks vs sustained, decay); build + install on device; play a sudden loud sound → sharp bright large pulse; knock repeatedly → visible re-strikes; stop → fade to calm (screenshot/logcat events).
+  Learner check: Start the session and try: one loud clap (should flash sharp and bright), continuous speech (should hold a softer pulse), repeated knocking (should visibly re-strike with each knock), and stopping the sound (should fade out). Tell me if the strength, colors, and rhythm feel right.
+  Commit: `Add sound pulse kernel with behavior analyzer`
 
 - [ ] **4. Sounds get names — YAMNet classification and bubbles**
   Becomes usable: Recognized sounds show their swipeable icon bubble (cars, speech, door, alarm, birds); unclassifiable sounds show the white "?" bubble; two sounds at once show two bubbles; the classifier's five categories are the only ones shown. Bundled labeled samples make every demo repeatable on demand.
@@ -75,7 +75,7 @@ Build mode: **fast with learn explanations** — learner chose a hybrid: fast ex
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — after slice 3 (the flash is live; feedback on direction, strength, colors, and feel shapes slices 4–6)
+- [ ] Early usable behavior explored — after slice 3 (the pulse is live; feedback on strength, colors, onset feel, and rhythm shapes slices 4–6)
 - [ ] Final kick-the-tires exploration and feedback completed — after slice 6
 
 ## Final Review
@@ -98,6 +98,7 @@ Activity mode: [live app and editor, explicit static fallback, focused alternati
 
 - 2026-10-18 (slice 2, research result): **Two-mic direction is not usable on the Xiaomi 12T Pro via `MIC` + `CAMCORDER` sources** — sustained loud sound near one edge gave ~0.0–0.2 dB difference between sources (mean |diff| ~2.4 dB across 220 samples; louder side near-random). Evidence: `probe_log.txt` (timestamped `PROBE bottom=… top=…` lines), probe readout in-app.
 - 2026-10-18 (slice 2, round 2 — learner asked to retry): widened to five inputs (`CAMCORDER`, `MIC`, `VOICE_RECOGNITION`, `UNPROCESSED`, stereo L/R). **Confirmed: no direction signal.** Stereo L==R in 446/446 samples; during sustained loud sound all pairs within ~0.9 dB; large spreads only at onsets with flipping order (timing skew, not space). Evidence: `probe_log_r2.txt`.
-- 2026-10-18 (slice 2, round 3 — decisive device-selection test): the phone exposes **two physical builtin mics as separate devices (id 17, id 19)**, but `setPreferredDevice(19)` was silently redirected to device 17 (`routedDevice` log). micA/micB offset constant ~8–10 dB regardless of sound position = AGC artifacts on one signal. Evidence: `probe_log_r3.txt`. **PLAN REVISION (kernel): direction is removed from the kernel — three rounds show the platform cannot provide it honestly on this device. Options presented to the learner (surround pulse / other honest forms); her decision is pending — recorded here once taken.**
+- 2026-10-18 (slice 2, round 3 — decisive device-selection test): the phone exposes **two physical builtin mics as separate devices (id 17, id 19)**, but when two captures ran together the policy pinned both to one device; micA/micB offset constant ~8–10 dB regardless of sound position = AGC artifacts on one signal. Evidence: `probe_log_r3.txt`.
+- 2026-10-19 (slice 2, round 4 — learner-requested final retry, source × device matrix with phase markers): all four sources (`MIC`, `CAMCORDER`, `VOICE_RECOGNITION`, `UNPROCESSED`) + a no-preference reference **routed to the same single device**; per-phase differences within **±0.2 dB** across the learner-marked protocol (quiet/top/bottom/left/right, ~940 samples); concurrent captures honor only the first capture's device preference. Evidence: `probe_log_r4.txt` (incl. `MicProbe` routing log + `PHASE` markers). **PLAN REVISION RESOLVED (kernel): direction removed — four rounds show the platform cannot provide it honestly on this device. Learner decision after reviewing all evidence: keep the honest core as the "sound pulse (visual vocabulary)" — center-expanding pulse, brightness/size ← strength, color ← loudness, onset shape + rhythm + fade-out ← measured signal behavior. `prd.md > Sound pulse (the visual vocabulary)` and `spec.md > Components` updated; the direction research stands as a documented finding (protocol + logs), not a failure.**
 
 - 2026-10-18 (slice 1, environment): `permission_handler` 13.x requires Android SDK 37, whose platform package is published with a broken identity (`android-37.0`, ApiLevel `37.0`) that Gradle/AGP could not resolve, and the SDK manager kept reinstalling it on every build. Fix chosen: pinned `permission_handler: 12.0.3` (needs SDK ≤ 35; our SDK 36 satisfies it). No behavior difference for our needs (mic request + permanentlyDenied + openAppSettings all available). `flutter analyze` clean, `flutter test` passes, `flutter build apk --debug` succeeds. Learner check on the physical phone still pending (device was not connected via ADB at slice close).

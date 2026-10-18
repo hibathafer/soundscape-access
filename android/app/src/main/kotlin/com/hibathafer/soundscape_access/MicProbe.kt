@@ -55,20 +55,25 @@ class MicProbe(
         }
         val mics = inputs.filter { it.type == AudioDeviceInfo.TYPE_BUILTIN_MIC }
         Log.i(TAG, "BUILTIN_MIC count=${mics.size}")
+        val secondMic = mics.getOrNull(1)
 
-        if (mics.size >= 2) {
-            Log.i(TAG, "PLAN: separate preferred devices micA=${mics[0].id} micB=${mics[1].id}")
-            openPreferred("micA", mics[0])
-            openPreferred("micB", mics[1])
-        } else {
-            Log.i(TAG, "PLAN: fewer than 2 builtin mics — opening one plain MIC as micA")
-            openPlain("micA")
-        }
-
-        // Stereo on UNPROCESSED: the only path that may bypass mixing.
+        // Round 4: source x device matrix. The audio policy may respect
+        // setPreferredDevice for SOME sources even though it ignored MIC.
+        data class Attempt(val label: String, val source: Int)
+        val attempts = mutableListOf(
+            Attempt("mic", MediaRecorder.AudioSource.MIC),
+            Attempt("cam", MediaRecorder.AudioSource.CAMCORDER),
+            Attempt("vrc", MediaRecorder.AudioSource.VOICE_RECOGNITION),
+        )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            openStereo("u", MediaRecorder.AudioSource.UNPROCESSED)
+            attempts += Attempt("unp", MediaRecorder.AudioSource.UNPROCESSED)
         }
+        for (a in attempts) {
+            if (secondMic != null) openPreferred(a.label, a.source, secondMic)
+            else openPlain(a.label, a.source)
+        }
+        // Baseline reference: plain MIC with no device preference.
+        openPlain("ref", MediaRecorder.AudioSource.MIC)
 
         if (records.isEmpty()) {
             stop()
@@ -139,14 +144,14 @@ class MicProbe(
     }
 
     @SuppressLint("MissingPermission")
-    private fun openPreferred(label: String, device: AudioDeviceInfo) {
+    private fun openPreferred(label: String, source: Int, device: AudioDeviceInfo) {
         val minBuf = AudioRecord.getMinBufferSize(
             sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT
         )
         if (minBuf == AudioRecord.ERROR || minBuf == AudioRecord.ERROR_BAD_VALUE) return
         val rec = try {
             AudioRecord(
-                MediaRecorder.AudioSource.MIC, sampleRate,
+                source, sampleRate,
                 AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT,
                 maxOf(minBuf * 2, 3200)
             )
@@ -157,14 +162,14 @@ class MicProbe(
     }
 
     @SuppressLint("MissingPermission")
-    private fun openPlain(label: String) {
+    private fun openPlain(label: String, source: Int) {
         val minBuf = AudioRecord.getMinBufferSize(
             sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT
         )
         if (minBuf == AudioRecord.ERROR || minBuf == AudioRecord.ERROR_BAD_VALUE) return
         val rec = try {
             AudioRecord(
-                MediaRecorder.AudioSource.MIC, sampleRate,
+                source, sampleRate,
                 AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT,
                 maxOf(minBuf * 2, 3200)
             )
@@ -173,7 +178,7 @@ class MicProbe(
     }
 
     @SuppressLint("MissingPermission")
-    private fun openStereo(label: String, source: Int) {
+    private fun openStereoUnused(label: String, source: Int) {
         val minBuf = AudioRecord.getMinBufferSize(
             sampleRate, AudioFormat.CHANNEL_IN_STEREO, AudioFormat.ENCODING_PCM_16BIT
         )

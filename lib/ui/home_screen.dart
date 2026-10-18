@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
   /// Round 2: adds vrec / unprocessed / stereo channels — any signal that
   /// might carry direction after round 1 showed MIC+CAMCORDER are mixed.
   Widget _buildProbePanel() {
-    const order = ['micA', 'micB', 'uL', 'uR', 'top', 'bottom', 'stL', 'stR', 'vrec', 'unproc'];
+    const order = ['mic', 'cam', 'vrc', 'unp', 'ref', 'micA', 'micB', 'uL', 'uR', 'top', 'bottom', 'stL', 'stR', 'vrec', 'unproc'];
     final present = order.where((k) => _probeLevels.containsKey(k)).toList();
 
     double norm(double? db) => (((db ?? -160) + 80) / 80).clamp(0.0, 1.0);
@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Direction probe r2 (research)',
+          const Text('Direction probe r4 (research)',
               style: TextStyle(
                   color: SoundscapeColors.ink,
                   fontWeight: FontWeight.w700,
@@ -194,6 +194,28 @@ class _HomeScreenState extends State<HomeScreen> {
             _probeBar(k, norm(_probeLevels[k]), _probeLevels[k]),
             const SizedBox(height: 6),
           ],
+          const SizedBox(height: 6),
+          // Round-4 phase markers: tap while sounding so the logcat
+          // analysis aligns exactly with each protocol phase.
+          const Text('Mark phase (tap while sounding):',
+              style: TextStyle(color: SoundscapeColors.muted, fontSize: 12)),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: [
+              for (final p in ['quiet', 'bottom', 'top', 'left', 'right'])
+                ActionChip(
+                  label: Text(p,
+                      style: const TextStyle(
+                          fontSize: 12, color: SoundscapeColors.ink)),
+                  backgroundColor: const Color(0xFF0F1720),
+                  side: const BorderSide(color: Color(0xFF2B3B4E)),
+                  onPressed: () => debugPrint('PHASE $p MARK'),
+                ),
+            ],
+          ),
+          const SizedBox(height: 8),
           Text(verdict,
               style:
                   const TextStyle(color: SoundscapeColors.muted, fontSize: 13)),

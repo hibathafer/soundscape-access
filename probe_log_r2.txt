@@ -455,3 +455,1382 @@
 10-18 22:52:04.680 I/flutter (31765): PROBE stR=62.1 stL=62.1 top=61.7 vrec=60.6 unproc=61.1 bottom=62.6
 10-18 22:52:04.780 I/flutter (31765): PROBE stR=62.9 stL=62.9 top=63.1 vrec=62.7 unproc=63.2 bottom=63.2
 10-18 22:52:04.882 I/flutter (31765): PROBE stR=62.1 stL=62.1 top=62.2 vrec=62.9 unproc=62.5 bottom=62.0
+10-18 23:07:12.758 I/flutter ( 3080): [IMPORTANT:flutter/shell/platform/android/android_context_vk_impeller.cc(62)] Using the Impeller rendering backend (Vulkan).
+10-18 23:07:12.787 I/flutter ( 3080): The Dart VM service is listening on http://127.0.0.1:40405/IByOcYic5ww=/
+10-18 23:07:21.644 I/flutter ( 3080): PROBE uR=-160.0 uL=-160.0
+10-18 23:07:21.747 I/flutter ( 3080): PROBE uR=-160.0 uL=-160.0
+10-18 23:07:21.849 I/flutter ( 3080): PROBE uR=29.8 uL=31.6
+10-18 23:07:21.941 I/flutter ( 3080): PROBE uR=34.5 uL=32.4
+10-18 23:07:22.041 I/flutter ( 3080): PROBE uR=16.5 uL=18.0
+10-18 23:07:22.149 I/flutter ( 3080): PROBE uR=-160.0 micA=24.0 uL=-160.0
+10-18 23:07:22.241 I/flutter ( 3080): PROBE micB=-160.0 micA=30.4 uR=37.8 uL=37.8
+10-18 23:07:22.351 I/flutter ( 3080): PROBE micB=50.9 micA=30.4 uR=40.7 uL=40.7
+10-18 23:07:22.442 I/flutter ( 3080): PROBE micB=50.9 micA=41.3 uR=41.2 uL=41.2
+10-18 23:07:22.542 I/flutter ( 3080): PROBE micB=51.6 micA=41.3 uR=38.8 uL=38.8
+10-18 23:07:22.661 I/flutter ( 3080): PROBE micB=51.6 micA=43.0 uR=45.7 uL=45.7
+10-18 23:07:22.743 I/flutter ( 3080): PROBE micB=55.9 micA=43.0 uR=46.3 uL=46.3
+10-18 23:07:22.854 I/flutter ( 3080): PROBE micB=55.9 micA=47.5 uR=49.4 uL=49.4
+10-18 23:07:22.958 I/flutter ( 3080): PROBE micB=62.8 micA=47.5 uR=51.6 uL=51.6
+10-18 23:07:23.160 I/flutter ( 3080): PROBE micB=59.2 micA=50.0 uR=47.5 uL=47.5
+10-18 23:07:23.251 I/flutter ( 3080): PROBE micB=59.2 micA=46.7 uR=42.8 uL=42.8
+10-18 23:07:23.350 I/flutter ( 3080): PROBE micB=55.3 micA=46.7 uR=43.4 uL=43.4
+10-18 23:07:23.445 I/flutter ( 3080): PROBE micB=55.3 micA=41.9 uR=39.5 uL=39.5
+10-18 23:07:23.550 I/flutter ( 3080): PROBE micB=51.4 micA=41.9 uR=45.8 uL=45.8
+10-18 23:07:23.652 I/flutter ( 3080): PROBE micB=51.4 micA=44.5 uR=42.5 uL=42.5
+10-18 23:07:23.752 I/flutter ( 3080): PROBE micB=56.2 micA=44.5 uR=44.2 uL=44.2
+10-18 23:07:23.851 I/flutter ( 3080): PROBE micB=56.2 micA=44.9 uR=46.1 uL=46.1
+10-18 23:07:23.951 I/flutter ( 3080): PROBE micB=57.4 micA=44.9 uR=47.4 uL=47.4
+10-18 23:07:24.046 I/flutter ( 3080): PROBE micB=57.4 micA=46.0 uR=43.4 uL=43.4
+10-18 23:07:24.147 I/flutter ( 3080): PROBE micB=55.9 micA=46.0 uR=44.4 uL=44.4
+10-18 23:07:24.246 I/flutter ( 3080): PROBE micB=55.9 micA=45.0 uR=45.7 uL=45.7
+10-18 23:07:24.348 I/flutter ( 3080): PROBE micB=55.3 micA=45.0 uR=39.9 uL=39.9
+10-18 23:07:24.447 I/flutter ( 3080): PROBE micB=55.3 micA=40.2 uR=39.2 uL=39.2
+10-18 23:07:24.548 I/flutter ( 3080): PROBE micB=45.0 micA=40.2 uR=38.4 uL=38.4
+10-18 23:07:24.648 I/flutter ( 3080): PROBE micB=45.0 micA=40.8 uR=43.0 uL=43.0
+10-18 23:07:24.748 I/flutter ( 3080): PROBE micB=53.2 micA=40.8 uR=42.2 uL=42.2
+10-18 23:07:24.848 I/flutter ( 3080): PROBE micB=53.2 micA=41.6 uR=39.5 uL=39.5
+10-18 23:07:24.961 I/flutter ( 3080): PROBE micB=47.6 micA=41.6 uR=36.9 uL=36.9
+10-18 23:07:25.048 I/flutter ( 3080): PROBE micB=47.6 micA=37.7 uR=38.7 uL=38.7
+10-18 23:07:25.156 I/flutter ( 3080): PROBE micB=45.8 micA=37.7 uR=39.7 uL=39.7
+10-18 23:07:25.257 I/flutter ( 3080): PROBE micB=45.8 micA=39.9 uR=40.1 uL=40.1
+10-18 23:07:25.354 I/flutter ( 3080): PROBE micB=49.6 micA=39.9 uR=39.3 uL=39.3
+10-18 23:07:25.465 I/flutter ( 3080): PROBE micB=49.6 micA=38.9 uR=38.6 uL=38.6
+10-18 23:07:25.550 I/flutter ( 3080): PROBE micB=44.0 micA=38.9 uR=36.0 uL=36.0
+10-18 23:07:25.652 I/flutter ( 3080): PROBE micB=44.0 micA=37.0 uR=37.0 uL=37.0
+10-18 23:07:25.751 I/flutter ( 3080): PROBE micB=40.6 micA=37.0 uR=37.0 uL=37.0
+10-18 23:07:25.859 I/flutter ( 3080): PROBE micB=40.6 micA=37.1 uR=37.2 uL=37.2
+10-18 23:07:25.951 I/flutter ( 3080): PROBE micB=41.9 micA=37.1 uR=36.9 uL=36.9
+10-18 23:07:26.053 I/flutter ( 3080): PROBE micB=41.9 micA=36.4 uR=36.2 uL=36.2
+10-18 23:07:26.152 I/flutter ( 3080): PROBE micB=41.6 micA=36.4 uR=38.4 uL=38.4
+10-18 23:07:26.251 I/flutter ( 3080): PROBE micB=41.6 micA=38.7 uR=39.2 uL=39.2
+10-18 23:07:26.352 I/flutter ( 3080): PROBE micB=49.4 micA=38.7 uR=37.9 uL=37.9
+10-18 23:07:26.452 I/flutter ( 3080): PROBE micB=49.4 micA=38.5 uR=38.9 uL=38.9
+10-18 23:07:26.552 I/flutter ( 3080): PROBE micB=45.8 micA=38.5 uR=38.8 uL=38.8
+10-18 23:07:26.652 I/flutter ( 3080): PROBE micB=45.8 micA=38.0 uR=36.4 uL=36.4
+10-18 23:07:26.762 I/flutter ( 3080): PROBE micB=44.4 micA=38.0 uR=37.1 uL=37.1
+10-18 23:07:26.854 I/flutter ( 3080): PROBE micB=44.4 micA=38.2 uR=39.4 uL=39.4
+10-18 23:07:26.954 I/flutter ( 3080): PROBE micB=51.5 micA=38.2 uR=43.7 uL=43.7
+10-18 23:07:27.055 I/flutter ( 3080): PROBE micB=51.5 micA=45.5 uR=47.2 uL=47.2
+10-18 23:07:27.159 I/flutter ( 3080): PROBE micB=60.4 micA=45.5 uR=50.0 uL=50.0
+10-18 23:07:27.256 I/flutter ( 3080): PROBE micB=60.4 micA=48.3 uR=46.6 uL=46.6
+10-18 23:07:27.359 I/flutter ( 3080): PROBE micB=61.2 micA=48.3 uR=52.4 uL=52.4
+10-18 23:07:27.455 I/flutter ( 3080): PROBE micB=61.2 micA=53.1 uR=53.6 uL=53.6
+10-18 23:07:27.561 I/flutter ( 3080): PROBE micB=63.6 micA=53.1 uR=43.2 uL=43.2
+10-18 23:07:27.657 I/flutter ( 3080): PROBE micB=63.6 micA=52.5 uR=55.3 uL=55.3
+10-18 23:07:27.758 I/flutter ( 3080): PROBE micB=64.5 micA=52.5 uR=43.1 uL=43.1
+10-18 23:07:27.858 I/flutter ( 3080): PROBE micB=64.5 micA=52.1 uR=56.8 uL=56.8
+10-18 23:07:27.959 I/flutter ( 3080): PROBE micB=68.2 micA=52.1 uR=56.0 uL=56.0
+10-18 23:07:28.059 I/flutter ( 3080): PROBE micB=68.2 micA=55.6 uR=51.9 uL=51.9
+10-18 23:07:28.159 I/flutter ( 3080): PROBE micB=62.7 micA=55.6 uR=46.6 uL=46.6
+10-18 23:07:28.259 I/flutter ( 3080): PROBE micB=62.7 micA=46.2 uR=44.3 uL=44.3
+10-18 23:07:28.361 I/flutter ( 3080): PROBE micB=56.6 micA=46.2 uR=45.7 uL=45.7
+10-18 23:07:28.460 I/flutter ( 3080): PROBE micB=56.6 micA=44.2 uR=42.0 uL=42.0
+10-18 23:07:28.562 I/flutter ( 3080): PROBE micB=54.0 micA=44.2 uR=42.8 uL=42.8
+10-18 23:07:28.661 I/flutter ( 3080): PROBE micB=54.0 micA=43.7 uR=44.5 uL=44.5
+10-18 23:07:28.761 I/flutter ( 3080): PROBE micB=57.0 micA=43.7 uR=48.6 uL=48.6
+10-18 23:07:28.863 I/flutter ( 3080): PROBE micB=57.0 micA=48.9 uR=51.9 uL=51.9
+10-18 23:07:28.962 I/flutter ( 3080): PROBE micB=64.1 micA=48.9 uR=52.8 uL=52.8
+10-18 23:07:29.063 I/flutter ( 3080): PROBE micB=64.1 micA=53.3 uR=52.6 uL=52.6
+10-18 23:07:29.163 I/flutter ( 3080): PROBE micB=62.3 micA=53.3 uR=44.2 uL=44.2
+10-18 23:07:29.263 I/flutter ( 3080): PROBE micB=62.3 micA=47.9 uR=49.7 uL=49.7
+10-18 23:07:29.363 I/flutter ( 3080): PROBE micB=61.9 micA=47.9 uR=51.3 uL=51.3
+10-18 23:07:29.464 I/flutter ( 3080): PROBE micB=61.9 micA=50.2 uR=48.4 uL=48.4
+10-18 23:07:29.565 I/flutter ( 3080): PROBE micB=58.9 micA=50.2 uR=42.8 uL=42.8
+10-18 23:07:29.665 I/flutter ( 3080): PROBE micB=58.9 micA=45.9 uR=48.1 uL=48.1
+10-18 23:07:29.764 I/flutter ( 3080): PROBE micB=59.7 micA=45.9 uR=49.5 uL=49.5
+10-18 23:07:29.865 I/flutter ( 3080): PROBE micB=59.7 micA=49.5 uR=51.0 uL=51.0
+10-18 23:07:29.966 I/flutter ( 3080): PROBE micB=63.0 micA=49.5 uR=50.7 uL=50.7
+10-18 23:07:30.065 I/flutter ( 3080): PROBE micB=63.0 micA=52.8 uR=54.2 uL=54.2
+10-18 23:07:30.165 I/flutter ( 3080): PROBE micB=64.8 micA=52.8 uR=51.9 uL=51.9
+10-18 23:07:30.266 I/flutter ( 3080): PROBE micB=64.8 micA=51.2 uR=49.0 uL=49.0
+10-18 23:07:30.367 I/flutter ( 3080): PROBE micB=60.3 micA=51.2 uR=46.4 uL=46.4
+10-18 23:07:30.467 I/flutter ( 3080): PROBE micB=60.3 micA=47.8 uR=51.1 uL=51.1
+10-18 23:07:30.567 I/flutter ( 3080): PROBE micB=62.0 micA=47.8 uR=48.9 uL=48.9
+10-18 23:07:30.667 I/flutter ( 3080): PROBE micB=62.0 micA=50.0 uR=48.5 uL=48.5
+10-18 23:07:30.768 I/flutter ( 3080): PROBE micB=59.0 micA=50.0 uR=45.6 uL=45.6
+10-18 23:07:30.868 I/flutter ( 3080): PROBE micB=59.0 micA=44.7 uR=36.3 uL=36.3
+10-18 23:07:30.969 I/flutter ( 3080): PROBE micB=45.9 micA=44.7 uR=39.8 uL=39.8
+10-18 23:07:31.070 I/flutter ( 3080): PROBE micB=45.9 micA=39.3 uR=40.1 uL=40.1
+10-18 23:07:31.170 I/flutter ( 3080): PROBE micB=46.6 micA=39.3 uR=36.5 uL=36.5
+10-18 23:07:31.270 I/flutter ( 3080): PROBE micB=46.6 micA=39.2 uR=39.8 uL=39.8
+10-18 23:07:31.371 I/flutter ( 3080): PROBE micB=50.0 micA=39.2 uR=45.2 uL=45.2
+10-18 23:07:31.472 I/flutter ( 3080): PROBE micB=50.0 micA=43.8 uR=42.2 uL=42.2
+10-18 23:07:31.572 I/flutter ( 3080): PROBE micB=54.7 micA=43.8 uR=42.2 uL=42.2
+10-18 23:07:31.672 I/flutter ( 3080): PROBE micB=54.7 micA=41.4 uR=41.0 uL=41.0
+10-18 23:07:31.772 I/flutter ( 3080): PROBE micB=54.1 micA=41.4 uR=46.9 uL=46.9
+10-18 23:07:31.873 I/flutter ( 3080): PROBE micB=54.1 micA=45.5 uR=43.7 uL=43.7
+10-18 23:07:31.974 I/flutter ( 3080): PROBE micB=54.7 micA=45.5 uR=40.3 uL=40.3
+10-18 23:07:32.073 I/flutter ( 3080): PROBE micB=54.7 micA=39.9 uR=36.9 uL=36.9
+10-18 23:07:32.174 I/flutter ( 3080): PROBE micB=44.0 micA=39.9 uR=36.7 uL=36.7
+10-18 23:07:32.274 I/flutter ( 3080): PROBE micB=44.0 micA=38.7 uR=41.7 uL=41.7
+10-18 23:07:32.375 I/flutter ( 3080): PROBE micB=53.0 micA=38.7 uR=42.2 uL=42.2
+10-18 23:07:32.475 I/flutter ( 3080): PROBE micB=53.0 micA=42.6 uR=44.3 uL=44.3
+10-18 23:07:32.575 I/flutter ( 3080): PROBE micB=57.2 micA=42.6 uR=49.1 uL=49.1
+10-18 23:07:32.676 I/flutter ( 3080): PROBE micB=57.2 micA=49.2 uR=48.9 uL=48.9
+10-18 23:07:32.777 I/flutter ( 3080): PROBE micB=59.9 micA=49.2 uR=43.7 uL=43.7
+10-18 23:07:32.879 I/flutter ( 3080): PROBE micB=59.9 micA=42.6 uR=39.9 uL=39.9
+10-18 23:07:32.979 I/flutter ( 3080): PROBE micB=53.9 micA=42.6 uR=46.1 uL=46.1
+10-18 23:07:33.079 I/flutter ( 3080): PROBE micB=53.9 micA=46.6 uR=47.5 uL=47.5
+10-18 23:07:33.180 I/flutter ( 3080): PROBE micB=57.9 micA=46.6 uR=44.0 uL=44.0
+10-18 23:07:33.281 I/flutter ( 3080): PROBE micB=57.9 micA=42.9 uR=38.5 uL=38.5
+10-18 23:07:33.381 I/flutter ( 3080): PROBE micB=54.5 micA=42.9 uR=45.9 uL=45.9
+10-18 23:07:33.481 I/flutter ( 3080): PROBE micB=54.5 micA=47.9 uR=49.8 uL=49.8
+10-18 23:07:33.582 I/flutter ( 3080): PROBE micB=61.4 micA=47.9 uR=49.9 uL=49.9
+10-18 23:07:33.682 I/flutter ( 3080): PROBE micB=61.4 micA=47.9 uR=41.1 uL=41.1
+10-18 23:07:33.782 I/flutter ( 3080): PROBE micB=53.2 micA=47.9 uR=36.4 uL=36.4
+10-18 23:07:33.883 I/flutter ( 3080): PROBE micB=53.2 micA=36.8 uR=37.0 uL=37.0
+10-18 23:07:33.984 I/flutter ( 3080): PROBE micB=39.2 micA=36.8 uR=36.2 uL=36.2
+10-18 23:07:34.083 I/flutter ( 3080): PROBE micB=39.2 micA=36.5 uR=36.7 uL=36.7
+10-18 23:07:34.185 I/flutter ( 3080): PROBE micB=37.4 micA=36.5 uR=35.9 uL=35.9
+10-18 23:07:34.285 I/flutter ( 3080): PROBE micB=37.4 micA=36.3 uR=37.6 uL=37.6
+10-18 23:07:34.386 I/flutter ( 3080): PROBE micB=41.4 micA=36.3 uR=37.6 uL=37.6
+10-18 23:07:34.485 I/flutter ( 3080): PROBE micB=41.4 micA=37.9 uR=37.4 uL=37.4
+10-18 23:07:34.586 I/flutter ( 3080): PROBE micB=46.1 micA=37.9 uR=37.9 uL=37.9
+10-18 23:07:34.687 I/flutter ( 3080): PROBE micB=46.1 micA=37.4 uR=37.1 uL=37.1
+10-18 23:07:34.788 I/flutter ( 3080): PROBE micB=43.9 micA=37.4 uR=37.5 uL=37.5
+10-18 23:07:34.888 I/flutter ( 3080): PROBE micB=43.9 micA=37.4 uR=37.4 uL=37.4
+10-18 23:07:34.988 I/flutter ( 3080): PROBE micB=41.2 micA=37.4 uR=36.8 uL=36.8
+10-18 23:07:35.088 I/flutter ( 3080): PROBE micB=41.2 micA=37.6 uR=38.3 uL=38.3
+10-18 23:07:35.189 I/flutter ( 3080): PROBE micB=41.6 micA=37.6 uR=35.7 uL=35.7
+10-18 23:07:35.289 I/flutter ( 3080): PROBE micB=41.6 micA=36.7 uR=36.8 uL=36.8
+10-18 23:07:35.389 I/flutter ( 3080): PROBE micB=43.5 micA=36.7 uR=38.3 uL=38.3
+10-18 23:07:35.490 I/flutter ( 3080): PROBE micB=43.5 micA=38.3 uR=39.8 uL=39.8
+10-18 23:07:35.589 I/flutter ( 3080): PROBE micB=50.9 micA=38.3 uR=42.6 uL=42.6
+10-18 23:07:35.691 I/flutter ( 3080): PROBE micB=50.9 micA=41.5 uR=40.0 uL=40.0
+10-18 23:07:35.791 I/flutter ( 3080): PROBE micB=51.1 micA=41.5 uR=43.7 uL=43.7
+10-18 23:07:35.892 I/flutter ( 3080): PROBE micB=51.1 micA=45.4 uR=47.2 uL=47.2
+10-18 23:07:35.993 I/flutter ( 3080): PROBE micB=57.8 micA=45.4 uR=43.3 uL=43.3
+10-18 23:07:36.092 I/flutter ( 3080): PROBE micB=57.8 micA=42.6 uR=37.5 uL=37.5
+10-18 23:07:36.193 I/flutter ( 3080): PROBE micB=45.4 micA=42.6 uR=38.5 uL=38.5
+10-18 23:07:36.293 I/flutter ( 3080): PROBE micB=45.4 micA=37.4 uR=36.6 uL=36.6
+10-18 23:07:36.394 I/flutter ( 3080): PROBE micB=43.8 micA=37.4 uR=37.5 uL=37.5
+10-18 23:07:36.496 I/flutter ( 3080): PROBE micB=43.8 micA=38.6 uR=39.3 uL=39.3
+10-18 23:07:36.597 I/flutter ( 3080): PROBE micB=43.9 micA=38.6 uR=38.6 uL=38.6
+10-18 23:07:36.697 I/flutter ( 3080): PROBE micB=43.9 micA=42.3 uR=46.4 uL=46.4
+10-18 23:07:36.797 I/flutter ( 3080): PROBE micB=58.4 micA=42.3 uR=48.1 uL=48.1
+10-18 23:07:36.899 I/flutter ( 3080): PROBE micB=58.4 micA=47.3 uR=44.1 uL=44.1
+10-18 23:07:37.000 I/flutter ( 3080): PROBE micB=54.7 micA=47.3 uR=36.9 uL=36.9
+10-18 23:07:37.101 I/flutter ( 3080): PROBE micB=54.7 micA=37.4 uR=37.3 uL=37.3
+10-18 23:07:37.202 I/flutter ( 3080): PROBE micB=40.6 micA=37.4 uR=37.1 uL=37.1
+10-18 23:07:37.301 I/flutter ( 3080): PROBE micB=40.6 micA=37.4 uR=38.3 uL=38.3
+10-18 23:07:37.402 I/flutter ( 3080): PROBE micB=41.9 micA=37.4 uR=35.8 uL=35.8
+10-18 23:07:37.502 I/flutter ( 3080): PROBE micB=41.9 micA=37.3 uR=37.8 uL=37.8
+10-18 23:07:37.602 I/flutter ( 3080): PROBE micB=36.1 micA=37.3 uR=37.6 uL=37.6
+10-18 23:07:37.703 I/flutter ( 3080): PROBE micB=36.1 micA=42.4 uR=46.9 uL=46.9
+10-18 23:07:37.804 I/flutter ( 3080): PROBE micB=58.4 micA=42.4 uR=48.1 uL=48.1
+10-18 23:07:37.904 I/flutter ( 3080): PROBE micB=58.4 micA=47.0 uR=43.6 uL=43.6
+10-18 23:07:38.004 I/flutter ( 3080): PROBE micB=59.5 micA=47.0 uR=50.2 uL=50.2
+10-18 23:07:38.104 I/flutter ( 3080): PROBE micB=59.5 micA=48.1 uR=43.6 uL=43.6
+10-18 23:07:38.205 I/flutter ( 3080): PROBE micB=54.9 micA=48.1 uR=44.7 uL=44.7
+10-18 23:07:38.305 I/flutter ( 3080): PROBE micB=54.9 micA=45.6 uR=46.8 uL=46.8
+10-18 23:07:38.405 I/flutter ( 3080): PROBE micB=56.2 micA=45.6 uR=43.7 uL=43.7
+10-18 23:07:38.506 I/flutter ( 3080): PROBE micB=56.2 micA=43.8 uR=42.2 uL=42.2
+10-18 23:07:38.606 I/flutter ( 3080): PROBE micB=55.1 micA=43.8 uR=46.4 uL=46.4
+10-18 23:07:38.707 I/flutter ( 3080): PROBE micB=55.1 micA=44.3 uR=40.2 uL=40.2
+10-18 23:07:38.807 I/flutter ( 3080): PROBE micB=52.8 micA=44.3 uR=44.9 uL=44.9
+10-18 23:07:38.908 I/flutter ( 3080): PROBE micB=52.8 micA=44.7 uR=44.4 uL=44.4
+10-18 23:07:39.009 I/flutter ( 3080): PROBE micB=55.8 micA=44.7 uR=45.5 uL=45.5
+10-18 23:07:39.110 I/flutter ( 3080): PROBE micB=55.8 micA=48.7 uR=51.4 uL=51.4
+10-18 23:07:39.209 I/flutter ( 3080): PROBE micB=62.4 micA=48.7 uR=49.6 uL=49.6
+10-18 23:07:39.310 I/flutter ( 3080): PROBE micB=62.4 micA=48.6 uR=44.6 uL=44.6
+10-18 23:07:39.411 I/flutter ( 3080): PROBE micB=56.3 micA=48.6 uR=45.2 uL=45.2
+10-18 23:07:39.510 I/flutter ( 3080): PROBE micB=56.3 micA=43.9 uR=41.9 uL=41.9
+10-18 23:07:39.611 I/flutter ( 3080): PROBE micB=51.9 micA=43.9 uR=39.6 uL=39.6
+10-18 23:07:39.712 I/flutter ( 3080): PROBE micB=51.9 micA=39.5 uR=38.9 uL=38.9
+10-18 23:07:39.812 I/flutter ( 3080): PROBE micB=43.7 micA=39.5 uR=37.7 uL=37.7
+10-18 23:07:39.914 I/flutter ( 3080): PROBE micB=43.7 micA=37.7 uR=37.7 uL=37.7
+10-18 23:07:40.013 I/flutter ( 3080): PROBE micB=47.9 micA=37.7 uR=43.1 uL=43.1
+10-18 23:07:40.115 I/flutter ( 3080): PROBE micB=47.9 micA=41.8 uR=41.1 uL=41.1
+10-18 23:07:40.217 I/flutter ( 3080): PROBE micB=53.6 micA=41.8 uR=44.7 uL=44.7
+10-18 23:07:40.316 I/flutter ( 3080): PROBE micB=53.6 micA=44.4 uR=44.6 uL=44.6
+10-18 23:07:40.417 I/flutter ( 3080): PROBE micB=57.6 micA=44.4 uR=47.5 uL=47.5
+10-18 23:07:40.517 I/flutter ( 3080): PROBE micB=57.6 micA=48.4 uR=49.3 uL=49.3
+10-18 23:07:40.618 I/flutter ( 3080): PROBE micB=61.0 micA=48.4 uR=48.7 uL=48.7
+10-18 23:07:40.718 I/flutter ( 3080): PROBE micB=61.0 micA=47.5 uR=45.2 uL=45.2
+10-18 23:07:40.818 I/flutter ( 3080): PROBE micB=56.1 micA=47.5 uR=43.1 uL=43.1
+10-18 23:07:40.918 I/flutter ( 3080): PROBE micB=56.1 micA=41.5 uR=36.9 uL=36.9
+10-18 23:07:41.018 I/flutter ( 3080): PROBE micB=42.6 micA=41.5 uR=37.2 uL=37.2
+10-18 23:07:41.119 I/flutter ( 3080): PROBE micB=42.6 micA=38.5 uR=39.7 uL=39.7
+10-18 23:07:41.219 I/flutter ( 3080): PROBE micB=45.7 micA=37.4 uR=37.1 uL=37.1
+10-18 23:07:41.319 I/flutter ( 3080): PROBE micB=45.7 micA=37.4 uR=37.9 uL=37.9
+10-18 23:07:41.419 I/flutter ( 3080): PROBE micB=44.6 micA=37.9 uR=37.5 uL=37.5
+10-18 23:07:41.521 I/flutter ( 3080): PROBE micB=44.6 micA=37.9 uR=54.8 uL=54.8
+10-18 23:07:41.620 I/flutter ( 3080): PROBE micB=63.1 micA=52.4 uR=45.2 uL=45.2
+10-18 23:07:41.721 I/flutter ( 3080): PROBE micB=63.1 micA=52.4 uR=42.2 uL=42.2
+10-18 23:07:41.821 I/flutter ( 3080): PROBE micB=50.6 micA=37.9 uR=38.2 uL=38.2
+10-18 23:07:41.921 I/flutter ( 3080): PROBE micB=50.6 micA=37.9 uR=37.9 uL=37.9
+10-18 23:07:42.021 I/flutter ( 3080): PROBE micB=63.2 micA=52.4 uR=55.3 uL=55.3
+10-18 23:07:42.121 I/flutter ( 3080): PROBE micB=63.2 micA=52.4 uR=40.0 uL=40.0
+10-18 23:07:42.222 I/flutter ( 3080): PROBE micB=50.4 micA=37.0 uR=37.6 uL=37.6
+10-18 23:07:42.340 I/flutter ( 3080): PROBE micB=50.4 micA=37.0 uR=36.3 uL=36.3
+10-18 23:07:42.423 I/flutter ( 3080): PROBE micB=62.2 micA=50.5 uR=53.4 uL=53.4
+10-18 23:07:42.533 I/flutter ( 3080): PROBE micB=62.2 micA=50.5 uR=38.0 uL=38.0
+10-18 23:07:42.636 I/flutter ( 3080): PROBE micB=44.4 micA=36.9 uR=35.7 uL=35.7
+10-18 23:07:42.731 I/flutter ( 3080): PROBE micB=44.4 micA=36.9 uR=38.1 uL=38.1
+10-18 23:07:42.824 I/flutter ( 3080): PROBE micB=38.9 micA=37.4 uR=37.3 uL=37.3
+10-18 23:07:42.924 I/flutter ( 3080): PROBE micB=38.9 micA=37.4 uR=37.5 uL=37.5
+10-18 23:07:43.024 I/flutter ( 3080): PROBE micB=62.5 micA=51.1 uR=54.0 uL=54.0
+10-18 23:07:43.124 I/flutter ( 3080): PROBE micB=62.5 micA=51.1 uR=38.8 uL=38.8
+10-18 23:07:43.225 I/flutter ( 3080): PROBE micB=59.7 micA=49.2 uR=52.0 uL=52.0
+10-18 23:07:43.325 I/flutter ( 3080): PROBE micB=59.7 micA=49.2 uR=39.3 uL=39.3
+10-18 23:07:43.425 I/flutter ( 3080): PROBE micB=60.4 micA=49.4 uR=52.0 uL=52.0
+10-18 23:07:43.526 I/flutter ( 3080): PROBE micB=60.4 micA=49.4 uR=42.0 uL=42.0
+10-18 23:07:43.626 I/flutter ( 3080): PROBE micB=63.5 micA=52.6 uR=55.5 uL=55.5
+10-18 23:07:43.727 I/flutter ( 3080): PROBE micB=63.5 micA=52.6 uR=51.6 uL=51.6
+10-18 23:07:43.845 I/flutter ( 3080): PROBE micB=60.9 micA=52.4 uR=45.9 uL=45.9
+10-18 23:07:43.944 I/flutter ( 3080): PROBE micB=60.9 micA=52.4 uR=52.5 uL=52.5
+10-18 23:07:44.042 I/flutter ( 3080): PROBE micB=61.8 micA=49.6 uR=47.2 uL=47.2
+10-18 23:07:44.143 I/flutter ( 3080): PROBE micB=61.8 micA=49.6 uR=51.1 uL=51.1
+10-18 23:07:44.242 I/flutter ( 3080): PROBE micB=60.5 micA=46.1 uR=47.1 uL=47.1
+10-18 23:07:44.330 I/flutter ( 3080): PROBE micB=60.5 micA=46.1 uR=45.1 uL=45.1
+10-18 23:07:44.439 I/flutter ( 3080): PROBE micB=58.6 micA=45.7 uR=46.0 uL=46.0
+10-18 23:07:44.540 I/flutter ( 3080): PROBE micB=58.6 micA=45.7 uR=45.9 uL=45.9
+10-18 23:07:44.630 I/flutter ( 3080): PROBE micB=56.0 micA=41.8 uR=42.0 uL=42.0
+10-18 23:07:44.731 I/flutter ( 3080): PROBE micB=56.0 micA=41.8 uR=40.3 uL=40.3
+10-18 23:07:44.832 I/flutter ( 3080): PROBE micB=55.5 micA=46.0 uR=47.3 uL=47.3
+10-18 23:07:44.933 I/flutter ( 3080): PROBE micB=55.5 micA=46.0 uR=43.7 uL=43.7
+10-18 23:07:45.035 I/flutter ( 3080): PROBE micB=55.8 micA=45.5 uR=46.5 uL=46.5
+10-18 23:07:45.135 I/flutter ( 3080): PROBE micB=55.8 micA=45.5 uR=44.9 uL=44.9
+10-18 23:07:45.253 I/flutter ( 3080): PROBE micB=55.5 micA=43.9 uR=43.9 uL=43.9
+10-18 23:07:45.347 I/flutter ( 3080): PROBE micB=55.5 micA=43.9 uR=44.1 uL=44.1
+10-18 23:07:45.449 I/flutter ( 3080): PROBE micB=56.2 micA=45.4 uR=46.7 uL=46.7
+10-18 23:07:45.546 I/flutter ( 3080): PROBE micB=56.2 micA=45.4 uR=43.2 uL=43.2
+10-18 23:07:45.649 I/flutter ( 3080): PROBE micB=58.2 micA=48.8 uR=49.6 uL=49.6
+10-18 23:07:45.745 I/flutter ( 3080): PROBE micB=58.2 micA=48.8 uR=51.8 uL=51.8
+10-18 23:07:45.845 I/flutter ( 3080): PROBE micB=61.7 micA=50.4 uR=46.5 uL=46.5
+10-18 23:07:45.947 I/flutter ( 3080): PROBE micB=61.7 micA=50.4 uR=48.5 uL=48.5
+10-18 23:07:46.044 I/flutter ( 3080): PROBE micB=60.1 micA=48.2 uR=49.0 uL=49.0
+10-18 23:07:46.150 I/flutter ( 3080): PROBE micB=60.1 micA=48.2 uR=59.9 uL=59.9
+10-18 23:07:46.245 I/flutter ( 3080): PROBE micB=65.2 micA=57.2 uR=48.7 uL=48.7
+10-18 23:07:46.343 I/flutter ( 3080): PROBE micB=65.2 micA=57.2 uR=55.4 uL=55.4
+10-18 23:07:46.443 I/flutter ( 3080): PROBE micB=64.6 micA=52.8 uR=52.7 uL=52.7
+10-18 23:07:46.541 I/flutter ( 3080): PROBE micB=64.6 micA=52.8 uR=50.0 uL=50.0
+10-18 23:07:46.641 I/flutter ( 3080): PROBE micB=63.0 micA=54.9 uR=55.6 uL=55.6
+10-18 23:07:46.742 I/flutter ( 3080): PROBE micB=63.0 micA=54.9 uR=42.5 uL=42.5
+10-18 23:07:46.842 I/flutter ( 3080): PROBE micB=63.4 micA=50.6 uR=53.0 uL=53.0
+10-18 23:07:46.942 I/flutter ( 3080): PROBE micB=61.1 micA=50.6 uR=53.9 uL=53.9
+10-18 23:07:47.056 I/flutter ( 3080): PROBE micB=61.1 micA=51.2 uR=41.8 uL=41.8
+10-18 23:07:47.145 I/flutter ( 3080): PROBE micB=60.6 micA=51.2 uR=50.9 uL=50.9
+10-18 23:07:47.254 I/flutter ( 3080): PROBE micB=60.6 micA=48.3 uR=40.6 uL=40.6
+10-18 23:07:47.345 I/flutter ( 3080): PROBE micB=59.0 micA=48.3 uR=38.1 uL=38.1
+10-18 23:07:47.454 I/flutter ( 3080): PROBE micB=59.0 micA=38.5 uR=38.8 uL=38.8
+10-18 23:07:47.546 I/flutter ( 3080): PROBE micB=44.2 micA=38.5 uR=40.0 uL=40.0
+10-18 23:07:47.648 I/flutter ( 3080): PROBE micB=44.2 micA=42.8 uR=44.9 uL=44.9
+10-18 23:07:47.751 I/flutter ( 3080): PROBE micB=57.2 micA=42.8 uR=47.2 uL=47.2
+10-18 23:07:47.850 I/flutter ( 3080): PROBE micB=57.2 micA=45.8 uR=44.8 uL=44.8
+10-18 23:07:47.949 I/flutter ( 3080): PROBE micB=57.1 micA=45.8 uR=49.8 uL=49.8
+10-18 23:07:48.050 I/flutter ( 3080): PROBE micB=57.1 micA=51.3 uR=53.0 uL=53.0
+10-18 23:07:48.149 I/flutter ( 3080): PROBE micB=68.4 micA=51.3 uR=58.6 uL=58.6
+10-18 23:07:48.248 I/flutter ( 3080): PROBE micB=68.4 micA=56.4 uR=51.3 uL=51.3
+10-18 23:07:48.349 I/flutter ( 3080): PROBE micB=64.6 micA=56.4 uR=51.7 uL=51.7
+10-18 23:07:48.449 I/flutter ( 3080): PROBE micB=64.6 micA=49.5 uR=41.6 uL=41.6
+10-18 23:07:48.549 I/flutter ( 3080): PROBE micB=56.2 micA=49.5 uR=48.2 uL=48.2
+10-18 23:07:48.649 I/flutter ( 3080): PROBE micB=56.2 micA=50.5 uR=53.1 uL=53.1
+10-18 23:07:48.750 I/flutter ( 3080): PROBE micB=64.3 micA=50.5 uR=51.4 uL=51.4
+10-18 23:07:48.851 I/flutter ( 3080): PROBE micB=64.3 micA=50.4 uR=45.3 uL=45.3
+10-18 23:07:48.951 I/flutter ( 3080): PROBE micB=58.7 micA=50.4 uR=47.6 uL=47.6
+10-18 23:07:49.051 I/flutter ( 3080): PROBE micB=58.7 micA=47.5 uR=48.3 uL=48.3
+10-18 23:07:49.157 I/flutter ( 3080): PROBE micB=59.3 micA=47.5 uR=45.2 uL=45.2
+10-18 23:07:49.252 I/flutter ( 3080): PROBE micB=59.3 micA=45.6 uR=44.7 uL=44.7
+10-18 23:07:49.353 I/flutter ( 3080): PROBE micB=59.5 micA=45.6 uR=49.4 uL=49.4
+10-18 23:07:49.456 I/flutter ( 3080): PROBE micB=59.5 micA=48.6 uR=47.6 uL=47.6
+10-18 23:07:49.552 I/flutter ( 3080): PROBE micB=57.4 micA=48.6 uR=45.2 uL=45.2
+10-18 23:07:49.653 I/flutter ( 3080): PROBE micB=57.4 micA=44.5 uR=43.4 uL=43.4
+10-18 23:07:49.754 I/flutter ( 3080): PROBE micB=55.2 micA=44.5 uR=61.5 uL=61.5
+10-18 23:07:49.853 I/flutter ( 3080): PROBE micB=55.2 micA=58.7 uR=49.7 uL=49.7
+10-18 23:07:49.954 I/flutter ( 3080): PROBE micB=64.5 micA=58.7 uR=38.2 uL=38.2
+10-18 23:07:50.054 I/flutter ( 3080): PROBE micB=64.5 micA=41.5 uR=44.6 uL=44.6
+10-18 23:07:50.154 I/flutter ( 3080): PROBE micB=56.1 micA=41.5 uR=61.1 uL=61.1
+10-18 23:07:50.254 I/flutter ( 3080): PROBE micB=56.1 micA=63.7 uR=65.4 uL=65.4
+10-18 23:07:50.355 I/flutter ( 3080): PROBE micB=68.1 micA=63.7 uR=50.9 uL=50.9
+10-18 23:07:50.455 I/flutter ( 3080): PROBE micB=68.1 micA=49.9 uR=44.5 uL=44.5
+10-18 23:07:50.556 I/flutter ( 3080): PROBE micB=57.6 micA=49.9 uR=46.8 uL=46.8
+10-18 23:07:50.656 I/flutter ( 3080): PROBE micB=57.6 micA=46.2 uR=46.8 uL=46.8
+10-18 23:07:50.755 I/flutter ( 3080): PROBE micB=65.6 micA=46.2 uR=64.2 uL=64.2
+10-18 23:07:50.857 I/flutter ( 3080): PROBE micB=65.6 micA=61.2 uR=44.6 uL=44.6
+10-18 23:07:50.956 I/flutter ( 3080): PROBE micB=56.5 micA=61.2 uR=46.6 uL=46.6
+10-18 23:07:51.057 I/flutter ( 3080): PROBE micB=56.5 micA=46.1 uR=45.1 uL=45.1
+10-18 23:07:51.158 I/flutter ( 3080): PROBE micB=55.3 micA=46.1 uR=58.2 uL=58.2
+10-18 23:07:51.258 I/flutter ( 3080): PROBE micB=55.3 micA=62.6 uR=64.8 uL=64.8
+10-18 23:07:51.359 I/flutter ( 3080): PROBE micB=66.1 micA=62.6 uR=41.3 uL=41.3
+10-18 23:07:51.459 I/flutter ( 3080): PROBE micB=66.1 micA=42.1 uR=37.8 uL=37.8
+10-18 23:07:51.559 I/flutter ( 3080): PROBE micB=45.0 micA=42.1 uR=38.3 uL=38.3
+10-18 23:07:51.663 I/flutter ( 3080): PROBE micB=45.0 micA=38.1 uR=38.3 uL=38.3
+10-18 23:07:51.759 I/flutter ( 3080): PROBE micB=50.2 micA=38.1 uR=44.9 uL=44.9
+10-18 23:07:51.860 I/flutter ( 3080): PROBE micB=50.2 micA=61.1 uR=64.1 uL=64.1
+10-18 23:07:51.960 I/flutter ( 3080): PROBE micB=67.1 micA=61.1 uR=51.6 uL=51.6
+10-18 23:07:52.060 I/flutter ( 3080): PROBE micB=67.1 micA=50.5 uR=45.6 uL=45.6
+10-18 23:07:52.160 I/flutter ( 3080): PROBE micB=58.4 micA=50.5 uR=46.5 uL=46.5
+10-18 23:07:52.261 I/flutter ( 3080): PROBE micB=58.4 micA=48.5 uR=51.6 uL=51.6
+10-18 23:07:52.361 I/flutter ( 3080): PROBE micB=61.2 micA=48.5 uR=44.7 uL=44.7
+10-18 23:07:52.462 I/flutter ( 3080): PROBE micB=61.2 micA=63.1 uR=66.1 uL=66.1
+10-18 23:07:52.562 I/flutter ( 3080): PROBE micB=66.5 micA=63.1 uR=47.0 uL=47.0
+10-18 23:07:52.662 I/flutter ( 3080): PROBE micB=66.5 micA=47.3 uR=42.0 uL=42.0
+10-18 23:07:52.762 I/flutter ( 3080): PROBE micB=54.7 micA=47.3 uR=44.9 uL=44.9
+10-18 23:07:52.863 I/flutter ( 3080): PROBE micB=54.7 micA=46.0 uR=48.2 uL=48.2
+10-18 23:07:52.963 I/flutter ( 3080): PROBE micB=59.5 micA=46.0 uR=47.7 uL=47.7
+10-18 23:07:53.064 I/flutter ( 3080): PROBE micB=59.5 micA=47.4 uR=45.9 uL=45.9
+10-18 23:07:53.164 I/flutter ( 3080): PROBE micB=56.9 micA=47.4 uR=45.6 uL=45.6
+10-18 23:07:53.265 I/flutter ( 3080): PROBE micB=56.9 micA=45.3 uR=45.6 uL=45.6
+10-18 23:07:53.366 I/flutter ( 3080): PROBE micB=55.8 micA=45.3 uR=42.3 uL=42.3
+10-18 23:07:53.468 I/flutter ( 3080): PROBE micB=55.8 micA=42.8 uR=41.1 uL=41.1
+10-18 23:07:53.568 I/flutter ( 3080): PROBE micB=49.5 micA=42.8 uR=42.3 uL=42.3
+10-18 23:07:53.667 I/flutter ( 3080): PROBE micB=49.5 micA=41.3 uR=40.0 uL=40.0
+10-18 23:07:53.768 I/flutter ( 3080): PROBE micB=51.3 micA=41.3 uR=41.4 uL=41.4
+10-18 23:07:53.869 I/flutter ( 3080): PROBE micB=51.3 micA=40.5 uR=39.3 uL=39.3
+10-18 23:07:53.970 I/flutter ( 3080): PROBE micB=48.0 micA=40.5 uR=40.9 uL=40.9
+10-18 23:07:54.072 I/flutter ( 3080): PROBE micB=48.0 micA=57.0 uR=60.3 uL=60.3
+10-18 23:07:54.173 I/flutter ( 3080): PROBE micB=64.1 micA=57.0 uR=43.8 uL=43.8
+10-18 23:07:54.273 I/flutter ( 3080): PROBE micB=64.1 micA=47.6 uR=43.7 uL=43.7
+10-18 23:07:54.374 I/flutter ( 3080): PROBE micB=58.6 micA=47.6 uR=48.8 uL=48.8
+10-18 23:07:54.474 I/flutter ( 3080): PROBE micB=58.6 micA=58.2 uR=61.4 uL=61.4
+10-18 23:07:54.574 I/flutter ( 3080): PROBE micB=65.0 micA=58.2 uR=47.9 uL=47.9
+10-18 23:07:54.675 I/flutter ( 3080): PROBE micB=65.0 micA=51.7 uR=50.9 uL=50.9
+10-18 23:07:54.775 I/flutter ( 3080): PROBE micB=61.9 micA=51.7 uR=50.7 uL=50.7
+10-18 23:07:54.876 I/flutter ( 3080): PROBE micB=61.9 micA=51.5 uR=51.9 uL=51.9
+10-18 23:07:54.976 I/flutter ( 3080): PROBE micB=66.2 micA=51.5 uR=60.4 uL=60.4
+10-18 23:07:55.077 I/flutter ( 3080): PROBE micB=66.2 micA=57.5 uR=40.2 uL=40.2
+10-18 23:07:55.177 I/flutter ( 3080): PROBE micB=47.4 micA=57.5 uR=37.9 uL=37.9
+10-18 23:07:55.278 I/flutter ( 3080): PROBE micB=47.4 micA=38.1 uR=38.9 uL=38.9
+10-18 23:07:55.378 I/flutter ( 3080): PROBE micB=64.6 micA=38.1 uR=62.0 uL=62.0
+10-18 23:07:55.478 I/flutter ( 3080): PROBE micB=64.6 micA=59.1 uR=45.0 uL=45.0
+10-18 23:07:55.579 I/flutter ( 3080): PROBE micB=54.2 micA=59.1 uR=37.9 uL=37.9
+10-18 23:07:55.679 I/flutter ( 3080): PROBE micB=54.2 micA=38.4 uR=38.7 uL=38.7
+10-18 23:07:55.780 I/flutter ( 3080): PROBE micB=46.0 micA=38.4 uR=41.9 uL=41.9
+10-18 23:07:55.880 I/flutter ( 3080): PROBE micB=46.0 micA=46.0 uR=48.8 uL=48.8
+10-18 23:07:55.979 I/flutter ( 3080): PROBE micB=60.4 micA=46.0 uR=49.3 uL=49.3
+10-18 23:07:56.081 I/flutter ( 3080): PROBE micB=60.4 micA=48.3 uR=48.2 uL=48.2
+10-18 23:07:56.181 I/flutter ( 3080): PROBE micB=60.8 micA=48.3 uR=50.6 uL=50.6
+10-18 23:07:56.281 I/flutter ( 3080): PROBE micB=60.8 micA=50.4 uR=49.5 uL=49.5
+10-18 23:07:56.381 I/flutter ( 3080): PROBE micB=60.0 micA=50.4 uR=43.8 uL=43.8
+10-18 23:07:56.482 I/flutter ( 3080): PROBE micB=60.0 micA=44.5 uR=43.5 uL=43.5
+10-18 23:07:56.582 I/flutter ( 3080): PROBE micB=52.4 micA=44.5 uR=37.9 uL=37.9
+10-18 23:07:56.682 I/flutter ( 3080): PROBE micB=52.4 micA=38.2 uR=36.9 uL=36.9
+10-18 23:07:56.783 I/flutter ( 3080): PROBE micB=44.1 micA=38.2 uR=42.1 uL=42.1
+10-18 23:07:56.883 I/flutter ( 3080): PROBE micB=44.1 micA=48.5 uR=51.1 uL=51.1
+10-18 23:07:56.984 I/flutter ( 3080): PROBE micB=62.9 micA=48.5 uR=52.7 uL=52.7
+10-18 23:07:57.084 I/flutter ( 3080): PROBE micB=62.9 micA=51.5 uR=53.2 uL=53.2
+10-18 23:07:57.185 I/flutter ( 3080): PROBE micB=68.1 micA=51.5 uR=58.9 uL=58.9
+10-18 23:07:57.285 I/flutter ( 3080): PROBE micB=68.1 micA=57.1 uR=51.7 uL=51.7
+10-18 23:07:57.385 I/flutter ( 3080): PROBE micB=66.0 micA=57.1 uR=51.3 uL=51.3
+10-18 23:07:57.486 I/flutter ( 3080): PROBE micB=66.0 micA=49.7 uR=45.4 uL=45.4
+10-18 23:07:57.588 I/flutter ( 3080): PROBE micB=59.6 micA=49.7 uR=50.8 uL=50.8
+10-18 23:07:57.687 I/flutter ( 3080): PROBE micB=59.6 micA=51.0 uR=52.0 uL=52.0
+10-18 23:07:57.787 I/flutter ( 3080): PROBE micB=64.7 micA=51.0 uR=53.3 uL=53.3
+10-18 23:07:57.888 I/flutter ( 3080): PROBE micB=64.7 micA=53.9 uR=61.3 uL=61.3
+10-18 23:07:57.988 I/flutter ( 3080): PROBE micB=67.0 micA=53.9 uR=53.0 uL=53.0
+10-18 23:07:58.089 I/flutter ( 3080): PROBE micB=67.0 micA=58.2 uR=41.9 uL=41.9
+10-18 23:07:58.190 I/flutter ( 3080): PROBE micB=56.3 micA=58.2 uR=46.9 uL=46.9
+10-18 23:07:58.290 I/flutter ( 3080): PROBE micB=56.3 micA=48.1 uR=62.9 uL=62.9
+10-18 23:07:58.391 I/flutter ( 3080): PROBE micB=66.1 micA=48.1 uR=51.8 uL=51.8
+10-18 23:07:58.491 I/flutter ( 3080): PROBE micB=66.1 micA=60.1 uR=43.4 uL=43.4
+10-18 23:07:58.592 I/flutter ( 3080): PROBE micB=57.9 micA=60.1 uR=48.3 uL=48.3
+10-18 23:07:58.692 I/flutter ( 3080): PROBE micB=57.9 micA=47.5 uR=59.2 uL=59.2
+10-18 23:07:58.793 I/flutter ( 3080): PROBE micB=64.6 micA=47.5 uR=47.8 uL=47.8
+10-18 23:07:58.892 I/flutter ( 3080): PROBE micB=64.6 micA=56.7 uR=50.7 uL=50.7
+10-18 23:07:58.993 I/flutter ( 3080): PROBE micB=61.4 micA=56.7 uR=48.6 uL=48.6
+10-18 23:07:59.094 I/flutter ( 3080): PROBE micB=61.4 micA=47.3 uR=41.9 uL=41.9
+10-18 23:07:59.194 I/flutter ( 3080): PROBE micB=66.4 micA=47.3 uR=66.0 uL=66.0
+10-18 23:07:59.295 I/flutter ( 3080): PROBE micB=66.4 micA=63.0 uR=50.3 uL=50.3
+10-18 23:07:59.395 I/flutter ( 3080): PROBE micB=64.7 micA=63.0 uR=54.5 uL=54.5
+10-18 23:07:59.498 I/flutter ( 3080): PROBE micB=64.7 micA=52.7 uR=48.3 uL=48.3
+10-18 23:07:59.598 I/flutter ( 3080): PROBE micB=59.6 micA=52.7 uR=42.1 uL=42.1
+10-18 23:07:59.698 I/flutter ( 3080): PROBE micB=59.6 micA=44.1 uR=45.8 uL=45.8
+10-18 23:07:59.799 I/flutter ( 3080): PROBE micB=61.4 micA=44.1 uR=51.8 uL=51.8
+10-18 23:07:59.900 I/flutter ( 3080): PROBE micB=61.4 micA=50.6 uR=53.6 uL=53.6
+10-18 23:08:00.001 I/flutter ( 3080): PROBE micB=67.6 micA=50.6 uR=57.2 uL=57.2
+10-18 23:08:00.101 I/flutter ( 3080): PROBE micB=67.6 micA=55.6 uR=47.9 uL=47.9
+10-18 23:08:00.201 I/flutter ( 3080): PROBE micB=59.4 micA=55.6 uR=45.2 uL=45.2
+10-18 23:08:00.302 I/flutter ( 3080): PROBE micB=59.4 micA=47.3 uR=50.8 uL=50.8
+10-18 23:08:00.401 I/flutter ( 3080): PROBE micB=64.1 micA=47.3 uR=53.7 uL=53.7
+10-18 23:08:00.502 I/flutter ( 3080): PROBE micB=64.1 micA=52.0 uR=44.5 uL=44.5
+10-18 23:08:00.602 I/flutter ( 3080): PROBE micB=59.8 micA=52.0 uR=50.3 uL=50.3
+10-18 23:08:00.703 I/flutter ( 3080): PROBE micB=59.8 micA=47.9 uR=39.8 uL=39.8
+10-18 23:08:00.803 I/flutter ( 3080): PROBE micB=57.0 micA=47.9 uR=49.3 uL=49.3
+10-18 23:08:00.904 I/flutter ( 3080): PROBE micB=57.0 micA=46.7 uR=39.6 uL=39.6
+10-18 23:08:01.003 I/flutter ( 3080): PROBE micB=51.4 micA=46.7 uR=38.6 uL=38.6
+10-18 23:08:01.106 I/flutter ( 3080): PROBE micB=51.4 micA=49.2 uR=52.2 uL=52.2
+10-18 23:08:01.205 I/flutter ( 3080): PROBE micB=61.5 micA=49.2 uR=48.1 uL=48.1
+10-18 23:08:01.305 I/flutter ( 3080): PROBE micB=61.5 micA=49.7 uR=52.5 uL=52.5
+10-18 23:08:01.406 I/flutter ( 3080): PROBE micB=63.1 micA=49.7 uR=48.9 uL=48.9
+10-18 23:08:01.506 I/flutter ( 3080): PROBE micB=63.1 micA=49.5 uR=46.3 uL=46.3
+10-18 23:08:01.606 I/flutter ( 3080): PROBE micB=58.9 micA=49.5 uR=50.9 uL=50.9
+10-18 23:08:01.706 I/flutter ( 3080): PROBE micB=58.9 micA=51.7 uR=52.4 uL=52.4
+10-18 23:08:01.807 I/flutter ( 3080): PROBE micB=62.9 micA=51.7 uR=42.2 uL=42.2
+10-18 23:08:01.908 I/flutter ( 3080): PROBE micB=62.9 micA=43.0 uR=44.1 uL=44.1
+10-18 23:08:02.007 I/flutter ( 3080): PROBE micB=56.6 micA=43.0 uR=46.5 uL=46.5
+10-18 23:08:02.108 I/flutter ( 3080): PROBE micB=56.6 micA=45.5 uR=43.8 uL=43.8
+10-18 23:08:02.209 I/flutter ( 3080): PROBE micB=53.7 micA=45.5 uR=37.8 uL=37.8
+10-18 23:08:02.310 I/flutter ( 3080): PROBE micB=53.7 micA=38.7 uR=38.0 uL=38.0
+10-18 23:08:02.410 I/flutter ( 3080): PROBE micB=48.2 micA=38.7 uR=41.6 uL=41.6
+10-18 23:08:02.510 I/flutter ( 3080): PROBE micB=48.2 micA=41.6 uR=41.8 uL=41.8
+10-18 23:08:02.610 I/flutter ( 3080): PROBE micB=51.3 micA=41.6 uR=39.6 uL=39.6
+10-18 23:08:02.711 I/flutter ( 3080): PROBE micB=51.3 micA=39.2 uR=37.9 uL=37.9
+10-18 23:08:02.811 I/flutter ( 3080): PROBE micB=44.6 micA=39.2 uR=37.3 uL=37.3
+10-18 23:08:02.911 I/flutter ( 3080): PROBE micB=44.6 micA=37.2 uR=36.7 uL=36.7
+10-18 23:08:03.012 I/flutter ( 3080): PROBE micB=42.6 micA=37.2 uR=38.4 uL=38.4
+10-18 23:08:03.112 I/flutter ( 3080): PROBE micB=42.6 micA=40.5 uR=43.6 uL=43.6
+10-18 23:08:03.212 I/flutter ( 3080): PROBE micB=53.7 micA=40.5 uR=42.5 uL=42.5
+10-18 23:08:03.313 I/flutter ( 3080): PROBE micB=53.7 micA=46.3 uR=48.0 uL=48.0
+10-18 23:08:03.416 I/flutter ( 3080): PROBE micB=58.6 micA=46.3 uR=49.0 uL=49.0
+10-18 23:35:57.182 I/flutter (16335): [IMPORTANT:flutter/shell/common/shell.cc(529)] [Action Required]: Impeller opt-out deprecated.
+10-18 23:35:57.182 I/flutter (16335):     The application opted out of Impeller by either using the
+10-18 23:35:57.182 I/flutter (16335):     `--no-enable-impeller` flag or the
+10-18 23:35:57.182 I/flutter (16335):     `io.flutter.embedding.android.EnableImpeller` `AndroidManifest.xml` entry.
+10-18 23:35:57.182 I/flutter (16335):     These options are going to go away in an upcoming Flutter release. Remove
+10-18 23:35:57.182 I/flutter (16335):     the explicit opt-out. If you need to opt-out, please report a bug describing
+10-18 23:35:57.182 I/flutter (16335):     the issue.
+10-18 23:35:57.182 I/flutter (16335): 
+10-18 23:35:57.182 I/flutter (16335):     https://github.com/flutter/flutter/issues/new?template=02_bug.yml
+10-18 23:35:57.182 I/flutter (16335): 
+10-18 23:39:03.050 I/flutter ( 9522): [IMPORTANT:flutter/shell/platform/android/android_context_vk_impeller.cc(62)] Using the Impeller rendering backend (Vulkan).
+10-18 23:39:03.202 I/flutter ( 9522): The Dart VM service is listening on http://127.0.0.1:42327/AbLEQPn31qk=/
+10-18 23:42:57.058 I/flutter ( 9522): PROBE mic=8.6 cam=49.7 vrc=59.8
+10-18 23:42:57.253 I/flutter ( 9522): PROBE mic=62.6 cam=64.6 vrc=59.8 unp=64.6
+10-18 23:42:57.255 I/flutter ( 9522): PROBE ref=65.2 mic=62.6 cam=64.6 vrc=64.9 unp=64.6
+10-18 23:42:57.387 I/flutter ( 9522): PROBE ref=65.2 mic=64.2 cam=63.6 vrc=64.9 unp=63.6
+10-18 23:42:57.452 I/flutter ( 9522): PROBE ref=64.6 mic=64.2 cam=63.6 vrc=65.0 unp=63.6
+10-18 23:42:57.551 I/flutter ( 9522): PROBE ref=64.6 mic=66.1 cam=66.0 vrc=65.0 unp=66.0
+10-18 23:42:57.652 I/flutter ( 9522): PROBE ref=66.0 mic=66.1 cam=66.0 vrc=65.8 unp=66.0
+10-18 23:42:57.752 I/flutter ( 9522): PROBE ref=66.0 mic=64.9 cam=65.1 vrc=65.8 unp=65.1
+10-18 23:42:57.852 I/flutter ( 9522): PROBE ref=64.7 mic=64.9 cam=65.1 vrc=65.0 unp=65.1
+10-18 23:42:57.951 I/flutter ( 9522): PROBE ref=64.7 mic=65.1 cam=65.1 vrc=65.0 unp=65.1
+10-18 23:42:58.053 I/flutter ( 9522): PROBE ref=65.6 mic=65.1 cam=65.1 vrc=65.2 unp=65.1
+10-18 23:42:58.155 I/flutter ( 9522): PROBE ref=65.6 mic=65.1 cam=65.2 vrc=65.2 unp=65.2
+10-18 23:42:58.253 I/flutter ( 9522): PROBE ref=65.3 mic=65.1 cam=65.2 vrc=65.4 unp=65.2
+10-18 23:42:58.352 I/flutter ( 9522): PROBE ref=65.3 mic=65.7 cam=65.5 vrc=65.4 unp=65.5
+10-18 23:42:58.453 I/flutter ( 9522): PROBE ref=64.8 mic=65.7 cam=65.5 vrc=65.3 unp=65.5
+10-18 23:42:58.553 I/flutter ( 9522): PROBE ref=64.8 mic=64.6 cam=64.3 vrc=65.3 unp=64.3
+10-18 23:42:58.654 I/flutter ( 9522): PROBE ref=62.2 mic=64.6 cam=64.3 vrc=60.3 unp=64.3
+10-18 23:42:58.755 I/flutter ( 9522): PROBE ref=62.2 mic=58.1 cam=50.9 vrc=60.3 unp=50.9
+10-18 23:42:58.855 I/flutter ( 9522): PROBE ref=56.0 mic=58.1 cam=50.9 vrc=56.9 unp=50.9
+10-18 23:42:58.958 I/flutter ( 9522): PROBE ref=56.0 mic=57.1 cam=57.6 vrc=56.9 unp=57.6
+10-18 23:42:59.055 I/flutter ( 9522): PROBE ref=56.0 mic=57.1 cam=57.6 vrc=57.1 unp=57.6
+10-18 23:42:59.156 I/flutter ( 9522): PROBE ref=56.0 mic=60.2 cam=61.7 vrc=57.1 unp=61.7
+10-18 23:42:59.256 I/flutter ( 9522): PROBE ref=64.3 mic=60.2 cam=61.7 vrc=64.2 unp=61.7
+10-18 23:42:59.355 I/flutter ( 9522): PROBE ref=64.3 mic=63.4 cam=62.2 vrc=64.2 unp=62.2
+10-18 23:42:59.458 I/flutter ( 9522): PROBE ref=54.4 mic=63.4 cam=62.2 vrc=52.1 unp=62.2
+10-18 23:42:59.558 I/flutter ( 9522): PROBE ref=54.4 mic=48.3 cam=48.2 vrc=52.1 unp=48.2
+10-18 23:42:59.659 I/flutter ( 9522): PROBE ref=53.9 mic=48.3 cam=48.2 vrc=55.0 unp=48.2
+10-18 23:42:59.759 I/flutter ( 9522): PROBE ref=53.9 mic=56.7 cam=57.7 vrc=55.0 unp=57.7
+10-18 23:42:59.859 I/flutter ( 9522): PROBE ref=58.8 mic=56.7 cam=57.7 vrc=59.0 unp=57.7
+10-18 23:42:59.960 I/flutter ( 9522): PROBE ref=58.8 mic=59.5 cam=59.5 vrc=59.0 unp=59.5
+10-18 23:43:00.060 I/flutter ( 9522): PROBE ref=58.6 mic=59.5 cam=59.5 vrc=58.1 unp=59.5
+10-18 23:43:00.160 I/flutter ( 9522): PROBE ref=58.6 mic=57.2 cam=59.4 vrc=58.1 unp=59.4
+10-18 23:43:00.261 I/flutter ( 9522): PROBE ref=59.2 mic=57.2 cam=59.4 vrc=59.1 unp=59.4
+10-18 23:43:00.361 I/flutter ( 9522): PROBE ref=59.2 mic=58.5 cam=55.6 vrc=59.1 unp=55.6
+10-18 23:43:00.461 I/flutter ( 9522): PROBE ref=56.4 mic=58.5 cam=55.6 vrc=56.6 unp=55.6
+10-18 23:43:00.562 I/flutter ( 9522): PROBE ref=56.4 mic=59.5 cam=61.4 vrc=56.6 unp=61.4
+10-18 23:43:00.661 I/flutter ( 9522): PROBE ref=62.6 mic=59.5 cam=61.4 vrc=62.7 unp=61.4
+10-18 23:43:00.762 I/flutter ( 9522): PROBE ref=62.6 mic=62.7 cam=61.8 vrc=62.7 unp=61.8
+10-18 23:43:00.891 I/flutter ( 9522): PROBE ref=59.9 mic=62.7 cam=61.8 vrc=59.5 unp=61.8
+10-18 23:43:01.000 I/flutter ( 9522): PROBE ref=59.9 mic=58.1 cam=60.9 vrc=59.5 unp=60.9
+10-18 23:43:01.063 I/flutter ( 9522): PROBE ref=62.1 mic=58.1 cam=60.9 vrc=62.1 unp=60.9
+10-18 23:43:01.193 I/flutter ( 9522): PROBE ref=62.1 mic=61.5 cam=57.3 vrc=62.1 unp=57.3
+10-18 23:43:01.280 I/flutter ( 9522): PROBE ref=46.6 mic=61.5 cam=57.3 vrc=46.2 unp=57.3
+10-18 23:43:01.384 I/flutter ( 9522): PROBE ref=46.6 mic=44.2 cam=45.2 vrc=46.2 unp=45.2
+10-18 23:43:01.484 I/flutter ( 9522): PROBE ref=47.7 mic=44.2 cam=45.2 vrc=48.2 unp=45.2
+10-18 23:43:01.580 I/flutter ( 9522): PROBE ref=47.7 mic=48.6 cam=47.5 vrc=48.2 unp=47.5
+10-18 23:43:01.680 I/flutter ( 9522): PROBE ref=46.7 mic=48.6 cam=47.5 vrc=48.3 unp=47.5
+10-18 23:43:01.783 I/flutter ( 9522): PROBE ref=46.7 mic=49.4 cam=52.3 vrc=48.3 unp=52.3
+10-18 23:43:01.885 I/flutter ( 9522): PROBE ref=53.4 mic=49.4 cam=52.3 vrc=53.6 unp=52.3
+10-18 23:43:01.981 I/flutter ( 9522): PROBE ref=53.4 mic=53.4 cam=52.8 vrc=53.6 unp=52.8
+10-18 23:43:02.080 I/flutter ( 9522): PROBE ref=54.2 mic=53.4 cam=52.8 vrc=53.7 unp=52.8
+10-18 23:43:02.165 I/flutter ( 9522): PROBE ref=54.2 mic=53.9 cam=53.1 vrc=53.7 unp=53.1
+10-18 23:43:02.267 I/flutter ( 9522): PROBE ref=49.7 mic=53.9 cam=53.1 vrc=49.5 unp=53.1
+10-18 23:43:02.367 I/flutter ( 9522): PROBE ref=49.7 mic=49.9 cam=51.0 vrc=49.5 unp=51.0
+10-18 23:43:02.468 I/flutter ( 9522): PROBE ref=50.7 mic=49.9 cam=51.0 vrc=51.7 unp=51.0
+10-18 23:43:02.568 I/flutter ( 9522): PROBE ref=50.7 mic=51.2 cam=50.0 vrc=51.7 unp=50.0
+10-18 23:43:02.668 I/flutter ( 9522): PROBE ref=50.7 mic=51.2 cam=50.0 vrc=49.6 unp=50.0
+10-18 23:43:02.767 I/flutter ( 9522): PROBE ref=50.7 mic=48.9 cam=48.8 vrc=49.6 unp=48.8
+10-18 23:43:02.871 I/flutter ( 9522): PROBE ref=46.1 mic=48.9 cam=48.8 vrc=45.6 unp=48.8
+10-18 23:43:03.006 I/flutter ( 9522): PROBE ref=46.1 mic=44.7 cam=45.2 vrc=45.6 unp=45.2
+10-18 23:43:03.103 I/flutter ( 9522): PROBE ref=47.3 mic=44.7 cam=45.2 vrc=47.4 unp=45.2
+10-18 23:43:03.201 I/flutter ( 9522): PROBE ref=47.3 mic=50.1 cam=50.2 vrc=47.4 unp=50.2
+10-18 23:43:03.295 I/flutter ( 9522): PROBE ref=49.7 mic=50.1 cam=50.2 vrc=49.5 unp=50.2
+10-18 23:43:03.393 I/flutter ( 9522): PROBE ref=49.7 mic=46.4 cam=44.7 vrc=49.5 unp=44.7
+10-18 23:43:03.493 I/flutter ( 9522): PROBE ref=44.0 mic=46.4 cam=44.7 vrc=44.9 unp=44.7
+10-18 23:43:03.599 I/flutter ( 9522): PROBE ref=44.0 mic=45.0 cam=46.4 vrc=44.9 unp=46.4
+10-18 23:43:03.695 I/flutter ( 9522): PROBE ref=46.3 mic=45.0 cam=46.4 vrc=45.9 unp=46.4
+10-18 23:43:03.788 I/flutter ( 9522): PROBE ref=46.3 mic=45.2 cam=44.3 vrc=45.9 unp=44.3
+10-18 23:43:03.888 I/flutter ( 9522): PROBE ref=45.6 mic=45.2 cam=44.3 vrc=45.9 unp=44.3
+10-18 23:43:03.988 I/flutter ( 9522): PROBE ref=45.6 mic=47.4 cam=49.7 vrc=45.9 unp=49.7
+10-18 23:43:04.090 I/flutter ( 9522): PROBE ref=50.6 mic=47.4 cam=49.7 vrc=50.6 unp=49.7
+10-18 23:43:04.187 I/flutter ( 9522): PROBE ref=50.6 mic=50.5 cam=49.6 vrc=50.6 unp=49.6
+10-18 23:43:04.288 I/flutter ( 9522): PROBE ref=51.7 mic=50.5 cam=49.6 vrc=52.5 unp=49.6
+10-18 23:43:04.385 I/flutter ( 9522): PROBE ref=51.7 mic=53.1 cam=53.1 vrc=52.5 unp=53.1
+10-18 23:43:04.485 I/flutter ( 9522): PROBE ref=51.5 mic=53.1 cam=53.1 vrc=50.6 unp=53.1
+10-18 23:43:04.595 I/flutter ( 9522): PROBE ref=51.5 mic=50.2 cam=51.1 vrc=50.6 unp=51.1
+10-18 23:43:04.688 I/flutter ( 9522): PROBE ref=50.8 mic=50.2 cam=51.1 vrc=50.7 unp=51.1
+10-18 23:43:04.784 I/flutter ( 9522): PROBE ref=50.8 mic=50.0 cam=47.4 vrc=50.7 unp=47.4
+10-18 23:43:04.889 I/flutter ( 9522): PROBE ref=45.3 mic=45.9 cam=47.4 vrc=44.6 unp=47.4
+10-18 23:43:04.991 I/flutter ( 9522): PROBE ref=45.3 mic=45.9 cam=50.0 vrc=44.6 unp=50.0
+10-18 23:43:05.080 I/flutter ( 9522): PROBE ref=59.2 mic=62.9 cam=50.0 vrc=60.2 unp=50.0
+10-18 23:43:05.186 I/flutter ( 9522): PROBE ref=59.2 mic=62.9 cam=64.0 vrc=60.2 unp=64.0
+10-18 23:43:05.286 I/flutter ( 9522): PROBE ref=63.9 mic=61.9 cam=64.0 vrc=63.7 unp=64.0
+10-18 23:43:05.391 I/flutter ( 9522): PROBE ref=63.9 mic=61.9 cam=60.1 vrc=63.7 unp=60.1
+10-18 23:43:05.487 I/flutter ( 9522): PROBE ref=56.7 mic=55.3 cam=60.1 vrc=56.3 unp=60.1
+10-18 23:43:05.585 I/flutter ( 9522): PROBE ref=56.7 mic=55.3 cam=53.8 vrc=56.3 unp=53.8
+10-18 23:43:05.685 I/flutter ( 9522): PROBE ref=52.1 mic=50.6 cam=53.8 vrc=50.2 unp=53.8
+10-18 23:43:05.780 I/flutter ( 9522): PROBE ref=52.1 mic=50.6 cam=51.5 vrc=50.2 unp=51.5
+10-18 23:43:05.882 I/flutter ( 9522): PROBE ref=56.8 mic=59.1 cam=51.5 vrc=57.6 unp=51.5
+10-18 23:43:05.985 I/flutter ( 9522): PROBE ref=56.8 mic=59.1 cam=60.8 vrc=57.6 unp=60.8
+10-18 23:43:06.100 I/flutter ( 9522): PROBE ref=61.4 mic=61.2 cam=60.8 vrc=61.3 unp=60.8
+10-18 23:43:06.202 I/flutter ( 9522): PROBE ref=61.4 mic=61.2 cam=59.6 vrc=61.3 unp=59.6
+10-18 23:43:06.302 I/flutter ( 9522): PROBE ref=55.7 mic=49.4 cam=59.6 vrc=54.8 unp=59.6
+10-18 23:43:06.383 I/flutter ( 9522): PROBE ref=55.7 mic=49.4 cam=47.0 vrc=54.8 unp=47.0
+10-18 23:43:06.496 I/flutter ( 9522): PROBE ref=47.4 mic=47.6 cam=47.0 vrc=47.9 unp=47.0
+10-18 23:43:06.576 I/flutter ( 9522): PHASE quiet MARK
+10-18 23:43:06.583 I/flutter ( 9522): PROBE ref=47.4 mic=47.6 cam=47.5 vrc=47.9 unp=47.5
+10-18 23:43:06.683 I/flutter ( 9522): PROBE ref=47.7 mic=46.9 cam=47.5 vrc=47.2 unp=47.5
+10-18 23:43:06.784 I/flutter ( 9522): PROBE ref=47.7 mic=46.9 cam=45.7 vrc=47.2 unp=45.7
+10-18 23:43:06.884 I/flutter ( 9522): PROBE ref=44.3 mic=41.8 cam=45.7 vrc=43.4 unp=45.7
+10-18 23:43:06.992 I/flutter ( 9522): PROBE ref=44.3 mic=41.8 cam=38.8 vrc=43.4 unp=38.8
+10-18 23:43:07.089 I/flutter ( 9522): PROBE ref=42.3 mic=46.0 cam=38.8 vrc=43.1 unp=38.8
+10-18 23:43:07.194 I/flutter ( 9522): PROBE ref=42.3 mic=46.0 cam=47.5 vrc=43.1 unp=47.5
+10-18 23:43:07.293 I/flutter ( 9522): PROBE ref=52.2 mic=55.7 cam=47.5 vrc=52.3 unp=47.5
+10-18 23:43:07.392 I/flutter ( 9522): PROBE ref=52.2 mic=55.7 cam=56.8 vrc=52.3 unp=56.8
+10-18 23:43:07.496 I/flutter ( 9522): PROBE ref=57.2 mic=55.1 cam=56.8 vrc=57.3 unp=56.8
+10-18 23:43:07.591 I/flutter ( 9522): PROBE ref=57.2 mic=55.1 cam=53.4 vrc=57.3 unp=53.4
+10-18 23:43:07.697 I/flutter ( 9522): PROBE ref=52.5 mic=55.3 cam=53.4 vrc=53.1 unp=53.4
+10-18 23:43:07.794 I/flutter ( 9522): PROBE ref=52.5 mic=55.3 cam=57.6 vrc=53.1 unp=57.6
+10-18 23:43:07.891 I/flutter ( 9522): PROBE ref=58.2 mic=57.2 cam=57.6 vrc=58.0 unp=57.6
+10-18 23:43:07.991 I/flutter ( 9522): PROBE ref=58.2 mic=57.2 cam=54.9 vrc=58.0 unp=54.9
+10-18 23:43:08.087 I/flutter ( 9522): PROBE ref=53.6 mic=54.3 cam=54.9 vrc=54.0 unp=54.9
+10-18 23:43:08.188 I/flutter ( 9522): PROBE ref=53.6 mic=54.3 cam=57.0 vrc=54.0 unp=57.0
+10-18 23:43:08.287 I/flutter ( 9522): PROBE ref=56.5 mic=55.7 cam=57.0 vrc=56.3 unp=57.0
+10-18 23:43:08.388 I/flutter ( 9522): PROBE ref=56.5 mic=55.7 cam=49.6 vrc=56.3 unp=49.6
+10-18 23:43:08.488 I/flutter ( 9522): PROBE ref=47.0 mic=47.5 cam=49.6 vrc=46.9 unp=49.6
+10-18 23:43:08.587 I/flutter ( 9522): PROBE ref=47.0 mic=47.5 cam=48.6 vrc=46.9 unp=48.6
+10-18 23:43:08.689 I/flutter ( 9522): PROBE ref=49.3 mic=52.4 cam=48.6 vrc=51.7 unp=48.6
+10-18 23:43:08.789 I/flutter ( 9522): PROBE ref=49.3 mic=52.4 cam=55.6 vrc=51.7 unp=55.6
+10-18 23:43:08.889 I/flutter ( 9522): PROBE ref=57.2 mic=56.4 cam=55.6 vrc=56.7 unp=55.6
+10-18 23:43:08.989 I/flutter ( 9522): PROBE ref=57.2 mic=56.4 cam=53.9 vrc=56.7 unp=53.9
+10-18 23:43:09.090 I/flutter ( 9522): PROBE ref=50.5 mic=50.6 cam=53.9 vrc=50.4 unp=53.9
+10-18 23:43:09.192 I/flutter ( 9522): PROBE ref=50.5 mic=50.6 cam=50.6 vrc=50.4 unp=50.6
+10-18 23:43:09.292 I/flutter ( 9522): PROBE ref=49.5 mic=49.5 cam=50.6 vrc=49.7 unp=50.6
+10-18 23:43:09.391 I/flutter ( 9522): PROBE ref=49.5 mic=49.5 cam=49.3 vrc=49.7 unp=49.3
+10-18 23:43:09.492 I/flutter ( 9522): PROBE ref=50.2 mic=50.7 cam=49.3 vrc=50.6 unp=49.3
+10-18 23:43:09.592 I/flutter ( 9522): PROBE ref=50.2 mic=50.7 cam=51.0 vrc=50.6 unp=51.0
+10-18 23:43:09.694 I/flutter ( 9522): PROBE ref=48.9 mic=45.9 cam=51.0 vrc=47.5 unp=51.0
+10-18 23:43:09.795 I/flutter ( 9522): PROBE ref=48.9 mic=45.9 cam=45.2 vrc=47.5 unp=45.2
+10-18 23:43:09.893 I/flutter ( 9522): PROBE ref=44.8 mic=45.3 cam=45.2 vrc=44.9 unp=45.2
+10-18 23:43:09.995 I/flutter ( 9522): PROBE ref=44.8 mic=45.3 cam=45.4 vrc=44.9 unp=45.4
+10-18 23:43:10.094 I/flutter ( 9522): PROBE ref=46.9 mic=49.4 cam=45.4 vrc=47.8 unp=45.4
+10-18 23:43:10.193 I/flutter ( 9522): PROBE ref=46.9 mic=49.4 cam=49.0 vrc=47.8 unp=49.0
+10-18 23:43:10.294 I/flutter ( 9522): PROBE ref=48.5 mic=45.1 cam=49.0 vrc=47.8 unp=49.0
+10-18 23:43:10.394 I/flutter ( 9522): PROBE ref=48.5 mic=45.1 cam=43.8 vrc=47.8 unp=43.8
+10-18 23:43:10.494 I/flutter ( 9522): PROBE ref=44.1 mic=44.9 cam=43.8 vrc=44.1 unp=43.8
+10-18 23:43:10.594 I/flutter ( 9522): PROBE ref=44.1 mic=44.9 cam=44.6 vrc=44.1 unp=44.6
+10-18 23:43:10.696 I/flutter ( 9522): PROBE ref=45.0 mic=44.1 cam=44.6 vrc=44.8 unp=44.6
+10-18 23:43:10.796 I/flutter ( 9522): PROBE ref=45.0 mic=44.1 cam=46.4 vrc=44.8 unp=46.4
+10-18 23:43:10.896 I/flutter ( 9522): PROBE ref=48.4 mic=48.5 cam=46.4 vrc=48.4 unp=46.4
+10-18 23:43:10.997 I/flutter ( 9522): PROBE ref=48.4 mic=48.5 cam=47.7 vrc=48.4 unp=47.7
+10-18 23:43:11.097 I/flutter ( 9522): PROBE ref=46.8 mic=49.9 cam=47.7 vrc=47.3 unp=47.7
+10-18 23:43:11.197 I/flutter ( 9522): PROBE ref=46.8 mic=49.9 cam=53.5 vrc=47.3 unp=53.5
+10-18 23:43:11.298 I/flutter ( 9522): PROBE ref=56.5 mic=57.1 cam=53.5 vrc=57.1 unp=53.5
+10-18 23:43:11.398 I/flutter ( 9522): PROBE ref=56.5 mic=57.1 cam=56.2 vrc=57.1 unp=56.2
+10-18 23:43:11.499 I/flutter ( 9522): PROBE ref=53.5 mic=52.2 cam=56.2 vrc=52.3 unp=56.2
+10-18 23:43:11.599 I/flutter ( 9522): PROBE ref=53.5 mic=52.2 cam=52.0 vrc=52.3 unp=52.0
+10-18 23:43:11.699 I/flutter ( 9522): PROBE ref=50.7 mic=48.6 cam=52.0 vrc=50.0 unp=52.0
+10-18 23:43:11.799 I/flutter ( 9522): PROBE ref=50.7 mic=48.6 cam=48.0 vrc=50.0 unp=48.0
+10-18 23:43:11.899 I/flutter ( 9522): PROBE ref=50.4 mic=50.7 cam=48.0 vrc=50.6 unp=48.0
+10-18 23:43:12.001 I/flutter ( 9522): PROBE ref=50.4 mic=50.7 cam=50.6 vrc=50.6 unp=50.6
+10-18 23:43:12.100 I/flutter ( 9522): PROBE ref=49.4 mic=49.8 cam=50.6 vrc=49.5 unp=50.6
+10-18 23:43:12.200 I/flutter ( 9522): PROBE ref=49.4 mic=49.8 cam=50.1 vrc=49.5 unp=50.1
+10-18 23:43:12.302 I/flutter ( 9522): PROBE ref=52.4 mic=54.6 cam=50.1 vrc=52.6 unp=50.1
+10-18 23:43:12.403 I/flutter ( 9522): PROBE ref=52.4 mic=54.6 cam=56.0 vrc=52.6 unp=56.0
+10-18 23:43:12.501 I/flutter ( 9522): PROBE ref=56.9 mic=56.8 cam=56.0 vrc=57.5 unp=56.0
+10-18 23:43:12.602 I/flutter ( 9522): PROBE ref=56.9 mic=56.8 cam=55.7 vrc=57.5 unp=55.7
+10-18 23:43:12.703 I/flutter ( 9522): PROBE ref=53.6 mic=51.1 cam=55.7 vrc=51.7 unp=55.7
+10-18 23:43:12.803 I/flutter ( 9522): PROBE ref=53.6 mic=51.1 cam=51.3 vrc=51.7 unp=51.3
+10-18 23:43:12.902 I/flutter ( 9522): PROBE ref=52.6 mic=55.5 cam=51.3 vrc=53.1 unp=51.3
+10-18 23:43:13.003 I/flutter ( 9522): PROBE ref=52.6 mic=55.5 cam=56.3 vrc=53.1 unp=56.3
+10-18 23:43:13.104 I/flutter ( 9522): PROBE ref=57.0 mic=55.7 cam=56.3 vrc=57.0 unp=56.3
+10-18 23:43:13.205 I/flutter ( 9522): PROBE ref=57.0 mic=55.7 cam=54.4 vrc=57.0 unp=54.4
+10-18 23:43:13.304 I/flutter ( 9522): PROBE ref=49.6 mic=44.0 cam=54.4 vrc=48.0 unp=54.4
+10-18 23:43:13.406 I/flutter ( 9522): PROBE ref=49.6 mic=44.0 cam=40.8 vrc=48.0 unp=40.8
+10-18 23:43:13.506 I/flutter ( 9522): PROBE ref=44.2 mic=44.9 cam=40.8 vrc=44.7 unp=40.8
+10-18 23:43:13.607 I/flutter ( 9522): PROBE ref=44.2 mic=44.9 cam=44.8 vrc=44.7 unp=44.8
+10-18 23:43:13.707 I/flutter ( 9522): PROBE ref=42.8 mic=44.0 cam=44.8 vrc=42.5 unp=44.8
+10-18 23:43:13.807 I/flutter ( 9522): PROBE ref=42.8 mic=44.0 cam=46.3 vrc=42.5 unp=46.3
+10-18 23:43:13.907 I/flutter ( 9522): PROBE ref=46.9 mic=46.3 cam=46.3 vrc=46.8 unp=46.3
+10-18 23:43:14.007 I/flutter ( 9522): PROBE ref=46.9 mic=46.3 cam=45.9 vrc=46.8 unp=45.9
+10-18 23:43:14.040 I/flutter ( 9522): PHASE top MARK
+10-18 23:43:14.109 I/flutter ( 9522): PROBE ref=49.0 mic=52.9 cam=45.9 vrc=51.9 unp=45.9
+10-18 23:43:14.209 I/flutter ( 9522): PROBE ref=49.0 mic=52.9 cam=53.5 vrc=51.9 unp=53.5
+10-18 23:43:14.309 I/flutter ( 9522): PROBE ref=53.2 mic=50.1 cam=53.5 vrc=51.4 unp=53.5
+10-18 23:43:14.410 I/flutter ( 9522): PROBE ref=53.2 mic=50.1 cam=49.1 vrc=51.4 unp=49.1
+10-18 23:43:14.510 I/flutter ( 9522): PROBE ref=49.8 mic=49.9 cam=49.1 vrc=50.0 unp=49.1
+10-18 23:43:14.610 I/flutter ( 9522): PROBE ref=49.8 mic=49.9 cam=49.7 vrc=50.0 unp=49.7
+10-18 23:43:14.711 I/flutter ( 9522): PROBE ref=52.1 mic=52.8 cam=49.7 vrc=52.3 unp=49.7
+10-18 23:43:14.811 I/flutter ( 9522): PROBE ref=52.1 mic=52.8 cam=53.1 vrc=52.3 unp=53.1
+10-18 23:43:14.911 I/flutter ( 9522): PROBE ref=51.1 mic=50.4 cam=53.1 vrc=50.8 unp=53.1
+10-18 23:43:15.012 I/flutter ( 9522): PROBE ref=51.1 mic=50.4 cam=50.5 vrc=50.8 unp=50.5
+10-18 23:43:15.113 I/flutter ( 9522): PROBE ref=53.9 mic=57.1 cam=50.5 vrc=54.2 unp=50.5
+10-18 23:43:15.214 I/flutter ( 9522): PROBE ref=53.9 mic=57.1 cam=58.1 vrc=54.2 unp=58.1
+10-18 23:43:15.315 I/flutter ( 9522): PROBE ref=57.6 mic=56.8 cam=58.1 vrc=57.8 unp=58.1
+10-18 23:43:15.416 I/flutter ( 9522): PROBE ref=57.6 mic=56.8 cam=57.6 vrc=57.8 unp=57.6
+10-18 23:43:15.515 I/flutter ( 9522): PROBE ref=58.1 mic=57.3 cam=57.6 vrc=57.8 unp=57.6
+10-18 23:43:15.616 I/flutter ( 9522): PROBE ref=58.1 mic=57.3 cam=55.9 vrc=57.8 unp=55.9
+10-18 23:43:15.717 I/flutter ( 9522): PROBE ref=54.5 mic=53.6 cam=55.9 vrc=54.6 unp=55.9
+10-18 23:43:15.818 I/flutter ( 9522): PROBE ref=54.5 mic=53.6 cam=52.4 vrc=54.6 unp=52.4
+10-18 23:43:15.920 I/flutter ( 9522): PROBE ref=51.6 mic=52.9 cam=52.4 vrc=51.5 unp=52.4
+10-18 23:43:16.021 I/flutter ( 9522): PROBE ref=56.3 mic=52.9 cam=53.2 vrc=51.5 unp=53.2
+10-18 23:43:16.121 I/flutter ( 9522): PROBE ref=56.3 mic=56.1 cam=53.2 vrc=56.3 unp=53.2
+10-18 23:43:16.222 I/flutter ( 9522): PROBE ref=51.8 mic=56.1 cam=55.7 vrc=56.3 unp=55.7
+10-18 23:43:16.323 I/flutter ( 9522): PROBE ref=51.8 mic=51.3 cam=55.7 vrc=51.9 unp=55.7
+10-18 23:43:16.422 I/flutter ( 9522): PROBE ref=50.1 mic=51.3 cam=51.2 vrc=51.9 unp=51.2
+10-18 23:43:16.523 I/flutter ( 9522): PROBE ref=50.1 mic=49.6 cam=51.2 vrc=49.5 unp=51.2
+10-18 23:43:16.623 I/flutter ( 9522): PROBE ref=50.5 mic=49.6 cam=49.3 vrc=49.5 unp=49.3
+10-18 23:43:16.724 I/flutter ( 9522): PROBE ref=50.5 mic=49.6 cam=49.3 vrc=50.8 unp=49.3
+10-18 23:43:16.823 I/flutter ( 9522): PROBE ref=47.5 mic=49.6 cam=48.7 vrc=50.8 unp=48.7
+10-18 23:43:16.924 I/flutter ( 9522): PROBE ref=47.5 mic=48.9 cam=48.7 vrc=48.0 unp=48.7
+10-18 23:43:17.025 I/flutter ( 9522): PROBE ref=56.8 mic=48.9 cam=49.0 vrc=48.0 unp=49.0
+10-18 23:43:17.125 I/flutter ( 9522): PROBE ref=56.8 mic=58.9 cam=49.0 vrc=57.6 unp=49.0
+10-18 23:43:17.225 I/flutter ( 9522): PROBE ref=62.4 mic=58.9 cam=60.8 vrc=57.6 unp=60.8
+10-18 23:43:17.326 I/flutter ( 9522): PROBE ref=62.4 mic=63.8 cam=60.8 vrc=63.0 unp=60.8
+10-18 23:43:17.426 I/flutter ( 9522): PROBE ref=64.7 mic=63.8 cam=64.6 vrc=63.0 unp=64.6
+10-18 23:43:17.528 I/flutter ( 9522): PROBE ref=64.7 mic=64.5 cam=64.6 vrc=64.6 unp=64.6
+10-18 23:43:17.628 I/flutter ( 9522): PROBE ref=67.8 mic=64.5 cam=65.3 vrc=64.6 unp=65.3
+10-18 23:43:17.727 I/flutter ( 9522): PROBE ref=67.8 mic=68.6 cam=65.3 vrc=68.4 unp=65.3
+10-18 23:43:17.829 I/flutter ( 9522): PROBE ref=66.2 mic=68.6 cam=68.4 vrc=68.4 unp=68.4
+10-18 23:43:17.929 I/flutter ( 9522): PROBE ref=66.2 mic=64.2 cam=68.4 vrc=65.0 unp=68.4
+10-18 23:43:18.029 I/flutter ( 9522): PROBE ref=63.5 mic=64.2 cam=63.2 vrc=65.0 unp=63.2
+10-18 23:43:18.130 I/flutter ( 9522): PROBE ref=63.5 mic=63.9 cam=63.2 vrc=63.6 unp=63.2
+10-18 23:43:18.230 I/flutter ( 9522): PROBE ref=65.4 mic=63.9 cam=65.0 vrc=63.6 unp=65.0
+10-18 23:43:18.331 I/flutter ( 9522): PROBE ref=65.4 mic=65.0 cam=65.0 vrc=65.3 unp=65.0
+10-18 23:43:18.432 I/flutter ( 9522): PROBE ref=65.9 mic=65.0 cam=64.7 vrc=65.3 unp=64.7
+10-18 23:43:18.531 I/flutter ( 9522): PROBE ref=65.9 mic=67.4 cam=64.7 vrc=66.5 unp=64.7
+10-18 23:43:18.631 I/flutter ( 9522): PROBE ref=68.6 mic=67.4 cam=68.3 vrc=66.5 unp=68.3
+10-18 23:43:18.732 I/flutter ( 9522): PROBE ref=68.6 mic=67.9 cam=68.3 vrc=68.4 unp=68.3
+10-18 23:43:18.834 I/flutter ( 9522): PROBE ref=65.5 mic=67.9 cam=67.0 vrc=68.4 unp=67.0
+10-18 23:43:18.932 I/flutter ( 9522): PROBE ref=65.5 mic=65.0 cam=67.0 vrc=65.3 unp=67.0
+10-18 23:43:19.071 I/flutter ( 9522): PROBE ref=62.2 mic=65.0 cam=64.0 vrc=65.3 unp=64.0
+10-18 23:43:19.134 I/flutter ( 9522): PROBE ref=62.2 mic=60.3 cam=64.0 vrc=61.8 unp=64.0
+10-18 23:43:19.234 I/flutter ( 9522): PROBE ref=58.7 mic=60.3 cam=58.9 vrc=61.8 unp=58.9
+10-18 23:43:19.334 I/flutter ( 9522): PROBE ref=58.7 mic=58.7 cam=58.9 vrc=58.9 unp=58.9
+10-18 23:43:19.435 I/flutter ( 9522): PROBE ref=60.2 mic=58.7 cam=60.2 vrc=58.9 unp=60.2
+10-18 23:43:19.536 I/flutter ( 9522): PROBE ref=60.2 mic=59.6 cam=60.2 vrc=60.0 unp=60.2
+10-18 23:43:19.636 I/flutter ( 9522): PROBE ref=54.4 mic=59.6 cam=57.6 vrc=60.0 unp=57.6
+10-18 23:43:19.736 I/flutter ( 9522): PROBE ref=54.4 mic=53.4 cam=57.6 vrc=54.2 unp=57.6
+10-18 23:43:19.838 I/flutter ( 9522): PROBE ref=48.5 mic=53.4 cam=51.9 vrc=47.1 unp=51.9
+10-18 23:43:19.939 I/flutter ( 9522): PROBE ref=48.5 mic=46.9 cam=51.9 vrc=47.1 unp=49.8
+10-18 23:43:20.038 I/flutter ( 9522): PROBE ref=54.4 mic=46.9 cam=49.8 vrc=55.9 unp=49.8
+10-18 23:43:20.139 I/flutter ( 9522): PROBE ref=54.4 mic=57.9 cam=60.3 vrc=55.9 unp=60.3
+10-18 23:43:20.239 I/flutter ( 9522): PROBE ref=62.8 mic=57.9 cam=60.3 vrc=62.9 unp=60.3
+10-18 23:43:20.339 I/flutter ( 9522): PROBE ref=62.8 mic=63.3 cam=63.2 vrc=62.9 unp=63.2
+10-18 23:43:20.440 I/flutter ( 9522): PROBE ref=61.7 mic=63.3 cam=63.2 vrc=61.6 unp=63.2
+10-18 23:43:20.541 I/flutter ( 9522): PROBE ref=61.7 mic=61.4 cam=62.3 vrc=61.6 unp=62.3
+10-18 23:43:20.641 I/flutter ( 9522): PROBE ref=62.2 mic=61.4 cam=62.3 vrc=62.2 unp=62.3
+10-18 23:43:20.741 I/flutter ( 9522): PROBE ref=62.2 mic=61.5 cam=66.6 vrc=62.2 unp=66.6
+10-18 23:43:20.841 I/flutter ( 9522): PROBE ref=68.1 mic=61.5 cam=66.6 vrc=68.1 unp=66.6
+10-18 23:43:20.942 I/flutter ( 9522): PROBE ref=68.1 mic=68.0 cam=67.5 vrc=68.1 unp=67.5
+10-18 23:43:21.043 I/flutter ( 9522): PROBE ref=68.1 mic=68.0 cam=67.5 vrc=68.1 unp=67.5
+10-18 23:43:21.142 I/flutter ( 9522): PROBE ref=68.1 mic=68.1 cam=67.0 vrc=68.1 unp=67.0
+10-18 23:43:21.243 I/flutter ( 9522): PROBE ref=66.8 mic=68.1 cam=67.0 vrc=66.8 unp=67.0
+10-18 23:43:21.343 I/flutter ( 9522): PROBE ref=66.8 mic=66.9 cam=65.5 vrc=66.8 unp=65.5
+10-18 23:43:21.444 I/flutter ( 9522): PROBE ref=60.2 mic=66.9 cam=65.5 vrc=60.8 unp=65.5
+10-18 23:43:21.543 I/flutter ( 9522): PROBE ref=60.2 mic=61.3 cam=61.4 vrc=60.8 unp=61.4
+10-18 23:43:21.644 I/flutter ( 9522): PROBE ref=62.7 mic=61.3 cam=61.4 vrc=62.2 unp=61.4
+10-18 23:43:21.745 I/flutter ( 9522): PROBE ref=62.7 mic=62.3 cam=62.7 vrc=62.2 unp=62.7
+10-18 23:43:21.846 I/flutter ( 9522): PROBE ref=61.8 mic=62.3 cam=62.7 vrc=61.9 unp=62.7
+10-18 23:43:21.945 I/flutter ( 9522): PROBE ref=61.8 mic=61.7 cam=61.5 vrc=61.9 unp=61.5
+10-18 23:43:22.046 I/flutter ( 9522): PROBE ref=62.9 mic=61.7 cam=61.5 vrc=63.1 unp=61.5
+10-18 23:43:22.146 I/flutter ( 9522): PROBE ref=62.9 mic=63.1 cam=62.2 vrc=63.1 unp=62.2
+10-18 23:43:22.247 I/flutter ( 9522): PROBE ref=60.7 mic=63.1 cam=62.2 vrc=59.8 unp=62.2
+10-18 23:43:22.346 I/flutter ( 9522): PROBE ref=60.7 mic=62.6 cam=63.8 vrc=59.8 unp=63.8
+10-18 23:43:22.447 I/flutter ( 9522): PROBE ref=64.4 mic=62.6 cam=63.8 vrc=64.5 unp=63.8
+10-18 23:43:22.548 I/flutter ( 9522): PROBE ref=64.4 mic=62.9 cam=63.4 vrc=64.5 unp=63.4
+10-18 23:43:22.648 I/flutter ( 9522): PROBE ref=62.5 mic=62.9 cam=63.4 vrc=62.3 unp=63.4
+10-18 23:43:22.748 I/flutter ( 9522): PROBE ref=62.5 mic=62.6 cam=60.6 vrc=62.3 unp=60.6
+10-18 23:43:22.849 I/flutter ( 9522): PROBE ref=62.1 mic=62.6 cam=60.6 vrc=63.6 unp=60.6
+10-18 23:43:22.949 I/flutter ( 9522): PROBE ref=62.1 mic=63.8 cam=64.9 vrc=63.6 unp=64.9
+10-18 23:43:23.050 I/flutter ( 9522): PROBE ref=66.6 mic=63.8 cam=64.9 vrc=66.3 unp=64.9
+10-18 23:43:23.151 I/flutter ( 9522): PROBE ref=66.6 mic=66.9 cam=67.0 vrc=66.3 unp=67.0
+10-18 23:43:23.251 I/flutter ( 9522): PROBE ref=65.3 mic=66.9 cam=67.0 vrc=65.0 unp=67.0
+10-18 23:43:23.353 I/flutter ( 9522): PROBE ref=65.3 mic=63.8 cam=62.1 vrc=65.0 unp=62.1
+10-18 23:43:23.452 I/flutter ( 9522): PROBE ref=61.2 mic=63.8 cam=62.1 vrc=61.3 unp=62.1
+10-18 23:43:23.552 I/flutter ( 9522): PROBE ref=61.2 mic=61.7 cam=61.9 vrc=61.3 unp=61.9
+10-18 23:43:23.653 I/flutter ( 9522): PROBE ref=61.9 mic=61.7 cam=61.9 vrc=61.7 unp=61.9
+10-18 23:43:23.753 I/flutter ( 9522): PROBE ref=61.9 mic=61.4 cam=62.1 vrc=61.7 unp=62.1
+10-18 23:43:23.853 I/flutter ( 9522): PROBE ref=63.7 mic=61.4 cam=62.1 vrc=63.7 unp=62.1
+10-18 23:43:23.954 I/flutter ( 9522): PROBE ref=63.7 mic=63.6 cam=62.3 vrc=63.7 unp=62.3
+10-18 23:43:24.054 I/flutter ( 9522): PROBE ref=56.9 mic=63.6 cam=62.3 vrc=55.5 unp=62.3
+10-18 23:43:24.156 I/flutter ( 9522): PROBE ref=56.9 mic=52.6 cam=54.5 vrc=55.5 unp=54.5
+10-18 23:43:24.255 I/flutter ( 9522): PROBE ref=58.2 mic=52.6 cam=54.5 vrc=58.7 unp=54.5
+10-18 23:43:24.356 I/flutter ( 9522): PROBE ref=58.2 mic=59.0 cam=58.8 vrc=58.7 unp=58.8
+10-18 23:43:24.456 I/flutter ( 9522): PROBE ref=56.3 mic=59.0 cam=58.8 vrc=55.5 unp=58.8
+10-18 23:43:24.556 I/flutter ( 9522): PROBE ref=56.3 mic=54.5 cam=53.5 vrc=55.5 unp=53.5
+10-18 23:43:24.657 I/flutter ( 9522): PROBE ref=54.0 mic=54.5 cam=53.5 vrc=54.4 unp=53.5
+10-18 23:43:24.757 I/flutter ( 9522): PROBE ref=54.0 mic=54.2 cam=52.7 vrc=54.4 unp=52.7
+10-18 23:43:24.858 I/flutter ( 9522): PROBE ref=51.2 mic=54.2 cam=52.7 vrc=50.3 unp=52.7
+10-18 23:43:24.959 I/flutter ( 9522): PROBE ref=51.2 mic=51.6 cam=52.0 vrc=50.3 unp=52.0
+10-18 23:43:25.060 I/flutter ( 9522): PROBE ref=52.2 mic=51.6 cam=52.0 vrc=52.1 unp=52.0
+10-18 23:43:25.159 I/flutter ( 9522): PROBE ref=52.2 mic=51.0 cam=49.8 vrc=52.1 unp=49.8
+10-18 23:43:25.259 I/flutter ( 9522): PROBE ref=48.5 mic=51.0 cam=49.8 vrc=49.3 unp=49.8
+10-18 23:43:25.360 I/flutter ( 9522): PROBE ref=48.5 mic=49.8 cam=51.4 vrc=49.3 unp=51.4
+10-18 23:43:25.460 I/flutter ( 9522): PROBE ref=53.5 mic=49.8 cam=51.4 vrc=55.0 unp=51.4
+10-18 23:43:25.560 I/flutter ( 9522): PROBE ref=53.5 mic=57.2 cam=58.5 vrc=55.0 unp=58.5
+10-18 23:43:25.661 I/flutter ( 9522): PROBE ref=57.9 mic=57.2 cam=58.5 vrc=57.0 unp=58.5
+10-18 23:43:25.760 I/flutter ( 9522): PROBE ref=57.9 mic=54.5 cam=47.5 vrc=57.0 unp=47.5
+10-18 23:43:25.861 I/flutter ( 9522): PROBE ref=47.1 mic=54.5 cam=47.5 vrc=47.1 unp=47.5
+10-18 23:43:25.962 I/flutter ( 9522): PROBE ref=47.1 mic=46.9 cam=46.1 vrc=47.1 unp=46.1
+10-18 23:43:26.087 I/flutter ( 9522): PROBE ref=46.3 mic=46.9 cam=46.1 vrc=46.5 unp=46.1
+10-18 23:43:26.162 I/flutter ( 9522): PROBE ref=46.3 mic=47.3 cam=49.6 vrc=46.5 unp=49.6
+10-18 23:43:26.262 I/flutter ( 9522): PROBE ref=50.4 mic=47.3 cam=49.6 vrc=50.5 unp=49.6
+10-18 23:43:26.363 I/flutter ( 9522): PROBE ref=50.4 mic=51.3 cam=50.2 vrc=50.5 unp=50.2
+10-18 23:43:26.464 I/flutter ( 9522): PROBE ref=50.3 mic=51.3 cam=50.2 vrc=50.3 unp=50.2
+10-18 23:43:26.579 I/flutter ( 9522): PROBE ref=50.3 mic=49.0 cam=48.5 vrc=50.3 unp=48.5
+10-18 23:43:26.682 I/flutter ( 9522): PROBE ref=47.9 mic=49.0 cam=48.5 vrc=48.4 unp=48.5
+10-18 23:43:26.783 I/flutter ( 9522): PROBE ref=47.9 mic=49.4 cam=50.3 vrc=48.4 unp=50.3
+10-18 23:43:26.879 I/flutter ( 9522): PROBE ref=54.4 mic=49.4 cam=50.3 vrc=54.5 unp=50.3
+10-18 23:43:26.976 I/flutter ( 9522): PROBE ref=54.4 mic=54.4 cam=54.4 vrc=54.5 unp=54.4
+10-18 23:43:27.081 I/flutter ( 9522): PROBE ref=51.9 mic=54.4 cam=54.4 vrc=51.4 unp=54.4
+10-18 23:43:27.179 I/flutter ( 9522): PROBE ref=51.9 mic=51.2 cam=51.8 vrc=51.4 unp=51.8
+10-18 23:43:27.277 I/flutter ( 9522): PROBE ref=51.4 mic=51.2 cam=51.8 vrc=52.2 unp=51.8
+10-18 23:43:27.379 I/flutter ( 9522): PROBE ref=51.4 mic=52.4 cam=52.2 vrc=52.2 unp=52.2
+10-18 23:43:27.474 I/flutter ( 9522): PROBE ref=52.4 mic=52.4 cam=52.2 vrc=51.9 unp=52.2
+10-18 23:43:27.575 I/flutter ( 9522): PROBE ref=52.4 mic=51.8 cam=51.1 vrc=51.9 unp=51.1
+10-18 23:43:30.569 I/flutter ( 9522): PROBE ref=51.0 mic=62.5 cam=63.2 vrc=58.2 unp=63.2
+10-18 23:43:30.671 I/flutter ( 9522): PROBE ref=64.6 mic=62.5 cam=63.2 vrc=64.3 unp=63.2
+10-18 23:43:30.769 I/flutter ( 9522): PROBE ref=64.6 mic=64.8 cam=64.7 vrc=64.3 unp=64.7
+10-18 23:43:30.869 I/flutter ( 9522): PROBE ref=65.7 mic=64.8 cam=64.7 vrc=65.7 unp=64.7
+10-18 23:43:30.970 I/flutter ( 9522): PROBE ref=65.7 mic=65.0 cam=65.0 vrc=65.7 unp=65.0
+10-18 23:43:31.070 I/flutter ( 9522): PROBE ref=64.0 mic=65.0 cam=65.0 vrc=64.2 unp=65.0
+10-18 23:43:31.169 I/flutter ( 9522): PROBE ref=64.0 mic=64.2 cam=64.5 vrc=64.2 unp=64.5
+10-18 23:43:31.270 I/flutter ( 9522): PROBE ref=64.5 mic=64.2 cam=64.5 vrc=64.6 unp=64.5
+10-18 23:43:31.371 I/flutter ( 9522): PROBE ref=64.5 mic=65.1 cam=65.0 vrc=64.6 unp=65.0
+10-18 23:43:31.470 I/flutter ( 9522): PROBE ref=65.5 mic=65.1 cam=65.0 vrc=65.4 unp=65.0
+10-18 23:43:31.571 I/flutter ( 9522): PROBE ref=65.5 mic=65.6 cam=65.8 vrc=65.4 unp=65.8
+10-18 23:43:31.671 I/flutter ( 9522): PROBE ref=65.9 mic=65.6 cam=65.8 vrc=65.7 unp=65.8
+10-18 23:43:31.773 I/flutter ( 9522): PROBE ref=65.9 mic=65.1 cam=64.7 vrc=65.7 unp=64.7
+10-18 23:43:31.871 I/flutter ( 9522): PROBE ref=62.1 mic=65.1 cam=64.7 vrc=61.7 unp=64.7
+10-18 23:43:31.972 I/flutter ( 9522): PROBE ref=62.1 mic=59.2 cam=58.3 vrc=61.7 unp=58.3
+10-18 23:43:32.072 I/flutter ( 9522): PROBE ref=57.6 mic=59.2 cam=58.3 vrc=58.8 unp=58.3
+10-18 23:43:32.172 I/flutter ( 9522): PROBE ref=57.6 mic=57.3 cam=56.6 vrc=58.8 unp=56.6
+10-18 23:43:32.273 I/flutter ( 9522): PROBE ref=55.3 mic=57.3 cam=56.6 vrc=51.4 unp=56.6
+10-18 23:43:32.373 I/flutter ( 9522): PROBE ref=55.3 mic=49.1 cam=45.7 vrc=51.4 unp=45.7
+10-18 23:43:32.473 I/flutter ( 9522): PROBE ref=38.9 mic=49.1 cam=45.7 vrc=38.0 unp=45.7
+10-18 23:43:32.573 I/flutter ( 9522): PROBE ref=38.9 mic=41.6 cam=42.1 vrc=38.0 unp=42.1
+10-18 23:43:32.673 I/flutter ( 9522): PROBE ref=49.9 mic=41.6 cam=42.1 vrc=53.5 unp=42.1
+10-18 23:43:32.773 I/flutter ( 9522): PROBE ref=49.9 mic=58.5 cam=59.5 vrc=53.5 unp=59.5
+10-18 23:43:32.874 I/flutter ( 9522): PROBE ref=59.8 mic=58.5 cam=59.5 vrc=59.4 unp=59.5
+10-18 23:43:32.974 I/flutter ( 9522): PROBE ref=59.8 mic=56.4 cam=54.4 vrc=59.4 unp=54.4
+10-18 23:43:33.074 I/flutter ( 9522): PROBE ref=52.4 mic=56.4 cam=54.4 vrc=51.4 unp=54.4
+10-18 23:43:33.174 I/flutter ( 9522): PROBE ref=52.4 mic=50.3 cam=49.6 vrc=51.4 unp=49.6
+10-18 23:43:33.274 I/flutter ( 9522): PROBE ref=48.0 mic=50.3 cam=49.6 vrc=48.0 unp=49.6
+10-18 23:43:33.374 I/flutter ( 9522): PROBE ref=48.0 mic=49.1 cam=49.4 vrc=48.0 unp=49.4
+10-18 23:43:33.474 I/flutter ( 9522): PROBE ref=52.0 mic=49.1 cam=49.4 vrc=52.0 unp=49.4
+10-18 23:43:33.574 I/flutter ( 9522): PROBE ref=52.0 mic=51.8 cam=52.5 vrc=52.0 unp=52.5
+10-18 23:43:33.674 I/flutter ( 9522): PROBE ref=51.7 mic=51.8 cam=52.5 vrc=52.0 unp=52.5
+10-18 23:43:33.775 I/flutter ( 9522): PROBE ref=51.7 mic=51.9 cam=50.5 vrc=52.0 unp=50.5
+10-18 23:43:33.875 I/flutter ( 9522): PROBE ref=48.5 mic=51.9 cam=50.5 vrc=48.1 unp=50.5
+10-18 23:43:33.976 I/flutter ( 9522): PROBE ref=48.5 mic=49.0 cam=50.6 vrc=48.1 unp=50.6
+10-18 23:43:34.076 I/flutter ( 9522): PROBE ref=52.0 mic=49.0 cam=50.6 vrc=52.0 unp=50.6
+10-18 23:43:34.176 I/flutter ( 9522): PROBE ref=52.0 mic=51.0 cam=49.4 vrc=52.0 unp=49.4
+10-18 23:43:34.277 I/flutter ( 9522): PROBE ref=44.1 mic=51.0 cam=49.4 vrc=43.2 unp=49.4
+10-18 23:43:34.377 I/flutter ( 9522): PROBE ref=44.1 mic=41.3 cam=42.4 vrc=43.2 unp=42.4
+10-18 23:43:34.477 I/flutter ( 9522): PROBE ref=46.8 mic=41.3 cam=42.4 vrc=47.9 unp=42.4
+10-18 23:43:34.577 I/flutter ( 9522): PROBE ref=46.8 mic=49.2 cam=49.1 vrc=47.9 unp=49.1
+10-18 23:43:34.677 I/flutter ( 9522): PROBE ref=47.3 mic=49.2 cam=49.1 vrc=48.6 unp=49.1
+10-18 23:43:34.702 I/flutter ( 9522): PHASE quiet MARK
+10-18 23:43:34.797 I/flutter ( 9522): PROBE ref=47.3 mic=47.4 cam=47.3 vrc=48.6 unp=47.3
+10-18 23:43:34.895 I/flutter ( 9522): PROBE ref=47.2 mic=47.4 cam=47.3 vrc=43.1 unp=47.3
+10-18 23:43:34.995 I/flutter ( 9522): PROBE ref=47.2 mic=41.2 cam=40.9 vrc=43.1 unp=40.9
+10-18 23:43:35.093 I/flutter ( 9522): PROBE ref=46.7 mic=41.2 cam=40.9 vrc=47.1 unp=40.9
+10-18 23:43:35.180 I/flutter ( 9522): PROBE ref=46.7 mic=49.2 cam=49.3 vrc=47.1 unp=49.3
+10-18 23:43:35.280 I/flutter ( 9522): PROBE ref=50.4 mic=49.2 cam=49.3 vrc=50.4 unp=49.3
+10-18 23:43:35.379 I/flutter ( 9522): PROBE ref=50.4 mic=49.7 cam=50.0 vrc=50.4 unp=50.0
+10-18 23:43:35.480 I/flutter ( 9522): PROBE ref=47.8 mic=49.7 cam=50.0 vrc=48.1 unp=50.0
+10-18 23:43:35.580 I/flutter ( 9522): PROBE ref=47.8 mic=47.6 cam=46.8 vrc=48.1 unp=46.8
+10-18 23:43:35.680 I/flutter ( 9522): PROBE ref=44.2 mic=47.6 cam=46.8 vrc=42.9 unp=46.8
+10-18 23:43:35.781 I/flutter ( 9522): PROBE ref=44.2 mic=48.5 cam=50.4 vrc=42.9 unp=50.4
+10-18 23:43:35.881 I/flutter ( 9522): PROBE ref=53.7 mic=48.5 cam=50.4 vrc=54.2 unp=50.4
+10-18 23:43:35.981 I/flutter ( 9522): PROBE ref=53.7 mic=58.0 cam=58.6 vrc=54.2 unp=58.6
+10-18 23:43:36.082 I/flutter ( 9522): PROBE ref=60.5 mic=58.0 cam=58.6 vrc=60.5 unp=58.6
+10-18 23:43:36.182 I/flutter ( 9522): PROBE ref=60.5 mic=58.9 cam=58.7 vrc=60.5 unp=58.7
+10-18 23:43:36.282 I/flutter ( 9522): PROBE ref=55.6 mic=58.9 cam=58.7 vrc=56.3 unp=58.7
+10-18 23:43:36.383 I/flutter ( 9522): PROBE ref=55.6 mic=58.6 cam=59.1 vrc=56.3 unp=59.1
+10-18 23:43:36.483 I/flutter ( 9522): PROBE ref=58.7 mic=58.6 cam=59.1 vrc=58.2 unp=59.1
+10-18 23:43:36.584 I/flutter ( 9522): PROBE ref=58.7 mic=56.2 cam=55.0 vrc=58.2 unp=55.0
+10-18 23:43:36.685 I/flutter ( 9522): PROBE ref=56.5 mic=56.2 cam=55.0 vrc=56.6 unp=55.0
+10-18 23:43:36.785 I/flutter ( 9522): PROBE ref=56.5 mic=56.8 cam=56.1 vrc=56.6 unp=56.1
+10-18 23:43:36.885 I/flutter ( 9522): PROBE ref=54.1 mic=56.8 cam=56.1 vrc=53.8 unp=56.1
+10-18 23:43:37.005 I/flutter ( 9522): PROBE ref=54.1 mic=50.8 cam=50.1 vrc=53.8 unp=50.1
+10-18 23:43:37.103 I/flutter ( 9522): PROBE ref=50.3 mic=50.8 cam=50.1 vrc=50.6 unp=50.1
+10-18 23:43:37.203 I/flutter ( 9522): PROBE ref=50.3 mic=50.0 cam=49.9 vrc=50.6 unp=49.9
+10-18 23:43:37.303 I/flutter ( 9522): PROBE ref=46.4 mic=50.0 cam=49.9 vrc=45.2 unp=49.9
+10-18 23:43:37.403 I/flutter ( 9522): PROBE ref=46.4 mic=40.7 cam=40.4 vrc=45.2 unp=40.4
+10-18 23:43:37.502 I/flutter ( 9522): PROBE ref=43.1 mic=40.7 cam=40.4 vrc=43.4 unp=40.4
+10-18 23:43:37.602 I/flutter ( 9522): PROBE ref=43.1 mic=44.2 cam=44.4 vrc=43.4 unp=44.4
+10-18 23:43:37.710 I/flutter ( 9522): PROBE ref=44.0 mic=44.2 cam=44.4 vrc=45.4 unp=44.4
+10-18 23:43:37.800 I/flutter ( 9522): PROBE ref=44.0 mic=46.3 cam=46.7 vrc=45.4 unp=46.7
+10-18 23:43:37.896 I/flutter ( 9522): PROBE ref=46.3 mic=46.3 cam=46.7 vrc=45.1 unp=46.7
+10-18 23:43:37.995 I/flutter ( 9522): PROBE ref=46.3 mic=48.6 cam=49.5 vrc=45.1 unp=49.5
+10-18 23:43:38.095 I/flutter ( 9522): PROBE ref=51.9 mic=48.6 cam=49.5 vrc=52.0 unp=49.5
+10-18 23:43:38.193 I/flutter ( 9522): PROBE ref=51.9 mic=51.0 cam=50.4 vrc=52.0 unp=50.4
+10-18 23:43:38.294 I/flutter ( 9522): PROBE ref=47.1 mic=51.0 cam=50.4 vrc=46.7 unp=50.4
+10-18 23:43:38.394 I/flutter ( 9522): PROBE ref=47.1 mic=45.8 cam=45.5 vrc=46.7 unp=45.5
+10-18 23:43:38.495 I/flutter ( 9522): PROBE ref=47.8 mic=45.8 cam=45.5 vrc=49.1 unp=45.5
+10-18 23:43:38.612 I/flutter ( 9522): PROBE ref=47.8 mic=49.8 cam=50.1 vrc=49.1 unp=50.1
+10-18 23:43:38.717 I/flutter ( 9522): PROBE ref=50.1 mic=49.8 cam=50.1 vrc=49.4 unp=50.1
+10-18 23:43:38.815 I/flutter ( 9522): PROBE ref=50.1 mic=49.0 cam=49.3 vrc=49.4 unp=49.3
+10-18 23:43:38.915 I/flutter ( 9522): PROBE ref=51.1 mic=49.0 cam=49.3 vrc=50.9 unp=49.3
+10-18 23:43:39.011 I/flutter ( 9522): PROBE ref=51.1 mic=50.2 cam=49.6 vrc=50.9 unp=49.6
+10-18 23:43:39.113 I/flutter ( 9522): PROBE ref=37.8 mic=50.2 cam=49.6 vrc=36.6 unp=49.6
+10-18 23:43:39.211 I/flutter ( 9522): PROBE ref=37.8 mic=43.6 cam=44.4 vrc=36.6 unp=44.4
+10-18 23:43:39.311 I/flutter ( 9522): PROBE ref=48.1 mic=43.6 cam=44.4 vrc=48.8 unp=44.4
+10-18 23:43:39.411 I/flutter ( 9522): PROBE ref=48.1 mic=49.3 cam=53.0 vrc=48.8 unp=53.0
+10-18 23:43:39.512 I/flutter ( 9522): PROBE ref=54.6 mic=49.3 cam=53.0 vrc=55.5 unp=53.0
+10-18 23:43:39.610 I/flutter ( 9522): PROBE ref=54.6 mic=57.7 cam=57.0 vrc=55.5 unp=57.0
+10-18 23:43:39.711 I/flutter ( 9522): PROBE ref=56.9 mic=57.7 cam=57.0 vrc=56.3 unp=57.0
+10-18 23:43:39.806 I/flutter ( 9522): PROBE ref=56.9 mic=53.6 cam=53.0 vrc=56.3 unp=53.0
+10-18 23:43:39.909 I/flutter ( 9522): PROBE ref=53.7 mic=53.6 cam=53.0 vrc=53.6 unp=53.0
+10-18 23:43:40.007 I/flutter ( 9522): PROBE ref=53.7 mic=53.8 cam=54.5 vrc=53.6 unp=54.5
+10-18 23:43:40.103 I/flutter ( 9522): PROBE ref=54.7 mic=53.8 cam=54.5 vrc=55.3 unp=54.5
+10-18 23:43:40.208 I/flutter ( 9522): PROBE ref=54.7 mic=55.9 cam=55.5 vrc=55.3 unp=55.5
+10-18 23:43:40.307 I/flutter ( 9522): PROBE ref=56.0 mic=55.9 cam=55.5 vrc=56.1 unp=55.5
+10-18 23:43:40.407 I/flutter ( 9522): PROBE ref=56.0 mic=58.1 cam=59.4 vrc=56.1 unp=59.4
+10-18 23:43:40.509 I/flutter ( 9522): PROBE ref=59.6 mic=58.1 cam=59.4 vrc=59.9 unp=59.4
+10-18 23:43:40.605 I/flutter ( 9522): PROBE ref=59.6 mic=59.5 cam=58.8 vrc=59.9 unp=58.8
+10-18 23:43:40.704 I/flutter ( 9522): PROBE ref=58.2 mic=59.5 cam=58.8 vrc=58.0 unp=58.8
+10-18 23:43:40.805 I/flutter ( 9522): PROBE ref=58.2 mic=60.1 cam=59.7 vrc=58.0 unp=59.7
+10-18 23:43:40.905 I/flutter ( 9522): PROBE ref=59.9 mic=60.1 cam=59.7 vrc=59.6 unp=59.7
+10-18 23:43:41.005 I/flutter ( 9522): PROBE ref=59.9 mic=54.7 cam=54.2 vrc=59.6 unp=54.2
+10-18 23:43:41.105 I/flutter ( 9522): PROBE ref=48.4 mic=54.7 cam=54.2 vrc=47.6 unp=54.2
+10-18 23:43:41.207 I/flutter ( 9522): PROBE ref=48.4 mic=40.8 cam=40.8 vrc=47.6 unp=40.8
+10-18 23:43:41.306 I/flutter ( 9522): PROBE ref=40.1 mic=40.8 cam=40.8 vrc=40.4 unp=40.8
+10-18 23:43:41.406 I/flutter ( 9522): PROBE ref=40.1 mic=43.1 cam=43.2 vrc=40.4 unp=43.2
+10-18 23:43:41.507 I/flutter ( 9522): PROBE ref=45.8 mic=43.1 cam=43.2 vrc=46.2 unp=43.2
+10-18 23:43:41.607 I/flutter ( 9522): PROBE ref=45.8 mic=52.9 cam=55.5 vrc=46.2 unp=55.5
+10-18 23:43:41.707 I/flutter ( 9522): PROBE ref=58.0 mic=52.9 cam=55.5 vrc=58.1 unp=55.5
+10-18 23:43:41.807 I/flutter ( 9522): PROBE ref=58.0 mic=57.0 cam=55.5 vrc=58.1 unp=55.5
+10-18 23:43:41.921 I/flutter ( 9522): PROBE ref=48.5 mic=57.0 cam=55.5 vrc=46.9 unp=55.5
+10-18 23:43:42.016 I/flutter ( 9522): PROBE ref=48.5 mic=47.1 cam=45.8 vrc=46.9 unp=45.8
+10-18 23:43:42.109 I/flutter ( 9522): PROBE ref=44.9 mic=47.1 cam=45.8 vrc=46.1 unp=45.8
+10-18 23:43:42.215 I/flutter ( 9522): PROBE ref=44.9 mic=48.0 cam=48.5 vrc=46.1 unp=48.5
+10-18 23:43:42.319 I/flutter ( 9522): PROBE ref=53.3 mic=48.0 cam=48.5 vrc=53.3 unp=48.5
+10-18 23:43:42.365 I/flutter ( 9522): PHASE top MARK
+10-18 23:43:42.410 I/flutter ( 9522): PROBE ref=53.3 mic=53.4 cam=53.8 vrc=53.3 unp=53.8
+10-18 23:43:42.515 I/flutter ( 9522): PROBE ref=52.3 mic=53.4 cam=53.8 vrc=53.1 unp=53.8
+10-18 23:43:42.613 I/flutter ( 9522): PROBE ref=52.3 mic=57.8 cam=59.4 vrc=53.1 unp=59.4
+10-18 23:43:42.712 I/flutter ( 9522): PROBE ref=61.1 mic=57.8 cam=59.4 vrc=61.2 unp=59.4
+10-18 23:43:42.812 I/flutter ( 9522): PROBE ref=61.1 mic=60.6 cam=59.6 vrc=61.2 unp=59.6
+10-18 23:43:42.911 I/flutter ( 9522): PROBE ref=57.5 mic=60.6 cam=59.6 vrc=56.9 unp=59.6
+10-18 23:43:43.012 I/flutter ( 9522): PROBE ref=57.5 mic=58.4 cam=60.0 vrc=56.9 unp=60.0
+10-18 23:43:43.112 I/flutter ( 9522): PROBE ref=60.0 mic=58.4 cam=60.0 vrc=60.1 unp=60.0
+10-18 23:43:43.214 I/flutter ( 9522): PROBE ref=60.0 mic=57.8 cam=54.4 vrc=60.1 unp=54.4
+10-18 23:43:43.313 I/flutter ( 9522): PROBE ref=53.1 mic=57.8 cam=54.4 vrc=54.0 unp=54.4
+10-18 23:43:43.414 I/flutter ( 9522): PROBE ref=53.1 mic=55.5 cam=55.9 vrc=54.0 unp=55.9
+10-18 23:43:43.514 I/flutter ( 9522): PROBE ref=59.3 mic=55.5 cam=55.9 vrc=60.1 unp=55.9
+10-18 23:43:43.614 I/flutter ( 9522): PROBE ref=59.3 mic=61.9 cam=62.3 vrc=60.1 unp=62.3
+10-18 23:43:43.714 I/flutter ( 9522): PROBE ref=63.3 mic=61.9 cam=62.3 vrc=63.1 unp=62.3
+10-18 23:43:43.815 I/flutter ( 9522): PROBE ref=63.3 mic=62.6 cam=62.5 vrc=63.1 unp=62.5
+10-18 23:43:43.915 I/flutter ( 9522): PROBE ref=60.4 mic=62.6 cam=62.5 vrc=60.3 unp=62.5
+10-18 23:43:44.015 I/flutter ( 9522): PROBE ref=60.4 mic=61.8 cam=62.5 vrc=60.3 unp=62.5
+10-18 23:43:44.116 I/flutter ( 9522): PROBE ref=64.3 mic=61.8 cam=62.5 vrc=64.6 unp=62.5
+10-18 23:43:44.217 I/flutter ( 9522): PROBE ref=64.3 mic=65.9 cam=66.0 vrc=64.6 unp=66.0
+10-18 23:43:44.317 I/flutter ( 9522): PROBE ref=66.1 mic=65.9 cam=66.0 vrc=65.9 unp=66.0
+10-18 23:43:44.418 I/flutter ( 9522): PROBE ref=66.1 mic=64.8 cam=64.3 vrc=65.9 unp=64.3
+10-18 23:43:44.518 I/flutter ( 9522): PROBE ref=62.4 mic=64.8 cam=64.3 vrc=62.1 unp=64.3
+10-18 23:43:44.619 I/flutter ( 9522): PROBE ref=62.4 mic=61.6 cam=62.2 vrc=62.1 unp=62.2
+10-18 23:43:44.719 I/flutter ( 9522): PROBE ref=63.7 mic=61.6 cam=62.2 vrc=63.7 unp=62.2
+10-18 23:43:44.819 I/flutter ( 9522): PROBE ref=63.7 mic=64.1 cam=63.9 vrc=63.7 unp=63.9
+10-18 23:43:44.920 I/flutter ( 9522): PROBE ref=63.0 mic=64.1 cam=63.9 vrc=63.1 unp=63.9
+10-18 23:43:45.020 I/flutter ( 9522): PROBE ref=63.0 mic=61.9 cam=62.0 vrc=63.1 unp=62.0
+10-18 23:43:45.120 I/flutter ( 9522): PROBE ref=62.9 mic=61.9 cam=62.0 vrc=63.0 unp=62.0
+10-18 23:43:45.220 I/flutter ( 9522): PROBE ref=62.9 mic=62.8 cam=62.5 vrc=63.0 unp=62.5
+10-18 23:43:45.321 I/flutter ( 9522): PROBE ref=61.1 mic=62.8 cam=62.5 vrc=60.9 unp=62.5
+10-18 23:43:45.423 I/flutter ( 9522): PROBE ref=61.1 mic=60.6 cam=60.2 vrc=60.9 unp=60.2
+10-18 23:43:45.522 I/flutter ( 9522): PROBE ref=58.8 mic=60.6 cam=60.2 vrc=58.5 unp=60.2
+10-18 23:43:45.622 I/flutter ( 9522): PROBE ref=58.8 mic=56.3 cam=55.4 vrc=58.5 unp=55.4
+10-18 23:43:45.723 I/flutter ( 9522): PROBE ref=54.1 mic=56.3 cam=55.4 vrc=53.8 unp=55.4
+10-18 23:43:45.823 I/flutter ( 9522): PROBE ref=54.1 mic=52.3 cam=52.2 vrc=53.8 unp=52.2
+10-18 23:43:45.923 I/flutter ( 9522): PROBE ref=51.5 mic=52.3 cam=52.2 vrc=52.0 unp=52.2
+10-18 23:43:46.023 I/flutter ( 9522): PROBE ref=51.5 mic=52.8 cam=52.6 vrc=52.0 unp=52.6
+10-18 23:43:46.123 I/flutter ( 9522): PROBE ref=51.8 mic=52.8 cam=52.6 vrc=51.5 unp=52.6
+10-18 23:43:46.224 I/flutter ( 9522): PROBE ref=51.8 mic=49.8 cam=49.8 vrc=51.5 unp=49.8
+10-18 23:43:46.324 I/flutter ( 9522): PROBE ref=52.5 mic=49.8 cam=49.8 vrc=52.9 unp=49.8
+10-18 23:43:46.424 I/flutter ( 9522): PROBE ref=52.5 mic=54.2 cam=54.4 vrc=52.9 unp=54.4
+10-18 23:43:46.525 I/flutter ( 9522): PROBE ref=54.2 mic=54.2 cam=54.4 vrc=54.4 unp=54.4
+10-18 23:43:46.625 I/flutter ( 9522): PROBE ref=54.2 mic=59.7 cam=63.7 vrc=54.4 unp=63.7
+10-18 23:43:46.725 I/flutter ( 9522): PROBE ref=70.9 mic=59.7 cam=63.7 vrc=71.9 unp=63.7
+10-18 23:43:46.825 I/flutter ( 9522): PROBE ref=70.9 mic=73.8 cam=74.3 vrc=71.9 unp=74.3
+10-18 23:43:46.925 I/flutter ( 9522): PROBE ref=74.4 mic=73.8 cam=74.3 vrc=74.3 unp=74.3
+10-18 23:43:47.026 I/flutter ( 9522): PROBE ref=74.4 mic=74.1 cam=74.2 vrc=74.3 unp=74.2
+10-18 23:43:47.126 I/flutter ( 9522): PROBE ref=74.5 mic=74.1 cam=74.2 vrc=74.5 unp=74.2
+10-18 23:43:47.226 I/flutter ( 9522): PROBE ref=74.5 mic=74.2 cam=73.9 vrc=74.5 unp=73.9
+10-18 23:43:47.327 I/flutter ( 9522): PROBE ref=74.0 mic=74.2 cam=73.9 vrc=74.0 unp=73.9
+10-18 23:43:47.426 I/flutter ( 9522): PROBE ref=74.0 mic=74.1 cam=73.9 vrc=74.0 unp=73.9
+10-18 23:43:47.527 I/flutter ( 9522): PROBE ref=73.5 mic=74.1 cam=73.9 vrc=73.5 unp=73.9
+10-18 23:43:47.627 I/flutter ( 9522): PROBE ref=73.5 mic=73.5 cam=73.6 vrc=73.5 unp=73.6
+10-18 23:43:47.727 I/flutter ( 9522): PROBE ref=73.5 mic=73.5 cam=73.6 vrc=73.3 unp=73.6
+10-18 23:43:47.828 I/flutter ( 9522): PROBE ref=73.5 mic=73.7 cam=73.6 vrc=73.3 unp=73.6
+10-18 23:43:47.928 I/flutter ( 9522): PROBE ref=73.8 mic=73.7 cam=73.6 vrc=73.6 unp=73.6
+10-18 23:43:48.027 I/flutter ( 9522): PROBE ref=73.8 mic=73.9 cam=74.2 vrc=73.6 unp=74.2
+10-18 23:43:48.128 I/flutter ( 9522): PROBE ref=74.1 mic=73.9 cam=74.2 vrc=74.0 unp=74.2
+10-18 23:43:48.228 I/flutter ( 9522): PROBE ref=74.1 mic=74.0 cam=73.8 vrc=74.0 unp=73.8
+10-18 23:43:48.329 I/flutter ( 9522): PROBE ref=73.7 mic=74.0 cam=73.8 vrc=73.7 unp=73.8
+10-18 23:43:48.428 I/flutter ( 9522): PROBE ref=73.7 mic=73.5 cam=73.9 vrc=73.7 unp=73.9
+10-18 23:43:48.529 I/flutter ( 9522): PROBE ref=73.9 mic=73.5 cam=73.9 vrc=73.9 unp=73.9
+10-18 23:43:48.630 I/flutter ( 9522): PROBE ref=73.9 mic=74.1 cam=73.8 vrc=73.9 unp=73.8
+10-18 23:43:48.730 I/flutter ( 9522): PROBE ref=73.8 mic=74.1 cam=73.8 vrc=73.8 unp=73.8
+10-18 23:43:48.830 I/flutter ( 9522): PROBE ref=73.8 mic=73.8 cam=73.9 vrc=73.8 unp=73.9
+10-18 23:43:48.931 I/flutter ( 9522): PROBE ref=73.9 mic=73.8 cam=73.9 vrc=74.1 unp=73.9
+10-18 23:43:49.031 I/flutter ( 9522): PROBE ref=73.9 mic=73.5 cam=73.4 vrc=74.1 unp=73.4
+10-18 23:43:49.133 I/flutter ( 9522): PROBE ref=73.5 mic=73.5 cam=73.4 vrc=73.2 unp=73.4
+10-18 23:43:49.232 I/flutter ( 9522): PROBE ref=73.5 mic=73.5 cam=73.3 vrc=73.2 unp=73.3
+10-18 23:43:49.333 I/flutter ( 9522): PROBE ref=73.2 mic=73.5 cam=73.3 vrc=73.5 unp=73.3
+10-18 23:43:49.433 I/flutter ( 9522): PROBE ref=73.2 mic=73.7 cam=74.1 vrc=73.5 unp=74.1
+10-18 23:43:49.534 I/flutter ( 9522): PROBE ref=74.4 mic=73.7 cam=74.1 vrc=74.4 unp=74.1
+10-18 23:43:49.634 I/flutter ( 9522): PROBE ref=74.4 mic=74.5 cam=74.6 vrc=74.4 unp=74.6
+10-18 23:43:49.735 I/flutter ( 9522): PROBE ref=74.8 mic=74.5 cam=74.6 vrc=74.7 unp=74.6
+10-18 23:43:49.836 I/flutter ( 9522): PROBE ref=74.8 mic=74.8 cam=74.7 vrc=74.7 unp=74.7
+10-18 23:43:49.936 I/flutter ( 9522): PROBE ref=74.6 mic=74.8 cam=74.7 vrc=74.6 unp=74.7
+10-18 23:43:50.036 I/flutter ( 9522): PROBE ref=74.6 mic=74.7 cam=74.7 vrc=74.6 unp=74.7
+10-18 23:43:50.137 I/flutter ( 9522): PROBE ref=74.8 mic=74.7 cam=74.7 vrc=74.7 unp=74.7
+10-18 23:43:50.237 I/flutter ( 9522): PROBE ref=74.8 mic=74.7 cam=74.7 vrc=74.7 unp=74.7
+10-18 23:43:50.339 I/flutter ( 9522): PROBE ref=74.6 mic=74.7 cam=74.7 vrc=74.6 unp=74.7
+10-18 23:43:50.438 I/flutter ( 9522): PROBE ref=74.6 mic=74.6 cam=74.7 vrc=74.6 unp=74.7
+10-18 23:43:50.539 I/flutter ( 9522): PROBE ref=74.3 mic=73.1 cam=74.7 vrc=74.0 unp=74.7
+10-18 23:43:50.640 I/flutter ( 9522): PROBE ref=74.3 mic=73.1 cam=72.9 vrc=74.0 unp=72.9
+10-18 23:43:50.741 I/flutter ( 9522): PROBE ref=73.4 mic=73.1 cam=72.9 vrc=73.8 unp=72.9
+10-18 23:43:50.841 I/flutter ( 9522): PROBE ref=73.4 mic=74.5 cam=74.3 vrc=73.8 unp=74.3
+10-18 23:43:50.942 I/flutter ( 9522): PROBE ref=74.3 mic=74.0 cam=74.3 vrc=74.3 unp=74.3
+10-18 23:43:51.043 I/flutter ( 9522): PROBE ref=74.3 mic=74.0 cam=74.2 vrc=74.3 unp=74.2
+10-18 23:43:51.144 I/flutter ( 9522): PROBE ref=74.2 mic=74.2 cam=74.2 vrc=74.1 unp=74.2
+10-18 23:43:51.243 I/flutter ( 9522): PROBE ref=74.2 mic=74.2 cam=73.7 vrc=74.1 unp=73.7
+10-18 23:43:51.343 I/flutter ( 9522): PROBE ref=71.1 mic=63.7 cam=73.7 vrc=70.2 unp=73.7
+10-18 23:43:51.444 I/flutter ( 9522): PROBE ref=71.1 mic=63.7 cam=59.9 vrc=70.2 unp=59.9
+10-18 23:43:51.546 I/flutter ( 9522): PROBE ref=58.9 mic=55.2 cam=59.9 vrc=58.9 unp=59.9
+10-18 23:43:51.645 I/flutter ( 9522): PROBE ref=58.9 mic=55.2 cam=55.1 vrc=58.9 unp=55.1
+10-18 23:43:51.745 I/flutter ( 9522): PROBE ref=55.4 mic=56.1 cam=55.1 vrc=53.8 unp=55.1
+10-18 23:43:51.847 I/flutter ( 9522): PROBE ref=55.4 mic=56.1 cam=55.9 vrc=53.8 unp=55.9
+10-18 23:43:51.946 I/flutter ( 9522): PROBE ref=55.5 mic=53.6 cam=55.9 vrc=55.9 unp=55.9
+10-18 23:43:52.047 I/flutter ( 9522): PROBE ref=55.5 mic=53.6 cam=53.0 vrc=55.9 unp=53.0
+10-18 23:43:52.147 I/flutter ( 9522): PROBE ref=52.7 mic=56.4 cam=53.0 vrc=52.3 unp=53.0
+10-18 23:43:52.248 I/flutter ( 9522): PROBE ref=52.7 mic=56.4 cam=56.8 vrc=52.3 unp=56.8
+10-18 23:43:52.348 I/flutter ( 9522): PROBE ref=57.4 mic=55.4 cam=56.8 vrc=57.4 unp=56.8
+10-18 23:43:52.448 I/flutter ( 9522): PROBE ref=53.3 mic=55.4 cam=54.9 vrc=57.4 unp=54.9
+10-18 23:43:52.549 I/flutter ( 9522): PROBE ref=53.3 mic=54.0 cam=54.9 vrc=52.9 unp=54.9
+10-18 23:43:52.649 I/flutter ( 9522): PROBE ref=57.9 mic=54.0 cam=55.3 vrc=52.9 unp=55.3
+10-18 23:43:52.750 I/flutter ( 9522): PROBE ref=57.9 mic=60.5 cam=55.3 vrc=58.6 unp=55.3
+10-18 23:43:52.850 I/flutter ( 9522): PROBE ref=59.0 mic=60.5 cam=60.3 vrc=58.6 unp=60.3
+10-18 23:43:52.958 I/flutter ( 9522): PROBE ref=59.0 mic=55.5 cam=60.3 vrc=58.4 unp=60.3
+10-18 23:43:53.050 I/flutter ( 9522): PROBE ref=56.1 mic=55.5 cam=55.0 vrc=58.4 unp=55.0
+10-18 23:43:53.152 I/flutter ( 9522): PROBE ref=56.1 mic=54.1 cam=55.0 vrc=56.0 unp=55.0
+10-18 23:43:53.253 I/flutter ( 9522): PROBE ref=56.3 mic=54.1 cam=55.4 vrc=56.0 unp=55.4
+10-18 23:43:53.353 I/flutter ( 9522): PROBE ref=56.3 mic=60.4 cam=55.4 vrc=56.7 unp=55.4
+10-18 23:43:53.453 I/flutter ( 9522): PROBE ref=61.6 mic=60.4 cam=61.0 vrc=56.7 unp=61.0
+10-18 23:43:53.554 I/flutter ( 9522): PROBE ref=61.6 mic=62.7 cam=61.0 vrc=62.2 unp=61.0
+10-18 23:43:53.654 I/flutter ( 9522): PROBE ref=62.1 mic=62.7 cam=62.4 vrc=62.2 unp=62.4
+10-18 23:43:53.754 I/flutter ( 9522): PROBE ref=62.1 mic=57.4 cam=62.4 vrc=61.3 unp=62.4
+10-18 23:43:53.855 I/flutter ( 9522): PROBE ref=58.6 mic=57.4 cam=56.6 vrc=61.3 unp=56.6
+10-18 23:43:53.954 I/flutter ( 9522): PROBE ref=58.6 mic=61.2 cam=56.6 vrc=59.0 unp=56.6
+10-18 23:43:54.054 I/flutter ( 9522): PROBE ref=62.9 mic=61.2 cam=62.2 vrc=59.0 unp=62.2
+10-18 23:43:54.154 I/flutter ( 9522): PROBE ref=62.9 mic=62.5 cam=62.2 vrc=62.9 unp=62.2
+10-18 23:43:54.255 I/flutter ( 9522): PROBE ref=58.9 mic=62.5 cam=61.6 vrc=62.9 unp=61.6
+10-18 23:43:54.355 I/flutter ( 9522): PROBE ref=58.9 mic=56.5 cam=61.6 vrc=58.4 unp=61.6
+10-18 23:43:54.455 I/flutter ( 9522): PROBE ref=58.6 mic=56.5 cam=56.6 vrc=58.4 unp=56.6
+10-18 23:43:54.556 I/flutter ( 9522): PROBE ref=58.6 mic=58.3 cam=56.6 vrc=58.5 unp=56.6
+10-18 23:43:54.659 I/flutter ( 9522): PROBE ref=57.4 mic=58.3 cam=58.2 vrc=58.5 unp=58.2
+10-18 23:43:54.756 I/flutter ( 9522): PROBE ref=57.4 mic=59.8 cam=58.2 vrc=57.8 unp=58.2
+10-18 23:43:54.856 I/flutter ( 9522): PROBE ref=61.2 mic=59.8 cam=60.4 vrc=57.8 unp=60.4
+10-18 23:43:54.957 I/flutter ( 9522): PROBE ref=61.2 mic=61.0 cam=60.4 vrc=61.8 unp=60.4
+10-18 23:43:55.057 I/flutter ( 9522): PROBE ref=59.2 mic=61.0 cam=60.7 vrc=61.8 unp=60.7
+10-18 23:43:55.157 I/flutter ( 9522): PROBE ref=59.2 mic=60.7 cam=60.7 vrc=58.6 unp=60.7
+10-18 23:43:55.257 I/flutter ( 9522): PROBE ref=61.7 mic=60.7 cam=61.6 vrc=58.6 unp=61.6
+10-18 23:43:55.357 I/flutter ( 9522): PROBE ref=61.7 mic=60.8 cam=61.6 vrc=61.7 unp=61.6
+10-18 23:43:55.458 I/flutter ( 9522): PROBE ref=58.6 mic=60.8 cam=59.2 vrc=61.7 unp=59.2
+10-18 23:43:55.557 I/flutter ( 9522): PROBE ref=58.6 mic=56.2 cam=59.2 vrc=57.9 unp=59.2
+10-18 23:43:55.658 I/flutter ( 9522): PROBE ref=58.5 mic=56.2 cam=56.5 vrc=57.9 unp=56.5
+10-18 23:43:55.758 I/flutter ( 9522): PROBE ref=58.5 mic=57.9 cam=56.5 vrc=58.5 unp=56.5
+10-18 23:43:55.859 I/flutter ( 9522): PROBE ref=53.4 mic=57.9 cam=57.4 vrc=58.5 unp=57.4
+10-18 23:43:55.958 I/flutter ( 9522): PROBE ref=53.4 mic=57.3 cam=57.4 vrc=52.7 unp=57.4
+10-18 23:43:56.059 I/flutter ( 9522): PROBE ref=63.2 mic=57.3 cam=59.1 vrc=52.7 unp=59.1
+10-18 23:43:56.159 I/flutter ( 9522): PROBE ref=63.2 mic=62.7 cam=59.1 vrc=63.3 unp=59.1
+10-18 23:43:56.259 I/flutter ( 9522): PROBE ref=55.5 mic=62.7 cam=62.0 vrc=63.3 unp=62.0
+10-18 23:43:56.360 I/flutter ( 9522): PROBE ref=55.5 mic=53.0 cam=62.0 vrc=54.6 unp=62.0
+10-18 23:43:56.460 I/flutter ( 9522): PROBE ref=51.5 mic=53.0 cam=53.0 vrc=54.6 unp=53.0
+10-18 23:43:56.467 I/flutter ( 9522): PHASE bottom MARK
+10-18 23:43:56.560 I/flutter ( 9522): PROBE ref=51.5 mic=48.8 cam=53.0 vrc=51.4 unp=53.0
+10-18 23:43:56.661 I/flutter ( 9522): PROBE ref=46.4 mic=48.8 cam=48.2 vrc=51.4 unp=48.2
+10-18 23:43:56.761 I/flutter ( 9522): PROBE ref=46.4 mic=50.2 cam=48.2 vrc=47.2 unp=48.2
+10-18 23:43:56.861 I/flutter ( 9522): PROBE ref=56.7 mic=50.2 cam=52.8 vrc=47.2 unp=52.8
+10-18 23:43:56.962 I/flutter ( 9522): PROBE ref=56.7 mic=61.4 cam=52.8 vrc=57.2 unp=52.8
+10-18 23:43:57.062 I/flutter ( 9522): PROBE ref=61.9 mic=61.4 cam=61.8 vrc=57.2 unp=61.8
+10-18 23:43:57.162 I/flutter ( 9522): PROBE ref=61.9 mic=57.7 cam=61.8 vrc=61.8 unp=61.8
+10-18 23:43:57.262 I/flutter ( 9522): PROBE ref=48.6 mic=57.7 cam=55.8 vrc=61.8 unp=55.8
+10-18 23:43:57.363 I/flutter ( 9522): PROBE ref=48.6 mic=47.6 cam=55.8 vrc=48.2 unp=55.8
+10-18 23:43:57.464 I/flutter ( 9522): PROBE ref=54.5 mic=47.6 cam=48.3 vrc=48.2 unp=48.3
+10-18 23:43:57.566 I/flutter ( 9522): PROBE ref=54.5 mic=56.0 cam=48.3 vrc=55.2 unp=48.3
+10-18 23:43:57.666 I/flutter ( 9522): PROBE ref=60.3 mic=56.0 cam=57.2 vrc=55.2 unp=57.2
+10-18 23:43:57.765 I/flutter ( 9522): PROBE ref=60.3 mic=61.2 cam=57.2 vrc=60.8 unp=57.2
+10-18 23:43:57.866 I/flutter ( 9522): PROBE ref=63.8 mic=61.2 cam=62.1 vrc=60.8 unp=62.1
+10-18 23:43:57.968 I/flutter ( 9522): PROBE ref=63.8 mic=64.2 cam=62.1 vrc=64.2 unp=62.1
+10-18 23:43:58.069 I/flutter ( 9522): PROBE ref=59.5 mic=64.2 cam=63.5 vrc=64.2 unp=63.5
+10-18 23:43:58.170 I/flutter ( 9522): PROBE ref=59.5 mic=55.4 cam=63.5 vrc=57.1 unp=63.5
+10-18 23:43:58.271 I/flutter ( 9522): PROBE ref=53.7 mic=55.4 cam=54.0 vrc=53.7 unp=54.0
+10-18 23:43:58.371 I/flutter ( 9522): PROBE ref=53.7 mic=57.3 cam=57.4 vrc=53.7 unp=57.4
+10-18 23:43:58.473 I/flutter ( 9522): PROBE ref=57.0 mic=57.3 cam=57.4 vrc=57.0 unp=57.4
+10-18 23:43:58.574 I/flutter ( 9522): PROBE ref=57.0 mic=53.6 cam=53.6 vrc=57.0 unp=53.6
+10-18 23:43:58.674 I/flutter ( 9522): PROBE ref=54.6 mic=53.6 cam=53.6 vrc=54.5 unp=53.6
+10-18 23:43:58.774 I/flutter ( 9522): PROBE ref=54.6 mic=54.6 cam=54.6 vrc=54.5 unp=54.6
+10-18 23:43:58.876 I/flutter ( 9522): PROBE ref=54.1 mic=54.6 cam=54.6 vrc=53.9 unp=54.6
+10-18 23:43:58.976 I/flutter ( 9522): PROBE ref=54.1 mic=54.0 cam=54.5 vrc=53.9 unp=54.5
+10-18 23:43:59.075 I/flutter ( 9522): PROBE ref=54.8 mic=54.0 cam=54.5 vrc=55.7 unp=54.5
+10-18 23:43:59.175 I/flutter ( 9522): PROBE ref=54.8 mic=57.9 cam=59.0 vrc=55.7 unp=59.0
+10-18 23:43:59.276 I/flutter ( 9522): PROBE ref=60.0 mic=57.9 cam=59.0 vrc=59.7 unp=59.0
+10-18 23:43:59.376 I/flutter ( 9522): PROBE ref=60.0 mic=59.1 cam=59.2 vrc=59.7 unp=59.2
+10-18 23:43:59.478 I/flutter ( 9522): PROBE ref=59.5 mic=59.1 cam=59.2 vrc=59.5 unp=59.2
+10-18 23:43:59.577 I/flutter ( 9522): PROBE ref=59.5 mic=58.7 cam=58.1 vrc=59.5 unp=58.1
+10-18 23:43:59.678 I/flutter ( 9522): PROBE ref=59.0 mic=58.7 cam=58.1 vrc=59.1 unp=58.1
+10-18 23:43:59.777 I/flutter ( 9522): PROBE ref=59.0 mic=59.3 cam=58.6 vrc=59.1 unp=58.6
+10-18 23:43:59.877 I/flutter ( 9522): PROBE ref=54.0 mic=59.3 cam=58.6 vrc=53.8 unp=58.6
+10-18 23:43:59.977 I/flutter ( 9522): PROBE ref=54.0 mic=53.9 cam=54.0 vrc=53.8 unp=54.0
+10-18 23:44:00.078 I/flutter ( 9522): PROBE ref=54.6 mic=53.9 cam=54.0 vrc=54.6 unp=54.0
+10-18 23:44:00.178 I/flutter ( 9522): PROBE ref=54.6 mic=55.6 cam=55.6 vrc=54.6 unp=55.6
+10-18 23:44:00.279 I/flutter ( 9522): PROBE ref=55.9 mic=55.6 cam=55.6 vrc=55.8 unp=55.6
+10-18 23:44:00.379 I/flutter ( 9522): PROBE ref=55.9 mic=55.4 cam=55.5 vrc=55.8 unp=55.5
+10-18 23:44:00.479 I/flutter ( 9522): PROBE ref=55.4 mic=55.4 cam=55.5 vrc=55.8 unp=55.5
+10-18 23:44:00.580 I/flutter ( 9522): PROBE ref=55.4 mic=55.0 cam=54.8 vrc=55.8 unp=54.8
+10-18 23:44:00.680 I/flutter ( 9522): PROBE ref=54.5 mic=55.0 cam=54.8 vrc=53.5 unp=54.8
+10-18 23:44:00.781 I/flutter ( 9522): PROBE ref=54.5 mic=55.1 cam=55.1 vrc=53.5 unp=55.1
+10-18 23:44:00.881 I/flutter ( 9522): PROBE ref=56.2 mic=55.1 cam=55.1 vrc=56.3 unp=55.1
+10-18 23:44:00.981 I/flutter ( 9522): PROBE ref=56.2 mic=56.2 cam=56.7 vrc=56.3 unp=56.7
+10-18 23:44:01.099 I/flutter ( 9522): PROBE ref=58.3 mic=56.2 cam=56.7 vrc=59.8 unp=56.7
+10-18 23:44:01.199 I/flutter ( 9522): PROBE ref=58.3 mic=60.7 cam=60.5 vrc=59.8 unp=60.5
+10-18 23:44:01.301 I/flutter ( 9522): PROBE ref=59.4 mic=60.7 cam=60.5 vrc=58.3 unp=60.5
+10-18 23:44:01.399 I/flutter ( 9522): PROBE ref=59.4 mic=59.3 cam=59.6 vrc=58.3 unp=59.6
+10-18 23:44:01.498 I/flutter ( 9522): PROBE ref=61.5 mic=59.3 cam=59.6 vrc=61.3 unp=59.6
+10-18 23:44:01.599 I/flutter ( 9522): PROBE ref=61.5 mic=60.9 cam=61.3 vrc=61.3 unp=61.3
+10-18 23:44:01.683 I/flutter ( 9522): PROBE ref=59.6 mic=60.9 cam=61.3 vrc=59.5 unp=61.3
+10-18 23:44:01.784 I/flutter ( 9522): PROBE ref=59.6 mic=57.6 cam=56.0 vrc=59.5 unp=56.0
+10-18 23:44:01.884 I/flutter ( 9522): PROBE ref=54.4 mic=57.6 cam=56.0 vrc=54.4 unp=56.0
+10-18 23:44:01.985 I/flutter ( 9522): PROBE ref=54.4 mic=54.9 cam=54.6 vrc=54.4 unp=54.6
+10-18 23:44:02.085 I/flutter ( 9522): PROBE ref=55.3 mic=54.9 cam=54.6 vrc=56.6 unp=54.6
+10-18 23:44:02.186 I/flutter ( 9522): PROBE ref=55.3 mic=56.6 cam=59.7 vrc=56.6 unp=59.7
+10-18 23:44:02.285 I/flutter ( 9522): PROBE ref=63.0 mic=56.6 cam=59.7 vrc=63.7 unp=59.7
+10-18 23:44:02.386 I/flutter ( 9522): PROBE ref=63.0 mic=63.8 cam=62.8 vrc=63.7 unp=62.8
+10-18 23:44:02.487 I/flutter ( 9522): PROBE ref=58.8 mic=63.8 cam=62.8 vrc=54.8 unp=62.8
+10-18 23:44:02.587 I/flutter ( 9522): PROBE ref=58.8 mic=54.7 cam=55.0 vrc=54.8 unp=55.0
+10-18 23:44:02.687 I/flutter ( 9522): PROBE ref=57.9 mic=54.7 cam=55.0 vrc=58.5 unp=55.0
+10-18 23:44:02.788 I/flutter ( 9522): PROBE ref=57.9 mic=58.1 cam=57.9 vrc=58.5 unp=57.9
+10-18 23:44:02.889 I/flutter ( 9522): PROBE ref=55.3 mic=58.1 cam=57.9 vrc=54.4 unp=57.9
+10-18 23:44:02.989 I/flutter ( 9522): PROBE ref=55.3 mic=54.4 cam=55.0 vrc=54.4 unp=55.0
+10-18 23:44:03.089 I/flutter ( 9522): PROBE ref=56.4 mic=54.4 cam=55.0 vrc=56.0 unp=55.0
+10-18 23:44:03.190 I/flutter ( 9522): PROBE ref=56.4 mic=55.9 cam=55.4 vrc=56.0 unp=55.4
+10-18 23:44:03.310 I/flutter ( 9522): PROBE ref=56.2 mic=55.9 cam=55.4 vrc=56.8 unp=55.4
+10-18 23:44:03.409 I/flutter ( 9522): PROBE ref=56.2 mic=60.0 cam=61.4 vrc=56.8 unp=61.4
+10-18 23:44:03.512 I/flutter ( 9522): PROBE ref=65.0 mic=60.0 cam=61.4 vrc=65.1 unp=61.4
+10-18 23:44:03.602 I/flutter ( 9522): PROBE ref=65.0 mic=65.2 cam=64.7 vrc=65.1 unp=64.7
+10-18 23:44:03.708 I/flutter ( 9522): PROBE ref=59.6 mic=65.2 cam=64.7 vrc=59.0 unp=64.7
+10-18 23:44:03.806 I/flutter ( 9522): PROBE ref=59.6 mic=49.4 cam=48.4 vrc=59.0 unp=48.4
+10-18 23:44:03.906 I/flutter ( 9522): PROBE ref=47.7 mic=49.4 cam=48.4 vrc=49.5 unp=48.4
+10-18 23:44:04.006 I/flutter ( 9522): PROBE ref=47.7 mic=59.0 cam=61.0 vrc=49.5 unp=61.0
+10-18 23:44:04.106 I/flutter ( 9522): PROBE ref=63.7 mic=59.0 cam=61.0 vrc=64.9 unp=61.0
+10-18 23:44:04.204 I/flutter ( 9522): PROBE ref=63.7 mic=64.8 cam=64.9 vrc=64.9 unp=64.9
+10-18 23:44:04.304 I/flutter ( 9522): PROBE ref=64.3 mic=64.8 cam=64.9 vrc=63.5 unp=64.9
+10-18 23:44:04.404 I/flutter ( 9522): PROBE ref=64.3 mic=63.9 cam=63.5 vrc=63.5 unp=63.5
+10-18 23:44:04.502 I/flutter ( 9522): PROBE ref=63.7 mic=63.9 cam=63.5 vrc=63.7 unp=63.5
+10-18 23:44:04.606 I/flutter ( 9522): PROBE ref=63.7 mic=63.2 cam=62.6 vrc=63.7 unp=62.6
+10-18 23:44:04.702 I/flutter ( 9522): PROBE ref=60.5 mic=63.2 cam=62.6 vrc=59.3 unp=62.6
+10-18 23:44:04.802 I/flutter ( 9522): PROBE ref=60.5 mic=57.1 cam=57.3 vrc=59.3 unp=57.3
+10-18 23:44:04.902 I/flutter ( 9522): PROBE ref=57.7 mic=57.1 cam=57.3 vrc=57.6 unp=57.3
+10-18 23:44:05.002 I/flutter ( 9522): PROBE ref=57.7 mic=58.2 cam=58.8 vrc=57.6 unp=58.8
+10-18 23:44:05.101 I/flutter ( 9522): PROBE ref=60.3 mic=58.2 cam=58.8 vrc=60.3 unp=58.8
+10-18 23:44:05.201 I/flutter ( 9522): PROBE ref=60.3 mic=59.4 cam=58.4 vrc=60.3 unp=58.4
+10-18 23:44:05.300 I/flutter ( 9522): PROBE ref=53.6 mic=59.4 cam=58.4 vrc=53.1 unp=58.4
+10-18 23:44:05.400 I/flutter ( 9522): PROBE ref=53.6 mic=50.6 cam=54.1 vrc=53.1 unp=54.1
+10-18 23:44:05.502 I/flutter ( 9522): PROBE ref=56.1 mic=50.6 cam=54.1 vrc=56.4 unp=54.1
+10-18 23:44:05.601 I/flutter ( 9522): PROBE ref=56.1 mic=58.1 cam=57.3 vrc=56.4 unp=57.3
+10-18 23:44:05.701 I/flutter ( 9522): PROBE ref=56.4 mic=58.1 cam=57.3 vrc=56.1 unp=57.3
+10-18 23:44:05.801 I/flutter ( 9522): PROBE ref=56.4 mic=52.7 cam=53.6 vrc=56.1 unp=53.6
+10-18 23:44:05.902 I/flutter ( 9522): PROBE ref=53.9 mic=52.7 cam=53.6 vrc=53.9 unp=53.6
+10-18 23:44:06.002 I/flutter ( 9522): PROBE ref=53.9 mic=54.4 cam=55.5 vrc=53.9 unp=55.5
+10-18 23:44:06.102 I/flutter ( 9522): PROBE ref=55.7 mic=54.4 cam=55.5 vrc=56.4 unp=55.5
+10-18 23:44:06.213 I/flutter ( 9522): PROBE ref=55.7 mic=57.3 cam=56.4 vrc=56.4 unp=56.4
+10-18 23:44:06.319 I/flutter ( 9522): PROBE ref=58.4 mic=57.3 cam=56.4 vrc=58.1 unp=56.4
+10-18 23:44:06.403 I/flutter ( 9522): PROBE ref=58.4 mic=57.1 cam=56.8 vrc=58.1 unp=56.8
+10-18 23:44:06.494 I/flutter ( 9522): PHASE left MARK
+10-18 23:44:06.503 I/flutter ( 9522): PROBE ref=52.6 mic=57.1 cam=56.8 vrc=52.1 unp=56.8
+10-18 23:44:06.604 I/flutter ( 9522): PROBE ref=52.6 mic=51.8 cam=51.7 vrc=52.1 unp=51.7
+10-18 23:44:06.704 I/flutter ( 9522): PROBE ref=50.5 mic=51.8 cam=51.7 vrc=50.5 unp=51.7
+10-18 23:44:06.804 I/flutter ( 9522): PROBE ref=50.5 mic=51.2 cam=51.5 vrc=50.5 unp=51.5
+10-18 23:44:06.904 I/flutter ( 9522): PROBE ref=52.7 mic=51.2 cam=51.5 vrc=53.2 unp=51.5
+10-18 23:44:07.004 I/flutter ( 9522): PROBE ref=52.7 mic=52.7 cam=52.7 vrc=53.2 unp=52.7
+10-18 23:44:07.105 I/flutter ( 9522): PROBE ref=51.0 mic=52.7 cam=52.7 vrc=49.8 unp=52.7
+10-18 23:44:07.209 I/flutter ( 9522): PROBE ref=51.0 mic=48.4 cam=47.6 vrc=49.8 unp=47.6
+10-18 23:44:07.312 I/flutter ( 9522): PROBE ref=47.6 mic=48.4 cam=47.6 vrc=48.1 unp=47.6
+10-18 23:44:07.409 I/flutter ( 9522): PROBE ref=47.6 mic=50.7 cam=52.1 vrc=48.1 unp=52.1
+10-18 23:44:07.508 I/flutter ( 9522): PROBE ref=54.7 mic=50.7 cam=52.1 vrc=54.6 unp=52.1
+10-18 23:44:07.608 I/flutter ( 9522): PROBE ref=54.7 mic=54.6 cam=53.9 vrc=54.6 unp=53.9
+10-18 23:44:07.708 I/flutter ( 9522): PROBE ref=57.5 mic=54.6 cam=53.9 vrc=57.5 unp=53.9
+10-18 23:44:07.807 I/flutter ( 9522): PROBE ref=57.5 mic=57.1 cam=57.1 vrc=57.5 unp=57.1
+10-18 23:44:07.908 I/flutter ( 9522): PROBE ref=53.3 mic=57.1 cam=57.1 vrc=53.5 unp=57.1
+10-18 23:44:08.008 I/flutter ( 9522): PROBE ref=53.3 mic=55.2 cam=55.3 vrc=53.5 unp=55.3
+10-18 23:44:08.107 I/flutter ( 9522): PROBE ref=54.0 mic=55.2 cam=55.3 vrc=55.6 unp=55.3
+10-18 23:44:08.207 I/flutter ( 9522): PROBE ref=54.0 mic=55.2 cam=55.9 vrc=55.6 unp=55.9
+10-18 23:44:08.308 I/flutter ( 9522): PROBE ref=56.7 mic=55.2 cam=55.9 vrc=55.4 unp=55.9
+10-18 23:44:08.408 I/flutter ( 9522): PROBE ref=56.7 mic=54.7 cam=54.1 vrc=55.4 unp=54.1
+10-18 23:44:08.509 I/flutter ( 9522): PROBE ref=51.6 mic=54.7 cam=54.1 vrc=51.5 unp=54.1
+10-18 23:44:08.609 I/flutter ( 9522): PROBE ref=51.6 mic=54.0 cam=54.3 vrc=51.5 unp=54.3
+10-18 23:44:08.709 I/flutter ( 9522): PROBE ref=54.5 mic=54.0 cam=54.3 vrc=54.4 unp=54.3
+10-18 23:44:08.809 I/flutter ( 9522): PROBE ref=54.5 mic=51.0 cam=49.5 vrc=54.4 unp=49.5
+10-18 23:44:08.909 I/flutter ( 9522): PROBE ref=48.2 mic=51.0 cam=49.5 vrc=48.7 unp=49.5
+10-18 23:44:09.009 I/flutter ( 9522): PROBE ref=48.2 mic=51.2 cam=51.9 vrc=48.7 unp=51.9
+10-18 23:44:09.110 I/flutter ( 9522): PROBE ref=58.9 mic=51.2 cam=51.9 vrc=60.2 unp=51.9
+10-18 23:44:09.211 I/flutter ( 9522): PROBE ref=58.9 mic=61.1 cam=61.2 vrc=60.2 unp=61.2
+10-18 23:44:09.311 I/flutter ( 9522): PROBE ref=58.5 mic=61.1 cam=61.2 vrc=56.5 unp=61.2
+10-18 23:44:09.411 I/flutter ( 9522): PROBE ref=58.5 mic=52.4 cam=52.1 vrc=56.5 unp=52.1
+10-18 23:44:09.512 I/flutter ( 9522): PROBE ref=52.5 mic=52.4 cam=52.1 vrc=52.2 unp=52.1
+10-18 23:44:09.612 I/flutter ( 9522): PROBE ref=52.5 mic=55.7 cam=56.1 vrc=52.2 unp=56.1
+10-18 23:44:09.712 I/flutter ( 9522): PROBE ref=56.5 mic=55.7 cam=56.1 vrc=56.8 unp=56.1
+10-18 23:44:09.812 I/flutter ( 9522): PROBE ref=56.5 mic=54.4 cam=53.6 vrc=56.8 unp=53.6
+10-18 23:44:09.913 I/flutter ( 9522): PROBE ref=53.2 mic=54.4 cam=53.6 vrc=52.3 unp=53.6
+10-18 23:44:10.013 I/flutter ( 9522): PROBE ref=53.2 mic=52.4 cam=52.2 vrc=52.3 unp=52.2
+10-18 23:44:10.113 I/flutter ( 9522): PROBE ref=55.8 mic=52.4 cam=52.2 vrc=55.9 unp=52.2
+10-18 23:44:10.213 I/flutter ( 9522): PROBE ref=55.8 mic=56.4 cam=56.6 vrc=55.9 unp=56.6
+10-18 23:44:10.314 I/flutter ( 9522): PROBE ref=55.4 mic=56.4 cam=56.6 vrc=55.3 unp=56.6
+10-18 23:44:10.415 I/flutter ( 9522): PROBE ref=55.4 mic=56.2 cam=56.7 vrc=55.3 unp=56.7
+10-18 23:44:10.515 I/flutter ( 9522): PROBE ref=58.2 mic=56.2 cam=56.7 vrc=58.8 unp=56.7
+10-18 23:44:10.615 I/flutter ( 9522): PROBE ref=58.2 mic=58.8 cam=58.4 vrc=58.8 unp=58.4
+10-18 23:44:10.715 I/flutter ( 9522): PROBE ref=55.8 mic=58.8 cam=58.4 vrc=54.7 unp=58.4
+10-18 23:44:10.815 I/flutter ( 9522): PROBE ref=55.8 mic=53.2 cam=57.2 vrc=54.7 unp=57.2
+10-18 23:44:10.916 I/flutter ( 9522): PROBE ref=63.1 mic=53.2 cam=57.2 vrc=63.7 unp=57.2
+10-18 23:44:11.016 I/flutter ( 9522): PROBE ref=63.1 mic=64.9 cam=64.6 vrc=63.7 unp=64.6
+10-18 23:44:11.116 I/flutter ( 9522): PROBE ref=62.3 mic=64.9 cam=64.6 vrc=61.4 unp=64.6
+10-18 23:44:11.216 I/flutter ( 9522): PROBE ref=62.3 mic=58.4 cam=57.4 vrc=61.4 unp=57.4
+10-18 23:44:11.316 I/flutter ( 9522): PROBE ref=55.3 mic=58.4 cam=57.4 vrc=56.0 unp=57.4
+10-18 23:44:11.417 I/flutter ( 9522): PROBE ref=55.3 mic=56.1 cam=56.4 vrc=56.0 unp=56.4
+10-18 23:44:11.517 I/flutter ( 9522): PROBE ref=55.5 mic=56.1 cam=56.4 vrc=57.2 unp=56.4
+10-18 23:44:11.618 I/flutter ( 9522): PROBE ref=55.5 mic=59.6 cam=59.8 vrc=57.2 unp=59.8
+10-18 23:44:11.717 I/flutter ( 9522): PROBE ref=60.9 mic=59.6 cam=59.8 vrc=61.9 unp=59.8
+10-18 23:44:11.819 I/flutter ( 9522): PROBE ref=60.9 mic=63.2 cam=64.2 vrc=61.9 unp=64.2
+10-18 23:44:11.920 I/flutter ( 9522): PROBE ref=64.5 mic=63.2 cam=64.2 vrc=64.0 unp=64.2
+10-18 23:44:12.021 I/flutter ( 9522): PROBE ref=64.5 mic=62.3 cam=60.3 vrc=64.0 unp=60.3
+10-18 23:44:12.121 I/flutter ( 9522): PROBE ref=57.6 mic=62.3 cam=60.3 vrc=55.5 unp=60.3
+10-18 23:44:12.222 I/flutter ( 9522): PROBE ref=57.6 mic=54.0 cam=53.9 vrc=55.5 unp=53.9
+10-18 23:44:12.323 I/flutter ( 9522): PROBE ref=53.1 mic=54.0 cam=53.9 vrc=52.9 unp=53.9
+10-18 23:44:12.423 I/flutter ( 9522): PROBE ref=53.1 mic=53.2 cam=55.8 vrc=52.9 unp=55.8
+10-18 23:44:12.522 I/flutter ( 9522): PROBE ref=62.7 mic=53.2 cam=55.8 vrc=63.0 unp=55.8
+10-18 23:44:12.623 I/flutter ( 9522): PROBE ref=62.7 mic=63.9 cam=64.2 vrc=63.0 unp=64.2
+10-18 23:44:12.723 I/flutter ( 9522): PROBE ref=62.9 mic=63.9 cam=64.2 vrc=62.9 unp=64.2
+10-18 23:44:12.824 I/flutter ( 9522): PROBE ref=62.9 mic=62.8 cam=62.2 vrc=62.9 unp=62.2
+10-18 23:44:12.924 I/flutter ( 9522): PROBE ref=61.8 mic=62.8 cam=62.2 vrc=62.0 unp=62.2
+10-18 23:44:13.025 I/flutter ( 9522): PROBE ref=61.8 mic=62.7 cam=62.7 vrc=62.0 unp=62.7
+10-18 23:44:13.125 I/flutter ( 9522): PROBE ref=61.9 mic=62.7 cam=62.7 vrc=61.6 unp=62.7
+10-18 23:44:13.225 I/flutter ( 9522): PROBE ref=61.9 mic=60.4 cam=60.0 vrc=61.6 unp=60.0
+10-18 23:44:13.326 I/flutter ( 9522): PROBE ref=59.8 mic=60.4 cam=60.0 vrc=59.7 unp=60.0
+10-18 23:44:13.426 I/flutter ( 9522): PROBE ref=59.8 mic=61.6 cam=62.3 vrc=59.7 unp=62.3
+10-18 23:44:13.526 I/flutter ( 9522): PROBE ref=62.6 mic=61.6 cam=62.3 vrc=62.6 unp=62.3
+10-18 23:44:13.628 I/flutter ( 9522): PROBE ref=62.6 mic=60.6 cam=59.3 vrc=62.6 unp=59.3
+10-18 23:44:13.729 I/flutter ( 9522): PROBE ref=57.6 mic=60.6 cam=59.3 vrc=57.6 unp=59.3
+10-18 23:44:13.829 I/flutter ( 9522): PROBE ref=57.6 mic=56.4 cam=56.3 vrc=57.6 unp=56.3
+10-18 23:44:13.929 I/flutter ( 9522): PROBE ref=54.6 mic=56.4 cam=56.3 vrc=53.5 unp=56.3
+10-18 23:44:14.030 I/flutter ( 9522): PROBE ref=54.6 mic=51.0 cam=49.7 vrc=53.5 unp=49.7
+10-18 23:44:14.130 I/flutter ( 9522): PROBE ref=50.8 mic=51.0 cam=49.7 vrc=51.8 unp=49.7
+10-18 23:44:14.232 I/flutter ( 9522): PROBE ref=50.8 mic=57.2 cam=59.4 vrc=51.8 unp=59.4
+10-18 23:44:14.331 I/flutter ( 9522): PROBE ref=62.2 mic=57.2 cam=59.4 vrc=62.6 unp=59.4
+10-18 23:44:14.432 I/flutter ( 9522): PROBE ref=62.2 mic=63.2 cam=63.0 vrc=62.6 unp=63.0
+10-18 23:44:14.532 I/flutter ( 9522): PROBE ref=62.6 mic=63.2 cam=63.0 vrc=62.4 unp=63.0
+10-18 23:44:14.633 I/flutter ( 9522): PROBE ref=62.6 mic=61.5 cam=61.5 vrc=62.4 unp=61.5
+10-18 23:44:14.733 I/flutter ( 9522): PROBE ref=61.9 mic=61.5 cam=61.5 vrc=61.8 unp=61.5
+10-18 23:44:14.833 I/flutter ( 9522): PROBE ref=61.9 mic=61.0 cam=60.1 vrc=61.8 unp=60.1
+10-18 23:44:14.934 I/flutter ( 9522): PROBE ref=66.9 mic=61.0 cam=60.1 vrc=67.4 unp=60.1
+10-18 23:44:15.034 I/flutter ( 9522): PROBE ref=66.9 mic=67.6 cam=67.6 vrc=67.4 unp=67.6
+10-18 23:44:15.135 I/flutter ( 9522): PROBE ref=68.1 mic=67.6 cam=67.6 vrc=68.4 unp=67.6
+10-18 23:44:15.234 I/flutter ( 9522): PROBE ref=68.1 mic=68.5 cam=68.5 vrc=68.4 unp=68.5
+10-18 23:44:15.335 I/flutter ( 9522): PROBE ref=66.6 mic=68.5 cam=68.5 vrc=66.3 unp=68.5
+10-18 23:44:15.437 I/flutter ( 9522): PROBE ref=66.6 mic=67.2 cam=67.4 vrc=66.3 unp=67.4
+10-18 23:44:15.536 I/flutter ( 9522): PROBE ref=66.2 mic=67.2 cam=67.4 vrc=65.2 unp=67.4
+10-18 23:44:15.637 I/flutter ( 9522): PROBE ref=66.2 mic=64.5 cam=64.5 vrc=65.2 unp=64.5
+10-18 23:44:15.737 I/flutter ( 9522): PROBE ref=63.0 mic=64.5 cam=64.5 vrc=63.6 unp=64.5
+10-18 23:44:15.838 I/flutter ( 9522): PROBE ref=63.0 mic=62.5 cam=62.7 vrc=63.6 unp=62.7
+10-18 23:44:15.939 I/flutter ( 9522): PROBE ref=62.4 mic=62.5 cam=62.7 vrc=61.8 unp=62.7
+10-18 23:44:16.039 I/flutter ( 9522): PROBE ref=62.4 mic=62.5 cam=61.6 vrc=61.8 unp=61.6
+10-18 23:44:16.139 I/flutter ( 9522): PROBE ref=62.5 mic=62.5 cam=61.6 vrc=62.8 unp=61.6
+10-18 23:44:16.241 I/flutter ( 9522): PROBE ref=62.5 mic=63.7 cam=63.7 vrc=62.8 unp=63.7
+10-18 23:44:16.340 I/flutter ( 9522): PROBE ref=62.1 mic=60.5 cam=63.7 vrc=61.9 unp=63.7
+10-18 23:44:16.441 I/flutter ( 9522): PROBE ref=62.1 mic=60.5 cam=63.1 vrc=61.9 unp=63.1
+10-18 23:44:16.541 I/flutter ( 9522): PROBE ref=64.0 mic=63.8 cam=63.1 vrc=64.1 unp=63.1
+10-18 23:44:16.642 I/flutter ( 9522): PROBE ref=64.0 mic=63.8 cam=61.7 vrc=64.1 unp=61.7
+10-18 23:44:16.742 I/flutter ( 9522): PROBE ref=62.8 mic=62.2 cam=61.7 vrc=62.5 unp=61.7
+10-18 23:44:16.842 I/flutter ( 9522): PROBE ref=62.8 mic=62.2 cam=62.7 vrc=62.5 unp=62.7
+10-18 23:44:16.943 I/flutter ( 9522): PROBE ref=60.8 mic=63.1 cam=62.7 vrc=60.7 unp=62.7
+10-18 23:44:17.043 I/flutter ( 9522): PROBE ref=60.8 mic=63.1 cam=63.1 vrc=60.7 unp=63.1
+10-18 23:44:17.144 I/flutter ( 9522): PROBE ref=64.8 mic=64.6 cam=63.1 vrc=65.2 unp=63.1
+10-18 23:44:17.244 I/flutter ( 9522): PROBE ref=64.8 mic=64.6 cam=65.1 vrc=65.2 unp=65.1
+10-18 23:44:17.345 I/flutter ( 9522): PROBE ref=65.4 mic=65.1 cam=65.1 vrc=65.3 unp=65.1
+10-18 23:44:17.446 I/flutter ( 9522): PROBE ref=65.4 mic=65.1 cam=64.6 vrc=65.3 unp=64.6
+10-18 23:44:17.546 I/flutter ( 9522): PROBE ref=62.6 mic=62.6 cam=64.6 vrc=62.4 unp=64.6
+10-18 23:44:17.646 I/flutter ( 9522): PROBE ref=62.6 mic=62.6 cam=62.9 vrc=62.4 unp=62.9
+10-18 23:44:17.747 I/flutter ( 9522): PROBE ref=62.8 mic=62.8 cam=62.9 vrc=63.0 unp=62.9
+10-18 23:44:17.846 I/flutter ( 9522): PROBE ref=62.8 mic=62.8 cam=62.5 vrc=63.0 unp=62.5
+10-18 23:44:17.949 I/flutter ( 9522): PROBE ref=63.8 mic=63.8 cam=62.5 vrc=63.8 unp=62.5
+10-18 23:44:18.049 I/flutter ( 9522): PROBE ref=63.8 mic=63.8 cam=63.6 vrc=63.8 unp=63.6
+10-18 23:44:18.150 I/flutter ( 9522): PROBE ref=61.1 mic=56.6 cam=63.6 vrc=60.1 unp=63.6
+10-18 23:44:18.250 I/flutter ( 9522): PROBE ref=60.3 mic=56.6 cam=56.5 vrc=60.1 unp=56.5
+10-18 23:44:18.350 I/flutter ( 9522): PROBE ref=60.3 mic=63.2 cam=56.5 vrc=61.4 unp=56.5
+10-18 23:44:18.451 I/flutter ( 9522): PROBE ref=64.8 mic=63.2 cam=63.7 vrc=61.4 unp=63.7
+10-18 23:44:18.552 I/flutter ( 9522): PROBE ref=64.8 mic=65.3 cam=63.7 vrc=64.7 unp=63.7
+10-18 23:44:18.652 I/flutter ( 9522): PROBE ref=64.6 mic=65.3 cam=65.1 vrc=64.7 unp=65.1
+10-18 23:44:18.751 I/flutter ( 9522): PROBE ref=64.6 mic=64.3 cam=65.1 vrc=64.7 unp=65.1
+10-18 23:44:18.852 I/flutter ( 9522): PROBE ref=64.8 mic=64.3 cam=64.7 vrc=64.7 unp=64.7
+10-18 23:44:18.953 I/flutter ( 9522): PROBE ref=64.8 mic=64.1 cam=64.7 vrc=64.6 unp=64.7
+10-18 23:44:19.055 I/flutter ( 9522): PROBE ref=63.9 mic=64.1 cam=63.6 vrc=64.6 unp=63.6
+10-18 23:44:19.154 I/flutter ( 9522): PROBE ref=63.9 mic=65.1 cam=63.6 vrc=64.1 unp=63.6
+10-18 23:44:19.255 I/flutter ( 9522): PROBE ref=65.7 mic=65.1 cam=65.5 vrc=64.1 unp=65.5
+10-18 23:44:19.356 I/flutter ( 9522): PROBE ref=65.7 mic=65.8 cam=65.5 vrc=65.8 unp=65.5
+10-18 23:44:19.456 I/flutter ( 9522): PROBE ref=65.6 mic=65.8 cam=66.2 vrc=65.8 unp=66.2
+10-18 23:44:19.556 I/flutter ( 9522): PROBE ref=65.6 mic=64.3 cam=66.2 vrc=65.2 unp=66.2
+10-18 23:44:19.657 I/flutter ( 9522): PROBE ref=64.1 mic=64.3 cam=63.2 vrc=65.2 unp=63.2
+10-18 23:44:19.757 I/flutter ( 9522): PROBE ref=64.1 mic=65.1 cam=63.2 vrc=64.4 unp=63.2
+10-18 23:44:19.858 I/flutter ( 9522): PROBE ref=64.0 mic=65.1 cam=65.0 vrc=64.4 unp=65.0
+10-18 23:44:19.958 I/flutter ( 9522): PROBE ref=64.0 mic=62.2 cam=65.0 vrc=63.9 unp=65.0
+10-18 23:44:20.059 I/flutter ( 9522): PROBE ref=61.2 mic=62.2 cam=62.1 vrc=63.9 unp=62.1
+10-18 23:44:20.159 I/flutter ( 9522): PROBE ref=61.2 mic=62.1 cam=62.1 vrc=61.6 unp=62.1
+10-18 23:44:20.261 I/flutter ( 9522): PROBE ref=64.8 mic=62.1 cam=63.1 vrc=61.6 unp=63.1
+10-18 23:44:20.361 I/flutter ( 9522): PROBE ref=64.8 mic=65.4 cam=63.1 vrc=65.0 unp=63.1
+10-18 23:44:20.462 I/flutter ( 9522): PROBE ref=63.8 mic=65.4 cam=65.1 vrc=65.0 unp=65.1
+10-18 23:44:20.562 I/flutter ( 9522): PROBE ref=63.8 mic=62.4 cam=65.1 vrc=63.6 unp=65.1
+10-18 23:44:20.662 I/flutter ( 9522): PROBE ref=62.0 mic=62.4 cam=62.2 vrc=63.6 unp=62.2
+10-18 23:44:20.763 I/flutter ( 9522): PROBE ref=62.0 mic=62.6 cam=62.2 vrc=61.2 unp=62.2
+10-18 23:44:20.862 I/flutter ( 9522): PROBE ref=65.0 mic=62.6 cam=63.0 vrc=61.2 unp=63.0
+10-18 23:44:20.962 I/flutter ( 9522): PROBE ref=65.0 mic=65.3 cam=63.0 vrc=65.3 unp=63.0
+10-18 23:44:21.063 I/flutter ( 9522): PROBE ref=64.4 mic=65.3 cam=65.2 vrc=65.3 unp=65.2
+10-18 23:44:21.163 I/flutter ( 9522): PROBE ref=64.4 mic=65.3 cam=65.2 vrc=64.2 unp=65.2
+10-18 23:44:21.264 I/flutter ( 9522): PROBE ref=67.0 mic=65.3 cam=65.4 vrc=64.2 unp=65.4
+10-18 23:44:21.363 I/flutter ( 9522): PROBE ref=67.0 mic=67.1 cam=65.4 vrc=67.2 unp=65.4
+10-18 23:44:21.464 I/flutter ( 9522): PROBE ref=65.5 mic=67.1 cam=67.0 vrc=67.2 unp=67.0
+10-18 23:44:21.564 I/flutter ( 9522): PROBE ref=65.5 mic=64.7 cam=67.0 vrc=65.3 unp=67.0
+10-18 23:44:21.664 I/flutter ( 9522): PROBE ref=64.4 mic=64.7 cam=64.5 vrc=65.3 unp=64.5
+10-18 23:44:21.764 I/flutter ( 9522): PROBE ref=64.4 mic=63.4 cam=64.5 vrc=64.3 unp=64.5
+10-18 23:44:21.865 I/flutter ( 9522): PROBE ref=60.7 mic=63.4 cam=63.1 vrc=64.3 unp=63.1
+10-18 23:44:21.965 I/flutter ( 9522): PROBE ref=60.7 mic=58.3 cam=63.1 vrc=60.1 unp=63.1
+10-18 23:44:22.065 I/flutter ( 9522): PROBE ref=60.8 mic=58.3 cam=58.3 vrc=60.1 unp=58.3
+10-18 23:44:22.165 I/flutter ( 9522): PROBE ref=60.8 mic=63.4 cam=58.3 vrc=61.5 unp=58.3
+10-18 23:44:22.266 I/flutter ( 9522): PROBE ref=64.0 mic=63.4 cam=63.8 vrc=61.5 unp=63.8
+10-18 23:44:22.366 I/flutter ( 9522): PROBE ref=64.0 mic=63.0 cam=63.8 vrc=63.7 unp=63.8
+10-18 23:44:22.466 I/flutter ( 9522): PROBE ref=61.4 mic=63.0 cam=62.7 vrc=63.7 unp=62.7
+10-18 23:44:22.567 I/flutter ( 9522): PROBE ref=61.4 mic=62.2 cam=62.7 vrc=61.6 unp=62.7
+10-18 23:44:22.668 I/flutter ( 9522): PROBE ref=64.1 mic=62.2 cam=62.8 vrc=61.6 unp=62.8
+10-18 23:44:22.768 I/flutter ( 9522): PROBE ref=64.1 mic=64.4 cam=64.5 vrc=64.4 unp=64.5
+10-18 23:44:22.868 I/flutter ( 9522): PROBE ref=64.4 mic=64.4 cam=64.5 vrc=64.0 unp=64.5
+10-18 23:44:22.969 I/flutter ( 9522): PROBE ref=64.4 mic=63.3 cam=62.4 vrc=64.0 unp=62.4
+10-18 23:44:22.996 I/flutter ( 9522): PHASE right MARK
+10-18 23:44:23.070 I/flutter ( 9522): PROBE ref=58.8 mic=63.3 cam=62.4 vrc=58.7 unp=62.4
+10-18 23:44:23.169 I/flutter ( 9522): PROBE ref=58.8 mic=59.7 cam=61.0 vrc=58.7 unp=61.0
+10-18 23:44:23.270 I/flutter ( 9522): PROBE ref=63.6 mic=59.7 cam=61.0 vrc=63.9 unp=61.0
+10-18 23:44:23.371 I/flutter ( 9522): PROBE ref=63.6 mic=64.2 cam=64.3 vrc=63.9 unp=64.3
+10-18 23:44:23.470 I/flutter ( 9522): PROBE ref=64.6 mic=64.2 cam=64.3 vrc=65.1 unp=64.3
+10-18 23:44:23.571 I/flutter ( 9522): PROBE ref=64.6 mic=65.4 cam=65.6 vrc=65.1 unp=65.6
+10-18 23:44:23.671 I/flutter ( 9522): PROBE ref=65.4 mic=65.4 cam=65.6 vrc=65.5 unp=65.6
+10-18 23:44:23.773 I/flutter ( 9522): PROBE ref=65.4 mic=64.8 cam=64.2 vrc=65.5 unp=64.2
+10-18 23:44:23.873 I/flutter ( 9522): PROBE ref=63.1 mic=64.8 cam=64.2 vrc=65.5 unp=64.2
+10-18 23:44:23.974 I/flutter ( 9522): PROBE ref=63.1 mic=61.7 cam=61.2 vrc=62.1 unp=61.2
+10-18 23:44:24.074 I/flutter ( 9522): PROBE ref=59.3 mic=61.7 cam=61.2 vrc=58.7 unp=61.2
+10-18 23:44:24.176 I/flutter ( 9522): PROBE ref=59.3 mic=56.4 cam=56.2 vrc=58.7 unp=56.2
+10-18 23:44:24.276 I/flutter ( 9522): PROBE ref=55.3 mic=56.4 cam=56.2 vrc=55.4 unp=56.2
+10-18 23:44:24.381 I/flutter ( 9522): PROBE ref=55.3 mic=55.8 cam=55.8 vrc=55.4 unp=55.8
+10-18 23:44:24.481 I/flutter ( 9522): PROBE ref=59.9 mic=55.8 cam=55.8 vrc=60.9 unp=55.8
+10-18 23:44:24.581 I/flutter ( 9522): PROBE ref=59.9 mic=63.3 cam=63.8 vrc=60.9 unp=63.8
+10-18 23:44:24.681 I/flutter ( 9522): PROBE ref=64.2 mic=63.3 cam=63.8 vrc=64.2 unp=63.8
+10-18 23:44:24.782 I/flutter ( 9522): PROBE ref=64.2 mic=62.6 cam=62.0 vrc=64.2 unp=62.0
+10-18 23:44:24.882 I/flutter ( 9522): PROBE ref=59.3 mic=62.6 cam=62.0 vrc=57.1 unp=62.0
+10-18 23:44:24.982 I/flutter ( 9522): PROBE ref=59.3 mic=56.2 cam=56.1 vrc=57.1 unp=56.1
+10-18 23:44:25.083 I/flutter ( 9522): PROBE ref=59.7 mic=56.2 cam=56.1 vrc=61.3 unp=56.1
+10-18 23:44:25.184 I/flutter ( 9522): PROBE ref=59.7 mic=63.4 cam=64.5 vrc=61.3 unp=64.5
+10-18 23:44:25.284 I/flutter ( 9522): PROBE ref=65.8 mic=63.4 cam=64.5 vrc=65.7 unp=64.5
+10-18 23:44:25.384 I/flutter ( 9522): PROBE ref=65.8 mic=65.2 cam=64.3 vrc=65.7 unp=64.3
+10-18 23:44:25.484 I/flutter ( 9522): PROBE ref=60.6 mic=65.2 cam=64.3 vrc=59.2 unp=64.3
+10-18 23:44:25.603 I/flutter ( 9522): PROBE ref=60.6 mic=58.5 cam=60.3 vrc=59.2 unp=60.3
+10-18 23:44:25.702 I/flutter ( 9522): PROBE ref=64.0 mic=58.5 cam=60.3 vrc=64.2 unp=60.3
+10-18 23:44:25.800 I/flutter ( 9522): PROBE ref=64.0 mic=64.9 cam=65.0 vrc=64.2 unp=65.0
+10-18 23:44:25.901 I/flutter ( 9522): PROBE ref=63.9 mic=64.9 cam=65.0 vrc=63.7 unp=65.0
+10-18 23:44:26.000 I/flutter ( 9522): PROBE ref=63.9 mic=63.2 cam=63.2 vrc=63.7 unp=63.2
+10-18 23:44:26.101 I/flutter ( 9522): PROBE ref=63.6 mic=63.2 cam=63.2 vrc=63.7 unp=63.2
+10-18 23:44:26.199 I/flutter ( 9522): PROBE ref=63.6 mic=63.0 cam=62.4 vrc=63.7 unp=62.4
+10-18 23:44:26.299 I/flutter ( 9522): PROBE ref=60.3 mic=63.0 cam=62.4 vrc=60.0 unp=62.4
+10-18 23:44:26.399 I/flutter ( 9522): PROBE ref=60.3 mic=60.1 cam=60.3 vrc=60.0 unp=60.3
+10-18 23:44:26.499 I/flutter ( 9522): PROBE ref=62.9 mic=60.1 cam=60.3 vrc=63.3 unp=60.3
+10-18 23:44:26.599 I/flutter ( 9522): PROBE ref=62.9 mic=65.5 cam=65.9 vrc=63.3 unp=65.9
+10-18 23:44:26.696 I/flutter ( 9522): PROBE ref=67.2 mic=65.5 cam=65.9 vrc=67.3 unp=65.9
+10-18 23:44:26.796 I/flutter ( 9522): PROBE ref=67.2 mic=67.1 cam=67.4 vrc=67.3 unp=67.4
+10-18 23:44:26.890 I/flutter ( 9522): PROBE ref=66.7 mic=67.1 cam=67.4 vrc=66.9 unp=67.4
+10-18 23:44:26.991 I/flutter ( 9522): PROBE ref=66.7 mic=65.9 cam=65.0 vrc=66.9 unp=65.0
+10-18 23:44:27.091 I/flutter ( 9522): PROBE ref=62.5 mic=65.9 cam=65.0 vrc=61.4 unp=65.0
+10-18 23:44:27.191 I/flutter ( 9522): PROBE ref=62.5 mic=59.8 cam=59.7 vrc=61.4 unp=59.7
+10-18 23:44:27.292 I/flutter ( 9522): PROBE ref=62.4 mic=59.8 cam=59.7 vrc=63.4 unp=59.7
+10-18 23:44:27.391 I/flutter ( 9522): PROBE ref=62.4 mic=64.4 cam=64.7 vrc=63.4 unp=64.7
+10-18 23:44:27.492 I/flutter ( 9522): PROBE ref=63.6 mic=64.4 cam=64.7 vrc=62.8 unp=64.7
+10-18 23:44:27.616 I/flutter ( 9522): PROBE ref=63.6 mic=61.2 cam=60.2 vrc=62.8 unp=60.2
+10-18 23:44:27.694 I/flutter ( 9522): PROBE ref=57.1 mic=61.2 cam=60.2 vrc=56.3 unp=60.2
+10-18 23:44:27.811 I/flutter ( 9522): PROBE ref=57.1 mic=54.0 cam=55.0 vrc=56.3 unp=55.0
+10-18 23:44:27.910 I/flutter ( 9522): PROBE ref=59.8 mic=54.0 cam=55.0 vrc=60.6 unp=55.0
+10-18 23:44:28.005 I/flutter ( 9522): PROBE ref=59.8 mic=63.0 cam=64.3 vrc=60.6 unp=64.3
+10-18 23:44:28.108 I/flutter ( 9522): PROBE ref=66.0 mic=63.0 cam=64.3 vrc=66.3 unp=64.3
+10-18 23:44:28.208 I/flutter ( 9522): PROBE ref=66.0 mic=67.0 cam=66.7 vrc=66.3 unp=66.7
+10-18 23:44:28.299 I/flutter ( 9522): PROBE ref=65.9 mic=67.0 cam=66.7 vrc=66.0 unp=66.7
+10-18 23:44:28.408 I/flutter ( 9522): PROBE ref=65.9 mic=65.1 cam=64.8 vrc=66.0 unp=64.8
+10-18 23:44:28.503 I/flutter ( 9522): PROBE ref=63.0 mic=65.1 cam=64.8 vrc=65.2 unp=64.8
+10-18 23:44:28.609 I/flutter ( 9522): PROBE ref=63.0 mic=68.1 cam=68.4 vrc=65.2 unp=68.4
+10-18 23:44:28.708 I/flutter ( 9522): PROBE ref=68.3 mic=68.1 cam=68.4 vrc=67.7 unp=68.4
+10-18 23:44:28.808 I/flutter ( 9522): PROBE ref=68.3 mic=67.9 cam=67.9 vrc=67.7 unp=67.9
+10-18 23:44:28.905 I/flutter ( 9522): PROBE ref=67.9 mic=67.9 cam=67.9 vrc=67.3 unp=67.9
+10-18 23:44:29.005 I/flutter ( 9522): PROBE ref=67.9 mic=67.2 cam=68.0 vrc=67.3 unp=68.0
+10-18 23:44:29.103 I/flutter ( 9522): PROBE ref=68.2 mic=67.2 cam=68.0 vrc=68.3 unp=68.0
+10-18 23:44:29.204 I/flutter ( 9522): PROBE ref=68.2 mic=64.5 cam=61.5 vrc=68.3 unp=61.5
+10-18 23:44:29.304 I/flutter ( 9522): PROBE ref=64.9 mic=64.5 cam=61.5 vrc=65.2 unp=61.5
+10-18 23:44:29.400 I/flutter ( 9522): PROBE ref=64.9 mic=67.2 cam=67.6 vrc=65.2 unp=67.6
+10-18 23:44:29.504 I/flutter ( 9522): PROBE ref=67.3 mic=67.2 cam=67.6 vrc=67.4 unp=67.6
+10-18 23:44:29.604 I/flutter ( 9522): PROBE ref=67.3 mic=67.0 cam=67.2 vrc=67.4 unp=67.2
+10-18 23:44:29.699 I/flutter ( 9522): PROBE ref=66.6 mic=67.0 cam=67.2 vrc=66.2 unp=67.2
+10-18 23:44:29.799 I/flutter ( 9522): PROBE ref=66.6 mic=65.6 cam=65.4 vrc=66.2 unp=65.4
+10-18 23:44:29.901 I/flutter ( 9522): PROBE ref=65.6 mic=65.6 cam=65.4 vrc=65.6 unp=65.4
+10-18 23:44:30.003 I/flutter ( 9522): PROBE ref=65.6 mic=65.7 cam=65.9 vrc=65.6 unp=65.9
+10-18 23:44:30.101 I/flutter ( 9522): PROBE ref=67.4 mic=65.7 cam=65.9 vrc=67.4 unp=65.9
+10-18 23:44:30.201 I/flutter ( 9522): PROBE ref=67.4 mic=67.0 cam=66.6 vrc=67.4 unp=66.6
+10-18 23:44:30.301 I/flutter ( 9522): PROBE ref=63.6 mic=67.0 cam=66.6 vrc=63.2 unp=66.6
+10-18 23:44:30.401 I/flutter ( 9522): PROBE ref=63.6 mic=63.7 cam=63.5 vrc=63.2 unp=63.5
+10-18 23:44:30.502 I/flutter ( 9522): PROBE ref=63.6 mic=63.7 cam=63.5 vrc=63.6 unp=63.5
+10-18 23:44:30.602 I/flutter ( 9522): PROBE ref=63.6 mic=62.4 cam=62.9 vrc=63.6 unp=62.9
+10-18 23:44:30.702 I/flutter ( 9522): PROBE ref=65.1 mic=62.4 cam=62.9 vrc=65.6 unp=62.9
+10-18 23:44:30.802 I/flutter ( 9522): PROBE ref=65.1 mic=66.6 cam=66.5 vrc=65.6 unp=66.5
+10-18 23:44:30.903 I/flutter ( 9522): PROBE ref=66.3 mic=66.6 cam=66.5 vrc=66.3 unp=66.5
+10-18 23:44:31.016 I/flutter ( 9522): PROBE ref=66.3 mic=66.7 cam=66.6 vrc=66.3 unp=66.6
+10-18 23:44:31.103 I/flutter ( 9522): PROBE ref=66.2 mic=66.7 cam=66.6 vrc=66.1 unp=66.6
+10-18 23:44:31.213 I/flutter ( 9522): PROBE ref=66.2 mic=64.7 cam=65.1 vrc=66.1 unp=65.1
+10-18 23:44:31.304 I/flutter ( 9522): PROBE ref=65.8 mic=64.7 cam=65.1 vrc=65.8 unp=65.1
+10-18 23:44:31.412 I/flutter ( 9522): PROBE ref=65.8 mic=65.5 cam=65.4 vrc=65.8 unp=65.4
+10-18 23:44:31.512 I/flutter ( 9522): PROBE ref=64.0 mic=65.5 cam=65.4 vrc=64.1 unp=65.4
+10-18 23:44:31.608 I/flutter ( 9522): PROBE ref=64.0 mic=64.1 cam=63.6 vrc=64.1 unp=63.6
+10-18 23:44:31.707 I/flutter ( 9522): PROBE ref=63.2 mic=64.1 cam=63.6 vrc=62.8 unp=63.6
+10-18 23:44:31.808 I/flutter ( 9522): PROBE ref=63.2 mic=61.0 cam=59.7 vrc=62.8 unp=59.7
+10-18 23:44:31.907 I/flutter ( 9522): PROBE ref=55.2 mic=61.0 cam=59.7 vrc=55.0 unp=59.7
+10-18 23:44:32.009 I/flutter ( 9522): PROBE ref=55.2 mic=58.9 cam=60.9 vrc=55.0 unp=60.9
+10-18 23:44:32.109 I/flutter ( 9522): PROBE ref=62.2 mic=58.9 cam=60.9 vrc=62.2 unp=60.9
+10-18 23:44:32.207 I/flutter ( 9522): PROBE ref=62.2 mic=61.2 cam=59.4 vrc=62.2 unp=59.4
+10-18 23:44:32.310 I/flutter ( 9522): PROBE ref=56.6 mic=61.2 cam=59.4 vrc=56.0 unp=59.4
+10-18 23:44:32.409 I/flutter ( 9522): PROBE ref=56.6 mic=54.6 cam=54.6 vrc=56.0 unp=54.6
+10-18 23:44:32.509 I/flutter ( 9522): PROBE ref=53.9 mic=54.6 cam=54.6 vrc=53.7 unp=54.6
+10-18 23:44:32.609 I/flutter ( 9522): PROBE ref=53.9 mic=55.2 cam=57.3 vrc=53.7 unp=57.3
+10-18 23:44:32.710 I/flutter ( 9522): PROBE ref=60.0 mic=55.2 cam=57.3 vrc=60.2 unp=57.3
+10-18 23:44:32.811 I/flutter ( 9522): PROBE ref=60.0 mic=59.8 cam=58.6 vrc=60.2 unp=58.6
+10-18 23:44:32.911 I/flutter ( 9522): PROBE ref=52.3 mic=59.8 cam=58.6 vrc=51.6 unp=58.6
+10-18 23:44:33.011 I/flutter ( 9522): PROBE ref=52.3 mic=53.0 cam=53.1 vrc=51.6 unp=53.1
+10-18 23:44:33.112 I/flutter ( 9522): PROBE ref=55.0 mic=53.0 cam=53.1 vrc=54.8 unp=53.1
+10-18 23:44:33.212 I/flutter ( 9522): PROBE ref=55.0 mic=54.5 cam=54.9 vrc=54.8 unp=54.9
+10-18 23:44:33.312 I/flutter ( 9522): PROBE ref=55.7 mic=54.5 cam=54.9 vrc=56.6 unp=54.9
+10-18 23:44:33.412 I/flutter ( 9522): PROBE ref=55.7 mic=58.0 cam=58.0 vrc=56.6 unp=58.0
+10-18 23:44:33.512 I/flutter ( 9522): PROBE ref=57.0 mic=58.0 cam=58.0 vrc=56.3 unp=58.0
+10-18 23:44:33.613 I/flutter ( 9522): PROBE ref=57.0 mic=53.4 cam=52.9 vrc=56.3 unp=52.9
+10-18 23:44:33.713 I/flutter ( 9522): PROBE ref=52.2 mic=53.4 cam=52.9 vrc=51.8 unp=52.9
+10-18 23:44:33.813 I/flutter ( 9522): PROBE ref=52.2 mic=51.7 cam=52.3 vrc=51.8 unp=52.3
+10-18 23:44:33.913 I/flutter ( 9522): PROBE ref=54.8 mic=51.7 cam=52.3 vrc=54.9 unp=52.3
+10-18 23:44:34.015 I/flutter ( 9522): PROBE ref=54.8 mic=53.9 cam=53.4 vrc=54.9 unp=53.4
+10-18 23:44:34.115 I/flutter ( 9522): PROBE ref=52.4 mic=53.9 cam=53.4 vrc=52.7 unp=53.4
+10-18 23:44:34.216 I/flutter ( 9522): PROBE ref=52.4 mic=55.1 cam=56.1 vrc=52.7 unp=56.1
+10-18 23:44:34.318 I/flutter ( 9522): PROBE ref=55.2 mic=55.1 cam=56.1 vrc=55.1 unp=56.1
+10-18 23:44:34.422 I/flutter ( 9522): PROBE ref=55.2 mic=54.8 cam=54.2 vrc=55.1 unp=54.2

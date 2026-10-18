@@ -18,9 +18,9 @@ The app is one Flutter program (written in Dart) that runs on the phone. It has 
 
 1. **The ears (Audio Capture)** — a small piece that keeps listening while the session runs and passes a slice of what it hears to the next part, many times per second.
 2. **The name-giver (Sound Classifier)** — a tiny AI model called **YAMNet** that lives *inside the phone*. It hears a slice and answers: "this sounds like a car / speech / a door / an alarm / birds / I don't know," with a confidence number. Nothing leaves the phone — free, works offline, private.
-3. **The compass (Direction Estimator)** — uses the phone's two microphones (top and bottom on the Xiaomi 12T Pro) and compares which one hears the sound louder, to guess which side the sound came from. *This is the part we agreed to test on the real phone first*; if it misbehaves, we sit down and adjust the plan honestly — we never fake the direction.
+3. **The behavior reader (Sound Behavior Analyzer)** — watches how the level of the sound changes over time and describes its *behavior*: did it start suddenly (a bang) or gently (speech building)? is it repeating (knocking, beeps) or continuous (engine, voices)? is it fading away? *This replaced the original "compass" — four rounds of on-device experiments proved this phone gives apps one mixed audio signal with no direction in it (the full evidence trail is in `Decisions and Open Issues`), so we describe **how** the sound behaves instead of pretending to know **where** it came from. We never fake the direction.*
 4. **The brain (Session Controller)** — decides when a session starts and stops, applies the rules: known sound → colored bubble, unknown → white "?" bubble, vibration only when the user turned it on, and tries to keep listening after the user leaves the app (with the approved fallback: the app stays in front if the phone refuses).
-5. **The face (Flash + Bubbles UI)** — the screen part everyone sees: the flash that starts on the sound's side and fades the other way, the swipeable icon bubbles, the two buttons.
+5. **The face (Pulse + Bubbles UI)** — the screen part everyone sees: the pulse that ignites at the center and expands outward with each sound, the swipeable icon bubbles, the two buttons.
 
 **Why this shape and nothing more elaborate:** everything runs on the phone — no servers, no accounts, no internet, no keys, no cost. A proof of concept must start instantly and record cleanly for the demo video, and the audience we serve deserves sounds that don't leave their device.
 
@@ -35,10 +35,10 @@ PRD ref: `prd.md > The Core Journey`.
 4. **User leaves the app** → Session Controller attempts the Android **foreground service (type: microphone)** so capture continues; if the phone refuses or kills it → approved fallback: session continues with the app in front (`prd.md > Open Questions`).
 5. **Each audio slice** flows two ways, in parallel:
    - → **Sound Classifier (YAMNet)** → category + confidence. Confident result → mapped to one of the five categories; weak/unknown → white "?" (`prd.md > Unknown sounds`).
-   - → **Direction Estimator** → side/strength from the two microphones' level difference.
-6. **Results merge** in the Session Controller into a *sound event* {category, direction, strength, proximity color} → **Flash + Bubbles UI**: flash ignites on the sound's side with the proximity color, icon bubble appears (swipeable); two sounds → two events, both shown (`prd.md > Simultaneous sounds`).
+   - → **Sound Behavior Analyzer** → onset (sudden/gradual), rhythm (repeating/continuous), strength from the level stream.
+6. **Results merge** in the Session Controller into a *sound event* {category, confidence, strength, color, onset, rhythm} → **Pulse + Bubbles UI**: the center-expanding pulse ignites (brightness/size ← strength, color ← loudness, shape ← onset/rhythm), icon bubble appears (swipeable); two sounds → two events, both shown (`prd.md > Simultaneous sounds`).
 7. **Vibration toggle on** → Vibration Service buzzes on captured events (`prd.md > Vibration (manual, simple)`).
-8. **Source/user moves away** → level drops → event strength fades → flash dims and disappears; **Stop** → sessionActive = false → capture, service, vibration end.
+8. **Sound stops** → level drops → pulse fades to calm; **Stop** → sessionActive = false → capture, service, vibration end.
 
 ## Stack
 
@@ -83,24 +83,24 @@ Renders the only screen: large center Start/Stop, small vibration toggle, live a
 PRD ref: `prd.md > Screens and Layout`.
 
 ### Audio Capture Service
-Keeps the microphone open for the session; streams short PCM slices (mono, 16 kHz — YAMNet's expected input) to the classifier and the direction estimator; stops on Stop/app kill. Handles the permission flow: gentle one-line explanation → system dialog.
+Keeps the microphone open for the session; streams short PCM slices (mono, 16 kHz — YAMNet's expected input) to the classifier and the sound behavior analyzer; stops on Stop/app kill. Handles the permission flow: gentle one-line explanation → system dialog.
 PRD ref: `prd.md > Features and Behavior > Sound capture and classification (session-based)`, `prd.md > States and Boundaries > First use`.
 
 ### Sound Classifier (YAMNet, on-device)
 Loads the TFLite model + labels from `assets/model/`; per slice returns scores → mapped to exactly five categories: cars/traffic, speech, door/knock, alarm/bell/beep, birds/nature. Below confidence threshold → **unknown**. Threshold is an implementation constant, tuned during the build against real sounds (not a learner decision).
 PRD ref: `prd.md > Sound capture and classification`, `prd.md > Unknown sounds`.
 
-### Direction Estimator
-Compares input levels across the phone's microphones (top vs bottom on the test device) to estimate the sound's side and strength. **Research-first:** build step 1 verifies (a) individual mic sources are selectable on this device, (b) a measurable level difference exists from a known side. Android `AudioRecord` via the Kotlin bridge.
-PRD ref: `prd.md > Directional flash`. Known limits: two mics on one axis bias top/bottom discrimination; left/right may be weaker — results decide the honest adjustment (see `Decisions and Open Issues`).
+### Sound Behavior Analyzer
+Pure-Dart, testable: turns the capture's level stream into the pulse's descriptive properties — onset classification (sudden vs gradual from rise rate), repetition detection (re-strike intervals from level peaks), sustain/decay envelope. This is where the "measure, don't guess" discipline lives, applied to time behavior (the direction avenue itself is closed — see `Decisions and Open Issues`).
+PRD ref: `prd.md > Sound pulse (the visual vocabulary)`.
 
 ### Session Controller
 Single owner of session state: Start/Stop, the "Working now" toast, vibration toggle, sound events, and the **background attempt** (Android foreground service, type `microphone`, started while the app is in the foreground) with the approved fallback to a foreground session.
 PRD ref: `prd.md > Starting and stopping`, `prd.md > Leaving the App (state)`, `prd.md > Product Decisions > Session must not obstruct phone use`.
 
-### Visual Feedback — Flash + Bubbles
-Consumes sound events: renders the directional edge flash (side, strength, proximity color; fades as the level drops), and the swipeable messenger-style bubbles (category icon; white "?" for unknown). Two simultaneous events render independently.
-PRD ref: `prd.md > Directional flash`, `prd.md > Sound-type bubbles`, `prd.md > Simultaneous sounds`.
+### Visual Feedback — Pulse + Bubbles
+Consumes sound events: renders the center-expanding sound pulse (brightness/size ← strength, color ← loudness red/orange, onset shape ← sharp fast flash vs soft fade-in, rhythm ← re-striking rings for repeats vs one sustained pulse, fade-out as the level drops), and the swipeable messenger-style bubbles (category icon; white "?" for unknown). Two simultaneous events render independently. No direction rendering — removed with the kernel revision (see `Decisions and Open Issues`).
+PRD ref: `prd.md > Sound pulse (the visual vocabulary)`, `prd.md > Sound-type bubbles`, `prd.md > Simultaneous sounds`.
 
 ### Vibration Service
 Thin wrapper over the `vibration` package: buzz once per captured event while the toggle is on; no patterns. Needs `VIBRATE` permission (normal level).
@@ -114,7 +114,7 @@ Nothing persists — no database, no files written by the app (PRD: "nothing per
 |---|---|---|---|
 | `sessionActive` | Session Controller (memory) | Start/Stop pressed | Fresh app start = session off (state lost, by design) |
 | `vibrationEnabled` | in-memory | toggle tapped | resets to off |
-| `soundEvent {category, confidence, side, strength, color}` | ephemeral — created per detection, consumed by UI, discarded | every audio slice result | gone |
+| `soundEvent {category, confidence, strength, color, onset, rhythm}` | ephemeral — created per detection, consumed by UI, discarded | every audio slice result | gone |
 | YAMNet model + labels | `assets/` (bundled, read-only) | never at runtime | unchanged |
 | Demo sample sounds | `assets/samples/` (bundled, **labeled sample data**) | never at runtime | unchanged |
 
@@ -130,7 +130,7 @@ soundscape-access/
 │   ├── main.dart               # app entry; dark theme
 │   ├── ui/
 │   │   ├── home_screen.dart    # the single screen (App Shell)
-│   │   ├── flash.dart          # directional flash rendering
+│   │   ├── flash.dart          # center-expanding sound pulse rendering
 │   │   └── bubbles.dart        # swipeable sound-type bubbles
 │   ├── audio/
 │   │   ├── capture.dart        # mic stream (16 kHz PCM slices)
@@ -138,8 +138,8 @@ soundscape-access/
 │   ├── classify/
 │   │   ├── yamnet.dart         # TFLite wrapper: slice → scores
 │   │   └── categories.dart     # 5-category mapping + confidence threshold
-│   ├── direction/
-│   │   └── estimator.dart      # two-mic level comparison (+ research notes)
+│   ├── analyze/
+│   │   └── behavior.dart       # onset/rhythm/duration from the level stream
 │   ├── session/
 │   │   ├── controller.dart     # session state, events, start/stop
 │   │   ├── background.dart     # foreground-service attempt + fallback
@@ -174,7 +174,7 @@ The learner should be able to read this tree and know where everything lives; `5
 - **Microphone permission denied** → friendly message + button opening device settings (as agreed in the PRD); app stays usable for nothing else. (`prd.md > Permission denied`)
 - **Classifier unsure / silent environment** → no bubble for silence; white "?" bubble when a sound exists but can't be named — never a crash, never a hidden sound. (`prd.md > Unknown sounds`)
 - **Background capture refused/killed (Xiaomi MIUI/HyperOS)** → approved fallback: session keeps running with the app in front; setup note (Autostart/battery exemption) documented in `Where It Runs`. (`prd.md > Open Questions`)
-- **Two-mic direction not available on this device** → plan-revision conversation with the learner (agreed in `4-spec`); degraded options are decided together — **the direction is never faked**.
+- **Two-mic direction not available on this device** → **resolved (negative) after four experiment rounds**; the kernel was revised by learner decision to the sound-behavior vocabulary (center pulse, strength, color, onset, rhythm) — direction is never faked. Evidence and the full decision trail: `Decisions and Open Issues` below, `checklist.md > Revisions`, `probe_log*.txt`.
 - **YAMNet `.tflite` file unavailable/incompatible** → convert from the TensorFlow Hub model ourselves, or swap to an equally small sound-classification model — decide in build step 1, before UI work.
 
 ## What Was Simplified and Why
@@ -198,7 +198,8 @@ The learner should be able to read this tree and know where everything lives; `5
 
 **One useful unknown (agreed investigation):**
 - **Can this app hear the two microphones separately on the Xiaomi 12T Pro, and is the level difference usable for direction?** Clarified by: build step 1 — record from selected mic sources while a sound comes from a known side, compare levels on screen. Evidence needed: a repeatable per-mic level difference (top/bottom first; left/right assessed separately). If unavailable → the agreed plan-revision conversation, options presented honestly (never fake the kernel). Record the outcome here during the build.
-- **OUTCOME (2026-10-18, slice 2): ANSWERED — NO. Three rounds of on-device experiments on the Xiaomi 12T Pro (Android 14) confirm no directional signal is obtainable by a normal app.** Round 1: `MIC` + `CAMCORDER`, 220 samples — sustained loud near-field sound gave ~0.0–0.2 dB between sources; louder side near-random (48 vs 46). Round 2: widened to five inputs (`CAMCORDER`, `MIC`, `VOICE_RECOGNITION`, `UNPROCESSED` which bypasses AGC, and stereo L/R channels), 446 samples — stereo left == right in 446/446; during sustained loud sound (avg ≥ 65 dB) every pair within ~0.9 dB mean; large spreads (up to 25.8 dB) occurred only at sound onsets/offsets and the "loudest" source flipped between consecutive 100 ms samples — timing skew between capture buffers, not spatial information. Round 3 (decisive, device-selection avenue): `AudioManager.getDevices()` exposed **two physical `TYPE_BUILTIN_MIC` devices (id 17, id 19)**, but `setPreferredDevice(19)` was silently redirected to device 17 by the audio policy (`routedDevice` log); parallel captures showed a constant ~8–10 dB offset that never flipped with sound position — independent AGC instances on one mixed signal. Evidence: `probe_log.txt`, `probe_log_r2.txt`, `probe_log_r3.txt` (timestamped, incl. routing log). **Consequence: the direction claim was removed from the kernel via the pre-agreed plan-revision conversation; the learner's chosen replacement form is recorded in `checklist.md > Revisions`.**
+- **OUTCOME (2026-10-18/19, slice 2): ANSWERED — NO. Four rounds of on-device experiments on the Xiaomi 12T Pro (Android 14) confirm no directional signal is obtainable by a normal app.** Round 1: `MIC` + `CAMCORDER`, 220 samples — sustained loud near-field sound gave ~0.0–0.2 dB between sources; louder side near-random (48 vs 46). Round 2: widened to five inputs (`CAMCORDER`, `MIC`, `VOICE_RECOGNITION`, `UNPROCESSED` which bypasses AGC, and stereo L/R channels), 446 samples — stereo left == right in 446/446; during sustained loud sound (avg ≥ 65 dB) every pair within ~0.9 dB mean; large spreads (up to 25.8 dB) occurred only at sound onsets/offsets and the "loudest" source flipped between consecutive 100 ms samples — timing skew between capture buffers, not spatial information. Round 3 (device-selection avenue): `AudioManager.getDevices()` exposed **two physical `TYPE_BUILTIN_MIC` devices (id 17, id 19)**, but when two captures ran together the policy pinned both to one device; the parallel-capture offset was a constant ~8–10 dB that never flipped with sound position — independent AGC instances on one mixed signal. Round 4 (source × device matrix, learner-run protocol with per-phase marker taps): all four sources (`MIC`, `CAMCORDER`, `VOICE_RECOGNITION`, `UNPROCESSED`) plus a no-preference reference routed to the **same single device**; per-phase source-vs-reference differences were **within ±0.2 dB in every phase** (quiet/top/bottom/left/right; ~940 timestamped samples). Also learned: with concurrent captures the policy honors only the first capture's device preference — both physical mics are never exposed simultaneously. Evidence: `probe_log.txt`, `probe_log_r2.txt`, `probe_log_r3.txt`, `probe_log_r4.txt` (timestamped, incl. `MicProbe` routing logs and `PHASE` markers).
+- **KERNEL DECISION (2026-10-19, learner): direction removed; the kernel becomes the sound-behavior vocabulary.** After reviewing the four-round evidence, the learner chose to keep building the honest core rather than drop it: a center-expanding **pulse** whose brightness/size follow the sound's strength, color follows loudness (red very loud / orange moderate — an honest closeness proxy, no direction claimed), and whose **onset shape** (sudden sharp flash vs soft fade-in), **rhythm** (re-strike rings for knocks/beeps vs one sustained pulse), and **fade-out** describe how the sound behaves — all measured from the real level stream by the Sound Behavior Analyzer, never guessed. Learner's words: "this is a learning hackathon and the value is building something real and effective." The direction research stands as a documented finding (reproducible protocol + logs), not a failure.
 
 **Still unresolved (carryover):**
 - `prd.md > Open Questions` — background capture feasibility: approach now specified (FGS type `microphone` from foreground; fallback foreground session); device verification happens in `5-build`.
