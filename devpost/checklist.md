@@ -13,7 +13,7 @@ Build mode: **fast with learn explanations** — learner chose a hybrid: fast ex
 
 ## Slices
 
-- [ ] **1. The app runs on your phone — permission, Start/Stop, live session**
+- [x] **1. The app runs on your phone — permission, Start/Stop, live session**
   Becomes usable: Installed on the Android phone: one dark screen with a large Start/Stop button and a vibration toggle; first start shows the gentle mic line then the system dialog (denied → friendly message + settings route); Start shows the "Working now" toast and the mic genuinely captures (session active); vibration toggle buzzes on captured sound events; Stop ends everything. Bootstrap (project scaffold, dependencies, config) happens inside this slice.
   Why now: It is the whole journey's spine (PRD steps 1–4) plus the foundation every later slice lands on; nothing else can be verified without a running app.
   PRD ref: `prd.md > The Core Journey` (steps 1–4), `prd.md > Starting and stopping`, `prd.md > Vibration (manual, simple)`, `prd.md > States and Boundaries` (First use, Permission denied)
@@ -95,3 +95,8 @@ Reflection: [offered/answered/declined/already covered — personal answer belon
 Activity mode: [live app and editor, explicit static fallback, focused alternative, prior practice, or recap]
 
 ## Revisions
+
+- 2026-10-18 (slice 2, research result): **Two-mic direction is not usable on the Xiaomi 12T Pro via `MIC` + `CAMCORDER` sources** — sustained loud sound near one edge gave ~0.0–0.2 dB difference between sources (mean |diff| ~2.4 dB across 220 samples; louder side near-random). Evidence: `probe_log.txt` (timestamped `PROBE bottom=… top=…` lines), probe readout in-app.
+- 2026-10-18 (slice 2, round 2 — learner asked to retry): widened to five inputs (`CAMCORDER`, `MIC`, `VOICE_RECOGNITION`, `UNPROCESSED`, stereo L/R). **Confirmed: no direction signal.** Stereo L==R in 446/446 samples; during sustained loud sound all pairs within ~0.9 dB; large spreads only at onsets with flipping order (timing skew, not space). Evidence: `probe_log_r2.txt`. **Plan revision opened with the learner: the kernel loses real direction — options (intensity+proximity-only flash vs. other honest forms) presented; awaiting her decision.** Spec updated (`spec.md > Decisions and Open Issues`).
+
+- 2026-10-18 (slice 1, environment): `permission_handler` 13.x requires Android SDK 37, whose platform package is published with a broken identity (`android-37.0`, ApiLevel `37.0`) that Gradle/AGP could not resolve, and the SDK manager kept reinstalling it on every build. Fix chosen: pinned `permission_handler: 12.0.3` (needs SDK ≤ 35; our SDK 36 satisfies it). No behavior difference for our needs (mic request + permanentlyDenied + openAppSettings all available). `flutter analyze` clean, `flutter test` passes, `flutter build apk --debug` succeeds. Learner check on the physical phone still pending (device was not connected via ADB at slice close).

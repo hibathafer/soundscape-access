@@ -1,7 +1,10 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../audio/capture.dart';
 import '../audio/permission.dart' as mic;
+import '../direction/probe.dart';
 import '../session/controller.dart';
 import '../session/vibration_service.dart';
 import '../theme.dart';
@@ -24,6 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _permissionBlocked = false;
   bool _busy = false;
 
+  // Slice-2 direction research probe (temporary debug panel).
+  final _probe = MicProbeStream();
+  Map<String, double> _probeLevels = const {};
+  bool _probeRunning = false;
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _session.removeListener(_onSessionChanged);
+    _probe.stop();
     _capture.stop();
     _session.dispose();
     super.dispose();
@@ -104,12 +113,27 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() => _busy = true);
 
     if (_session.sessionActive) {
+      await _probe.stop();
+      setState(() {
+        _probeRunning = false;
+        _probeLevels = const {};
+      });
       await _capture.stop();
       _session.stop();
     } else {
       if (await _ensurePermission()) {
         final started = await _capture.start();
         if (started) {
+          // Slice-2 research probe: runs alongside the session.
+          final probeOk = await _probe.start((levels) {
+            // Slice-2 evidence trail: timestamped levels for adb logcat.
+            final pairs = levels.entries
+                .map((e) => '${e.key}=${e.value.toStringAsFixed(1)}')
+                .join(' ');
+            debugPrint('PROBE $pairs');
+            if (mounted) setState(() => _probeLevels = levels);
+          });
+          if (mounted) setState(() => _probeRunning = probeOk);
           _session.start();
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -120,6 +144,95 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     }
     if (mounted) setState(() => _busy = false);
+  }
+
+  /// Temporary research panel: live dB per mic source + the spread.
+  /// Round 2: adds vrec / unprocessed / stereo channels — any signal that
+  /// might carry direction after round 1 showed MIC+CAMCORDER are mixed.
+  Widget _buildProbePanel() {
+    const order = ['top', 'bottom', 'stL', 'stR', 'vrec', 'unproc'];
+    final present = order.where((k) => _probeLevels.containsKey(k)).toList();
+
+    double norm(double? db) => (((db ?? -160) + 80) / 80).clamp(0.0, 1.0);
+
+    // Spread = max - min among live sources (the direction opportunity).
+    String verdict;
+    if (present.length < 2) {
+      verdict = 'Need at least two sources…';
+    } else {
+      final vals = present.map((k) => _probeLevels[k]!);
+      final spread = vals.reduce(math.max) - vals.reduce(math.min);
+      if (spread >= 5) {
+        verdict =
+            'SPREAD ${spread.toStringAsFixed(1)} dB — sources differ! Direction may be possible.';
+      } else if (spread >= 2.5) {
+        verdict =
+            'Spread ${spread.toStringAsFixed(1)} dB — weak. Needs strong near-field sound to judge.';
+      } else {
+        verdict =
+            'Spread ${spread.toStringAsFixed(1)} dB — sources nearly identical.';
+      }
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF16212E),
+        border: Border.all(color: const Color(0xFF2B3B4E)),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Direction probe r2 (research)',
+              style: TextStyle(
+                  color: SoundscapeColors.ink,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13)),
+          const SizedBox(height: 8),
+          for (final k in present) ...[
+            _probeBar(k, norm(_probeLevels[k]), _probeLevels[k]),
+            const SizedBox(height: 6),
+          ],
+          Text(verdict,
+              style:
+                  const TextStyle(color: SoundscapeColors.muted, fontSize: 13)),
+        ],
+      ),
+    );
+  }
+
+  Widget _probeBar(String label, double value, double? db) {
+    return Row(
+      children: [
+        SizedBox(
+            width: 58,
+            child: Text(label,
+                style:
+                    const TextStyle(color: SoundscapeColors.muted, fontSize: 13))),
+        Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: value,
+              minHeight: 10,
+              backgroundColor: const Color(0xFF0F1720),
+              valueColor: AlwaysStoppedAnimation(
+                  label == 'bottom'
+                      ? SoundscapeColors.farOrange
+                      : SoundscapeColors.accent),
+            ),
+          ),
+        ),
+        SizedBox(
+            width: 66,
+            child: Text(
+                db == null ? '--' : '${db.toStringAsFixed(1)} dB',
+                textAlign: TextAlign.right,
+                style:
+                    const TextStyle(color: SoundscapeColors.muted, fontSize: 13))),
+      ],
+    );
   }
 
   @override
@@ -163,6 +276,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: const TextStyle(
                                 color: SoundscapeColors.muted, fontSize: 15),
                           ),
+                          const SizedBox(height: 14),
+                          // Slice-2 research readout (temporary debug panel).
+                          if (_probeRunning) _buildProbePanel(),
                         ],
                       )
                     : Text(
