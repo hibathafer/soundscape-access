@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
   /// Round 2: adds vrec / unprocessed / stereo channels — any signal that
   /// might carry direction after round 1 showed MIC+CAMCORDER are mixed.
   Widget _buildProbePanel() {
-    const order = ['top', 'bottom', 'stL', 'stR', 'vrec', 'unproc'];
+    const order = ['micA', 'micB', 'uL', 'uR', 'top', 'bottom', 'stL', 'stR', 'vrec', 'unproc'];
     final present = order.where((k) => _probeLevels.containsKey(k)).toList();
 
     double norm(double? db) => (((db ?? -160) + 80) / 80).clamp(0.0, 1.0);

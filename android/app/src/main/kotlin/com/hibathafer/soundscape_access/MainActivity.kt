@@ -29,7 +29,7 @@ class MainActivity : FlutterActivity() {
         MethodChannel(messenger, "soundscape/mic_probe").setMethodCallHandler { call, result ->
             when (call.method) {
                 "start" -> {
-                    val p = probe ?: MicProbe { levels ->
+                    val p = probe ?: MicProbe(applicationContext) { levels ->
                         // onLevels already arrives on the main thread.
                         levelSink?.success(levels)
                     }.also { probe = it }
