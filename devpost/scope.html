@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soundscape Access — Scope (Draft)</title>
+<style>
+  :root{
+    --bg:#0f1720; --panel:#16212e; --panel2:#1c2a3a; --ink:#e8eef5; --muted:#9db0c4;
+    --accent:#39c6b0; --accent2:#f4b942; --danger:#e0716c; --line:#2b3b4e; --ok:#7fd1a6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Arabic",sans-serif;}
+  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+  header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:26px}
+  h1{font-size:30px;margin:0;letter-spacing:.3px}
+  h1 .sub{display:block;font-size:13px;font-weight:600;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+  .badge{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    padding:6px 12px;border-radius:999px;border:1px solid var(--accent2);color:var(--accent2)}
+  .oneline{font-size:19px;line-height:1.7;background:var(--panel);border-left:4px solid var(--accent);
+    padding:16px 18px;border-radius:0 10px 10px 0;margin:0 0 30px}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:18px}
+  h2{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+  h3{font-size:15px;margin:16px 0 8px;color:var(--accent2)}
+  p{margin:0 0 10px}
+  .quote{border-left:3px solid var(--accent2);padding-left:12px;color:var(--muted);font-style:italic}
+  ul,ol{margin:6px 0 4px;padding-left:22px}
+  li{margin-bottom:7px}
+  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);
+    border-radius:999px;padding:3px 11px;font-size:13px;margin:2px 4px 2px 0;color:var(--muted)}
+  /* diagram */
+  .diagram{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:6px}
+  .diagram svg{width:100%;height:auto;display:block}
+  .fallback{display:none;font-size:14px;color:var(--muted);padding:8px 4px}
+  .diagram.no-svg svg{display:none}
+  .diagram.no-svg .fallback{display:block}
+  /* stepper */
+  .steps{list-style:none;margin:10px 0 0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s;background:var(--panel2);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px 12px 52px;position:relative;margin-bottom:8px}
+  .steps li::before{content:counter(s);position:absolute;left:12px;top:11px;width:28px;height:28px;
+    border-radius:50%;background:var(--accent);color:#06231f;font-weight:800;
+    display:flex;align-items:center;justify-content:center;font-size:14px}
+  .stepnav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .stepnav button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+    border-radius:8px;padding:7px 14px;font-size:14px;cursor:pointer}
+  .stepnav button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:700}
+  .steps.js li{display:none}
+  .steps.js li.on{display:block}
+  .hint{font-size:13px;color:var(--muted);margin-top:8px}
+  /* reveals */
+  details{background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    padding:12px 16px;margin-bottom:10px}
+  details[open]{border-color:#3a5068}
+  summary{cursor:pointer;font-weight:700;letter-spacing:.5px}
+  .tag{font-size:11px;font-weight:800;letter-spacing:1.5px;padding:3px 9px;border-radius:6px;margin-right:8px}
+  .tag.now{background:#123b33;color:var(--ok);border:1px solid #1e5c4e}
+  .tag.later{background:#3b3312;color:var(--accent2);border:1px solid #5c4e1e}
+  .tag.cut{background:#3b1a1a;color:var(--danger);border:1px solid #5c2e2e}
+  .wow{background:linear-gradient(135deg,#123b33,#16212e);border:1px solid #1e5c4e}
+  footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);
+    padding-top:14px;margin-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  code{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:14px}
+  @media (max-width:640px){h1{font-size:24px}.oneline{font-size:17px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1><span class="sub">Scope · Planning Document</span>Soundscape Access</h1>
+    <span class="badge">Status: Approved</span>
+  </header>
+
+  <p class="oneline">A mobile app that makes a deaf or hard-of-hearing user aware of the sounds around
+  them — where they came from, how strong they are, and what they actually are — during ordinary
+  moments, not only in dangerous ones. The goal is to get as close as we can to natural hearing:
+  <em>“as if I can hear everything around me.”</em> A real starting point is enough; this does not
+  have to be a super-app.</p>
+
+  <!-- ============ DIAGRAM: user → loop → proof ============ -->
+  <section>
+    <h2>The Shape of the Plan</h2>
+    <div class="diagram" id="diagram">
+      <svg viewBox="0 0 900 340" role="img" aria-label="Diagram: the user, the core loop, and the proof">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#39c6b0"/>
+          </marker>
+          <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#f4b942"/>
+          </marker>
+        </defs>
+        <!-- User -->
+        <rect x="20" y="110" width="210" height="120" rx="14" fill="#16212e" stroke="#39c6b0" stroke-width="2"/>
+        <text x="125" y="145" text-anchor="middle" fill="#e8eef5" font-size="17" font-weight="700">Deaf / HoH user</text>
+        <text x="125" y="172" text-anchor="middle" fill="#9db0c4" font-size="13">wants ambient awareness</text>
+        <text x="125" y="194" text-anchor="middle" fill="#9db0c4" font-size="13">in ordinary moments</text>
+        <!-- Loop -->
+        <rect x="330" y="40" width="330" height="260" rx="14" fill="#1c2a3a" stroke="#2b3b4e" stroke-width="2"/>
+        <text x="495" y="70" text-anchor="middle" fill="#f4b942" font-size="15" font-weight="700" letter-spacing="2">CORE LOOP</text>
+        <rect x="360" y="90" width="270" height="44" rx="9" fill="#16212e" stroke="#2b3b4e"/>
+        <text x="495" y="117" text-anchor="middle" fill="#e8eef5" font-size="14">1 · App open, screen on — sound captured</text>
+        <rect x="360" y="144" width="270" height="44" rx="9" fill="#16212e" stroke="#2b3b4e"/>
+        <text x="495" y="171" text-anchor="middle" fill="#e8eef5" font-size="14">2 · Flash from source + icon of type</text>
+        <rect x="360" y="198" width="270" height="44" rx="9" fill="#16212e" stroke="#2b3b4e"/>
+        <text x="495" y="225" text-anchor="middle" fill="#e8eef5" font-size="14">3 · User ignores / pays attention / moves</text>
+        <rect x="360" y="252" width="270" height="44" rx="9" fill="#16212e" stroke="#2b3b4e"/>
+        <text x="495" y="279" text-anchor="middle" fill="#e8eef5" font-size="14">4 · Source recedes — flash fades out</text>
+        <!-- loop back arrow -->
+        <path d="M700 110 q40 60 0 120" fill="none" stroke="#f4b942" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arr2)"/>
+        <text x="748" y="174" text-anchor="middle" fill="#f4b942" font-size="12">repeats —</text>
+        <text x="748" y="190" text-anchor="middle" fill="#f4b942" font-size="12">stays on</text>
+        <!-- Proof -->
+        <rect x="700" y="240" width="180" height="80" rx="14" fill="#123b33" stroke="#7fd1a6" stroke-width="2"/>
+        <text x="790" y="272" text-anchor="middle" fill="#7fd1a6" font-size="15" font-weight="700">PROOF</text>
+        <text x="790" y="295" text-anchor="middle" fill="#bfe8d3" font-size="12.5">60-second demo video</text>
+        <!-- arrows -->
+        <line x1="230" y1="170" x2="326" y2="170" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+        <text x="278" y="158" text-anchor="middle" fill="#9db0c4" font-size="12">keeps it in front</text>
+        <line x1="660" y1="272" x2="696" y2="272" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+        <text x="678" y="260" text-anchor="middle" fill="#9db0c4" font-size="12">visible</text>
+      </svg>
+      <div class="fallback">
+        <strong>Flow:</strong> Deaf / HoH user → keeps the app in front of them → Core loop:
+        (1) sound captured → (2) flash from source + icon → (3) user reacts → (4) flash fades,
+        loop repeats → Proof: 60-second demo video.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KERNEL ============ -->
+  <section>
+    <h2>The Unique Kernel</h2>
+    <p>A live flash across the screen that represents a sound’s <strong>direction and intensity</strong>,
+    moving and fading as the source moves away, paired with an <strong>icon that names the type of
+    sound</strong> (car, speech, door…). In other words, the phone stops being an alarm and becomes a
+    <strong>continuous sense of the environment</strong>.</p>
+    <p class="quote">If we deleted the flash and nobody noticed the difference, nothing distinctive
+    would be left — this is the kernel of the project.</p>
+  </section>
+
+  <!-- ============ WHO ============ -->
+  <section>
+    <h2>Who It’s For</h2>
+    <p>Deaf or hard-of-hearing people who want to feel the sound of their environment
+    <strong>in ordinary time</strong>, not only when something is dangerous.</p>
+    <p><strong>What they do instead today:</strong> relying on constant watching, or alerts that are
+    very limited (a doorbell, someone touching their shoulder) — there is no continuous sense of
+    what is going on around them.</p>
+  </section>
+
+  <!-- ============ LOOP (stepper) ============ -->
+  <section>
+    <h2>The Core Loop</h2>
+    <ol class="steps" id="steps">
+      <li>The user opens the app and keeps it in front of them (screen on).</li>
+      <li>The app captures a sound → the phone <strong>flashes from the direction of the sound</strong>
+          (stronger toward the source, weaker on the opposite side) and an <strong>icon appears naming
+          the sound type</strong>.</li>
+      <li>The user decides: ignore it, pay attention, or move.</li>
+      <li>As the user or the source moves away, <strong>the flash shifts toward the source, dims, and
+          disappears</strong> — then the loop repeats.</li>
+    </ol>
+    <div class="stepnav" id="stepnav" hidden>
+      <button type="button" data-i="0" aria-pressed="true">Step 1</button>
+      <button type="button" data-i="1" aria-pressed="false">Step 2</button>
+      <button type="button" data-i="2" aria-pressed="false">Step 3</button>
+      <button type="button" data-i="3" aria-pressed="false">Step 4</button>
+      <button type="button" data-i="-1" aria-pressed="false">Show all</button>
+    </div>
+    <p class="hint">The user comes back because the environment feels alive around them —
+    “ears that stay on,” by their own choice.</p>
+  </section>
+
+  <!-- ============ INSPIRATION ============ -->
+  <section>
+    <h2>Inspiration &amp; Identity</h2>
+    <ul>
+      <li>The Korean drama <em>Twinkling Watermelon</em>: the scene where a ringing bell switches the
+      lights on so the characters know danger is coming, and the scene where a deaf child is in danger
+      while his hearing brother calls him and he cannot hear him.
+      <strong>Light and flash as a channel of awareness.</strong> <span class="pill">reference link to be added</span></li>
+      <li>The feeling to aim for: <strong>calm, aware presence</strong> — not panic, not constant
+      alarms. The app supports the user; it does not shout at them.</li>
+    </ul>
+  </section>
+
+  <!-- ============ WHY ============ -->
+  <section>
+    <h2>Why This Matters to the Learner</h2>
+    <p class="quote">“I am from the group with physical disabilities, so I know the community of
+    people with special needs up close… every time I build an idea, my goal is to make things easier
+    for a specific group.”</p>
+    <p>Her previous project: a simple MVP that listed the accessibility facilities available to
+    people with physical disabilities (ramp? elevator?) — the questions she faces when going
+    anywhere. This time she chose another group she cares about: deaf and hard-of-hearing people.</p>
+  </section>
+
+  <!-- ============ DONE ============ -->
+  <section class="wow">
+    <h2 style="color:var(--ok)">What “Working” Looks Like</h2>
+    <p><strong>The demo video (first minute):</strong> the app open on screen → a car horn or similar
+    sound plays <strong>from one side</strong> (left / behind) → the phone <strong>flashes immediately
+    from that side and shows an icon for the sound type</strong> → the source stops or moves away →
+    <strong>the flash shifts toward the source, dims, and disappears</strong>.</p>
+    <p class="quote">The “wow” moment she wants: “a different feeling toward sounds for the first
+    time” — the sound environment reaching the user through the screen.</p>
+  </section>
+
+  <!-- ============ BOUNDARY ============ -->
+  <section>
+    <h2><span class="tag now">NOW</span>The POC Boundary</h2>
+    <p>In the first version (the agreed minimum):</p>
+    <ol>
+      <li>Capturing sounds and classifying them into <strong>a limited set of categories (3–5)</strong>;
+      exact categories to be decided in <code>3-prd</code>.</li>
+      <li><strong>A flash that tracks direction and intensity</strong> and fades as distance grows.</li>
+      <li><strong>An icon naming the sound type</strong> (chosen approach: icons + flash).</li>
+      <li>Running <strong>with the screen on, phone in hand or in front of the user</strong>.</li>
+    </ol>
+  </section>
+
+  <details>
+    <summary><span class="tag later">LATER</span>Worth doing, just not now</summary>
+    <ul>
+      <li><strong>Always-on background operation (24/7) and vibration while the screen is off</strong>
+      (the sleep mode she described) — a stretch goal, to be attempted only if research
+      (<code>4-spec</code>) shows it is feasible and time allows.</li>
+      <li>More sound categories and higher classification accuracy.</li>
+      <li>Public deployment — optional anyway.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary><span class="tag cut">CUT</span>Explicitly cut — nothing disappears silently</summary>
+    <ul>
+      <li><strong>Multiple vibration patterns</strong> as an alternative to icons — they tire the
+      user’s memory and clutter the experience (her own concern about too much vibration).</li>
+      <li><strong>Recognizing “every sound in the world”</strong> — a deliberate limit: 3–5 categories
+      prove the idea. As she put it: “It does not have to be a super-app… at least it should be a
+      beginning.”</li>
+    </ul>
+  </details>
+
+  <footer>
+    <span>Canonical source: <code>devpost/scope.md</code> — this page is a review companion.</span>
+    <span>Doc: scope · status: approved</span>
+  </footer>
+</div>
+
+<script>
+  // Progressive enhancement: step control for the core loop (maps to the actual plan steps).
+  (function(){
+    var ol = document.getElementById('steps');
+    var nav = document.getElementById('stepnav');
+    if(!ol || !nav || !document.body || !document.body.addEventListener) return;
+    var items = ol.querySelectorAll('li');
+    ol.classList.add('js');
+    items[0].classList.add('on');
+    nav.hidden = false;
+    nav.addEventListener('click', function(e){
+      var b = e.target.closest ? e.target.closest('button') : null;
+      if(!b) return;
+      var i = parseInt(b.getAttribute('data-i'), 10);
+      for(var k=0;k<items.length;k++){
+        items[k].classList.toggle('on', i === -1 || k === i);
+      }
+      var btns = nav.querySelectorAll('button');
+      for(var j=0;j<btns.length;j++){
+        btns[j].setAttribute('aria-pressed', btns[j] === b ? 'true' : 'false');
+      }
+    });
+  })();
+  // SVG fallback if rendering fails
+  (function(){
+    var d = document.getElementById('diagram');
+    if(!d) return;
+    var svg = d.querySelector('svg');
+    if(!svg || !svg.getBoundingClientRect || svg.getBoundingClientRect().width === 0){
+      d.classList.add('no-svg');
+    }
+  })();
+</script>
+</body>
+</html>

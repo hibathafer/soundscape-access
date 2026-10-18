@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soundscape Access — PRD (Draft)</title>
+<style>
+  :root{
+    --bg:#0f1720; --panel:#16212e; --panel2:#1c2a3a; --ink:#e8eef5; --muted:#9db0c4;
+    --accent:#39c6b0; --accent2:#f4b942; --danger:#e0716c; --line:#2b3b4e; --ok:#7fd1a6;
+    --red:#e2574c; --orange:#f4b942;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Arabic",sans-serif;}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 20px 80px}
+  header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+  h1{font-size:30px;margin:0}
+  h1 .sub{display:block;font-size:13px;font-weight:600;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+  .badge{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    padding:6px 12px;border-radius:999px;border:1px solid var(--accent2);color:var(--accent2)}
+  .expand{background:linear-gradient(135deg,#123b33,#16212e);border:1px solid #1e5c4e;
+    border-radius:12px;padding:14px 18px;margin:0 0 24px;font-size:15px}
+  .expand b{color:var(--ok)}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:18px}
+  h2{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+  h3{font-size:15px;margin:18px 0 8px;color:var(--accent2)}
+  p{margin:0 0 10px}
+  .quote{border-left:3px solid var(--accent2);padding-left:12px;color:var(--muted);font-style:italic}
+  ul,ol{margin:6px 0 4px;padding-left:22px}
+  li{margin-bottom:7px}
+  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);
+    border-radius:999px;padding:3px 11px;font-size:13px;margin:2px 4px 2px 0;color:var(--muted)}
+  .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+  .dot.red{background:var(--red)} .dot.orange{background:var(--orange)} .dot.white{background:#fff;border:1px solid #94a3b8}
+  /* diagram */
+  .diagram{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .diagram svg{width:100%;height:auto;display:block}
+  .fallback{display:none;font-size:14px;color:var(--muted);padding:8px 4px}
+  .diagram.no-svg svg{display:none} .diagram.no-svg .fallback{display:block}
+  /* stepper */
+  .steps{list-style:none;margin:10px 0 0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s;background:var(--panel2);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px 12px 52px;position:relative;margin-bottom:8px}
+  .steps li::before{content:counter(s);position:absolute;left:12px;top:11px;width:28px;height:28px;
+    border-radius:50%;background:var(--accent);color:#06231f;font-weight:800;
+    display:flex;align-items:center;justify-content:center;font-size:14px}
+  .stepnav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .stepnav button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+    border-radius:8px;padding:7px 14px;font-size:14px;cursor:pointer}
+  .stepnav button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:700}
+  .steps.js li{display:none} .steps.js li.on{display:block}
+  /* reveals + criteria */
+  details{background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    padding:12px 16px;margin-bottom:10px}
+  details[open]{border-color:#3a5068}
+  summary{cursor:pointer;font-weight:700;letter-spacing:.5px}
+  .tag{font-size:11px;font-weight:800;letter-spacing:1.5px;padding:3px 9px;border-radius:6px;margin-right:8px}
+  .tag.state{background:#123b33;color:var(--ok);border:1px solid #1e5c4e}
+  .tag.err{background:#3b1a1a;color:var(--danger);border:1px solid #5c2e2e}
+  .tag.now{background:#123b33;color:var(--ok);border:1px solid #1e5c4e}
+  .tag.later{background:#3b3312;color:var(--accent2);border:1px solid #5c4e1e}
+  .tag.cut{background:#3b1a1a;color:var(--danger);border:1px solid #5c2e2e}
+  .tag.dec{background:#12303b;color:#7ec8e3;border:1px solid #1e4a5c}
+  .ac{list-style:none;padding-left:0}
+  .ac li{padding-left:26px;position:relative;color:#cfe0ee;font-size:15px}
+  .ac li::before{content:"☐";position:absolute;left:2px;top:0;color:var(--accent);font-size:16px}
+  .note{font-size:13px;color:var(--muted)}
+  footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);
+    padding-top:14px;margin-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  code{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:14px}
+  @media (max-width:640px){h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1><span class="sub">PRD · Product Requirements</span>Soundscape Access</h1>
+    <span class="badge">Status: Approved</span>
+  </header>
+
+  <div class="expand">
+    <b>Scope said</b> “open the app, keep it in front of you — flash + icons.”
+    <b>Now we know exactly:</b> one screen with two buttons, a gentle permission step, a
+    “Working now” toast, five fixed categories, swipeable messenger-style bubbles,
+    red/orange/white color rules, unknown-sound handling, and the fallback if leaving
+    the app proves technically impossible.
+  </div>
+
+  <!-- ============ JOURNEY DIAGRAM ============ -->
+  <section>
+    <h2>The Core Journey</h2>
+    <div class="diagram" id="diagram">
+      <svg viewBox="0 0 920 300" role="img" aria-label="Journey: open, permission, start, leave app, live capture, stop">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#39c6b0"/>
+          </marker>
+          <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#f4b942"/>
+          </marker>
+        </defs>
+        <rect x="15" y="60" width="150" height="70" rx="12" fill="#16212e" stroke="#39c6b0" stroke-width="2"/>
+        <text x="90" y="90" text-anchor="middle" fill="#e8eef5" font-size="14" font-weight="700">Open app</text>
+        <text x="90" y="112" text-anchor="middle" fill="#9db0c4" font-size="12">1 screen · 2 buttons</text>
+
+        <line x1="165" y1="95" x2="205" y2="95" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+
+        <rect x="208" y="45" width="170" height="100" rx="12" fill="#16212e" stroke="#2b3b4e" stroke-width="2"/>
+        <text x="293" y="75" text-anchor="middle" fill="#e8eef5" font-size="14" font-weight="700">First use</text>
+        <text x="293" y="97" text-anchor="middle" fill="#9db0c4" font-size="12">gentle “why mic?” line</text>
+        <text x="293" y="116" text-anchor="middle" fill="#9db0c4" font-size="12">→ system permission</text>
+
+        <line x1="378" y1="95" x2="418" y2="95" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+
+        <rect x="421" y="60" width="150" height="70" rx="12" fill="#16212e" stroke="#39c6b0" stroke-width="2"/>
+        <text x="496" y="90" text-anchor="middle" fill="#e8eef5" font-size="14" font-weight="700">▶ Start</text>
+        <text x="496" y="112" text-anchor="middle" fill="#9db0c4" font-size="12">toast: “Working now”</text>
+
+        <line x1="571" y1="95" x2="611" y2="95" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+
+        <rect x="614" y="45" width="170" height="100" rx="12" fill="#16212e" stroke="#f4b942" stroke-width="2"/>
+        <text x="699" y="75" text-anchor="middle" fill="#f4b942" font-size="14" font-weight="700">Leaves the app</text>
+        <text x="699" y="97" text-anchor="middle" fill="#9db0c4" font-size="12">session continues —</text>
+        <text x="699" y="116" text-anchor="middle" fill="#9db0c4" font-size="12">phone stays usable</text>
+
+        <line x1="699" y1="145" x2="699" y2="178" stroke="#f4b942" stroke-width="2.5" marker-end="url(#arr2)"/>
+
+        <!-- live capture loop -->
+        <rect x="380" y="182" width="560" height="100" rx="14" fill="#1c2a3a" stroke="#2b3b4e" stroke-width="2"/>
+        <text x="660" y="207" text-anchor="middle" fill="#f4b942" font-size="13" font-weight="700" letter-spacing="2">LIVE SESSION (CORE LOOP)</text>
+        <text x="660" y="232" text-anchor="middle" fill="#e8eef5" font-size="13.5">sound arrives → flash from source side + icon bubble</text>
+        <text x="660" y="253" text-anchor="middle" fill="#e8eef5" font-size="13.5">→ user glances / acts → source recedes → flash fades → repeat</text>
+        <text x="660" y="273" text-anchor="middle" fill="#9db0c4" font-size="12">unknown → white “?” bubble · two sounds → two bubbles · vibration optional</text>
+        <!-- loop back arrow -->
+        <path d="M360 232 q-70 -110 130 -130" fill="none" stroke="#f4b942" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arr2)"/>
+        <text x="180" y="185" text-anchor="middle" fill="#f4b942" font-size="12">Stop ends the session</text>
+      </svg>
+      <div class="fallback">
+        <strong>Journey:</strong> Open app (one screen, two buttons) → first use: gentle mic explanation
+        → system permission → Start → toast “Working now” → user leaves the app (session continues,
+        phone usable) → live loop: sound arrives → flash from source side + icon bubble → user glances/acts
+        → source recedes → flash fades → repeat (unknown → white “?” · two sounds → two bubbles ·
+        optional vibration) → Stop ends the session.
+      </div>
+    </div>
+
+    <ol class="steps" id="steps">
+      <li><strong>Open app</strong> — one screen: large Start/Stop button in the center, small vibration toggle.</li>
+      <li><strong>First use</strong> — gentle one-line “why we need the microphone,” then the system permission dialog. Denied → friendly message + route to settings.</li>
+      <li><strong>Start</strong> — toast “Working now.”</li>
+      <li><strong>Leave the app</strong> — home screen or other apps; capture continues without obstructing phone use (fallback: session runs with the app in front if the platform refuses).</li>
+      <li><strong>Live loop</strong> — flash starts at the sound’s side and fades toward the opposite side; strength = sound strength; color = proximity (red near, orange farther, white unknown); swipeable icon bubble per sound; two sounds → two bubbles; optional vibration.</li>
+      <li><strong>Stop</strong> — press the center button again; the session ends.</li>
+    </ol>
+    <div class="stepnav" id="stepnav" hidden>
+      <button type="button" data-i="0" aria-pressed="true">Step 1</button>
+      <button type="button" data-i="1" aria-pressed="false">Step 2</button>
+      <button type="button" data-i="2" aria-pressed="false">Step 3</button>
+      <button type="button" data-i="3" aria-pressed="false">Step 4</button>
+      <button type="button" data-i="4" aria-pressed="false">Step 5</button>
+      <button type="button" data-i="5" aria-pressed="false">Step 6</button>
+      <button type="button" data-i="-1" aria-pressed="false">Show all</button>
+    </div>
+  </section>
+
+  <!-- ============ LAYOUT + LOOK ============ -->
+  <section>
+    <h2>Screens, Layout &amp; Look and Feel</h2>
+    <ul>
+      <li><strong>One screen only:</strong> center = large <strong>Start/Stop</strong>; secondary = small
+      <strong>vibration toggle</strong>; live area = directional flash + floating bubbles.</li>
+      <li><strong>Dark background</strong> (light is the hero) · <strong>warm &amp; friendly</strong>
+      (“an app that supports you, not one that shouts at you”) · <strong>fairly large, clear type</strong>.</li>
+      <li><strong>Color rules:</strong> <span class="dot red"></span>red = very close ·
+      <span class="dot orange"></span>orange = farther · <span class="dot white"></span>white = type unknown.
+      Color is never the only signal — position and strength always carry it too.</li>
+    </ul>
+  </section>
+
+  <!-- ============ BEHAVIORS ============ -->
+  <section>
+    <h2>Features &amp; Behavior — with acceptance criteria</h2>
+
+    <details open>
+      <summary>Sound capture &amp; classification — five fixed categories</summary>
+      <p>Cars/traffic · speech/voices · door/knocking · alarm/bell/beep · birds/nature.
+      These five are the only types shown in this version.</p>
+      <ul class="ac">
+        <li>Car-horn sample played from one side → car icon bubble during the sound.</li>
+        <li>No other sound type is ever promised to the user.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Directional flash</summary>
+      <p>Starts on the sound’s side, strongest toward the source, fading toward the opposite side;
+      strength follows sound strength; shifts and disappears as the source/user moves away.</p>
+      <ul class="ac">
+        <li>Sound from the right → flash starts right, dims toward the left.</li>
+        <li>Source stops/moves away → flash visibly fades out.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Sound-type bubbles (messenger chat-head style)</summary>
+      <p>Floating, calm, non-blocking; category icon near the source direction; swipe down to dismiss.</p>
+      <ul class="ac">
+        <li>Recognized sound shows its icon bubble; swiping removes it without ending the session.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Simultaneous sounds · Unknown sounds · Vibration</summary>
+      <ul class="ac">
+        <li>Two sounds from different sides → two bubbles, distinguishable by color and position.</li>
+        <li>Unclassifiable sound → white “?” bubble, no crash, no special alarm; flash still shows direction.</li>
+        <li>Vibration toggle on → vibration when sounds are captured; toggle off → none (no patterns).</li>
+      </ul>
+      <p class="note">Learner on unknowns: “if it disappears, the situation becomes worse; our goal is
+      to help, so at least there remains a source for the sound.”</p>
+    </details>
+
+    <details>
+      <summary>Start &amp; Stop</summary>
+      <ul class="ac">
+        <li>Start → toast “Working now”; user may leave the app (or foreground fallback per Open Questions).</li>
+        <li>Pressing the center button again stops the session.</li>
+      </ul>
+      <p class="note">Assumption: the center button is a toggle (no alternative was specified).</p>
+    </details>
+  </section>
+
+  <!-- ============ STATES ============ -->
+  <section>
+    <h2>States, Empty &amp; Error Cases</h2>
+    <details>
+      <summary><span class="tag state">FIRST USE</span>Gentle permission explanation → system dialog</summary>
+      <p class="note">“I definitely prefer explaining to him gently why we need the permission.”</p>
+    </details>
+    <details>
+      <summary><span class="tag err">DENIED</span>Permission refused</summary>
+      <p>Friendly short message: the app cannot work without the microphone + a route to device settings.
+      <span class="note">Assumption, surfaced for confirmation during review.</span></p>
+    </details>
+    <details>
+      <summary><span class="tag state">QUIET</span>Nothing to show</summary>
+      <p>Screen stays calm, no bubbles; session remains active. <span class="note">Assumption: no active-state
+      indicator beyond the start toast was specified.</span></p>
+    </details>
+    <details>
+      <summary><span class="tag state">LEAVING THE APP</span>Session continues</summary>
+      <p>Intended flow; if the platform refuses background capture → fallback: session runs with the app in
+      front (see Open Questions). No data persists between sessions.</p>
+    </details>
+  </section>
+
+  <!-- ============ DECISIONS ============ -->
+  <section>
+    <h2>Product Decisions</h2>
+    <details>
+      <summary><span class="tag dec">DECIDED</span>Why each choice, in her words</summary>
+      <ul>
+        <li><strong>Icons + flash</strong> — chosen over vibration patterns (hard to memorize, cluttered)
+        and text (reading breaks the continuous feel).</li>
+        <li><strong>Unknown sounds shown, not hidden</strong> — “if it disappears, the situation becomes
+        worse; our goal is to help.”</li>
+        <li><strong>Session must not obstruct phone use</strong> — “a sound-sense must not force you to
+        stare at it,” with a fallback because it needs research.</li>
+        <li><strong>Five categories fixed</strong> — “all of them — they are the best choice, most
+        recurring, and most important.”</li>
+        <li><strong>Manual vibration</strong> — constant vibration becomes annoying (her own concern).</li>
+        <li><strong>Visual direction</strong> — dark, warm/friendly, fairly large clear type.</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- ============ BOUNDARY ============ -->
+  <section>
+    <h2><span class="tag now">NOW</span>What We're Building</h2>
+    <ol>
+      <li>One dark, warm, single-screen app: Start/Stop + vibration toggle.</li>
+      <li>Gentle mic explanation on first use + friendly denied state.</li>
+      <li>Session capture classifying into the five fixed categories.</li>
+      <li>Directional flash (side → fade, strength = sound, color = proximity).</li>
+      <li>Swipeable icon bubbles · white “?” for unknowns · two-sound display.</li>
+      <li>Manual vibration during the session.</li>
+      <li>Start toast, leaving the app without blocking phone use (or documented fallback), working Stop.</li>
+      <li>Scope's one-minute demo behavior, demonstrable on screen.</li>
+    </ol>
+  </section>
+
+  <details>
+    <summary><span class="tag later">DEFERRED</span>Deferred from the POC</summary>
+    <ul>
+      <li><strong>Always-on 24/7 background with screen off</strong> (sleep mode) — needs research; cut to Later in scope.</li>
+      <li><strong>More categories / higher accuracy</strong> — five categories prove the kernel.</li>
+      <li><strong>Public deployment</strong> — optional; a local recording is fine.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary><span class="tag cut">NON-GOALS</span>What this will NOT do</summary>
+    <ul>
+      <li>Recognize every sound in the world (capped at five — “not a super-app”).</li>
+      <li>Vibration patterns per sound type (cut as memorization-heavy).</li>
+      <li>Accounts, history, cloud sync, sharing — nothing implies them.</li>
+      <li>Be an alarm-only danger app — identity is calm, continuous awareness.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Open questions</summary>
+    <ul>
+      <li><strong>Background capture for the session</strong> → investigate in <code>4-spec</code>;
+      does not block spec approval (fallback approved). Verified in <code>5-build</code> on-device.</li>
+      <li><strong>Direction detection approach</strong> → assumption: a single phone microphone can
+      approximate it well enough for the demo; confirm in <code>4-spec</code>.</li>
+      <li><strong>Assumptions labeled above:</strong> toggle stop · denied-permission message · quiet-state
+      presentation. Confirm during review; none block <code>4-spec</code>.</li>
+      <li><em>Twinkling Watermelon</em> reference link — cosmetic.</li>
+    </ul>
+  </details>
+
+  <footer>
+    <span>Canonical source: <code>devpost/prd.md</code> — this page is a review companion.</span>
+    <span>Doc: prd · status: approved</span>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var ol = document.getElementById('steps');
+    var nav = document.getElementById('stepnav');
+    if(!ol || !nav || !document.body || !document.body.addEventListener) return;
+    var items = ol.querySelectorAll('li');
+    ol.classList.add('js');
+    items[0].classList.add('on');
+    nav.hidden = false;
+    nav.addEventListener('click', function(e){
+      var b = e.target.closest ? e.target.closest('button') : null;
+      if(!b) return;
+      var i = parseInt(b.getAttribute('data-i'), 10);
+      for(var k=0;k<items.length;k++){ items[k].classList.toggle('on', i === -1 || k === i); }
+      var btns = nav.querySelectorAll('button');
+      for(var j=0;j<btns.length;j++){ btns[j].setAttribute('aria-pressed', btns[j] === b ? 'true':'false'); }
+    });
+  })();
+  (function(){
+    var d = document.getElementById('diagram'); if(!d) return;
+    var svg = d.querySelector('svg');
+    if(!svg || !svg.getBoundingClientRect || svg.getBoundingClientRect().width === 0){ d.classList.add('no-svg'); }
+  })();
+</script>
+</body>
+</html>

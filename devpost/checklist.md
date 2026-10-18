@@ -1,0 +1,97 @@
+---
+doc: checklist
+status: approved
+---
+<!-- `status` is the progress state every skill reads. Write `draft` when you first save this file,
+     and change it to `approved` when the learner clearly approves the displayed plan ("looks good" counts).
+     Do not request a second sign-off. Never skip the draft save —
+     an unsaved draft dies with the conversation. -->
+
+# Build Checklist
+
+Build mode: **fast with learn explanations** — learner chose a hybrid: fast execution, short plain-language explanation after each slice, hands-on exploration at the checkpoints (after slices 3 and 6).
+
+## Slices
+
+- [ ] **1. The app runs on your phone — permission, Start/Stop, live session**
+  Becomes usable: Installed on the Android phone: one dark screen with a large Start/Stop button and a vibration toggle; first start shows the gentle mic line then the system dialog (denied → friendly message + settings route); Start shows the "Working now" toast and the mic genuinely captures (session active); vibration toggle buzzes on captured sound events; Stop ends everything. Bootstrap (project scaffold, dependencies, config) happens inside this slice.
+  Why now: It is the whole journey's spine (PRD steps 1–4) plus the foundation every later slice lands on; nothing else can be verified without a running app.
+  PRD ref: `prd.md > The Core Journey` (steps 1–4), `prd.md > Starting and stopping`, `prd.md > Vibration (manual, simple)`, `prd.md > States and Boundaries` (First use, Permission denied)
+  Spec ref: `spec.md > File Structure`, `spec.md > Where It Runs and How Someone Tries It`, `spec.md > Components` (App Shell, Audio Capture Service, Session Controller, Vibration Service)
+  Build: Create the Flutter project per the spec's file structure; dark Material 3 theme; the single screen with Start/Stop + vibration toggle; permission flow (gentle explanation → system dialog → denied message); session controller with start/stop/toast; mic capture stream with a simple level threshold emitting events; vibration on events while the toggle is on; `VIBRATE`/`RECORD_AUDIO` permissions in the manifest.
+  Verify (mechanical): `flutter analyze` → no issues; `flutter build apk --debug` → success; `adb install` + launch on the connected Xiaomi 12T Pro; logcat shows the mic session starting after permission grant.
+  Learner check: Open the app on your phone, grant the mic permission, press Start, see the "Working now" toast, turn the vibration toggle on and make a sound — feel a buzz; press Stop and confirm it all goes quiet.
+  Commit: `Add app shell, permission flow, and live capture session`
+
+- [ ] **2. Direction probe on the real device (critical risk)**
+  Becomes usable: A debug readout while the session runs shows live input levels per microphone source (top/bottom), so we can see on screen what the phone actually hears from a known side. Runnable evidence for or against the direction approach.
+  Why now: This is the spec's recorded "one useful unknown" — two-mic direction on the Xiaomi 12T Pro. Risk-first: if it fails, we revise the plan while almost nothing is built. The spec explicitly makes this build step 1 of the direction work.
+  PRD ref: `prd.md > Directional flash`
+  Spec ref: `spec.md > Components` (Direction Estimator), `spec.md > Decisions and Open Issues` (One useful unknown), `spec.md > Important Failure Modes` (Direction unusable)
+  Build: Kotlin bridge exposing Android `AudioRecord` source levels to Dart; a temporary debug panel printing/plotting per-source levels while the session runs; test protocol: play a sound from a known side, observe the difference. Record the outcome in `spec.md > Decisions and Open Issues`.
+  Verify (mechanical): `flutter analyze` → no issues; run on device; logcat/debug panel prints numeric levels for the available mic sources while a test sound plays — numbers must visibly differ between sides, or the failure is honestly captured and escalated as a plan revision.
+  Learner check: With the debug panel open, play the horn sample from above/below (and left/right if available) and read the numbers with me — do they move apart when the side changes?
+  Commit: `Add two-mic direction probe with on-device readout`
+
+- [ ] **3. The kernel ignites — directional flash from real sounds**
+  Becomes usable: With the session running, a real sound produces the live flash: it starts on the sound's side, strongest toward the source, colored by proximity (red very close / orange farther), and fades away as the sound stops or moves. The distinctive thing about this product now exists on screen.
+  Why now: The unique kernel comes early, not last (`scope.md > The Unique Kernel`); slices 1–2 feed it everything it needs (events + direction), and seeing it live is what early learner feedback should shape.
+  PRD ref: `prd.md > Directional flash`, `prd.md > Look and Feel` (color semantics)
+  Spec ref: `spec.md > Components` (Visual Feedback — Flash + Bubbles), `spec.md > Look and Feel`
+  Build: Flash renderer over the live area (side, strength-driven gradient, proximity color from level), fade-out as levels drop, direction input from slice 2's result (or the agreed degraded form if the probe forced a revision); wire the session's events to it.
+  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → unit tests pass for event → side/color/fade mapping; build + install on device; play a sound from one side and confirm (via screenshot/logcat events) the rendered side matches.
+  Learner check: Start the session, play the horn from the right — the flash should ignite on the right in red/orange and fade when the sound stops. Tell me if the direction, strength, and fade feel right.
+  Commit: `Add directional flash with proximity colors and fade`
+
+- [ ] **4. Sounds get names — YAMNet classification and bubbles**
+  Becomes usable: Recognized sounds show their swipeable icon bubble (cars, speech, door, alarm, birds); unclassifiable sounds show the white "?" bubble; two sounds at once show two bubbles; the classifier's five categories are the only ones shown. Bundled labeled samples make every demo repeatable on demand.
+  Why now: It completes the kernel's second half ("what is it" beside "where is it") and turns slices 1–3 from noise-reactive into sound-identifying — the PRD's core value.
+  PRD ref: `prd.md > Sound capture and classification (session-based)`, `prd.md > Unknown sounds`, `prd.md > Simultaneous sounds`, `prd.md > Sound-type bubbles`
+  Spec ref: `spec.md > Components` (Sound Classifier), `spec.md > External Services and Dependencies` (YAMNet asset), `spec.md > Data Model`
+  Build: Bundle `yamnet.tflite` + labels (resolve availability per the spec's failure mode); classifier wrapper (slice → scores → five categories + threshold → unknown); bubble widget (icon per category, white "?" for unknown, swipe-down dismiss); event merging for simultaneous sounds; add labeled demo samples under `assets/samples/`.
+  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → category mapping + threshold → unknown tests pass; model file present in built assets; play the horn sample on device → logcat shows category "cars" + confidence; an unclassifiable sound → "unknown".
+  Learner check: Run the session, play each bundled sample — the right icon appears; swipe one away; try two sounds at once; play something odd and confirm the white "?" appears without breaking anything.
+  Commit: `Add YAMNet classification and sound-type bubbles`
+
+- [ ] **5. Leaving the app keeps it listening (with the approved fallback)**
+  Becomes usable: After Start, the user goes to the home screen / other apps and capture genuinely continues (Android foreground service, type microphone); if the phone refuses or kills it, the documented fallback (session with the app in front) applies — either way the PRD's "must not obstruct phone use" intent is honestly served.
+  Why now: It is the last risky platform behavior; everything visual already works, so a fallback here still leaves a demonstrable product.
+  PRD ref: `prd.md > Product Decisions > Session must not obstruct phone use`, `prd.md > States and Boundaries` (Leaving the app), `prd.md > Open Questions`
+  Spec ref: `spec.md > Components` (Session Controller), `spec.md > Where It Runs and How Someone Tries It` (Xiaomi setup notes), `spec.md > Important Failure Modes` (Background killed)
+  Build: Kotlin foreground service with `FOREGROUND_SERVICE_MICROPHONE` + service type declared; start it while the app is foregrounded on Start; stop on Stop; graceful detection of service death → fall back to foreground session with a brief friendly note; document Autostart/battery-exemption steps for MIUI/HyperOS.
+  Verify (mechanical): `flutter analyze` → no issues; build + install; start session → press Home → `adb logcat` shows the service running and mic frames still arriving while backgrounded; force-stop the service → app detects it and keeps a foreground session without crashing.
+  Learner check: Start the session, press Home, play a sound — flash still works when you return / vibration still buzzes; if the phone killed it, confirm the app told you plainly and still works in front.
+  Commit: `Add background session service with foreground fallback`
+
+- [ ] **6. Demo-ready integration — full journey, README, repo hygiene**
+  Becomes usable: The complete PRD core journey runs top to bottom on the phone (open → permission → start → leave/return → flash+icons+unknown+two sounds → stop), with factual README run/setup instructions and placeholder env docs (none needed — no keys) so a stranger could install the APK and try it.
+  Why now: The demo video and the public repository are the submission; this slice makes the whole thing recordable and openable by others, and it is the last chance to catch integration gaps before the final review.
+  PRD ref: `prd.md > What We're Building`, `prd.md > The Core Journey` (end to end)
+  Spec ref: `spec.md > Where It Runs and How Someone Tries It`, `spec.md > File Structure`
+  Build: Walk the full journey fixing integration gaps; confirm Look and Feel matches the spec (dark, warm, large type, color semantics); write `README.md` (what it is, how to build/run, Xiaomi setup notes, sample sounds, no secrets); confirm `.gitignore` covers plan docs' private file and credentials; tidy debug affordances (keep the probe available but out of the demo path).
+  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → full suite passes; `flutter build apk --debug` → success; `adb install` + launch; README exists and commands in it match reality (run them).
+  Learner check: Do the full run exactly as the README says, from install to Stop, and tell me anything that felt off — this is the version we record.
+  Commit: `Make the demo journey ready with README and repo hygiene`
+
+## Hands-on Checkpoints
+
+- [ ] Early usable behavior explored — after slice 3 (the flash is live; feedback on direction, strength, colors, and feel shapes slices 4–6)
+- [ ] Final kick-the-tires exploration and feedback completed — after slice 6
+
+## Final Review
+
+- [ ] Final review complete — feedback resolved and learner confirms ready to ship
+
+## Code Tour and App Map
+
+- [ ] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
+- [ ] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
+- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+
+Activity and evidence: [what actually happened; real document/test/code references; unfinished work if interrupted]
+Route and stops: [actual paths and symbols; guided stops completed, or reference-only route]
+Edit outcome: [tried/kept/reverted/declined/not applicable; verification if changed]
+Reflection: [offered/answered/declined/already covered — personal answer belongs only in the ignored profile]
+Activity mode: [live app and editor, explicit static fallback, focused alternative, prior practice, or recap]
+
+## Revisions

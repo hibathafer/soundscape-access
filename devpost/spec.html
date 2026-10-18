@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soundscape Access — Technical Spec (Draft)</title>
+<style>
+  :root{
+    --bg:#0f1720; --panel:#16212e; --panel2:#1c2a3a; --ink:#e8eef5; --muted:#9db0c4;
+    --accent:#39c6b0; --accent2:#f4b942; --danger:#e0716c; --line:#2b3b4e; --ok:#7fd1a6;
+    --red:#e2574c; --orange:#f4b942; --blue:#7ec8e3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Arabic",sans-serif;}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
+  header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+  h1{font-size:30px;margin:0}
+  h1 .sub{display:block;font-size:13px;font-weight:600;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+  .badge{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    padding:6px 12px;border-radius:999px;border:1px solid var(--accent2);color:var(--accent2)}
+  .expand{background:linear-gradient(135deg,#123b33,#16212e);border:1px solid #1e5c4e;
+    border-radius:12px;padding:14px 18px;margin:0 0 24px;font-size:15px}
+  .expand b{color:var(--ok)}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:18px}
+  h2{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+  h3{font-size:15px;margin:18px 0 8px;color:var(--accent2)}
+  p{margin:0 0 10px}
+  .quote{border-left:3px solid var(--accent2);padding-left:12px;color:var(--muted);font-style:italic}
+  ul,ol{margin:6px 0 4px;padding-left:22px}
+  li{margin-bottom:7px}
+  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);
+    border-radius:999px;padding:3px 11px;font-size:13px;margin:2px 4px 2px 0;color:var(--muted)}
+  .diagram{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .diagram svg{width:100%;height:auto;display:block}
+  .fallback{display:none;font-size:14px;color:var(--muted);padding:8px 4px}
+  .diagram.no-svg svg{display:none} .diagram.no-svg .fallback{display:block}
+  .steps{list-style:none;margin:10px 0 0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s;background:var(--panel2);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px 12px 52px;position:relative;margin-bottom:8px}
+  .steps li::before{content:counter(s);position:absolute;left:12px;top:11px;width:28px;height:28px;
+    border-radius:50%;background:var(--accent);color:#06231f;font-weight:800;
+    display:flex;align-items:center;justify-content:center;font-size:14px}
+  .stepnav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .stepnav button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+    border-radius:8px;padding:7px 14px;font-size:14px;cursor:pointer}
+  .stepnav button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:700}
+  .steps.js li{display:none} .steps.js li.on{display:block}
+  details{background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    padding:12px 16px;margin-bottom:10px}
+  details[open]{border-color:#3a5068}
+  summary{cursor:pointer;font-weight:700;letter-spacing:.5px}
+  .tag{font-size:11px;font-weight:800;letter-spacing:1.5px;padding:3px 9px;border-radius:6px;margin-right:8px}
+  .tag.ok{background:#123b33;color:var(--ok);border:1px solid #1e5c4e}
+  .tag.risk{background:#3b3312;color:var(--accent2);border:1px solid #5c4e1e}
+  .tag.fail{background:#3b1a1a;color:var(--danger);border:1px solid #5c2e2e}
+  .tag.dec{background:#12303b;color:var(--blue);border:1px solid #1e4a5c}
+  .note{font-size:13px;color:var(--muted)}
+  pre{background:#0c141d;border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+    overflow-x:auto;font-size:13.5px;line-height:1.5;color:#cfe0ee;margin:8px 0}
+  code{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0}
+  th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{color:var(--accent);font-size:12.5px;letter-spacing:1px;text-transform:uppercase}
+  footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);
+    padding-top:14px;margin-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media (max-width:640px){h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1><span class="sub">Spec · Technical Blueprint</span>Soundscape Access</h1>
+    <span class="badge">Status: Approved</span>
+  </header>
+
+  <div class="expand">
+    <b>PRD said</b> “what it does.” <b>Now we know how:</b> Flutter/Dart (her language),
+    YAMNet inside the phone (free · offline · private), two microphones for direction —
+    tested on her Xiaomi 12T Pro <b>first</b>, honest fallback if it misbehaves,
+    Android 14 foreground service for leaving the app, zero servers and $0.
+  </div>
+
+  <!-- ============ PLAIN LANGUAGE ============ -->
+  <section>
+    <h2>How This Works, In Plain Language</h2>
+    <p>One Flutter program (Dart) on the phone, five parts talking to each other:</p>
+    <ol>
+      <li><strong>The ears</strong> — keeps listening during the session, hands over short audio slices.</li>
+      <li><strong>The name-giver</strong> — <em>YAMNet</em>, a tiny AI model <em>inside the phone</em>: “car / speech / door / alarm / birds / don’t know.” Nothing leaves the device.</li>
+      <li><strong>The compass</strong> — compares the phone’s two microphones to guess the side. <em>Tested on the real phone first</em>; if it misbehaves we adjust the plan together — never fake it.</li>
+      <li><strong>The brain</strong> — start/stop, the rules (known → colored bubble, unknown → white “?”, vibration only when toggled), and the attempt to keep listening after the user leaves the app.</li>
+      <li><strong>The face</strong> — the flash that ignites on the sound’s side and fades away, plus swipeable bubbles and the two buttons.</li>
+    </ol>
+    <p class="quote">Why this shape: everything on the phone — no servers, no accounts, no internet, no keys, no cost; it starts instantly and records cleanly for the demo.</p>
+  </section>
+
+  <!-- ============ DATA FLOW DIAGRAM ============ -->
+  <section>
+    <h2>Architecture — Data Flow</h2>
+    <div class="diagram" id="diagram">
+      <svg viewBox="0 0 940 430" role="img" aria-label="Architecture: audio in, classifier and direction, session controller, UI out">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#39c6b0"/>
+          </marker>
+          <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#f4b942"/>
+          </marker>
+        </defs>
+        <!-- mic -->
+        <rect x="20" y="60" width="170" height="90" rx="12" fill="#16212e" stroke="#39c6b0" stroke-width="2"/>
+        <text x="105" y="92" text-anchor="middle" fill="#e8eef5" font-size="14.5" font-weight="700">🎧 Audio Capture</text>
+        <text x="105" y="114" text-anchor="middle" fill="#9db0c4" font-size="12">mic stream · 16 kHz PCM</text>
+        <text x="105" y="133" text-anchor="middle" fill="#9db0c4" font-size="12">Kotlin bridge + service</text>
+        <!-- classifier -->
+        <rect x="300" y="20" width="230" height="95" rx="12" fill="#16212e" stroke="#2b3b4e" stroke-width="2"/>
+        <text x="415" y="50" text-anchor="middle" fill="#e8eef5" font-size="14.5" font-weight="700">🧠 Sound Classifier</text>
+        <text x="415" y="72" text-anchor="middle" fill="#9db0c4" font-size="12">YAMNet (TFLite, on-device)</text>
+        <text x="415" y="91" text-anchor="middle" fill="#9db0c4" font-size="12">→ 5 categories + confidence</text>
+        <text x="415" y="108" text-anchor="middle" fill="#f4b942" font-size="11.5">weak → “unknown”</text>
+        <!-- direction -->
+        <rect x="300" y="140" width="230" height="95" rx="12" fill="#16212e" stroke="#f4b942" stroke-width="2"/>
+        <text x="415" y="170" text-anchor="middle" fill="#f4b942" font-size="14.5" font-weight="700">🧭 Direction Estimator</text>
+        <text x="415" y="192" text-anchor="middle" fill="#9db0c4" font-size="12">2-mic level difference</text>
+        <text x="415" y="211" text-anchor="middle" fill="#9db0c4" font-size="12">→ side + strength</text>
+        <text x="415" y="228" text-anchor="middle" fill="#e2574c" font-size="11.5">⚠ research first (build step 1)</text>
+        <!-- session -->
+        <rect x="600" y="60" width="200" height="115" rx="12" fill="#1c2a3a" stroke="#39c6b0" stroke-width="2"/>
+        <text x="700" y="90" text-anchor="middle" fill="#e8eef5" font-size="14.5" font-weight="700">⚙ Session Controller</text>
+        <text x="700" y="112" text-anchor="middle" fill="#9db0c4" font-size="12">start/stop · rules</text>
+        <text x="700" y="131" text-anchor="middle" fill="#9db0c4" font-size="12">sound events · fallback</text>
+        <text x="700" y="150" text-anchor="middle" fill="#9db0c4" font-size="12">vibration toggle</text>
+        <!-- ui -->
+        <rect x="600" y="240" width="200" height="95" rx="12" fill="#16212e" stroke="#7fd1a6" stroke-width="2"/>
+        <text x="700" y="270" text-anchor="middle" fill="#7fd1a6" font-size="14.5" font-weight="700">✨ Flash + Bubbles UI</text>
+        <text x="700" y="292" text-anchor="middle" fill="#9db0c4" font-size="12">directional flash</text>
+        <text x="700" y="311" text-anchor="middle" fill="#9db0c4" font-size="12">swipeable icon bubbles</text>
+        <!-- vibration -->
+        <rect x="600" y="355" width="200" height="60" rx="12" fill="#16212e" stroke="#2b3b4e" stroke-width="2"/>
+        <text x="700" y="381" text-anchor="middle" fill="#e8eef5" font-size="14" font-weight="700">📳 Vibration Service</text>
+        <text x="700" y="401" text-anchor="middle" fill="#9db0c4" font-size="12">only while toggle is ON</text>
+        <!-- user input side -->
+        <rect x="20" y="240" width="170" height="70" rx="12" fill="#16212e" stroke="#2b3b4e" stroke-width="2"/>
+        <text x="105" y="270" text-anchor="middle" fill="#e8eef5" font-size="14" font-weight="700">👆 App Shell</text>
+        <text x="105" y="292" text-anchor="middle" fill="#9db0c4" font-size="12">Start/Stop · toggle</text>
+        <!-- arrows -->
+        <line x1="190" y1="90" x2="296" y2="65" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+        <line x1="190" y1="120" x2="296" y2="175" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+        <line x1="530" y1="65" x2="596" y2="95" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+        <line x1="530" y1="185" x2="596" y2="135" stroke="#f4b942" stroke-width="2.5" marker-end="url(#arr2)"/>
+        <line x1="700" y1="175" x2="700" y2="236" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+        <line x1="700" y1="335" x2="700" y2="351" stroke="#39c6b0" stroke-width="2.5" marker-end="url(#arr)"/>
+        <line x1="190" y1="275" x2="596" y2="150" stroke="#2b3b4e" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arr)"/>
+        <text x="330" y="252" fill="#9db0c4" font-size="11.5">commands (start / stop / toggle)</text>
+      </svg>
+      <div class="fallback">
+        <strong>Flow:</strong> Audio Capture (mic 16 kHz) → Sound Classifier (YAMNet → 5 categories)
+        and Direction Estimator (2-mic levels, research first) → Session Controller (rules, events, fallback)
+        → Flash + Bubbles UI → Vibration Service (toggle only). App Shell commands feed the controller.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JOURNEY STEPPER ============ -->
+  <section>
+    <h2>The Core Journey Through the System</h2>
+    <p class="note">PRD ref: <code>prd.md &gt; The Core Journey</code> — traced through the pieces.</p>
+    <ol class="steps" id="steps">
+      <li><strong>Open app</strong> → App Shell renders the one dark screen from fresh in-memory state.</li>
+      <li><strong>First start</strong> → gentle mic explanation → system dialog. Denied → friendly message + settings.</li>
+      <li><strong>Start pressed</strong> → controller sets session on → toast “Working now” → capture streams slices.</li>
+      <li><strong>Leaves the app</strong> → Android foreground service (type: microphone), started from foreground; refused/killed → fallback: app stays in front.</li>
+      <li><strong>Each slice → two paths:</strong> classifier → category/confidence (weak → unknown) · direction estimator → side/strength.</li>
+      <li><strong>Events merge</strong> → flash ignites on the sound’s side with the proximity color + icon bubble appears; two sounds → two events.</li>
+      <li><strong>Vibration toggle on</strong> → one buzz per event. <strong>Source recedes</strong> → levels drop → flash fades out.</li>
+      <li><strong>Stop</strong> → session off → capture, service, vibration all end.</li>
+    </ol>
+    <div class="stepnav" id="stepnav" hidden>
+      <button type="button" data-i="0" aria-pressed="true">1</button>
+      <button type="button" data-i="1" aria-pressed="false">2</button>
+      <button type="button" data-i="2" aria-pressed="false">3</button>
+      <button type="button" data-i="3" aria-pressed="false">4</button>
+      <button type="button" data-i="4" aria-pressed="false">5</button>
+      <button type="button" data-i="5" aria-pressed="false">6</button>
+      <button type="button" data-i="6" aria-pressed="false">7</button>
+      <button type="button" data-i="7" aria-pressed="false">8</button>
+      <button type="button" data-i="-1" aria-pressed="false">Show all</button>
+    </div>
+  </section>
+
+  <!-- ============ STACK ============ -->
+  <section>
+    <h2>Stack</h2>
+    <table>
+      <tr><th>Choice</th><th>Why</th><th>Tradeoff accepted</th></tr>
+      <tr><td><strong>Flutter + Dart</strong> <span class="pill">her choice</span></td>
+          <td>“Settle on one language and develop myself”</td>
+          <td>Mic/vibration/background need plugins &amp; a Kotlin bridge</td></tr>
+      <tr><td><strong>YAMNet via <code>tflite_flutter</code></strong> <span class="pill">agreed</span></td>
+          <td>Free · offline · private; covers the five categories</td>
+          <td>Medium accuracy — proves the idea, not perfection</td></tr>
+      <tr><td><strong>Kotlin bridge</strong> (in <code>android/</code>)</td>
+          <td>Two-mic capture + Android 14 foreground service</td>
+          <td>Some logic lives outside Dart — documented here</td></tr>
+      <tr><td><strong><code>vibration</code> package</strong></td>
+          <td>Manual, simple haptics — matches the PRD</td>
+          <td>No patterns (by design)</td></tr>
+    </table>
+    <p class="note">Docs: flutter.dev · dart.dev · pub.dev/packages/tflite_flutter · pub.dev/packages/vibration ·
+      tensorflow.org/hub/tfhub/dev/google/yamnet · developer.android.com foreground-services · AudioRecord.
+      <strong>Unverified — check in build step 1:</strong> package versions, a ready <code>.tflite</code> YAMNet file,
+      and individual mic-source selection on the Xiaomi 12T Pro.</p>
+  </section>
+
+  <!-- ============ WHERE IT RUNS ============ -->
+  <section>
+    <h2>Where It Runs &amp; How Someone Tries It</h2>
+    <ul>
+      <li><strong>Runtime:</strong> Android app — test device <strong>Xiaomi 12T Pro · Android 14 (SDK 34)</strong> (Flutter + ADB verified on the machine; device connects via USB debugging). Emulator only for pure UI — direction/classification tests run on the real phone.</li>
+      <li><strong>Dev start:</strong> <code>flutter run</code> · <strong>Demo/APK:</strong> <code>flutter build apk</code> → install → open <em>Soundscape Access</em> → Start → record screen.</li>
+      <li><strong>Submission:</strong> short demo video + public GitHub repo required; <strong>deployment optional, not chosen</strong> (revisit in <code>6-ship</code>).</li>
+      <li><strong>Xiaomi setup notes:</strong> USB debugging on; for background capture allow <em>Autostart</em> + battery-optimization exemption (MIUI/HyperOS kills background services).</li>
+    </ul>
+  </section>
+
+  <!-- ============ LOOK ============ -->
+  <section>
+    <h2>Look and Feel (implementable)</h2>
+    <ul>
+      <li>Near-black surface (e.g. <code>#0F1720</code>) — light is the hero · Material 3 <strong>dark theme</strong>.</li>
+      <li>Warm &amp; friendly: rounded shapes, calm spacing, supportive copy — color carries data, never panic.</li>
+      <li>Fairly large, glanceable type.</li>
+      <li><strong>Color semantics:</strong> <span style="color:var(--red)">■</span> proximity ≈ <code>#E2574C</code> ·
+          <span style="color:var(--orange)">■</span> farther ≈ <code>#F4B942</code> ·
+          <span style="color:#fff">■</span> unknown <code>#FFFFFF</code> — position &amp; strength always agree with color.</li>
+    </ul>
+  </section>
+
+  <!-- ============ COMPONENTS ============ -->
+  <section>
+    <h2>Components (each with its PRD home)</h2>
+    <details>
+      <summary>🎧 Audio Capture Service — <code>prd.md &gt; Sound capture and classification</code></summary>
+      <p>Keeps the mic open for the session; streams 16 kHz mono PCM slices; owns the permission flow
+      (gentle line → system dialog). Stops on Stop/kill. Files: <code>lib/audio/</code>.</p>
+    </details>
+    <details>
+      <summary>🧠 Sound Classifier — <code>prd.md &gt; Unknown sounds</code></summary>
+      <p>TFLite model + labels from <code>assets/model/</code>; slice → scores → exactly five categories;
+      below confidence threshold → unknown (threshold tuned in the build — implementation detail).
+      Files: <code>lib/classify/</code>.</p>
+    </details>
+    <details>
+      <summary>🧭 Direction Estimator — <code>prd.md &gt; Directional flash</code> <span class="tag risk">RESEARCH FIRST</span></summary>
+      <p>Two-mic level comparison (top vs bottom on the test device) → side + strength.
+      <strong>Build step 1</strong> verifies individual mic access + a repeatable level difference from a known side.
+      Two mics on one axis bias top/bottom; if unusable → plan-revision conversation — <em>never faked</em>.
+      Files: <code>lib/direction/</code> + Kotlin bridge.</p>
+    </details>
+    <details>
+      <summary>⚙ Session Controller — <code>prd.md &gt; Starting and stopping</code> / leaving the app</summary>
+      <p>Owns session state, toast, events, vibration toggle, background attempt (FGS type microphone, started
+      from foreground) + approved fallback. Files: <code>lib/session/</code>.</p>
+    </details>
+    <details>
+      <summary>✨ Flash + Bubbles UI — <code>prd.md &gt; Sound-type bubbles</code> / <code>Simultaneous sounds</code></summary>
+      <p>Consumes events: directional edge flash (side/strength/color, fades with level) + swipeable bubbles
+      (icon; white “?” unknown). Two events render independently. Files: <code>lib/ui/</code>.</p>
+    </details>
+    <details>
+      <summary>📳 Vibration Service — <code>prd.md &gt; Vibration (manual, simple)</code></summary>
+      <p>One buzz per event while the toggle is ON; no patterns; <code>VIBRATE</code> permission (normal).
+      Files: <code>lib/session/vibration_service.dart</code>.</p>
+    </details>
+  </section>
+
+  <!-- ============ DATA MODEL ============ -->
+  <section>
+    <h2>Data Model — where things live</h2>
+    <table>
+      <tr><th>Piece</th><th>Lives</th><th>Leave &amp; return</th></tr>
+      <tr><td><code>sessionActive</code></td><td>memory (controller)</td><td>restart = off, by design</td></tr>
+      <tr><td><code>vibrationEnabled</code></td><td>memory (toggle)</td><td>resets to off</td></tr>
+      <tr><td><code>soundEvent {category, confidence, side, strength, color}</code></td><td>ephemeral per detection</td><td>gone</td></tr>
+      <tr><td>YAMNet model + labels</td><td><code>assets/model/</code> read-only</td><td>unchanged</td></tr>
+      <tr><td>Demo sounds</td><td><code>assets/samples/</code> — <strong>labeled sample data</strong></td><td>unchanged</td></tr>
+    </table>
+    <p class="note">No database, no written files — <code>prd.md</code>: “nothing persists between sessions.”</p>
+  </section>
+
+  <!-- ============ FILE TREE ============ -->
+  <section>
+    <h2>File Structure</h2>
+<pre>soundscape-access/
+├── android/                    # Android host: manifest, permissions, Kotlin bridge
+│   └── app/src/main/
+│       ├── AndroidManifest.xml # RECORD_AUDIO, FOREGROUND_SERVICE(_MICROPHONE), VIBRATE
+│       └── kotlin/…/           # dual-mic AudioRecord bridge + foreground service
+├── lib/
+│   ├── main.dart               # entry; dark theme
+│   ├── ui/                     # home_screen · flash · bubbles
+│   ├── audio/                  # capture (16 kHz PCM) · permission flow
+│   ├── classify/               # yamnet.dart · categories.dart (5 + threshold)
+│   ├── direction/              # estimator.dart (+ research notes)
+│   ├── session/                # controller · background · vibration_service
+│   └── theme.dart              # red / orange / white semantics
+├── assets/
+│   ├── model/                  # yamnet.tflite + labels.txt (verify step 1)
+│   └── samples/                # demo sounds (labeled sample data)
+├── test/                       # mapping & session rules
+├── devpost/                    # planning workspace (learner-profile.md gitignored)
+├── README.md                   # run/setup instructions
+├── pubspec.yaml
+└── .gitignore</pre>
+  </section>
+
+  <!-- ============ DEPS ============ -->
+  <section>
+    <h2>External Services &amp; Dependencies</h2>
+    <p><strong>None external — $0, no keys, no rate limits.</strong> Bundled only: Flutter SDK (verified installed),
+    <code>tflite_flutter</code>, YAMNet model asset (Apache-2.0 — <code>.tflite</code> availability unverified),
+    <code>vibration</code>, Android OS APIs.</p>
+  </section>
+
+  <!-- ============ FAILURE MODES ============ -->
+  <section>
+    <h2>Important Failure Modes</h2>
+    <details><summary><span class="tag fail">DENIED</span>Microphone permission refused</summary>
+      <p>Friendly message + route to settings (<code>prd.md</code>); no crash.</p></details>
+    <details><summary><span class="tag fail">QUIET / UNSURE</span>Silence or unclassifiable sound</summary>
+      <p>Silence → nothing; a real sound with no confident name → white “?” bubble, direction still shown.</p></details>
+    <details><summary><span class="tag fail">BACKGROUND KILLED</span>Xiaomi MIUI/HyperOS kills the service</summary>
+      <p>Approved fallback: session continues with the app in front; Autostart/battery exemption documented as setup.</p></details>
+    <details><summary><span class="tag fail">DIRECTION UNUSABLE</span>Individual mics not selectable / no level difference</summary>
+      <p>Plan-revision conversation with the learner; degraded options decided together — <strong>kernel never faked</strong>.</p></details>
+    <details><summary><span class="tag fail">MODEL MISSING</span>No ready <code>.tflite</code> YAMNet file</summary>
+      <p>Convert from TF Hub ourselves or swap an equally small model — decide in build step 1, before UI work.</p></details>
+  </section>
+
+  <!-- ============ SIMPLIFIED ============ -->
+  <section>
+    <h2>What Was Simplified and Why</h2>
+    <ul>
+      <li><strong>On-device YAMNet</strong> instead of a cloud API — free/offline/private; cloud stays a later enhancement only if the core works and time remains.</li>
+      <li><strong>No persistence</strong> instead of settings/history — restart = fresh session (PRD).</li>
+      <li><strong>One screen, no navigation</strong> — the product is one loop.</li>
+      <li><strong>Bundled labeled samples</strong> for the demo instead of depending on live traffic on demand — the live path stays real and primary.</li>
+      <li><strong>Simple vibration</strong> instead of patterns — her cut.</li>
+    </ul>
+  </section>
+
+  <!-- ============ DECISIONS ============ -->
+  <section>
+    <h2>Decisions and Open Issues</h2>
+    <details>
+      <summary><span class="tag dec">DECIDED</span>Learner decisions, with the tradeoff accepted</summary>
+      <ul>
+        <li><strong>Flutter + Dart</strong> — one language to master → accepts platform bridges.</li>
+        <li><strong>YAMNet now; cloud only later, if core succeeds and time remains</strong> → accepts medium accuracy.</li>
+        <li><strong>Android real device, local run + recording</strong> → deployment optional for <code>6-ship</code>.</li>
+        <li><strong>Direction: test the phone first, decide from results</strong> → accepts the revision conversation if it fails.</li>
+        <li><strong>Background attempt + honest fallback</strong> (from the PRD).</li>
+      </ul>
+    </details>
+    <details>
+      <summary><span class="tag risk">ONE USEFUL UNKNOWN</span>Two-mic direction on the Xiaomi 12T Pro</summary>
+      <p><strong>Question:</strong> can the app hear the two microphones separately, and is the level difference
+      usable for direction? <strong>Check:</strong> build step 1 — record selected mic sources with a sound from a
+      known side; <strong>evidence:</strong> repeatable per-mic level difference (top/bottom first, left/right assessed).
+      <strong>If not:</strong> the agreed plan-revision conversation. Outcome gets recorded here during the build.</p>
+    </details>
+    <details>
+      <summary>Still unresolved</summary>
+      <ul>
+        <li>Background feasibility → approach specified (FGS + fallback); device verification in <code>5-build</code>.</li>
+        <li>YAMNet <code>.tflite</code> availability → build step 1.</li>
+        <li>PRD labeled assumptions (toggle stop, denied copy, quiet state) → trivial, confirmed at review.</li>
+        <li><em>Twinkling Watermelon</em> reference link — cosmetic.</li>
+      </ul>
+    </details>
+  </section>
+
+  <footer>
+    <span>Canonical source: <code>devpost/spec.md</code> — this page is a review companion.</span>
+    <span>Doc: spec · status: approved</span>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var ol = document.getElementById('steps');
+    var nav = document.getElementById('stepnav');
+    if(!ol || !nav || !document.body || !document.body.addEventListener) return;
+    var items = ol.querySelectorAll('li');
+    ol.classList.add('js');
+    items[0].classList.add('on');
+    nav.hidden = false;
+    nav.addEventListener('click', function(e){
+      var b = e.target.closest ? e.target.closest('button') : null;
+      if(!b) return;
+      var i = parseInt(b.getAttribute('data-i'), 10);
+      for(var k=0;k<items.length;k++){ items[k].classList.toggle('on', i === -1 || k === i); }
+      var btns = nav.querySelectorAll('button');
+      for(var j=0;j<btns.length;j++){ btns[j].setAttribute('aria-pressed', btns[j] === b ? 'true':'false'); }
+    });
+  })();
+  (function(){
+    var d = document.getElementById('diagram'); if(!d) return;
+    var svg = d.querySelector('svg');
+    if(!svg || !svg.getBoundingClientRect || svg.getBoundingClientRect().width === 0){ d.classList.add('no-svg'); }
+  })();
+</script>
+</body>
+</html>
