@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:record/record.dart';
 
 import '../session/controller.dart';
@@ -42,6 +43,7 @@ class AudioCapture {
       // record reports dBFS in [-160, 0]; map to 0..1 for the controller.
       final db = amp.current;
       final level = ((db + 60) / 60).clamp(0.0, 1.0);
+      debugPrint('CAP db=$db level=${level.toStringAsFixed(2)}');
       _session.onLevel(level.toDouble());
     });
     return true;

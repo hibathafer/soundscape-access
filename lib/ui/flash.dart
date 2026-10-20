@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../analyze/behavior.dart';
@@ -5,11 +7,19 @@ import '../theme.dart';
 
 /// The kernel — prd.md > Sound pulse (the visual vocabulary).
 ///
-/// The pulse ignites at the center with every strike and expands outward:
-/// brightness/size follow the sound's strength, color follows loudness
-/// (red very loud / orange moderate), a sudden onset strikes fast while a
-/// gradual one fades in, and a repeating sound visibly re-strikes the pulse
-/// and its expanding ring with each beat. When the sound ends, it fades out.
+/// Rendered as **soft mist**, not defined shapes (learner's review note:
+/// "خفيف مثل ضباب... مو شكل معين وواضح"):
+///
+///  1. **The living mist** — a center lobe plus three offset lobes, all
+///     heavily blurred, so it reads as a soft cloud of light rather than a
+///     circle. Its brightness and size follow the sound's strength directly,
+///     so it is visible the moment a sound is present.
+///  2. **The strike wave** — a soft ring of mist rolling outward on every
+///     ignition and re-strike. This is what makes rhythm visible: a
+///     repeating sound sends a new wave with each beat.
+///
+/// Color follows loudness (red very loud / orange moderate). When the sound
+/// ends, everything fades to calm.
 ///
 /// No direction is claimed — four documented rounds of device research
 /// proved the platform gives apps one mixed signal (spec.md > Decisions
@@ -28,7 +38,7 @@ class SoundPulse extends StatefulWidget {
   final Onset onset;
   final Rhythm rhythm;
 
-  /// Increments on each strike; a change re-ignites the pulse.
+  /// Increments on each strike; a change fires the outward wave.
   final int strike;
 
   @override
@@ -55,7 +65,7 @@ class _SoundPulseState extends State<SoundPulse>
           widget.onset == Onset.sudden ? _attackSudden : _attackGradual;
       _c.forward(from: 0);
     } else if (widget.strength <= 0 && old.strength > 0) {
-      // The sound ended — fade to calm (prd.md > Sound pulse).
+      // The sound ended — the wave rolls out and dies.
       _c.duration = _fadeOut;
       _c.reverse();
     }
@@ -71,11 +81,15 @@ class _SoundPulseState extends State<SoundPulse>
   Widget build(BuildContext context) {
     return IgnorePointer(
       child: AnimatedBuilder(
+        // Rebuilds while the wave animates AND whenever the parent rebuilds
+        // with a new live strength (the builder reads widget.strength, so the
+        // mist tracks the sound in real time).
         animation: _c,
         builder: (context, _) => CustomPaint(
           painter: _PulsePainter(
             progress: _c.value,
             strength: widget.strength,
+            onset: widget.onset,
           ),
           size: Size.infinite,
         ),
@@ -85,50 +99,96 @@ class _SoundPulseState extends State<SoundPulse>
 }
 
 class _PulsePainter extends CustomPainter {
-  _PulsePainter({required this.progress, required this.strength});
+  _PulsePainter({
+    required this.progress,
+    required this.strength,
+    required this.onset,
+  });
 
-  /// Attack/fade phase: 0 quiet .. 1 fully struck.
+  /// The strike wave phase: 0 idle .. 1 fully rolled out.
   final double progress;
 
-  /// Live loudness — brightness and color follow it.
+  /// Live loudness — the mist's brightness, size, and color follow this
+  /// directly, independent of the animation.
   final double strength;
+
+  final Onset onset;
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (progress <= 0) return;
+    if (strength <= 0 && progress <= 0) return;
 
-    final eased = Curves.easeOutCubic.transform(progress);
     final center = size.center(Offset.zero);
     final maxR = size.shortestSide / 2;
+    final eased = Curves.easeOutCubic.transform(progress);
     final color = proximityColor(strength);
 
-    // The glow: bigger and brighter for stronger sounds.
-    final radius = maxR * (0.3 + 0.7 * strength) * (0.35 + 0.65 * eased);
-    final alpha = (strength * eased).clamp(0.0, 1.0);
-    final glow = Paint()
-      ..shader = RadialGradient(
+    // A gentle swell while a sudden strike lands — the mist breathes.
+    final flare = onset == Onset.sudden ? (0.9 + 0.1 * eased) : 1.0;
+    final cloudR = maxR * (0.34 + 0.66 * strength) * flare;
+
+    // --- Layer 1: the living mist (follows strength directly) ---
+    // Center lobe + three offset lobes, all blurred: soft fog, no edge.
+    _mist(canvas, color, center, cloudR, 0.50 * strength, 26);
+    for (final deg in const [90.0, 210.0, 330.0]) {
+      final dir = Offset.fromDirection(deg * math.pi / 180);
+      _mist(
+        canvas,
+        color,
+        center + dir * (cloudR * 0.34),
+        cloudR * 0.70,
+        0.32 * strength,
+        30,
+      );
+    }
+
+    // --- Layer 2: the strike wave (the rhythm flourish) ---
+    // A soft band of mist rolling outward; only while the wave animates.
+    if (progress > 0 && progress < 1) {
+      final waveR = cloudR * (1.05 + 0.6 * eased);
+      final waveAlpha = (1 - eased) * (0.35 + 0.5 * strength);
+      final shader = RadialGradient(
         colors: [
-          color.withValues(alpha: 0.75 * alpha),
-          color.withValues(alpha: 0.12 * alpha),
+          color.withValues(alpha: 0.0),
+          color.withValues(alpha: 0.9 * waveAlpha),
           color.withValues(alpha: 0.0),
         ],
-        stops: const [0.0, 0.55, 1.0],
-      ).createShader(Rect.fromCircle(center: center, radius: radius));
-    canvas.drawCircle(center, radius, glow);
-
-    // The strike ring — travels outward and dies; every repeat re-strikes it,
-    // which is how rhythm becomes visible (prd.md > Sound pulse).
-    final ringAlpha = (1 - eased) * alpha;
-    if (ringAlpha > 0.02) {
-      final ring = Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.5 + 2.5 * strength
-        ..color = color.withValues(alpha: 0.5 * ringAlpha);
-      canvas.drawCircle(center, radius * (1 + 0.35 * eased), ring);
+        stops: const [0.55, 0.78, 1.0],
+      ).createShader(Rect.fromCircle(center: center, radius: waveR));
+      final paint = Paint()
+        ..shader = shader
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 18);
+      canvas.drawCircle(center, waveR, paint);
     }
+  }
+
+  /// One blurred lobe of mist — the building block of the cloud.
+  void _mist(
+    Canvas canvas,
+    Color color,
+    Offset center,
+    double radius,
+    double alpha,
+    double blur,
+  ) {
+    if (alpha <= 0.01 || radius <= 0) return;
+    final shader = RadialGradient(
+      colors: [
+        color.withValues(alpha: alpha),
+        color.withValues(alpha: alpha * 0.45),
+        color.withValues(alpha: 0.0),
+      ],
+      stops: const [0.0, 0.45, 1.0],
+    ).createShader(Rect.fromCircle(center: center, radius: radius));
+    final paint = Paint()
+      ..shader = shader
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur);
+    canvas.drawCircle(center, radius, paint);
   }
 
   @override
   bool shouldRepaint(_PulsePainter old) =>
-      old.progress != progress || old.strength != strength;
+      old.progress != progress ||
+      old.strength != strength ||
+      old.onset != onset;
 }

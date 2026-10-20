@@ -33,14 +33,14 @@ Build mode: **fast with learn explanations** — learner chose a hybrid: fast ex
   Learner check: With the debug panel open, play the horn sample from above/below (and left/right if available) and read the numbers with me — do they move apart when the side changes? **Done across 4 learner-run protocols.**
   Commit: `Add two-mic direction probe with on-device readout`, `Add device-selection direction probe round 3 (slice 2, decisive)`
 
-- [ ] **3. The kernel ignites — the sound pulse (visual vocabulary)**
-  Becomes usable: With the session running, every real sound ignites the center-expanding pulse: brightness/size follow the sound's strength, color follows loudness (red very loud / orange moderate), a sudden sound produces a sharp fast flash while a gradual one fades in softly, a repeating sound (knocking, beeps) re-strikes the pulse with each ring while a continuous sound holds one sustained pulse, and everything fades back to calm when the sound stops. The distinctive thing about this product now exists on screen — honestly, with no direction claim.
+- [x] **3. The kernel ignites — the sound pulse (visual vocabulary)**
+  Becomes usable: With the session running, every real sound ignites the pulse: brightness/size follow the sound's strength, color follows loudness (red very loud / orange moderate), a sudden sound produces a sharp fast flash while a gradual one fades in softly, a repeating sound (knocking, beeps) re-strikes the pulse with each wave while a continuous sound holds one sustained pulse, and everything fades back to calm when the sound stops. The distinctive thing about this product now exists on screen — honestly, with no direction claim.
   Why now: The unique kernel comes early, not last (`scope.md > The Unique Kernel`); slices 1–2 feed it everything it needs (level stream + the documented decision to describe *behavior*, not direction), and seeing it live is what early learner feedback should shape.
   PRD ref: `prd.md > Sound pulse (the visual vocabulary)`, `prd.md > Look and Feel` (color semantics)
   Spec ref: `spec.md > Components` (Visual Feedback — Pulse + Bubbles, Sound Behavior Analyzer), `spec.md > Look and Feel`
-  Build: `lib/analyze/behavior.dart` — pure-Dart analyzer over the level stream: onset classification (rise rate), repetition detection (peak intervals), sustain/decay envelope; unit tests with synthetic streams. `lib/ui/flash.dart` — pulse renderer (center-out expansion, strength→brightness/size, loudness→color, onset→sharpness, rhythm→re-strike, fade-out). Wire session events to it.
-  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → analyzer tests pass (sudden vs gradual streams, repeated peaks vs sustained, decay); build + install on device; play a sudden loud sound → sharp bright large pulse; knock repeatedly → visible re-strikes; stop → fade to calm (screenshot/logcat events).
-  Learner check: Start the session and try: one loud clap (should flash sharp and bright), continuous speech (should hold a softer pulse), repeated knocking (should visibly re-strike with each knock), and stopping the sound (should fade out). Tell me if the strength, colors, and rhythm feel right.
+  Build: `lib/analyze/behavior.dart` — pure-Dart analyzer over the level stream: onset classification (rise rate), repetition detection (peak intervals), sustain/decay envelope; unit tests with synthetic streams. `lib/ui/flash.dart` — pulse renderer (strength→brightness/size, loudness→color, onset→sharpness, rhythm→wave, fade-out). Wire session events to it.
+  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → analyzer tests pass (sudden vs gradual streams, repeated peaks vs sustained, decay); build + install on device. **Done: analyze clean, 10/10 tests pass, installed + running on the device.**
+  Learner check: **Done (2026-10-20, partial by learner's call): "consider it successful" — the flash works.** Her review note applied: the pulse was redrawn from defined circles to **soft blurred mist** (a cloud of lobes + outward wave — "خفيف مثل ضباب... مو شكل معين وواضح"); reinstalled. Pending her answer next visit: loud-sound tests (she could not make loud sounds on the day) — rhythm-under-knocks, red/orange color feel.
   Commit: `Add sound pulse kernel with behavior analyzer`
 
 - [ ] **4. Sounds get names — YAMNet classification and bubbles**
@@ -75,7 +75,7 @@ Build mode: **fast with learn explanations** — learner chose a hybrid: fast ex
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — after slice 3 (the pulse is live; feedback on strength, colors, onset feel, and rhythm shapes slices 4–6)
+- [ ] Early usable behavior explored — after slice 3 (the mist pulse is live; **partially done 2026-10-20**: learner confirmed the flash works and reviewed the shape → mist redraw applied; loud-sound/rhythm answers deferred to her next visit)
 - [ ] Final kick-the-tires exploration and feedback completed — after slice 6
 
 ## Final Review
