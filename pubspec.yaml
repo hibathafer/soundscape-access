@@ -69,6 +69,8 @@ flutter:
     - assets/model/yamnet_mediapipe.tflite
     - assets/model/labels.txt
     - assets/samples/
+    # Bubble artwork — falls back to Material glyphs while empty.
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

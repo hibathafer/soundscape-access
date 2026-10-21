@@ -1,0 +1,7 @@
+# Drop the bubble artwork here as PNGs with transparent backgrounds:
+#
+#   cars.png  speech.png  door.png  alarm.png  birds.png  unknown.png
+#
+# 256x256 or larger. Until a file exists the app falls back to its Material
+# glyph, so a missing image degrades to a recognisable symbol rather than a
+# blank gap. Declared in pubspec.yaml as `assets/icons/`.

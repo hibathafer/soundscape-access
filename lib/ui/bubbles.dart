@@ -4,10 +4,12 @@ import '../classify/categories.dart';
 import '../session/controller.dart';
 import '../theme.dart';
 
-/// One floating, swipeable bubble per prd.md > Sound-type bubbles:
-/// an icon naming the sound type, colored by loudness (red close / orange
-/// farther), a neutral "?" when the type is unknown, and a downward swipe to
-/// dismiss. The layer sits above the pulse inside the live area.
+/// One floating, swipeable bubble per prd.md > Sound-type bubbles: a plain
+/// picture naming the sound type — no circle, no ring, no shadow, because
+/// those made it read as a button and it is not one. The picture's size
+/// carries loudness (closer is larger), a neutral "?" when the type is
+/// unknown, and a downward swipe to dismiss. The layer sits above the pulse
+/// inside the live area.
 class BubblesLayer extends StatelessWidget {
   const BubblesLayer({super.key, required this.bubbles, required this.onDismiss});
 
@@ -53,12 +55,17 @@ class _BubbleViewState extends State<_BubbleView> {
     final b = widget.bubble;
     final unknown = b.category == SoundCategory.unknown;
 
-    // Known sounds ride the loudness scale; unknown stays a quiet neutral so
-    // it never reads as "close" or "far" (prd.md > Look and Feel colors).
-    // On the light canvas that neutral has to be a real ink-like gray, or
-    // the "?" would be white-on-white.
-    final color =
-        unknown ? SoundscapeColors.unknownGray : proximityColor(b.strength);
+    // The circle, ring, shadow and colour wash are gone: all four were what
+    // made this read as a *button*, and it is not one. What is left is the
+    // picture.
+    //
+    // Loudness still has to travel somehow (prd.md > Look and Feel: close is
+    // red, farther is orange), and the ring was its only carrier — so the
+    // shape carries it now. This is a Transform, not a width change, so the
+    // Wrap never re-lays-out: the picture grows inside a fixed 72px box and
+    // nothing jumps.
+    final double scale =
+        unknown ? 1.0 : 0.75 + 0.25 * b.strength.clamp(0.0, 1.0);
 
     return GestureDetector(
       onVerticalDragUpdate: (d) => setState(() => _dragY += d.delta.dy),
@@ -74,39 +81,44 @@ class _BubbleViewState extends State<_BubbleView> {
         opacity: _dragY > _commitDistance ? 0.0 : 1.0,
         child: Transform.translate(
           offset: Offset(0, _dragY),
-          child: Container(
+          child: SizedBox(
             width: 72,
             height: 72,
-            decoration: BoxDecoration(
-              // A faint wash of the same color keeps the bubble readable
-              // against a white card; the ring carries the loudness.
-              color: color.withValues(alpha: 0.10),
-              shape: BoxShape.circle,
-              border: Border.all(color: color, width: 3),
-              boxShadow: [
-                BoxShadow(
-                  color: SoundscapeColors.ink.withValues(alpha: 0.10),
-                  blurRadius: 14,
-                  offset: const Offset(0, 3),
-                ),
-              ],
+            child: Center(
+              child: Transform.scale(
+                scale: scale,
+                child: _glyph(b.category, unknown),
+              ),
             ),
-            child: unknown
-                ? const Center(
-                    child: Text(
-                      '?',
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        color: SoundscapeColors.unknownGray,
-                        fontSize: 34,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  )
-                : Icon(_iconFor(b.category), color: color, size: 36),
           ),
         ),
       ),
+    );
+  }
+
+  /// The picture, and nothing else.
+  ///
+  /// Prefers `assets/icons/<category>.png`. Until that file exists the
+  /// Material glyph stands in, so a missing image degrades to a recognisable
+  /// symbol rather than a blank hole in the row.
+  Widget _glyph(SoundCategory cat, bool unknown) {
+    return Image.asset(
+      'assets/icons/${cat.name}.png',
+      width: 64,
+      height: 64,
+      fit: BoxFit.contain,
+      errorBuilder: (_, _, _) => unknown
+          ? const Text(
+              '?',
+              textDirection: TextDirection.ltr,
+              style: TextStyle(
+                color: SoundscapeColors.ink,
+                fontSize: 44,
+                fontWeight: FontWeight.w700,
+                height: 1,
+              ),
+            )
+          : Icon(_iconFor(cat), size: 52, color: SoundscapeColors.ink),
     );
   }
 }
