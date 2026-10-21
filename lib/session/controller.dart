@@ -82,6 +82,22 @@ class SessionController extends ChangeNotifier {
   final List<SoundEvent> _events = [];
   List<SoundEvent> get events => List.unmodifiable(_events);
 
+  /// Events captured since the last [consumeEvents]. [events] is rolling
+  /// display history and is never drained, so the vibration trigger counts
+  /// this instead: one buzz per newly captured event, no matter how many
+  /// times listeners are notified in between.
+  int _pendingEvents = 0;
+  int get pendingEventCount => _pendingEvents;
+
+  /// Hands over the events captured since the last call and resets the
+  /// count, so re-notifying a listener cannot replay a buzz. The visible
+  /// [events] history is left untouched.
+  int consumeEvents() {
+    final taken = _pendingEvents;
+    _pendingEvents = 0;
+    return taken;
+  }
+
   /// Called by the capture layer ~10 times/second with the live level.
   void onLevel(double level) {
     currentLevel = level;
@@ -93,7 +109,9 @@ class SessionController extends ChangeNotifier {
       pulseStrength = active.strength;
       pulseOnset = active.onset;
       pulseRhythm = active.rhythm;
-      if (active.strike) {
+      // Stale levels can arrive after stop(); only a live session may arm
+      // an event (and therefore a buzz).
+      if (active.strike && sessionActive) {
         pulseStrike++;
         _events.add(SoundEvent(
           strength: active.strength,
@@ -101,6 +119,7 @@ class SessionController extends ChangeNotifier {
           rhythm: active.rhythm,
           at: DateTime.now(),
         ));
+        _pendingEvents++;
         // Keep only the most recent events; slice 4 owns display logic.
         if (_events.length > 4) _events.removeAt(0);
       }
@@ -180,6 +199,7 @@ class SessionController extends ChangeNotifier {
     pulseStrike = 0;
     _analyzer.reset();
     _events.clear();
+    _pendingEvents = 0;
     _bubbles.clear();
     notifyListeners();
   }

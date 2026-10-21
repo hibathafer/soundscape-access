@@ -14,15 +14,23 @@ import '../ui/flash.dart';
 /// The one and only screen — prd.md > Screens and Layout.
 /// Large Start/Stop at the center, small vibration toggle, live area beneath.
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, this.session, this.vibration});
+
+  /// Test seams — lib/main.dart builds the screen with the real ones, tests
+  /// inject fakes so the vibration trigger can be observed without a mic.
+  @visibleForTesting
+  final SessionController? session;
+
+  @visibleForTesting
+  final VibrationService? vibration;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _session = SessionController();
-  final _vibration = VibrationService();
+  late final SessionController _session;
+  late final VibrationService _vibration;
   late final AudioCapture _capture;
 
   bool _permissionExplained = false;
@@ -43,6 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _session = widget.session ?? SessionController();
+    _vibration = widget.vibration ?? VibrationService();
     _capture = AudioCapture(_session);
     _session.addListener(_onSessionChanged);
   }
@@ -58,7 +68,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onSessionChanged() {
-    if (_session.events.isNotEmpty) {
+    // Drain first, then buzz: only events that arrived since the last
+    // notification can vibrate, so repeated notifications over the same
+    // history stay silent, and events captured while the toggle was off
+    // are dropped rather than replayed when it is switched on.
+    final newEvents = _session.consumeEvents();
+    if (newEvents > 0) {
       _vibration.buzzOnEvent(_session.vibrationEnabled);
     }
     setState(() {});
