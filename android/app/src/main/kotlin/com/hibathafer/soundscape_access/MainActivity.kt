@@ -41,6 +41,13 @@ class MainActivity : FlutterActivity() {
                     result.success(null)
                 }
 
+                "start_stereo" -> {
+                    val p = probe ?: MicProbe(applicationContext) { levels ->
+                        levelSink?.success(levels)
+                    }.also { probe = it }
+                    result.success(p.startStereo())
+                }
+
                 else -> result.notImplemented()
             }
         }

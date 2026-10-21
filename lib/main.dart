@@ -15,18 +15,22 @@ class SoundscapeApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         colorScheme: ColorScheme.fromSeed(
           seedColor: SoundscapeColors.accent,
-          brightness: Brightness.dark,
-          surface: SoundscapeColors.background,
+          brightness: Brightness.light,
+          surface: SoundscapeColors.surface,
         ),
         scaffoldBackgroundColor: SoundscapeColors.background,
-        // Fairly large, glanceable type — prd.md > Look and Feel.
+        // Glanceable type — prd.md > Look and Feel.
         textTheme: const TextTheme(
-          titleLarge: TextStyle(fontSize: 24),
-          bodyLarge: TextStyle(fontSize: 17),
-          bodyMedium: TextStyle(fontSize: 16),
+          titleLarge: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: SoundscapeColors.ink,
+          ),
+          bodyLarge: TextStyle(fontSize: 17, color: SoundscapeColors.ink),
+          bodyMedium: TextStyle(fontSize: 16, color: SoundscapeColors.ink),
         ),
       ),
       home: const HomeScreen(),

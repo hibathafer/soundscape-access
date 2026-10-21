@@ -34,4 +34,20 @@ class MicProbeStream {
     _sub = null;
     await _method.invokeMethod('stop');
   }
+
+  /// Round 5: one isolated stereo record. Same event stream, different
+  /// native entry point — keys arrive as stL / stR.
+  Future<bool> startStereo(
+      void Function(Map<String, double> levels) onLevels) async {
+    if (isRunning) return true;
+    final ok = await _method.invokeMethod<bool>('start_stereo') ?? false;
+    if (!ok) return false;
+    _sub = _events.receiveBroadcastStream().listen((event) {
+      if (event is Map) {
+        onLevels(event.map((k, v) =>
+            MapEntry(k.toString(), (v as num).toDouble())));
+      }
+    });
+    return true;
+  }
 }

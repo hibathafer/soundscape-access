@@ -18,12 +18,15 @@ import '../theme.dart';
 ///     ignition and re-strike. This is what makes rhythm visible: a
 ///     repeating sound sends a new wave with each beat.
 ///
-/// Color follows loudness (red very loud / orange moderate). When the sound
-/// ends, everything fades to calm.
+/// Color follows loudness (red very loud / orange moderate / a quiet neutral
+/// when we cannot yet tell). When the sound ends, everything fades to calm.
 ///
-/// No direction is claimed — four documented rounds of device research
-/// proved the platform gives apps one mixed signal (spec.md > Decisions
-/// and Open Issues). What we show is what we can honestly measure.
+/// No direction is claimed. Six logged probe runs on the physical device
+/// (probe_log*.txt; rounds 3-6 in spec.md > Decisions and Open Issues) found
+/// no usable bearing: the left/right axis produced the same sign on both
+/// ends, and the "no difference" control came out *larger* than the two ends
+/// it was supposed to sit between. What we show is what we can honestly
+/// measure.
 class SoundPulse extends StatefulWidget {
   const SoundPulse({
     super.key,
@@ -128,8 +131,11 @@ class _PulsePainter extends CustomPainter {
     final cloudR = maxR * (0.34 + 0.66 * strength) * flare;
 
     // --- Layer 1: the living mist (follows strength directly) ---
-    // Center lobe + three offset lobes, all blurred: soft fog, no edge.
-    _mist(canvas, color, center, cloudR, 0.50 * strength, 26);
+    // On a light canvas mist behaves like watercolour: it *adds* a tint
+    // rather than emitting light. Low alpha over near-white is invisible,
+    // so every lobe gets a floor — a faint sound still leaves a visible
+    // wash, and louder sounds deepen toward the full proximity color.
+    _mist(canvas, color, center, cloudR, 0.30 + 0.55 * strength, 26);
     for (final deg in const [90.0, 210.0, 330.0]) {
       final dir = Offset.fromDirection(deg * math.pi / 180);
       _mist(
@@ -137,7 +143,7 @@ class _PulsePainter extends CustomPainter {
         color,
         center + dir * (cloudR * 0.34),
         cloudR * 0.70,
-        0.32 * strength,
+        0.18 + 0.32 * strength,
         30,
       );
     }
