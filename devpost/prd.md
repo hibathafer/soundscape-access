@@ -26,7 +26,7 @@ The complete path, end to end (numbered steps, plain language):
 4. The user **leaves the app** — back to the home screen or into other apps — and keeps using the phone normally. The session continues without obstructing phone use *(with a documented fallback: if background capture proves infeasible, the session runs with the app in front — see `Open Questions`)*.
 5. Sounds arrive: a **live pulse** ignites at the center of the screen and expands outward — brighter and larger for stronger sounds (see `Look and Feel`). The pulse's **shape** shows how the sound began (a sharp flash for a sudden bang, a soft glow for a gradual rise) and a **repeating rhythm** for repeated sounds like knocking or alarm beeps.
 6. A **swipeable bubble** (messenger-chat-head style) shows an **icon naming the sound type** in the live area; the user can swipe it down to dismiss it.
-7. If a sound cannot be identified, the same bubble appears with a **neutral "?" mark in white** — no special alarm, no special vibration — while the pulse still fires, so the user knows a sound is there to investigate.
+7. If a sound cannot be identified, the same bubble appears with a **neutral "?" mark** — no special alarm, no special vibration — while the pulse still fires, so the user knows a sound is there to investigate.
 8. If **two sounds** arrive at once, both are shown, each with its own pulse and color.
 9. The optional **vibration toggle**: when enabled during the session, the phone vibrates as sounds are captured (e.g., phone in a pocket) — simple, not pattern-based.
 10. As the sound stops, its pulse fades and disappears. The user presses **Stop** to end the session.
@@ -41,13 +41,13 @@ The complete path, end to end (numbered steps, plain language):
 
 ## Look and Feel
 Established in the `3-prd` design beat (learner's answers):
-- **Dark background** — the flash must read clearly; the dark surface makes light the hero of the screen.
+- **Dark background** — the flash must read clearly; the dark surface makes light the hero of the screen. *(Revised 2026-10-22: shipped as a **light** canvas `#F4F7F6` with dark ink — the dark surface read as clinical, and a light canvas leaves the pulse as the only bright thing on screen. Values and contrast rationale in `lib/theme.dart`; recorded in `checklist.md > Revisions`.)*
 - **Warm and friendly character** — "an app that supports you, not one that shouts at you" (`scope.md > Inspiration & Identity`).
 - **Fairly large, clear type** — the user glances and returns to what they were doing.
 - **Color semantics** (content rules, not decoration):
   - **Red** — very loud sound (usually a close source).
   - **Orange** — moderately loud sound.
-  - **White** — sound present but type unknown (neutral, outside the loudness scale).
+  - **White** — sound present but type unknown (neutral, outside the loudness scale). *(Revised 2026-10-22: white is invisible on the shipped light canvas, so unknown is a quiet neutral gray `#7E9995`, still deliberately outside the loudness scale.)*
   - Color is never the only signal: the pulse's **brightness and shape** always carry the same information.
 - The pulse expands from the center with every sound and fades away, echoing the drama's "light as a channel of awareness" identity. *(Revised 2026-10-19 with the kernel change — loudness honestly approximates closeness, but no direction is claimed.)*
 
@@ -76,7 +76,7 @@ The pulse is the kernel. Every real sound ignites it; its properties honestly de
 - [ ] Acceptance criterion: a soft sound produces a small dim pulse — never as bright as a loud one.
 
 ### Sound-type bubbles
-- Each identified sound appears as a **floating bubble with the category icon** in the live area — styled like messenger chat heads: visible, calm, non-blocking.
+- Each identified sound appears as a **floating bubble with the category icon** in the live area — styled like messenger chat heads: visible, calm, non-blocking. *(Revised 2026-10-22: the circle, ring, shadow and colour wash were removed — they made the bubble read as a **button**, and it is not one. What is left is the artwork itself; loudness now travels through the artwork's **scale** (0.75→1.0) instead of a coloured ring.)*
 - The user can **swipe a bubble down to dismiss** it.
 - [ ] Acceptance criterion: a recognized sound shows its icon bubble; swiping removes it without affecting the session.
 
@@ -85,13 +85,14 @@ The pulse is the kernel. Every real sound ignites it; its properties honestly de
 - [ ] Acceptance criterion: playing two different sounds at once shows both bubbles with their own pulses.
 
 ### Unknown sounds
-- If classification cannot name a sound, the bubble still appears with a **neutral "?" in white** — the learner's decision: "if it disappears, the situation becomes worse; our goal is to help, so at least there remains a source for the sound."
+- If classification cannot name a sound, the bubble still appears with a **neutral "?"** — the learner's decision: "if it disappears, the situation becomes worse; our goal is to help, so at least there remains a source for the sound." *(The mark was white on the original dark canvas; on the shipped light canvas it renders in dark ink `#10201F`, still deliberately outside the red/orange loudness scale.)*
 - No special vibration and no alarm styling for unknowns; the pulse still shows that a sound happened and how strong it was.
-- [ ] Acceptance criterion: an unclassifiable sound produces a white "?" bubble and no crash; the pulse still fires.
+- [ ] Acceptance criterion: an unclassifiable sound produces a neutral "?" bubble and no crash; the pulse still fires.
 
 ### Vibration (manual, simple)
 - The vibration toggle is **manual and session-scoped**: vibrate when sounds are captured while the session runs — deliberately **not** pattern-per-sound (cut in `scope.md > Explicitly Cut`).
 - [ ] Acceptance criterion: with the toggle on, capturing a sound produces a vibration; with it off, none.
+- [x] Acceptance criterion (added 2026-10-22): **one buzz per captured sound, not one per screen update.** A single loud bang while the toggle is on buzzes exactly once and then stays quiet, however long the sound keeps the screen busy. Turning the toggle off mid-session stops further buzzing immediately; turning it back on does not replay sounds that were caught while it was off.
 
 ### Starting and stopping
 - Start → toast **"Working now"** → the user may leave the app; the session keeps running (fallback in `Open Questions`).
@@ -101,7 +102,7 @@ The pulse is the kernel. Every real sound ignites it; its properties honestly de
 - **First use** — a friendly one-line explanation of why the microphone is needed, then the system permission dialog. (Learner: "I definitely prefer explaining to him gently why we need the permission.")
 - **Permission denied** — a friendly short message that the app cannot work without the microphone, plus a route to the device settings. *(Assumption, surfaced for confirmation during review.)*
 - **Quiet environment / no sounds to show** — the screen stays calm and empty of bubbles; the session remains active. *(Assumption: no "active" indicator was specified beyond the start toast.)*
-- **Unknown sound** — white "?" bubble as described; session unaffected.
+- **Unknown sound** — neutral "?" bubble as described; session unaffected.
 - **Leaving the app** — intended flow: capture continues without obstructing phone use; if the platform refuses background capture, fallback = the session runs with the app in front (see `Open Questions`).
 - **No accounts, no stored data** — nothing persists between sessions in this version; closing the app ends the session's state.
 
@@ -113,17 +114,17 @@ Decisions the learner made during the interview, with reasons:
 - **Session must not obstruct phone use** — a sound-sense must not force the user to stare at it; background capture for the *session* is required intent, with a documented fallback because it needs technical research.
 - **Five categories fixed for v1** — highest recurrence and importance, chosen from a suggested list and confirmed by the learner: "all of them — they are the best choice, most recurring, and most important."
 - **Gentle permission explanation before the system dialog** — matches the identity of a supporting app.
-- **Visual direction: dark + warm/friendly + fairly large clear type.**
+- **Visual direction: ~~dark~~ light + warm/friendly + fairly large clear type.** *(Light since 2026-10-22 — see `Look and Feel` above.)*
 - **Manual vibration toggle** (on/off per the user's will, e.g., pocket) rather than automatic constant vibration — her own concern: constant vibration becomes annoying.
 - **Kernel revised 2026-10-19: direction removed, sound-behavior vocabulary added** — four on-device experiment rounds proved the platform gives apps one mixed audio signal on the Xiaomi 12T Pro (evidence in `checklist.md > Revisions`; logs `probe_log*.txt`). Learner decision after seeing the evidence: keep building the honest core — a center-expanding pulse whose brightness/size follow strength, color follows loudness, and whose **onset shape, rhythm, and duration** describe how the sound behaves — instead of a direction claim the device cannot support. Stated by the learner: "this is a learning hackathon and the value is building something real and effective."
 
 ## What We're Building
 The proof of concept must, to be complete:
-1. One dark, warm, single-screen app with a large Start/Stop button and a vibration toggle.
+1. One ~~dark~~ light, warm, single-screen app with a large Start/Stop button and a vibration toggle.
 2. Gentle microphone-permission explanation on first use, and a friendly denied state.
 3. Session-based capture that classifies into the five fixed categories.
 4. Sound pulse (the visual vocabulary): center-expanding pulse; brightness/size follow strength; color follows loudness (red/orange); onset shape (sharp vs soft), rhythm (re-strike vs sustained), and fade-out — all measured from the real signal. *(Revised 2026-10-19; direction removed after documented device research.)*
-5. Swipeable icon bubbles per sound; white "?" bubble for unknown sounds; two-sound display.
+5. Swipeable icon bubbles per sound; neutral "?" bubble for unknown sounds; two-sound display.
 6. Manual vibration during the session.
 7. Start toast ("Working now"), the ability to leave the app without blocking phone use *(or the documented foreground fallback)*, and a working Stop.
 8. The behavior shown in `scope.md > What "Working" Looks Like` demonstrable in a one-minute demo video.

@@ -28,7 +28,7 @@ The app is one Flutter program (written in Dart) that runs on the phone. It has 
 
 PRD ref: `prd.md > The Core Journey`.
 
-1. **User opens the app** → App Shell renders the single dark screen (Start/Stop + vibration toggle) from in-memory state (fresh by default).
+1. **User opens the app** → App Shell renders the single light screen (Start/Stop + vibration toggle) from in-memory state (fresh by default).
 2. **First start** → Session Controller asks Audio Capture for microphone access → the gentle one-line explanation shows, then the system dialog.
    - Denied → friendly message + route to settings (`prd.md > States and Boundaries > Permission denied`).
 3. **User presses Start** → Session Controller: sessionActive = true → toast **"Working now"** → Audio Capture begins streaming PCM slices.
@@ -70,10 +70,10 @@ Documentation links:
 ## Look and Feel
 
 Carried forward from `prd.md > Look and Feel` and `scope.md > Inspiration & Identity` — direction, not a design system:
-- **Dark, near-black surface** (e.g. deep blue-black like `#0F1720`) so light is the hero; Flutter Material 3 **dark theme** with custom colors can fully honor this.
+- ~~**Dark, near-black surface** (e.g. deep blue-black like `#0F1720`) so light is the hero; Flutter Material 3 **dark theme** with custom colors can fully honor this.~~ **Revised 2026-10-22 (learner): shipped as a light theme.** `lib/theme.dart` uses a soft off-white canvas `#F4F7F6` with dark ink `#10201F`, teal accents, and the same proximity semantics restated for a light canvas. Reason recorded in `checklist.md > Revisions` — the dark surface read as clinical, and a light canvas let the pulse stay the only bright thing on screen. Flutter Material 3 light theme with custom colors honors the rest of the intent unchanged.
 - **Warm, friendly character:** rounded shapes, calm spacing, plain supportive copy ("Working now"), no alarm-red UI chrome; color is used for data, not to frighten.
 - **Fairly large, clear type:** default Material text scaled up; glanceable labels.
-- **Color semantics (exact values to implement):** proximity red ≈ `#E2574C`, farther orange ≈ `#F4B942`, unknown white `#FFFFFF`; the flash is a soft edge glow/gradient whose position and strength always carry the same information as the color.
+- **Color semantics (exact values to implement):** proximity red ≈ `#E2574C`, farther orange ≈ `#F4B942`, unknown white `#FFFFFF`; the flash is a soft edge glow/gradient whose position and strength always carry the same information as the color. **Revised 2026-10-22 with the light canvas:** the shipped values live in `lib/theme.dart` — very close red `#CE4338` (4.7:1 on white, safe as text or fill), farther orange `#C67C15` (3.3:1: a dot/fill colour, not body text), and unknown is now a quiet neutral gray `#7E9995` instead of white, because pure white is invisible on a light canvas. The neutral sits deliberately outside the proximity scale so it can never read as "close" or "far". The flash remains a soft mist whose brightness and shape always carry the same information as the color.
 - Stack constraint: Flutter themes cover all of the above; no design tooling beyond code is needed.
 
 ## Components
@@ -99,11 +99,15 @@ Single owner of session state: Start/Stop, the "Working now" toast, vibration to
 PRD ref: `prd.md > Starting and stopping`, `prd.md > Leaving the App (state)`, `prd.md > Product Decisions > Session must not obstruct phone use`.
 
 ### Visual Feedback — Pulse + Bubbles
-Consumes sound events: renders the center-expanding sound pulse (brightness/size ← strength, color ← loudness red/orange, onset shape ← sharp fast flash vs soft fade-in, rhythm ← re-striking rings for repeats vs one sustained pulse, fade-out as the level drops), and the swipeable messenger-style bubbles (category icon; white "?" for unknown). Two simultaneous events render independently. No direction rendering — removed with the kernel revision (see `Decisions and Open Issues`).
+Consumes sound events: renders the center-expanding sound pulse (brightness/size ← strength, color ← loudness red/orange, onset shape ← sharp fast flash vs soft fade-in, rhythm ← re-striking rings for repeats vs one sustained pulse, fade-out as the level drops), and the swipeable bubbles (category artwork; neutral "?" for unknown). Two simultaneous events render independently. No direction rendering — removed with the kernel revision (see `Decisions and Open Issues`).
+
+*Revised 2026-10-22 (learner review): the bubbles no longer carry a circle, ring, shadow or colour wash — those made them read as buttons. The artwork stands on its own in a fixed 72 px box, and loudness is carried by its **scale** (0.75 → 1.0) rather than a coloured ring, so the layout never re-flows as a sound changes. See `lib/ui/bubbles.dart`.*
 PRD ref: `prd.md > Sound pulse (the visual vocabulary)`, `prd.md > Sound-type bubbles`, `prd.md > Simultaneous sounds`.
 
 ### Vibration Service
 Thin wrapper over the `vibration` package: buzz once per captured event while the toggle is on; no patterns. Needs `VIBRATE` permission (normal level).
+
+*"Once per captured event" is a real constraint, not a phrasing detail. The trigger must be **event-driven**, never **history-driven**: the session keeps a rolling list of recent events for the UI, so a listener that buzzes whenever that list is non-empty will buzz again on every subsequent notification for an event that happened long ago. `SessionController` therefore exposes `pendingEventCount` / `consumeEvents()` — the screen drains the pending count and buzzes only for what it has not seen yet. Events captured while the toggle is off are drained and dropped, not replayed when it is switched on. Fixed 2026-10-22 after the bug was found; see `checklist.md > Revisions`.*
 PRD ref: `prd.md > Vibration (manual, simple)`.
 
 ## Data Model
@@ -127,7 +131,7 @@ soundscape-access/
 │       ├── AndroidManifest.xml # RECORD_AUDIO, FOREGROUND_SERVICE(_MICROPHONE), VIBRATE; service type=microphone
 │       └── kotlin/…/           # AudioRecord bridge + foreground service
 ├── lib/
-│   ├── main.dart               # app entry; dark theme
+│   ├── main.dart               # app entry; light theme
 │   ├── ui/
 │   │   ├── home_screen.dart    # the single screen (App Shell)
 │   │   ├── flash.dart          # center-expanding sound pulse rendering
@@ -144,7 +148,7 @@ soundscape-access/
 │   │   ├── controller.dart     # session state, events, start/stop
 │   │   ├── background.dart     # foreground-service attempt + fallback
 │   │   └── vibration_service.dart
-│   └── theme.dart              # colors: red/orange/white semantics, dark palette
+│   └── theme.dart              # colors: red/orange/neutral semantics, light palette
 ├── assets/
 │   ├── model/                  # yamnet.tflite + labels.txt (verified in build step 1)
 │   └── samples/                # demo sounds (labeled sample data)

@@ -113,12 +113,13 @@ flutter build apk --debug
 
 ```bash
 flutter analyze   # no issues
-flutter test      # 25 tests
+flutter test      # 31 tests
 ```
 
 The tests cover the category index map (disjointness, threshold
 behaviour, honest unknown fallback), the session/bubble rules, the
-behaviour analyzer, and a widget test that renders the screen.
+behaviour analyzer, the vibration trigger (one buzz per captured
+event, toggle respected), and a widget test that renders the screen.
 
 ## Planning documents
 
