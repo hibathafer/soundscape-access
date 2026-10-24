@@ -85,16 +85,17 @@ class SessionController extends ChangeNotifier {
   /// Events captured since the last [consumeEvents]. [events] is rolling
   /// display history and is never drained, so the vibration trigger counts
   /// this instead: one buzz per newly captured event, no matter how many
-  /// times listeners are notified in between.
-  int _pendingEvents = 0;
-  int get pendingEventCount => _pendingEvents;
+  /// times listeners are notified in between. Kept as the events themselves,
+  /// not a count, so the buzz can follow how loud each sound actually was.
+  final List<SoundEvent> _pendingEvents = [];
+  int get pendingEventCount => _pendingEvents.length;
 
-  /// Hands over the events captured since the last call and resets the
-  /// count, so re-notifying a listener cannot replay a buzz. The visible
-  /// [events] history is left untouched.
-  int consumeEvents() {
-    final taken = _pendingEvents;
-    _pendingEvents = 0;
+  /// Hands over the events captured since the last call and clears the
+  /// pending list, so re-notifying a listener cannot replay a buzz. The
+  /// visible [events] history is left untouched.
+  List<SoundEvent> consumeEvents() {
+    final taken = List<SoundEvent>.unmodifiable(_pendingEvents);
+    _pendingEvents.clear();
     return taken;
   }
 
@@ -113,13 +114,14 @@ class SessionController extends ChangeNotifier {
       // an event (and therefore a buzz).
       if (active.strike && sessionActive) {
         pulseStrike++;
-        _events.add(SoundEvent(
+        final event = SoundEvent(
           strength: active.strength,
           onset: active.onset,
           rhythm: active.rhythm,
           at: DateTime.now(),
-        ));
-        _pendingEvents++;
+        );
+        _events.add(event);
+        _pendingEvents.add(event);
         // Keep only the most recent events; slice 4 owns display logic.
         if (_events.length > 4) _events.removeAt(0);
       }
@@ -199,7 +201,7 @@ class SessionController extends ChangeNotifier {
     pulseStrike = 0;
     _analyzer.reset();
     _events.clear();
-    _pendingEvents = 0;
+    _pendingEvents.clear();
     _bubbles.clear();
     notifyListeners();
   }

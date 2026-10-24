@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../audio/capture.dart';
 import '../audio/permission.dart' as mic;
 import '../direction/probe.dart';
+import '../session/background.dart';
 import '../session/controller.dart';
 import '../session/vibration_service.dart';
 import '../theme.dart';
@@ -28,10 +30,18 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   late final SessionController _session;
   late final VibrationService _vibration;
   late final AudioCapture _capture;
+
+  /// Slice 5 — the attempt to keep listening with the app in back.
+  final _background = BackgroundSession();
+  StreamSubscription<bool>? _backgroundSub;
+
+  /// True once the "running in front" note has been shown for this session, so
+  /// a service that keeps dying does not nag on every resume.
+  bool _fallbackNoted = false;
 
   bool _permissionExplained = false;
   bool _permissionBlocked = false;
@@ -55,16 +65,58 @@ class _HomeScreenState extends State<HomeScreen> {
     _vibration = widget.vibration ?? VibrationService();
     _capture = AudioCapture(_session);
     _session.addListener(_onSessionChanged);
+
+    WidgetsBinding.instance.addObserver(this);
+    // The one case a foreground poll would miss: the service dying while the
+    // app is still in front. The capture stream would quietly stop instead of
+    // telling the user why, so we say it plainly here.
+    _backgroundSub = _background.stateChanges.listen((running) {
+      if (!running && mounted && _session.sessionActive) {
+        _noteFallback('Listening continues in front — your phone may pause '
+            'the session while the app is in the background.');
+      }
+    });
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _backgroundSub?.cancel();
     _session.removeListener(_onSessionChanged);
     _probe.stop();
+    _background.stop();
     _capture.stop();
     _capture.dispose(); // releases the TFLite interpreter + mic recorder
     _session.dispose();
     super.dispose();
+  }
+
+  /// Android 14 lets a microphone-typed service start only from the foreground
+  /// and MIUI may refuse either way, so the answer can change underneath us.
+  /// Checking on resume is how a service that died in the background gets
+  /// reported before the user wonders why nothing is happening.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
+    if (!_session.sessionActive || _fallbackNoted) return;
+    _background.isRunning().then((running) {
+      if (!running && mounted && _session.sessionActive) {
+        _noteFallback('Listening continues in front — your phone may pause '
+            'the session while the app is in the background.');
+      }
+    });
+  }
+
+  /// The approved fallback, said once per session rather than repeatedly.
+  void _noteFallback(String message) {
+    if (_fallbackNoted || !mounted) return;
+    _fallbackNoted = true;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 5),
+      ));
   }
 
   void _onSessionChanged() {
@@ -73,8 +125,15 @@ class _HomeScreenState extends State<HomeScreen> {
     // history stay silent, and events captured while the toggle was off
     // are dropped rather than replayed when it is switched on.
     final newEvents = _session.consumeEvents();
-    if (newEvents > 0) {
-      _vibration.buzzOnEvent(_session.vibrationEnabled);
+    if (newEvents.isNotEmpty) {
+      // One pulse for the batch, sized by the loudest sound in it. The
+      // notifications are synchronous, so a batch is a single event in
+      // practice; taking the max keeps "at most one buzz per event" true
+      // even if that ever changed — two back-to-back vibrate() calls would
+      // only cut the first one short.
+      final strength =
+          newEvents.map((e) => e.strength).reduce((a, b) => a > b ? a : b);
+      _vibration.buzzOnEvent(_session.vibrationEnabled, strength: strength);
     }
     setState(() {});
   }
@@ -142,8 +201,10 @@ class _HomeScreenState extends State<HomeScreen> {
         _probeRunning = false;
         _probeLevels = const {};
       });
+      await _background.stop();
       await _capture.stop();
       _session.stop();
+      _fallbackNoted = false;
     } else {
       if (await _ensurePermission()) {
         final started = await _capture.start();
@@ -159,10 +220,26 @@ class _HomeScreenState extends State<HomeScreen> {
           });
           if (mounted) setState(() => _probeRunning = probeOk);
           _session.start();
+
+          // Slice 5: ask for the background right here, while the app is
+          // still in the foreground — Android 14 refuses this call later.
+          _fallbackNoted = false;
+          final backgroundOk = await _background.start();
+
           if (mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Working now')),
-            );
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(
+                content: Text(
+                  backgroundOk
+                      ? 'Working now'
+                      : 'Working now — running with the app in front. Your '
+                          'phone may pause listening if you leave it.',
+                ),
+                duration: Duration(seconds: backgroundOk ? 3 : 6),
+              ));
+            // Already said it; don't repeat it on the next resume.
+            _fallbackNoted = !backgroundOk;
           }
         }
       }

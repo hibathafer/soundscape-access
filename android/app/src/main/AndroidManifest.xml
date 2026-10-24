@@ -1,8 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- prd.md > Sound capture: the session listens while active.
-         Normal-level permissions only; FOREGROUND_SERVICE* arrive in slice 5. -->
+         RECORD_AUDIO + VIBRATE from slice 1; FOREGROUND_SERVICE(_MICROPHONE)
+         and POST_NOTIFICATIONS added in slice 5. -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- Slice 5: keep the mic session alive while the app is not in front.
+         FOREGROUND_SERVICE_MICROPHONE is the Android 14 rule that lets a
+         microphone-typed service start only from the foreground. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+    <!-- Lets the session notice the service's ongoing notification where the
+         user has granted notifications; the service runs either way. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <application
         android:label="Soundscape Access"
         android:name="${applicationName}"
@@ -34,6 +43,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- Slice 5 — background session service. Declared type must match the
+             type passed to startForeground(); Android 14 rejects a mismatch. -->
+        <service
+            android:name=".MicForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
