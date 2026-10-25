@@ -9,17 +9,17 @@ status: approved
 
 # Soundscape Access
 
-A mobile app that makes a deaf or hard-of-hearing user aware of the sounds around them — where they came from, how strong they are, and what they actually are — during ordinary moments, not only in dangerous ones. The goal is to get as close as we can to natural hearing: "as if I can hear everything around me." A real starting point is enough; this does not have to be a super-app.
+A mobile app that helps a deaf or hard-of-hearing user notice and identify selected sounds around them during ordinary moments, not only in dangerous ones. It offers a visual and optional haptic view of sound strength and behavior; it does not replace hearing or identify where a sound came from. A real starting point is enough; this does not have to be a super-app.
 
 ## The Unique Kernel
-A live flash across the screen that represents a sound's **direction and intensity**, moving and fading as the source moves away, paired with an **icon that names the type of sound** (car, speech, door…). In other words, the phone stops being an alarm and becomes a **continuous sense of the environment**. If we deleted the flash and nobody noticed the difference, nothing distinctive would be left — this is the kernel of the project.
+A live visual pulse that represents a sound's **strength and behavior** (onset, repetition, and fade), paired with **artwork that names a supported sound category** (car, speech, door…). In other words, the phone offers a **visual sense of selected sounds in the environment**. If we deleted the pulse and nobody noticed the difference, nothing distinctive would be left — this is the kernel of the project. Direction was part of the initial idea, but was removed after the documented device tests found no reliable directional signal.
 
 ## Who It's For
 Deaf or hard-of-hearing people who want to feel the sound of their environment **in ordinary time**, not only when something is dangerous.
 What they do instead today: relying on constant watching, or alerts that are very limited (a doorbell, someone touching their shoulder) — there is no continuous sense of what is going on around them.
 
 ## The Core Loop
-The user opens the app and keeps it in front of them (screen on) → the app captures a sound → the phone **flashes from the direction of the sound** (stronger toward the source, weaker on the opposite side) and an **icon appears naming the sound type** → the user decides: ignore it, pay attention, or move → as the user or the source moves away, **the flash shifts toward the source, dims, and disappears**.
+The user opens the app and starts a session → the app captures a sound → the pulse describes its **strength and behavior**, and an **icon appears when a supported category is identified** → the user decides what to do → as the sound dies away, the pulse fades. No direction or distance measurement is claimed.
 The user comes back because the environment feels alive around them — "ears that stay on," by their own choice.
 
 ## Inspiration & Identity
@@ -31,20 +31,29 @@ In her words: "I am from the group with physical disabilities, so I know the com
 Her previous project: a simple MVP that listed the accessibility facilities available to people with physical disabilities (ramp? elevator?) — the questions she faces when going anywhere. This time she chose another group she cares about: deaf and hard-of-hearing people.
 
 ## What "Working" Looks Like
-The demo video (first minute): the app open on screen → a car horn or similar sound plays **from one side** (left / behind) → the phone **flashes immediately from that side and shows an icon for the sound type** → the source stops or moves away → **the flash shifts toward the source, dims, and disappears**.
-The "wow" moment she wants: "a different feeling toward sounds for the first time" — the sound environment reaching the user through the screen.
+The demo video (first minute): the app open on screen → a supported sound plays → the phone shows the corresponding category when recognized and a pulse that follows the sound's strength/behavior → the source stops → the pulse fades.
+The "wow" moment she wants: "a different feeling toward sounds for the first time" — the sound environment reaching the user through visual and optional haptic feedback.
 
 ## The POC Boundary
 In the first version (the agreed minimum):
-1. Capturing sounds and classifying them into **a limited set of categories (3–5)**; exact categories to be decided in `3-prd`.
-2. **A flash that tracks direction and intensity** and fades as distance grows.
-3. **An icon naming the sound type** (chosen approach: icons + flash).
+1. Capturing sounds and classifying them into the **five categories** specified in `prd.md`.
+2. **A visual pulse** that follows sound strength, onset, repetition, and fade; it does not track direction or distance.
+3. **Artwork naming a supported sound category**, with an honest unknown state.
 4. Running **with the screen on, phone in hand or in front of the user**.
 
 ## Later
 - **Always-on background operation (24/7) and vibration while the screen is off** (the sleep mode she described) — a stretch goal, to be attempted only if research (`4-spec`) shows it is feasible and time allows.
 - More sound categories and higher classification accuracy.
 - Public deployment — optional anyway.
+
+## Evidence-based revision
+
+The initial direction-tracking idea was removed on 2026-10-19 after four
+on-device microphone experiments on the Xiaomi 12T Pro did not establish
+a reliable directional signal. The learner chose the sound-behavior pulse
+as the kernel instead. The experiment evidence and decision are recorded
+in `devpost/spec.md` and `devpost/checklist.md`; direction is not a current
+feature or a delivery claim.
 
 ## Explicitly Cut
 - **Multiple vibration patterns** as an alternative to icons — they tire the user's memory and clutter the experience (her own concern about too much vibration).

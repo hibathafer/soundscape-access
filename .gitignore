@@ -1,5 +1,6 @@
 # Personal learning context — kept out of commits by default
 /devpost/learner-profile.md
+/door-knock-test.log
 
 # Local credentials — never commit
 .env

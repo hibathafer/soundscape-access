@@ -87,11 +87,28 @@ class YamnetClassifier {
   }
 
   /// Convenience: window -> every category that clears the threshold
-  /// (strongest first), or a single unknown when none does.
-  Future<List<CategoryGuess>> guesses(Float32List window) async {
+  /// (strongest first), a single unknown when none does, or null if skipped.
+  Future<List<CategoryGuess>?> guesses(Float32List window) async {
     final s = await scores(window);
-    if (s == null) return const [CategoryGuess(SoundCategory.unknown, 0.0)];
-    return guessesFromScores(s);
+    return guessesFromNullableScores(s);
+  }
+
+  /// Compact diagnostic data for one completed inference.
+  String diagnosticSummary(List<double> scores) {
+    final topIndices = List<int>.generate(scores.length, (i) => i)
+      ..sort((a, b) {
+        final byScore = scores[b].compareTo(scores[a]);
+        return byScore != 0 ? byScore : a.compareTo(b);
+      });
+    final top = topIndices.take(5).map((i) {
+      final label = i < labels.length ? labels[i] : '#$i';
+      return '$i:$label=${scores[i].toStringAsFixed(3)}';
+    }).join(', ');
+    final peaks = categoryPeaksFromScores(scores).entries
+        .map((entry) =>
+            '${entry.key.name}=${entry.value.toStringAsFixed(3)}')
+        .join(', ');
+    return 'CLS_DIAG top=[$top] category_peaks=[$peaks, unknown=fallback]';
   }
 
   /// Name of the single strongest class in a score vector (debug/tuning only).

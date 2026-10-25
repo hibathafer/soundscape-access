@@ -84,9 +84,8 @@
   <div class="expand">
     <b>Scope said</b> “open the app, keep it in front of you — flash + icons.”
     <b>Now we know exactly:</b> one screen with two buttons, a gentle permission step, a
-    “Working now” toast, five fixed categories, swipeable messenger-style bubbles,
-    red/orange/white color rules, unknown-sound handling, and the fallback if leaving
-    the app proves technically impossible.
+    “Working now” toast, five fixed categories, swipeable artwork, sound-strength colors,
+    unknown-sound handling, a Door-only Knock confirmation, and an honest background fallback.
   </div>
 
   <!-- ============ JOURNEY DIAGRAM ============ -->
@@ -131,9 +130,9 @@
         <!-- live capture loop -->
         <rect x="380" y="182" width="560" height="100" rx="14" fill="#1c2a3a" stroke="#2b3b4e" stroke-width="2"/>
         <text x="660" y="207" text-anchor="middle" fill="#f4b942" font-size="13" font-weight="700" letter-spacing="2">LIVE SESSION (CORE LOOP)</text>
-        <text x="660" y="232" text-anchor="middle" fill="#e8eef5" font-size="13.5">sound arrives → flash from source side + icon bubble</text>
-        <text x="660" y="253" text-anchor="middle" fill="#e8eef5" font-size="13.5">→ user glances / acts → source recedes → flash fades → repeat</text>
-        <text x="660" y="273" text-anchor="middle" fill="#9db0c4" font-size="12">unknown → white “?” bubble · two sounds → two bubbles · vibration optional</text>
+        <text x="660" y="232" text-anchor="middle" fill="#e8eef5" font-size="13.5">sound arrives → pulse + recognized category</text>
+        <text x="660" y="253" text-anchor="middle" fill="#e8eef5" font-size="13.5">→ user glances / acts → sound fades → pulse fades → repeat</text>
+        <text x="660" y="273" text-anchor="middle" fill="#9db0c4" font-size="12">unknown → neutral “?” · two sounds → two bubbles · vibration optional</text>
         <!-- loop back arrow -->
         <path d="M360 232 q-70 -110 130 -130" fill="none" stroke="#f4b942" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arr2)"/>
         <text x="180" y="185" text-anchor="middle" fill="#f4b942" font-size="12">Stop ends the session</text>
@@ -141,8 +140,8 @@
       <div class="fallback">
         <strong>Journey:</strong> Open app (one screen, two buttons) → first use: gentle mic explanation
         → system permission → Start → toast “Working now” → user leaves the app (session continues,
-        phone usable) → live loop: sound arrives → flash from source side + icon bubble → user glances/acts
-        → source recedes → flash fades → repeat (unknown → white “?” · two sounds → two bubbles ·
+        phone usable)         → live loop: sound arrives → pulse + recognized category → user glances/acts
+        → sound fades → pulse fades → repeat (unknown → neutral “?” · two sounds → two bubbles ·
         optional vibration) → Stop ends the session.
       </div>
     </div>
@@ -152,7 +151,7 @@
       <li><strong>First use</strong> — gentle one-line “why we need the microphone,” then the system permission dialog. Denied → friendly message + route to settings.</li>
       <li><strong>Start</strong> — toast “Working now.”</li>
       <li><strong>Leave the app</strong> — home screen or other apps; capture continues without obstructing phone use (fallback: session runs with the app in front if the platform refuses).</li>
-      <li><strong>Live loop</strong> — flash starts at the sound’s side and fades toward the opposite side; strength = sound strength; color = proximity (red near, orange farther, white unknown); swipeable icon bubble per sound; two sounds → two bubbles; optional vibration.</li>
+      <li><strong>Live loop</strong> — center pulse follows sound strength and behavior; red/orange represent stronger/lower sound level and neutral gray marks unknown; swipeable category artwork; two sounds → two bubbles; optional vibration. No direction or distance is inferred.</li>
       <li><strong>Stop</strong> — press the center button again; the session ends.</li>
     </ol>
     <div class="stepnav" id="stepnav" hidden>
@@ -171,12 +170,12 @@
     <h2>Screens, Layout &amp; Look and Feel</h2>
     <ul>
       <li><strong>One screen only:</strong> center = large <strong>Start/Stop</strong>; secondary = small
-      <strong>vibration toggle</strong>; live area = directional flash + floating bubbles.</li>
-      <li><strong>Dark background</strong> (light is the hero) · <strong>warm &amp; friendly</strong>
+      <strong>vibration toggle</strong>; live area = center pulse + floating artwork.</li>
+      <li><strong>Light background</strong> · <strong>warm &amp; friendly</strong>
       (“an app that supports you, not one that shouts at you”) · <strong>fairly large, clear type</strong>.</li>
-      <li><strong>Color rules:</strong> <span class="dot red"></span>red = very close ·
-      <span class="dot orange"></span>orange = farther · <span class="dot white"></span>white = type unknown.
-      Color is never the only signal — position and strength always carry it too.</li>
+      <li><strong>Color rules:</strong> <span class="dot red"></span>red = stronger sound level ·
+      <span class="dot orange"></span>orange = moderate level · neutral gray = low/unspecified level.
+      Color is never the only signal — words and pulse shape/size also carry information.</li>
     </ul>
   </section>
 
@@ -189,24 +188,26 @@
       <p>Cars/traffic · speech/voices · door/knocking · alarm/bell/beep · birds/nature.
       These five are the only types shown in this version.</p>
       <ul class="ac">
-        <li>Car-horn sample played from one side → car icon bubble during the sound.</li>
+        <li>A car-horn sample produces the car category when the classifier identifies it; playback position does not provide direction.</li>
         <li>No other sound type is ever promised to the user.</li>
       </ul>
+      <p>Normal category threshold: <code>0.35</code>. Door-only fallback: Knock label 353 must score
+      at least <code>0.12</code> and higher than Tap label 354 in at least two of the last three
+      completed inference windows. This heuristic can still produce false positives.</p>
     </details>
 
     <details>
-      <summary>Directional flash</summary>
-      <p>Starts on the sound’s side, strongest toward the source, fading toward the opposite side;
-      strength follows sound strength; shifts and disappears as the source/user moves away.</p>
+      <summary>Sound pulse</summary>
+      <p>Center pulse follows sound strength, onset, repetition, and fade. It does not indicate source direction or distance.</p>
       <ul class="ac">
-        <li>Sound from the right → flash starts right, dims toward the left.</li>
-        <li>Source stops/moves away → flash visibly fades out.</li>
+        <li>A sudden sound produces a sharp pulse; repeated and continuous sounds have distinct rhythms.</li>
+        <li>Sound stops → pulse visibly fades out.</li>
       </ul>
     </details>
 
     <details>
       <summary>Sound-type bubbles (messenger chat-head style)</summary>
-      <p>Floating, calm, non-blocking; category icon near the source direction; swipe down to dismiss.</p>
+      <p>Floating, calm, non-blocking category artwork; swipe down to dismiss. No source direction is shown.</p>
       <ul class="ac">
         <li>Recognized sound shows its icon bubble; swiping removes it without ending the session.</li>
       </ul>
@@ -215,8 +216,8 @@
     <details>
       <summary>Simultaneous sounds · Unknown sounds · Vibration</summary>
       <ul class="ac">
-        <li>Two sounds from different sides → two bubbles, distinguishable by color and position.</li>
-        <li>Unclassifiable sound → white “?” bubble, no crash, no special alarm; flash still shows direction.</li>
+        <li>Two sounds → two bubbles.</li>
+        <li>Unclassifiable sound → neutral-gray “?” bubble, no crash or special alarm; pulse still shows sound strength.</li>
         <li>Vibration toggle on → vibration when sounds are captured; toggle off → none (no patterns).</li>
       </ul>
       <p class="note">Learner on unknowns: “if it disappears, the situation becomes worse; our goal is
@@ -272,7 +273,7 @@
         <li><strong>Five categories fixed</strong> — “all of them — they are the best choice, most
         recurring, and most important.”</li>
         <li><strong>Manual vibration</strong> — constant vibration becomes annoying (her own concern).</li>
-        <li><strong>Visual direction</strong> — dark, warm/friendly, fairly large clear type.</li>
+        <li><strong>Visual style</strong> — light, warm/friendly, fairly large clear type; no direction is displayed.</li>
       </ul>
     </details>
   </section>
@@ -281,11 +282,11 @@
   <section>
     <h2><span class="tag now">NOW</span>What We're Building</h2>
     <ol>
-      <li>One dark, warm, single-screen app: Start/Stop + vibration toggle.</li>
+      <li>One light, warm, single-screen app: Start/Stop + vibration toggle.</li>
       <li>Gentle mic explanation on first use + friendly denied state.</li>
       <li>Session capture classifying into the five fixed categories.</li>
-      <li>Directional flash (side → fade, strength = sound, color = proximity).</li>
-      <li>Swipeable icon bubbles · white “?” for unknowns · two-sound display.</li>
+      <li>Center pulse (strength, onset, repetition, fade; no direction).</li>
+      <li>Swipeable category artwork · neutral-gray “?” for unknowns · two-sound display.</li>
       <li>Manual vibration during the session.</li>
       <li>Start toast, leaving the app without blocking phone use (or documented fallback), working Stop.</li>
       <li>Scope's one-minute demo behavior, demonstrable on screen.</li>
@@ -314,10 +315,8 @@
   <details>
     <summary>Open questions</summary>
     <ul>
-      <li><strong>Background capture for the session</strong> → investigate in <code>4-spec</code>;
-      does not block spec approval (fallback approved). Verified in <code>5-build</code> on-device.</li>
-      <li><strong>Direction detection approach</strong> → assumption: a single phone microphone can
-      approximate it well enough for the demo; confirm in <code>4-spec</code>.</li>
+      <li><strong>Background capture</strong> → service and fallback are implemented; verify survival and fallback on the target phone. No device-independent guarantee.</li>
+      <li><strong>Direction detection</strong> → resolved: removed after four device experiments found no reliable direction signal; no direction is claimed.</li>
       <li><strong>Assumptions labeled above:</strong> toggle stop · denied-permission message · quiet-state
       presentation. Confirm during review; none block <code>4-spec</code>.</li>
       <li><em>Twinkling Watermelon</em> reference link — cosmetic.</li>

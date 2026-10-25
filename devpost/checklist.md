@@ -44,22 +44,22 @@ Build mode: **fast with learn explanations** — learner chose a hybrid: fast ex
   Commit: `Add sound pulse kernel with behavior analyzer`
 
 - [x] **4. Sounds get names — YAMNet classification and bubbles**
-  Becomes usable: Recognized sounds show their swipeable icon ~~bubble~~ artwork (cars, speech, door, alarm, birds); unclassifiable sounds show the neutral "?" bubble; two sounds at once show two bubbles; the classifier's five categories are the only ones shown. Bundled labeled samples make every demo repeatable on demand. **Shipped 2026-10-22 in `eddfa6a` + `9f6d4ac`: model + labels bundled, index-set mapping, threshold → unknown, swipe-to-dismiss artwork, 5 labeled `.wav` samples.**
-  Why now: It completes the kernel's second half ("what is it" beside "where is it") and turns slices 1–3 from noise-reactive into sound-identifying — the PRD's core value.
+  Becomes usable: Recognized sounds show their swipeable category artwork (cars, speech, door, alarm, birds); unclassifiable sounds show the neutral "?" artwork; two sounds at once show two items; the classifier's five categories are the only ones shown. Labeled sample files are bundled for manual testing. **Shipped 2026-10-22 in `eddfa6a` + `9f6d4ac`: model + labels bundled, index-set mapping, threshold → unknown, swipe-to-dismiss artwork, 5 labeled `.wav` samples.**
+  Why now: It completes the kernel's second half ("what happened" and "what is it") and turns slices 1–3 from noise-reactive into sound-identifying — the PRD's core value. Direction is not a current feature.
   PRD ref: `prd.md > Sound capture and classification (session-based)`, `prd.md > Unknown sounds`, `prd.md > Simultaneous sounds`, `prd.md > Sound-type bubbles`
   Spec ref: `spec.md > Components` (Sound Classifier), `spec.md > External Services and Dependencies` (YAMNet asset), `spec.md > Data Model`
-  Build: Bundle `yamnet.tflite` + labels (resolve availability per the spec's failure mode); classifier wrapper (slice → scores → five categories + threshold → unknown); bubble widget (artwork per category, neutral "?" for unknown, swipe-down dismiss); event merging for simultaneous sounds; add labeled demo samples under `assets/samples/`.
-  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → category mapping + threshold → unknown tests pass; model file present in built assets; play the horn sample on device → logcat shows category "cars" + confidence; an unclassifiable sound → "unknown". **Done (2026-10-22): analyze clean, category tests pass, model bundled, 31/31 tests green. On-device sample playback still to be walked with the learner.**
+  Build: Bundle `yamnet_mediapipe.tflite` + labels; classifier wrapper (slice → scores → five categories + threshold → unknown); Door-only Knock confirmation; category artwork; event merging for simultaneous sounds; labeled samples under `assets/samples/`.
+  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → category mapping, thresholds, Door fallback, and Unknown tests pass; model and labels are bundled. **Automated checks confirmed (2026-10-25): 43 tests in 5 test files pass, and the debug APK builds.** Real-device playback/accuracy checks for the bundled samples and wooden knocks remain to be walked with the learner; automated tests use synthetic scores and do not prove real-world model accuracy.
   Learner check: Run the session, play each bundled sample — the right icon appears; swipe one away; try two sounds at once; play something odd and confirm the neutral "?" appears without breaking anything. **Pending — to be walked together.**
   Commit: `Move to a light, simpler UI; ship the classifier; document honestly`, `Replace the button-like bubble with plain sound artwork`
 
-- [ ] **5. Leaving the app keeps it listening (with the approved fallback)**
-  Becomes usable: After Start, the user goes to the home screen / other apps and capture genuinely continues (Android foreground service, type microphone); if the phone refuses or kills it, the documented fallback (session with the app in front) applies — either way the PRD's "must not obstruct phone use" intent is honestly served.
+- [ ] **5. Leaving the app attempts to keep it listening (with the approved fallback)**
+  Becomes usable: After Start, the app attempts to keep capture active using an Android microphone foreground service; if the phone refuses or kills it, the app reports the limitation and uses the foreground-session fallback. This is implemented in the Android service and UI, but background survival is device/power-policy dependent and is not guaranteed.
   Why now: It is the last risky platform behavior; everything visual already works, so a fallback here still leaves a demonstrable product.
   PRD ref: `prd.md > Product Decisions > Session must not obstruct phone use`, `prd.md > States and Boundaries` (Leaving the app), `prd.md > Open Questions`
   Spec ref: `spec.md > Components` (Session Controller), `spec.md > Where It Runs and How Someone Tries It` (Xiaomi setup notes), `spec.md > Important Failure Modes` (Background killed)
-  Build: Kotlin foreground service with `FOREGROUND_SERVICE_MICROPHONE` + service type declared; start it while the app is foregrounded on Start; stop on Stop; graceful detection of service death → fall back to foreground session with a brief friendly note; document Autostart/battery-exemption steps for MIUI/HyperOS.
-  Verify (mechanical): `flutter analyze` → no issues; build + install; start session → press Home → `adb logcat` shows the service running and mic frames still arriving while backgrounded; force-stop the service → app detects it and keeps a foreground session without crashing.
+  Build: Implemented: Kotlin foreground service with `FOREGROUND_SERVICE_MICROPHONE` + microphone service type; starts on Start and stops on Stop; service-state monitoring and foreground fallback are wired; Xiaomi Autostart/battery-exemption guidance is documented. Do not mark complete until the target-device checks below are performed.
+  Verify (mechanical): Still open — install on the target Xiaomi device; start a session and press Home; confirm with `adb logcat` that the service remains active and audio capture continues; force-stop the service and confirm the app detects it and falls back without crashing.
   Learner check: Start the session, press Home, play a sound — flash still works when you return / vibration still buzzes; if the phone killed it, confirm the app told you plainly and still works in front.
   Commit: `Add background session service with foreground fallback`
 
@@ -68,8 +68,8 @@ Build mode: **fast with learn explanations** — learner chose a hybrid: fast ex
   Why now: The demo video and the public repository are the submission; this slice makes the whole thing recordable and openable by others, and it is the last chance to catch integration gaps before the final review.
   PRD ref: `prd.md > What We're Building`, `prd.md > The Core Journey` (end to end)
   Spec ref: `spec.md > Where It Runs and How Someone Tries It`, `spec.md > File Structure`
-  Build: Walk the full journey fixing integration gaps; confirm Look and Feel matches the spec (~~dark~~ light, warm, large type, color semantics); write `README.md` (what it is, how to build/run, Xiaomi setup notes, sample sounds, no secrets); confirm `.gitignore` covers plan docs' private file and credentials; tidy debug affordances (keep the probe available but out of the demo path).
-  Verify (mechanical): `flutter analyze` → no issues; `flutter test` → full suite passes; `flutter build apk --debug` → success; `adb install` + launch; README exists and commands in it match reality (run them).
+  Build: README, Android build instructions, license reference, and focused `.gitignore` rules are present. Remaining: walk the full journey on-device, verify the documented UI and sample/unknown behavior, review public-repository contents (including research logs/assets), and record the demo video.
+  Verify (mechanical): `flutter analyze`, `flutter test` (43 tests), and `flutter build apk --debug` passed on 2026-10-25. Still open: install and run the APK on the target device; verify the full journey and README steps there.
   Learner check: Do the full run exactly as the README says, from install to Stop, and tell me anything that felt off — this is the version we record.
   Commit: `Make the demo journey ready with README and repo hygiene`
 
@@ -80,19 +80,15 @@ Build mode: **fast with learn explanations** — learner chose a hybrid: fast ex
 
 ## Final Review
 
-- [ ] Final review complete — feedback resolved and learner confirms ready to ship
+- [ ] Final review complete — technical/documentation review and local validations performed 2026-10-25; learner's target-device walkthrough and final ready-to-ship confirmation are still pending.
 
 ## Code Tour and App Map
 
 - [ ] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
 - [ ] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse (not verified present or completed in this review)
 
-Activity and evidence: [what actually happened; real document/test/code references; unfinished work if interrupted]
-Route and stops: [actual paths and symbols; guided stops completed, or reference-only route]
-Edit outcome: [tried/kept/reverted/declined/not applicable; verification if changed]
-Reflection: [offered/answered/declined/already covered — personal answer belongs only in the ignored profile]
-Activity mode: [live app and editor, explicit static fallback, focused alternative, prior practice, or recap]
+Learning-activity fields above remain open; no code tour, learner reflection, or app-map presentation was performed as part of this documentation and validation review.
 
 ## Revisions
 
@@ -107,4 +103,4 @@ Activity mode: [live app and editor, explicit static fallback, focused alternati
 
 - 2026-10-22 (sound-type bubbles): **Button-like chrome removed.** The circle, ring, shadow and colour wash were what made a bubble read as a *button*, and it is not one. The artwork now stands alone in a fixed 72 px box; loudness travels through the artwork's **scale** (0.75 → 1.0) instead of a coloured ring, applied as a `Transform` so the layout never re-flows as a sound changes. Shipped in `9f6d4ac`; `lib/ui/bubbles.dart` carries the reasoning.
 
-- 2026-10-22 (vibration, bug fix): **One buzz per captured event, not per notification.** `_onSessionChanged` used to buzz whenever `_session.events.isNotEmpty`, but `events` is rolling display history that is never drained while a session runs, and `onLevel` notifies on every tick (~10/s) — so after the first strike the app buzzed continuously for the rest of the session. Fixed by separating *display history* from *pending work*: `SessionController` gained `pendingEventCount` + `consumeEvents()`, and the screen drains before buzzing. The toggle is honoured at two layers (draining ignores it, so events caught while off are dropped rather than replayed when it is switched on; `buzzOnEvent` also early-returns when off). Stale post-stop levels can no longer arm an event (`onLevel` now requires an active session). 6 new tests in `test/vibration_trigger_test.dart`, 31/31 green. Shipped in `3666601`.
+- 2026-10-22 (vibration, bug fix): **One buzz per captured event, not per notification.** `_onSessionChanged` used to buzz whenever `_session.events.isNotEmpty`, but `events` is rolling display history that is never drained while a session runs, and `onLevel` notifies on every tick (~10/s) — so after the first strike the app buzzed continuously for the rest of the session. Fixed by separating *display history* from *pending work*: `SessionController` gained `pendingEventCount` + `consumeEvents()`, and the screen drains before buzzing. The toggle is honoured at two layers (draining ignores it, so events caught while off are dropped rather than replayed when it is switched on; `buzzOnEvent` also early-returns when off). Stale post-stop levels can no longer arm an event (`onLevel` now requires an active session). 6 new tests in `test/vibration_trigger_test.dart`, 31 tests passed in that historical suite; the current suite has 43 tests. Shipped in `3666601`.

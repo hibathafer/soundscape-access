@@ -78,9 +78,8 @@
 
   <div class="expand">
     <b>PRD said</b> “what it does.” <b>Now we know how:</b> Flutter/Dart (her language),
-    YAMNet inside the phone (free · offline · private), two microphones for direction —
-    tested on her Xiaomi 12T Pro <b>first</b>, honest fallback if it misbehaves,
-    Android 14 foreground service for leaving the app, zero servers and $0.
+    bundled YAMNet inside the phone, a behavior analyzer instead of direction detection,
+    a Door-only Knock confirmation, and an Android foreground-service attempt with an honest fallback.
   </div>
 
   <!-- ============ PLAIN LANGUAGE ============ -->
@@ -89,19 +88,19 @@
     <p>One Flutter program (Dart) on the phone, five parts talking to each other:</p>
     <ol>
       <li><strong>The ears</strong> — keeps listening during the session, hands over short audio slices.</li>
-      <li><strong>The name-giver</strong> — <em>YAMNet</em>, a tiny AI model <em>inside the phone</em>: “car / speech / door / alarm / birds / don’t know.” Nothing leaves the device.</li>
-      <li><strong>The compass</strong> — compares the phone’s two microphones to guess the side. <em>Tested on the real phone first</em>; if it misbehaves we adjust the plan together — never fake it.</li>
-      <li><strong>The brain</strong> — start/stop, the rules (known → colored bubble, unknown → white “?”, vibration only when toggled), and the attempt to keep listening after the user leaves the app.</li>
-      <li><strong>The face</strong> — the flash that ignites on the sound’s side and fades away, plus swipeable bubbles and the two buttons.</li>
+      <li><strong>The name-giver</strong> — bundled <em>YAMNet</em> scores 521 labels on-device and maps them to five categories or Unknown. Scores do not guarantee correct identification.</li>
+      <li><strong>The behavior reader</strong> — measures onset, repetition, and fade from the level stream. Direction was removed after device tests found no reliable signal.</li>
+      <li><strong>The brain</strong> — start/stop, known and Unknown artwork, optional vibration, and an attempt at background capture with a foreground fallback.</li>
+      <li><strong>The face</strong> — a center pulse describing sound strength and behavior, plus swipeable category artwork.</li>
     </ol>
-    <p class="quote">Why this shape: everything on the phone — no servers, no accounts, no internet, no keys, no cost; it starts instantly and records cleanly for the demo.</p>
+    <p class="quote">Audio inference runs on-device. The app has no server, account, API key, or cloud-classification integration; ambient audio is not uploaded by the app.</p>
   </section>
 
   <!-- ============ DATA FLOW DIAGRAM ============ -->
   <section>
     <h2>Architecture — Data Flow</h2>
     <div class="diagram" id="diagram">
-      <svg viewBox="0 0 940 430" role="img" aria-label="Architecture: audio in, classifier and direction, session controller, UI out">
+      <svg viewBox="0 0 940 430" role="img" aria-label="Architecture: audio in, classifier and behavior analyzer, session controller, UI out">
         <defs>
           <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="#39c6b0"/>
@@ -121,12 +120,12 @@
         <text x="415" y="72" text-anchor="middle" fill="#9db0c4" font-size="12">YAMNet (TFLite, on-device)</text>
         <text x="415" y="91" text-anchor="middle" fill="#9db0c4" font-size="12">→ 5 categories + confidence</text>
         <text x="415" y="108" text-anchor="middle" fill="#f4b942" font-size="11.5">weak → “unknown”</text>
-        <!-- direction -->
+        <!-- sound behavior -->
         <rect x="300" y="140" width="230" height="95" rx="12" fill="#16212e" stroke="#f4b942" stroke-width="2"/>
-        <text x="415" y="170" text-anchor="middle" fill="#f4b942" font-size="14.5" font-weight="700">🧭 Direction Estimator</text>
-        <text x="415" y="192" text-anchor="middle" fill="#9db0c4" font-size="12">2-mic level difference</text>
-        <text x="415" y="211" text-anchor="middle" fill="#9db0c4" font-size="12">→ side + strength</text>
-        <text x="415" y="228" text-anchor="middle" fill="#e2574c" font-size="11.5">⚠ research first (build step 1)</text>
+        <text x="415" y="170" text-anchor="middle" fill="#f4b942" font-size="14.5" font-weight="700">Sound Behavior Analyzer</text>
+        <text x="415" y="192" text-anchor="middle" fill="#9db0c4" font-size="12">onset · repetition · fade</text>
+        <text x="415" y="211" text-anchor="middle" fill="#9db0c4" font-size="12">measured from level stream</text>
+        <text x="415" y="228" text-anchor="middle" fill="#9db0c4" font-size="11.5">no direction estimate</text>
         <!-- session -->
         <rect x="600" y="60" width="200" height="115" rx="12" fill="#1c2a3a" stroke="#39c6b0" stroke-width="2"/>
         <text x="700" y="90" text-anchor="middle" fill="#e8eef5" font-size="14.5" font-weight="700">⚙ Session Controller</text>
@@ -136,7 +135,7 @@
         <!-- ui -->
         <rect x="600" y="240" width="200" height="95" rx="12" fill="#16212e" stroke="#7fd1a6" stroke-width="2"/>
         <text x="700" y="270" text-anchor="middle" fill="#7fd1a6" font-size="14.5" font-weight="700">✨ Flash + Bubbles UI</text>
-        <text x="700" y="292" text-anchor="middle" fill="#9db0c4" font-size="12">directional flash</text>
+        <text x="700" y="292" text-anchor="middle" fill="#9db0c4" font-size="12">center pulse · strength / behavior</text>
         <text x="700" y="311" text-anchor="middle" fill="#9db0c4" font-size="12">swipeable icon bubbles</text>
         <!-- vibration -->
         <rect x="600" y="355" width="200" height="60" rx="12" fill="#16212e" stroke="#2b3b4e" stroke-width="2"/>
@@ -158,7 +157,7 @@
       </svg>
       <div class="fallback">
         <strong>Flow:</strong> Audio Capture (mic 16 kHz) → Sound Classifier (YAMNet → 5 categories)
-        and Direction Estimator (2-mic levels, research first) → Session Controller (rules, events, fallback)
+        and Sound Behavior Analyzer (onset, repetition, fade) → Session Controller (rules, events, fallback)
         → Flash + Bubbles UI → Vibration Service (toggle only). App Shell commands feed the controller.
       </div>
     </div>
@@ -169,13 +168,13 @@
     <h2>The Core Journey Through the System</h2>
     <p class="note">PRD ref: <code>prd.md &gt; The Core Journey</code> — traced through the pieces.</p>
     <ol class="steps" id="steps">
-      <li><strong>Open app</strong> → App Shell renders the one dark screen from fresh in-memory state.</li>
+      <li><strong>Open app</strong> → App Shell renders the one light screen from fresh in-memory state.</li>
       <li><strong>First start</strong> → gentle mic explanation → system dialog. Denied → friendly message + settings.</li>
       <li><strong>Start pressed</strong> → controller sets session on → toast “Working now” → capture streams slices.</li>
       <li><strong>Leaves the app</strong> → Android foreground service (type: microphone), started from foreground; refused/killed → fallback: app stays in front.</li>
-      <li><strong>Each slice → two paths:</strong> classifier → category/confidence (weak → unknown) · direction estimator → side/strength.</li>
-      <li><strong>Events merge</strong> → flash ignites on the sound’s side with the proximity color + icon bubble appears; two sounds → two events.</li>
-      <li><strong>Vibration toggle on</strong> → one buzz per event. <strong>Source recedes</strong> → levels drop → flash fades out.</li>
+      <li><strong>Each slice → two paths:</strong> classifier → category/confidence (weak → unknown) · behavior analyzer → onset/repetition/strength.</li>
+      <li><strong>Events merge</strong> → center pulse describes strength and behavior + category artwork appears; two sounds → two events.</li>
+      <li><strong>Vibration toggle on</strong> → one buzz per event. <strong>Sound stops</strong> → levels drop → pulse fades out.</li>
       <li><strong>Stop</strong> → session off → capture, service, vibration all end.</li>
     </ol>
     <div class="stepnav" id="stepnav" hidden>
@@ -203,7 +202,7 @@
           <td>Free · offline · private; covers the five categories</td>
           <td>Medium accuracy — proves the idea, not perfection</td></tr>
       <tr><td><strong>Kotlin bridge</strong> (in <code>android/</code>)</td>
-          <td>Two-mic capture + Android 14 foreground service</td>
+          <td>Android audio capture + foreground service</td>
           <td>Some logic lives outside Dart — documented here</td></tr>
       <tr><td><strong><code>vibration</code> package</strong></td>
           <td>Manual, simple haptics — matches the PRD</td>
@@ -211,15 +210,15 @@
     </table>
     <p class="note">Docs: flutter.dev · dart.dev · pub.dev/packages/tflite_flutter · pub.dev/packages/vibration ·
       tensorflow.org/hub/tfhub/dev/google/yamnet · developer.android.com foreground-services · AudioRecord.
-      <strong>Unverified — check in build step 1:</strong> package versions, a ready <code>.tflite</code> YAMNet file,
-      and individual mic-source selection on the Xiaomi 12T Pro.</p>
+      <strong>Verified in the repository:</strong> the model, labels, and package lock are present. Background
+      capture survival still needs physical-device verification.</p>
   </section>
 
   <!-- ============ WHERE IT RUNS ============ -->
   <section>
     <h2>Where It Runs &amp; How Someone Tries It</h2>
     <ul>
-      <li><strong>Runtime:</strong> Android app — test device <strong>Xiaomi 12T Pro · Android 14 (SDK 34)</strong> (Flutter + ADB verified on the machine; device connects via USB debugging). Emulator only for pure UI — direction/classification tests run on the real phone.</li>
+      <li><strong>Runtime:</strong> Android app — documented test device <strong>Xiaomi 12T Pro · Android 14 (SDK 34)</strong>. Emulator can be used for UI checks; automated classifier tests use synthetic score vectors.</li>
       <li><strong>Dev start:</strong> <code>flutter run</code> · <strong>Demo/APK:</strong> <code>flutter build apk</code> → install → open <em>Soundscape Access</em> → Start → record screen.</li>
       <li><strong>Submission:</strong> short demo video + public GitHub repo required; <strong>deployment optional, not chosen</strong> (revisit in <code>6-ship</code>).</li>
       <li><strong>Xiaomi setup notes:</strong> USB debugging on; for background capture allow <em>Autostart</em> + battery-optimization exemption (MIUI/HyperOS kills background services).</li>
@@ -230,12 +229,12 @@
   <section>
     <h2>Look and Feel (implementable)</h2>
     <ul>
-      <li>Near-black surface (e.g. <code>#0F1720</code>) — light is the hero · Material 3 <strong>dark theme</strong>.</li>
+      <li>Soft off-white surface <code>#F4F7F6</code> with dark ink <code>#10201F</code> · Material 3 <strong>light theme</strong>.</li>
       <li>Warm &amp; friendly: rounded shapes, calm spacing, supportive copy — color carries data, never panic.</li>
       <li>Fairly large, glanceable type.</li>
-      <li><strong>Color semantics:</strong> <span style="color:var(--red)">■</span> proximity ≈ <code>#E2574C</code> ·
-          <span style="color:var(--orange)">■</span> farther ≈ <code>#F4B942</code> ·
-          <span style="color:#fff">■</span> unknown <code>#FFFFFF</code> — position &amp; strength always agree with color.</li>
+      <li><strong>Color semantics:</strong> strong level <code>#CE4338</code> · moderate level
+          <code>#C67C15</code> · low/unspecified level <code>#7E9995</code> (the key labels this “Unknown”).
+          This is separate from classifier Unknown. Words and pulse size/shape accompany color; it is not a distance measurement.</li>
     </ul>
   </section>
 
@@ -249,16 +248,16 @@
     </details>
     <details>
       <summary>🧠 Sound Classifier — <code>prd.md &gt; Unknown sounds</code></summary>
-      <p>TFLite model + labels from <code>assets/model/</code>; slice → scores → exactly five categories;
-      below confidence threshold → unknown (threshold tuned in the build — implementation detail).
+      <p><code>assets/model/yamnet_mediapipe.tflite</code> + 521 labels from <code>assets/model/labels.txt</code>;
+      15,600 mono samples at 16 kHz per inference. Normal category threshold is <code>0.35</code>.
+      Door-only fallback: Knock label 353 ≥ <code>0.12</code> and greater than Tap label 354 in at least two
+      of the last three completed windows. This heuristic does not guarantee against false positives.
       Files: <code>lib/classify/</code>.</p>
     </details>
     <details>
-      <summary>🧭 Direction Estimator — <code>prd.md &gt; Directional flash</code> <span class="tag risk">RESEARCH FIRST</span></summary>
-      <p>Two-mic level comparison (top vs bottom on the test device) → side + strength.
-      <strong>Build step 1</strong> verifies individual mic access + a repeatable level difference from a known side.
-      Two mics on one axis bias top/bottom; if unusable → plan-revision conversation — <em>never faked</em>.
-      Files: <code>lib/direction/</code> + Kotlin bridge.</p>
+      <summary>Sound Behavior Analyzer — <code>prd.md &gt; Sound pulse</code></summary>
+      <p>Measures onset, repetition, and fade from the level stream. Direction was removed after the documented
+      four-round device investigation found no reliable signal.</p>
     </details>
     <details>
       <summary>⚙ Session Controller — <code>prd.md &gt; Starting and stopping</code> / leaving the app</summary>
@@ -267,8 +266,8 @@
     </details>
     <details>
       <summary>✨ Flash + Bubbles UI — <code>prd.md &gt; Sound-type bubbles</code> / <code>Simultaneous sounds</code></summary>
-      <p>Consumes events: directional edge flash (side/strength/color, fades with level) + swipeable bubbles
-      (icon; white “?” unknown). Two events render independently. Files: <code>lib/ui/</code>.</p>
+      <p>Consumes events: center pulse (strength/behavior) + swipeable category artwork (neutral “?” for Unknown).
+      Two events render independently. Files: <code>lib/ui/</code>.</p>
     </details>
     <details>
       <summary>📳 Vibration Service — <code>prd.md &gt; Vibration (manual, simple)</code></summary>
@@ -284,7 +283,7 @@
       <tr><th>Piece</th><th>Lives</th><th>Leave &amp; return</th></tr>
       <tr><td><code>sessionActive</code></td><td>memory (controller)</td><td>restart = off, by design</td></tr>
       <tr><td><code>vibrationEnabled</code></td><td>memory (toggle)</td><td>resets to off</td></tr>
-      <tr><td><code>soundEvent {category, confidence, side, strength, color}</code></td><td>ephemeral per detection</td><td>gone</td></tr>
+      <tr><td><code>soundEvent {category, confidence, strength, color, onset, rhythm}</code></td><td>ephemeral per detection</td><td>gone</td></tr>
       <tr><td>YAMNet model + labels</td><td><code>assets/model/</code> read-only</td><td>unchanged</td></tr>
       <tr><td>Demo sounds</td><td><code>assets/samples/</code> — <strong>labeled sample data</strong></td><td>unchanged</td></tr>
     </table>
@@ -298,17 +297,17 @@
 ├── android/                    # Android host: manifest, permissions, Kotlin bridge
 │   └── app/src/main/
 │       ├── AndroidManifest.xml # RECORD_AUDIO, FOREGROUND_SERVICE(_MICROPHONE), VIBRATE
-│       └── kotlin/…/           # dual-mic AudioRecord bridge + foreground service
+│   └── kotlin/…/           # Android audio/foreground-service bridge
 ├── lib/
-│   ├── main.dart               # entry; dark theme
+│   ├── main.dart               # entry; light theme
 │   ├── ui/                     # home_screen · flash · bubbles
 │   ├── audio/                  # capture (16 kHz PCM) · permission flow
 │   ├── classify/               # yamnet.dart · categories.dart (5 + threshold)
-│   ├── direction/              # estimator.dart (+ research notes)
+│   ├── direction/              # gated-off research probe
 │   ├── session/                # controller · background · vibration_service
-│   └── theme.dart              # red / orange / white semantics
+│   └── theme.dart              # red / orange / neutral semantics
 ├── assets/
-│   ├── model/                  # yamnet.tflite + labels.txt (verify step 1)
+│   ├── model/                  # yamnet_mediapipe.tflite + labels.txt (bundled)
 │   └── samples/                # demo sounds (labeled sample data)
 ├── test/                       # mapping & session rules
 ├── devpost/                    # planning workspace (learner-profile.md gitignored)
@@ -320,9 +319,9 @@
   <!-- ============ DEPS ============ -->
   <section>
     <h2>External Services &amp; Dependencies</h2>
-    <p><strong>None external — $0, no keys, no rate limits.</strong> Bundled only: Flutter SDK (verified installed),
-    <code>tflite_flutter</code>, YAMNet model asset (Apache-2.0 — <code>.tflite</code> availability unverified),
-    <code>vibration</code>, Android OS APIs.</p>
+    <p><strong>No external runtime services.</strong> The app has no server, account, cloud API, or API-key
+    integration. Audio inference uses the bundled YAMNet model locally. Flutter packages and Android OS APIs
+    are dependencies.</p>
   </section>
 
   <!-- ============ FAILURE MODES ============ -->
@@ -331,20 +330,21 @@
     <details><summary><span class="tag fail">DENIED</span>Microphone permission refused</summary>
       <p>Friendly message + route to settings (<code>prd.md</code>); no crash.</p></details>
     <details><summary><span class="tag fail">QUIET / UNSURE</span>Silence or unclassifiable sound</summary>
-      <p>Silence → nothing; a real sound with no confident name → white “?” bubble, direction still shown.</p></details>
+      <p>Silence → nothing; a completed sound inference with no category above threshold → neutral “?” artwork.
+      A skipped/busy inference is not treated as Unknown.</p></details>
     <details><summary><span class="tag fail">BACKGROUND KILLED</span>Xiaomi MIUI/HyperOS kills the service</summary>
       <p>Approved fallback: session continues with the app in front; Autostart/battery exemption documented as setup.</p></details>
-    <details><summary><span class="tag fail">DIRECTION UNUSABLE</span>Individual mics not selectable / no level difference</summary>
-      <p>Plan-revision conversation with the learner; degraded options decided together — <strong>kernel never faked</strong>.</p></details>
-    <details><summary><span class="tag fail">MODEL MISSING</span>No ready <code>.tflite</code> YAMNet file</summary>
-      <p>Convert from TF Hub ourselves or swap an equally small model — decide in build step 1, before UI work.</p></details>
+    <details><summary><span class="tag fail">DIRECTION REMOVED</span>No reliable directional signal found</summary>
+      <p>Direction was removed after four device tests; the current pulse describes sound behavior, not source location.</p></details>
+    <details><summary><span class="tag fail">MODEL LOAD FAILURE</span>Bundled model missing or incompatible</summary>
+      <p>Classification falls back to Unknown while the pulse may continue. The bundled file exists; execution on every device is not guaranteed.</p></details>
   </section>
 
   <!-- ============ SIMPLIFIED ============ -->
   <section>
     <h2>What Was Simplified and Why</h2>
     <ul>
-      <li><strong>On-device YAMNet</strong> instead of a cloud API — free/offline/private; cloud stays a later enhancement only if the core works and time remains.</li>
+      <li><strong>On-device YAMNet</strong> instead of a cloud API — ambient audio is not uploaded by the app.</li>
       <li><strong>No persistence</strong> instead of settings/history — restart = fresh session (PRD).</li>
       <li><strong>One screen, no navigation</strong> — the product is one loop.</li>
       <li><strong>Bundled labeled samples</strong> for the demo instead of depending on live traffic on demand — the live path stays real and primary.</li>
@@ -361,22 +361,19 @@
         <li><strong>Flutter + Dart</strong> — one language to master → accepts platform bridges.</li>
         <li><strong>YAMNet now; cloud only later, if core succeeds and time remains</strong> → accepts medium accuracy.</li>
         <li><strong>Android real device, local run + recording</strong> → deployment optional for <code>6-ship</code>.</li>
-        <li><strong>Direction: test the phone first, decide from results</strong> → accepts the revision conversation if it fails.</li>
+        <li><strong>Direction research completed</strong> → no reliable directional signal; the learner removed direction from the kernel.</li>
         <li><strong>Background attempt + honest fallback</strong> (from the PRD).</li>
       </ul>
     </details>
     <details>
-      <summary><span class="tag risk">ONE USEFUL UNKNOWN</span>Two-mic direction on the Xiaomi 12T Pro</summary>
-      <p><strong>Question:</strong> can the app hear the two microphones separately, and is the level difference
-      usable for direction? <strong>Check:</strong> build step 1 — record selected mic sources with a sound from a
-      known side; <strong>evidence:</strong> repeatable per-mic level difference (top/bottom first, left/right assessed).
-      <strong>If not:</strong> the agreed plan-revision conversation. Outcome gets recorded here during the build.</p>
+      <summary>Answered historical investigation: direction on the Xiaomi 12T Pro</summary>
+      <p>Four on-device rounds found no reliable directional signal through the tested microphone/API path.
+      This finding is historical; direction is not a current feature.</p>
     </details>
     <details>
       <summary>Still unresolved</summary>
       <ul>
-        <li>Background feasibility → approach specified (FGS + fallback); device verification in <code>5-build</code>.</li>
-        <li>YAMNet <code>.tflite</code> availability → build step 1.</li>
+        <li>Background service survival and fallback → verify on the target phone; no device-independent guarantee.</li>
         <li>PRD labeled assumptions (toggle stop, denied copy, quiet state) → trivial, confirmed at review.</li>
         <li><em>Twinkling Watermelon</em> reference link — cosmetic.</li>
       </ul>

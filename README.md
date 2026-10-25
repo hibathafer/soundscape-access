@@ -2,28 +2,26 @@
 
 **Turn the sounds around you into something you can see and feel.**
 
-Soundscape Access is an Android accessibility app that listens to the
-environment and reports it in two non-auditory channels: a live visual
-"sound pulse", and vibration. It is built for people who are blind or
-have low vision, and for anyone in a situation where they cannot look up
-or listen closely.
+Soundscape Access is an Android accessibility app for deaf and
+hard-of-hearing people. It listens to the environment and reports sounds
+through a live visual pulse, category artwork, and optional vibration.
 
-Everything runs **on the device**. There is no server, no account, and
-no network access at runtime — the microphone stream never leaves the
-phone.
+Audio classification runs on-device; the app has no account, server, or
+cloud-classification integration. Ambient audio is processed locally and
+is not uploaded by the app.
 
 ---
 
 ## The problem
 
-A person who cannot see the room has to reconstruct it from hearing
-alone, which means:
+A person who cannot reliably hear the room may miss sounds that are
+important in ordinary moments:
 
-- **"Is that a car or a bird?"** — sounds arrive unnamed and unranked.
-- **"How loud is it, really?"** — loudness is the cue that tells you
-  whether something needs attention, but hearing alone is a poor gauge.
-- **"Is something happening repeatedly?"** — a steady hum and a series
-  of knocks feel different, and the difference matters.
+- **"What just happened?"** — sounds can arrive without a visual cue.
+- **"How strong is it?"** — a visual pulse gives a non-auditory indication
+  of sound level.
+- **"Is it repeating?"** — the pulse describes repeated and continuous
+  sound behavior.
 
 Existing tools tend to be either research prototypes with no product
 polish, or fixed single-purpose alerts. This project aims at a small,
@@ -45,8 +43,9 @@ environment starts describing itself.
 
 **It does not tell you where a sound is coming from.**
 
-This was attempted seriously and abandoned on evidence. Six logged runs
-of an on-device two-microphone probe live in the repository as
+This was attempted seriously and abandoned on evidence. Six runs
+of an on-device two-microphone probe are represented by the repository's
+timestamped research logs as
 `probe_log.txt` … `probe_log_r6_direction.txt`. The first four rounds
 are summarised in [`devpost/spec.md`](devpost/spec.md); the decisive
 ones failed the criteria that were fixed *before* the test ran:
@@ -79,22 +78,33 @@ microphone  →  0.975 s windows  →  YAMNet (TensorFlow Lite, on-device)
 - **Classification** — YAMNet scores are mapped by hand onto five
   categories (`cars`, `speech`, `door`, `alarm`, `birds`) using index
   sets built from the real `yamnet_class_map.csv`. Anything below the
-  confidence threshold (0.35) resolves to `unknown`. Two strong
-  categories at once produce two bubbles.
+  general confidence threshold (0.35) resolves to `unknown`. Door has an
+  additional Knock-only fallback: a Knock score of at least 0.12 that is
+  greater than Tap must occur in at least two of the last three completed
+  inference windows before one Door event is added. This heuristic can
+  still misclassify sounds; it does not guarantee accurate detection.
+  Two strong categories at once produce two bubbles.
 - **Behaviour** — loudness, onset (sudden vs gradual) and rhythm
   (continuous vs repeating) are measured from the level envelope, not
   guessed.
 - **Rendering** — the pulse is deliberately *mist*, not a defined
   shape: a centre lobe plus three offset lobes, heavily blurred.
 
+YAMNet is a general-purpose sound-event model, not a safety monitor.
+Its scores are not calibrated probabilities, and classification accuracy
+depends on the sound and recording conditions. Soundscape Access does not
+identify a sound's direction and must not be relied on for emergency
+warnings.
+
 ## Getting started
 
 **Requirements**
 
-- Flutter 3.44.6 (stable) or newer
-- An Android device or emulator (Android 14 / API 34 was used for
-  development)
-- A JDK for the Android build
+- Flutter 3.44.6 stable with Dart 3.12.2 (the verified development
+  toolchain; other versions are not verified here)
+- Android SDK and build tools configured for Flutter
+- An Android device (Xiaomi 12T Pro, Android 14 / API 34, was used for
+  development; other devices/versions are not verified here)
 
 **Run it**
 
@@ -113,13 +123,15 @@ flutter build apk --debug
 
 ```bash
 flutter analyze   # no issues
-flutter test      # 31 tests
+flutter test      # 43 tests in 5 test files
 ```
 
-The tests cover the category index map (disjointness, threshold
-behaviour, honest unknown fallback), the session/bubble rules, the
-behaviour analyzer, the vibration trigger (one buzz per captured
-event, toggle respected), and a widget test that renders the screen.
+The current test suite covers category mapping and thresholds, Door's
+rolling Knock confirmation, the skipped-inference versus Unknown
+distinction, session/bubble rules, behavior analysis, vibration
+event-triggering, and a widget test. These are automated tests; they do
+not establish classification accuracy across real-world recordings or
+devices.
 
 ## Planning documents
 
@@ -146,13 +158,22 @@ lib/
 android/        native audio input + probe instrumentation
 assets/model/   bundled YAMNet TFLite model and labels
 devpost/        scope.md, prd.md, spec.md
-probe_log*.txt  raw on-device research evidence
+probe_log*.txt  filtered on-device research traces (temporary service URLs redacted)
 ```
 
 ## Platform
 
 Android only. iOS and desktop targets are not implemented.
 
+The Android microphone foreground service is implemented, but background
+capture can be restricted by Android versions and device power-management
+policies. The app uses a foreground-session fallback; background listening
+is not guaranteed on every device.
+
 ## License
 
-[MIT](LICENSE)
+Project source is licensed under [MIT](LICENSE). Bundled model, label,
+sound-sample, and icon assets may have separate terms; verify their
+provenance and required notices before redistributing them. This
+repository does not currently include a separate asset-attribution
+inventory.

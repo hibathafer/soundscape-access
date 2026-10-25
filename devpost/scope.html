@@ -74,10 +74,9 @@
     <span class="badge">Status: Approved</span>
   </header>
 
-  <p class="oneline">A mobile app that makes a deaf or hard-of-hearing user aware of the sounds around
-  them — where they came from, how strong they are, and what they actually are — during ordinary
-  moments, not only in dangerous ones. The goal is to get as close as we can to natural hearing:
-  <em>“as if I can hear everything around me.”</em> A real starting point is enough; this does not
+  <p class="oneline">A mobile app that helps deaf and hard-of-hearing users notice selected sounds
+  during ordinary moments through visual and optional haptic feedback. It describes sound strength
+  and behavior, not source direction or distance. A real starting point is enough; this does not
   have to be a super-app.</p>
 
   <!-- ============ DIAGRAM: user → loop → proof ============ -->
@@ -104,11 +103,11 @@
         <rect x="360" y="90" width="270" height="44" rx="9" fill="#16212e" stroke="#2b3b4e"/>
         <text x="495" y="117" text-anchor="middle" fill="#e8eef5" font-size="14">1 · App open, screen on — sound captured</text>
         <rect x="360" y="144" width="270" height="44" rx="9" fill="#16212e" stroke="#2b3b4e"/>
-        <text x="495" y="171" text-anchor="middle" fill="#e8eef5" font-size="14">2 · Flash from source + icon of type</text>
+        <text x="495" y="171" text-anchor="middle" fill="#e8eef5" font-size="14">2 · Pulse + recognized sound category</text>
         <rect x="360" y="198" width="270" height="44" rx="9" fill="#16212e" stroke="#2b3b4e"/>
         <text x="495" y="225" text-anchor="middle" fill="#e8eef5" font-size="14">3 · User ignores / pays attention / moves</text>
         <rect x="360" y="252" width="270" height="44" rx="9" fill="#16212e" stroke="#2b3b4e"/>
-        <text x="495" y="279" text-anchor="middle" fill="#e8eef5" font-size="14">4 · Source recedes — flash fades out</text>
+        <text x="495" y="279" text-anchor="middle" fill="#e8eef5" font-size="14">4 · Sound fades — pulse fades out</text>
         <!-- loop back arrow -->
         <path d="M700 110 q40 60 0 120" fill="none" stroke="#f4b942" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arr2)"/>
         <text x="748" y="174" text-anchor="middle" fill="#f4b942" font-size="12">repeats —</text>
@@ -124,8 +123,8 @@
         <text x="678" y="260" text-anchor="middle" fill="#9db0c4" font-size="12">visible</text>
       </svg>
       <div class="fallback">
-        <strong>Flow:</strong> Deaf / HoH user → keeps the app in front of them → Core loop:
-        (1) sound captured → (2) flash from source + icon → (3) user reacts → (4) flash fades,
+        <strong>Flow:</strong> Deaf / HoH user → starts a session → Core loop:
+        (1) sound captured → (2) pulse + recognized category → (3) user reacts → (4) pulse fades,
         loop repeats → Proof: 60-second demo video.
       </div>
     </div>
@@ -134,10 +133,9 @@
   <!-- ============ KERNEL ============ -->
   <section>
     <h2>The Unique Kernel</h2>
-    <p>A live flash across the screen that represents a sound’s <strong>direction and intensity</strong>,
-    moving and fading as the source moves away, paired with an <strong>icon that names the type of
-    sound</strong> (car, speech, door…). In other words, the phone stops being an alarm and becomes a
-    <strong>continuous sense of the environment</strong>.</p>
+    <p>A live visual pulse represents sound <strong>strength and behavior</strong> (onset, repetition,
+    and fade), paired with artwork that names a <strong>supported sound category</strong> (car, speech,
+    door…). The app does not measure direction or distance.</p>
     <p class="quote">If we deleted the flash and nobody noticed the difference, nothing distinctive
     would be left — this is the kernel of the project.</p>
   </section>
@@ -156,13 +154,11 @@
   <section>
     <h2>The Core Loop</h2>
     <ol class="steps" id="steps">
-      <li>The user opens the app and keeps it in front of them (screen on).</li>
-      <li>The app captures a sound → the phone <strong>flashes from the direction of the sound</strong>
-          (stronger toward the source, weaker on the opposite side) and an <strong>icon appears naming
-          the sound type</strong>.</li>
+      <li>The user opens the app and starts a session.</li>
+      <li>The app captures a sound → the pulse describes its <strong>strength and behavior</strong>
+          and artwork names the category when recognized.</li>
       <li>The user decides: ignore it, pay attention, or move.</li>
-      <li>As the user or the source moves away, <strong>the flash shifts toward the source, dims, and
-          disappears</strong> — then the loop repeats.</li>
+      <li>As the sound dies away, <strong>the pulse fades</strong> — then the loop repeats.</li>
     </ol>
     <div class="stepnav" id="stepnav" hidden>
       <button type="button" data-i="0" aria-pressed="true">Step 1</button>
@@ -202,10 +198,9 @@
   <!-- ============ DONE ============ -->
   <section class="wow">
     <h2 style="color:var(--ok)">What “Working” Looks Like</h2>
-    <p><strong>The demo video (first minute):</strong> the app open on screen → a car horn or similar
-    sound plays <strong>from one side</strong> (left / behind) → the phone <strong>flashes immediately
-    from that side and shows an icon for the sound type</strong> → the source stops or moves away →
-    <strong>the flash shifts toward the source, dims, and disappears</strong>.</p>
+    <p><strong>The demo video (first minute):</strong> the app open on screen → a supported sound
+    plays → the phone shows a category when recognized and a pulse that follows sound strength and
+    behavior → the sound stops → <strong>the pulse fades</strong>.</p>
     <p class="quote">The “wow” moment she wants: “a different feeling toward sounds for the first
     time” — the sound environment reaching the user through the screen.</p>
   </section>
@@ -215,10 +210,11 @@
     <h2><span class="tag now">NOW</span>The POC Boundary</h2>
     <p>In the first version (the agreed minimum):</p>
     <ol>
-      <li>Capturing sounds and classifying them into <strong>a limited set of categories (3–5)</strong>;
-      exact categories to be decided in <code>3-prd</code>.</li>
-      <li><strong>A flash that tracks direction and intensity</strong> and fades as distance grows.</li>
-      <li><strong>An icon naming the sound type</strong> (chosen approach: icons + flash).</li>
+      <li>Capturing sounds and classifying them into the <strong>five categories</strong> specified in
+      <code>prd.md</code>.</li>
+      <li><strong>A visual pulse</strong> that follows sound strength, onset, repetition, and fade;
+      it does not track direction or distance.</li>
+      <li><strong>Artwork naming a supported sound category</strong>, with an honest unknown state.</li>
       <li>Running <strong>with the screen on, phone in hand or in front of the user</strong>.</li>
     </ol>
   </section>
@@ -233,6 +229,10 @@
       <li>Public deployment — optional anyway.</li>
     </ul>
   </details>
+
+  <p class="note">Revision: direction tracking was removed after four on-device experiments on the
+  Xiaomi 12T Pro found no reliable directional signal. The learner chose sound behavior as the
+  product kernel; see <code>spec.md</code> and <code>checklist.md</code> for the evidence.</p>
 
   <details>
     <summary><span class="tag cut">CUT</span>Explicitly cut — nothing disappears silently</summary>

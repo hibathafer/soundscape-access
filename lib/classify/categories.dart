@@ -30,6 +30,10 @@ class CategoryGuess {
 /// decision. YAMNet scores are uncalibrated, so this is a pragmatic cut.
 const double kConfidenceThreshold = 0.35;
 
+/// Lower candidate floor for the Knock label, confirmed across a rolling
+/// three-window history before it can add a Door event.
+const double kKnockCandidateThreshold = 0.12;
+
 /// YAMNet output index -> the category that index belongs to. Built by hand
 /// from the real `yamnet_class_map.csv` display names (assets/model/labels.txt,
 /// verified index-aligned to the model at build time) so the mapping is
@@ -95,6 +99,29 @@ const Set<int> _birdsIdx = {
 List<CategoryGuess> guessesFromScores(List<double> scores) {
   final ranked = <CategoryGuess>[];
 
+  final peaks = categoryPeaksFromScores(scores);
+  for (final entry in peaks.entries) {
+    if (entry.value >= kConfidenceThreshold) {
+      ranked.add(CategoryGuess(entry.key, entry.value));
+    }
+  }
+
+  if (ranked.isEmpty) {
+    return const [CategoryGuess(SoundCategory.unknown, 0.0)];
+  }
+  ranked.sort((a, b) => b.confidence.compareTo(a.confidence));
+  return ranked;
+}
+
+/// Preserves a skipped inference as no result; a real score vector with no
+/// category above threshold still resolves to the usual Unknown fallback.
+List<CategoryGuess>? guessesFromNullableScores(List<double>? scores) =>
+    scores == null ? null : guessesFromScores(scores);
+
+/// Peak model score for each named app category. Unknown is a fallback rather
+/// than a model class, so it is intentionally absent from this map.
+Map<SoundCategory, double> categoryPeaksFromScores(List<double> scores) {
+  final peaks = <SoundCategory, double>{};
   for (final cat in const [
     SoundCategory.cars,
     SoundCategory.speech,
@@ -106,16 +133,38 @@ List<CategoryGuess> guessesFromScores(List<double> scores) {
     for (final i in _membersOf(cat)) {
       if (i < scores.length && scores[i] > peak) peak = scores[i];
     }
-    if (peak >= kConfidenceThreshold) {
-      ranked.add(CategoryGuess(cat, peak));
-    }
+    peaks[cat] = peak;
+  }
+  return peaks;
+}
+
+/// Confirms repeated wooden-knock evidence without changing normal category
+/// thresholds or mappings. Returns a Door guess only when confirmation first
+/// begins.
+class DoorKnockConfirmation {
+  final List<bool> _candidates = [];
+  bool _confirmed = false;
+
+  CategoryGuess? addScores(List<double> scores) {
+    const knockIndex = 353;
+    const tapIndex = 354;
+    final knock = knockIndex < scores.length ? scores[knockIndex] : 0.0;
+    final tap = tapIndex < scores.length ? scores[tapIndex] : 0.0;
+    _candidates.add(
+      knock >= kKnockCandidateThreshold && knock > tap,
+    );
+    if (_candidates.length > 3) _candidates.removeAt(0);
+
+    final confirmed = _candidates.where((candidate) => candidate).length >= 2;
+    final newlyConfirmed = confirmed && !_confirmed;
+    _confirmed = confirmed;
+    return newlyConfirmed ? CategoryGuess(SoundCategory.door, knock) : null;
   }
 
-  if (ranked.isEmpty) {
-    return const [CategoryGuess(SoundCategory.unknown, 0.0)];
+  void reset() {
+    _candidates.clear();
+    _confirmed = false;
   }
-  ranked.sort((a, b) => b.confidence.compareTo(a.confidence));
-  return ranked;
 }
 
 /// The strongest single category, or unknown when nothing clears the

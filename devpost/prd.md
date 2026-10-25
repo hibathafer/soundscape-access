@@ -45,9 +45,9 @@ Established in the `3-prd` design beat (learner's answers):
 - **Warm and friendly character** — "an app that supports you, not one that shouts at you" (`scope.md > Inspiration & Identity`).
 - **Fairly large, clear type** — the user glances and returns to what they were doing.
 - **Color semantics** (content rules, not decoration):
-  - **Red** — very loud sound (usually a close source).
+  - **Red** — very loud sound level.
   - **Orange** — moderately loud sound.
-  - **White** — sound present but type unknown (neutral, outside the loudness scale). *(Revised 2026-10-22: white is invisible on the shipped light canvas, so unknown is a quiet neutral gray `#7E9995`, still deliberately outside the loudness scale.)*
+  - **Neutral gray** — the low/unspecified level bucket, outside the red/orange levels (`#7E9995` on the shipped light canvas). This is separate from a classifier Unknown result.
   - Color is never the only signal: the pulse's **brightness and shape** always carry the same information.
 - The pulse expands from the center with every sound and fades away, echoing the drama's "light as a channel of awareness" identity. *(Revised 2026-10-19 with the kernel change — loudness honestly approximates closeness, but no direction is claimed.)*
 
@@ -61,13 +61,22 @@ While a session is active, the app captures ambient sound and classifies it into
 4. Alarm / bell / beep (incl. reversing-vehicle beeps)
 5. Birds / nature
 
-- [ ] Acceptance criterion: with a car-horn sample played from one side, the app shows the car icon in a bubble during the sound.
+The normal category confidence threshold is **0.35**. Door also has a
+Door-only temporal fallback for repeated knocks: a completed inference
+window is a Knock candidate when YAMNet's Knock score (label 353) is at
+least **0.12** and greater than its Tap score (label 354). Door is added
+only when at least **two of the last three completed inference windows**
+are candidates. This does not change other category thresholds or
+mappings and does not guarantee freedom from false positives. One
+qualifying window by itself does not emit Door.
+
+- [ ] Acceptance criterion: a car-horn sample produces the car category when the classifier identifies it; no direction is inferred from its playback position.
 - [ ] Acceptance criterion: the five categories are the only types shown in this version; nothing else is promised to the user.
 
 ### Sound pulse (the visual vocabulary)
 The pulse is the kernel. Every real sound ignites it; its properties honestly describe the sound:
 - **Ignition and expansion**: the pulse starts at the screen center and expands outward; **brightness and size follow the sound's strength** (loud sounds = big, bright; soft sounds = small, dim).
-- **Color follows loudness** (a practical proxy for closeness): **red** very loud, **orange** moderate — see `Look and Feel`. No direction is claimed (removed after documented device research — `checklist.md > Revisions`).
+- **Color follows measured sound level**: **red** very loud, **orange** moderate — see `Look and Feel`. It is not a distance measurement, and no direction is claimed (removed after documented device research — `checklist.md > Revisions`).
 - **Onset shape**: a **sudden** sound (bang, door slam) produces a **sharp fast flash**; a **gradual** sound (speech building up, birds) produces a **soft quick fade-in**. Measured from how fast the level rises, not guessed.
 - **Rhythm**: **repeated** sounds (knocking, alarm beeps) produce **rhythm rings** — the pulse visibly re-strikes with each beat; a **continuous** sound (engine, speech) produces one **sustained** pulse that holds while the sound holds.
 - The pulse **fades out** as the sound dies, and the screen returns to calm.
@@ -109,7 +118,7 @@ The pulse is the kernel. Every real sound ignites it; its properties honestly de
 ## Product Decisions
 Decisions the learner made during the interview, with reasons:
 - **Icons + pulse for sound identity** — chosen over vibration patterns (patterns are hard to memorize and cluttered) and over text (reading breaks the continuous feel).
-- **Proximity colors (red/orange) + neutral white for unknown** — "I want the color to indicate the source's proximity"; white keeps unknowns outside the danger scale.
+- **Sound-level colors (red/orange) + neutral gray for low/unspecified level** — color is an approximate visual cue, not a measured distance; it is separate from the classifier's Unknown category.
 - **Unknown sounds are shown, not hidden** — "our goal is to help, so at least there remains a source for the sound… he can track it and find out."
 - **Session must not obstruct phone use** — a sound-sense must not force the user to stare at it; background capture for the *session* is required intent, with a documented fallback because it needs technical research.
 - **Five categories fixed for v1** — highest recurrence and importance, chosen from a suggested list and confirmed by the learner: "all of them — they are the best choice, most recurring, and most important."

@@ -72,8 +72,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     // telling the user why, so we say it plainly here.
     _backgroundSub = _background.stateChanges.listen((running) {
       if (!running && mounted && _session.sessionActive) {
-        _noteFallback('Listening continues in front — your phone may pause '
-            'the session while the app is in the background.');
+        _noteFallback(
+          'Listening continues in front — your phone may pause '
+          'the session while the app is in the background.',
+        );
       }
     });
   }
@@ -101,8 +103,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     if (!_session.sessionActive || _fallbackNoted) return;
     _background.isRunning().then((running) {
       if (!running && mounted && _session.sessionActive) {
-        _noteFallback('Listening continues in front — your phone may pause '
-            'the session while the app is in the background.');
+        _noteFallback(
+          'Listening continues in front — your phone may pause '
+          'the session while the app is in the background.',
+        );
       }
     });
   }
@@ -113,10 +117,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     _fallbackNoted = true;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 5),
-      ));
+      ..showSnackBar(
+        SnackBar(content: Text(message), duration: const Duration(seconds: 5)),
+      );
   }
 
   void _onSessionChanged() {
@@ -131,8 +134,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       // practice; taking the max keeps "at most one buzz per event" true
       // even if that ever changed — two back-to-back vibrate() calls would
       // only cut the first one short.
-      final strength =
-          newEvents.map((e) => e.strength).reduce((a, b) => a > b ? a : b);
+      final strength = newEvents
+          .map((e) => e.strength)
+          .reduce((a, b) => a > b ? a : b);
       _vibration.buzzOnEvent(_session.vibrationEnabled, strength: strength);
     }
     setState(() {});
@@ -174,19 +178,25 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     if (result == mic.PermissionResult.granted) return true;
 
     if (!mounted) return false;
-    setState(() => _permissionBlocked =
-        result == mic.PermissionResult.permanentlyDenied);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(result == mic.PermissionResult.permanentlyDenied
-            ? 'The microphone is blocked for this app. You can allow it in '
-                'Settings — tap the message for a hand.'
-            : 'No worries — the app stays quiet until the microphone is '
-                'allowed.'),
+    setState(
+      () =>
+          _permissionBlocked = result == mic.PermissionResult.permanentlyDenied,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          result == mic.PermissionResult.permanentlyDenied
+              ? 'The microphone is blocked for this app. You can allow it in '
+                    'Settings — tap the message for a hand.'
+              : 'No worries — the app stays quiet until the microphone is '
+                    'allowed.',
+        ),
         action: SnackBarAction(
           label: 'Settings',
           onPressed: mic.MicPermission.openSettings,
         ),
-      ));
+      ),
+    );
     return false;
   }
 
@@ -224,20 +234,51 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           // Slice 5: ask for the background right here, while the app is
           // still in the foreground — Android 14 refuses this call later.
           _fallbackNoted = false;
+
           final backgroundOk = await _background.start();
+
+          var notificationPermission = mic.PermissionResult.granted;
+          if (!await mic.MicPermission.isNotificationGranted()) {
+            notificationPermission =
+                await mic.MicPermission.requestNotification();
+          }
 
           if (mounted) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                content: Text(
-                  backgroundOk
-                      ? 'Working now'
-                      : 'Working now — running with the app in front. Your '
-                          'phone may pause listening if you leave it.',
+              ..showSnackBar(
+                SnackBar(
+                  content: Text(
+                    backgroundOk
+                        ? notificationPermission == mic.PermissionResult.granted
+                              ? 'Listening started. Background listening is '
+                                    'best-effort; your phone may pause it if you '
+                                    'leave the app.'
+                              : 'Listening started. Notifications are off, so the '
+                                    'service notice may not appear in the '
+                                    'notification drawer. Background listening is '
+                                    'best-effort; your phone may pause it if you '
+                                    'leave the app.'
+                        : 'Listening with the app open. Background listening '
+                              'may not be available, and your phone may pause '
+                              'the session if you leave the app.',
+                  ),
+                  action: notificationPermission != mic.PermissionResult.granted
+                      ? SnackBarAction(
+                          label: 'Settings',
+                          onPressed: mic.MicPermission.openSettings,
+                        )
+                      : null,
+                  duration: Duration(
+                    seconds:
+                        backgroundOk &&
+                            notificationPermission ==
+                                mic.PermissionResult.granted
+                        ? 3
+                        : 6,
+                  ),
                 ),
-                duration: Duration(seconds: backgroundOk ? 3 : 6),
-              ));
+              );
             // Already said it; don't repeat it on the next resume.
             _fallbackNoted = !backgroundOk;
           }
@@ -252,7 +293,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     if (_busy) return;
     if (_session.sessionActive) {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Stop the session before round 5')));
+        const SnackBar(content: Text('Stop the session before round 5')),
+      );
       return;
     }
     setState(() => _busy = true);
@@ -290,7 +332,23 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   /// Round 2: adds vrec / unprocessed / stereo channels — any signal that
   /// might carry direction after round 1 showed MIC+CAMCORDER are mixed.
   Widget _buildProbePanel() {
-    const order = ['mic', 'cam', 'vrc', 'unp', 'ref', 'micA', 'micB', 'uL', 'uR', 'top', 'bottom', 'stL', 'stR', 'vrec', 'unproc'];
+    const order = [
+      'mic',
+      'cam',
+      'vrc',
+      'unp',
+      'ref',
+      'micA',
+      'micB',
+      'uL',
+      'uR',
+      'top',
+      'bottom',
+      'stL',
+      'stR',
+      'vrec',
+      'unproc',
+    ];
     final present = order.where((k) => _probeLevels.containsKey(k)).toList();
 
     double norm(double? db) => (((db ?? -160) + 80) / 80).clamp(0.0, 1.0);
@@ -324,13 +382,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(_r5Running
-                  ? 'Round 5 — isolated stereo (research)'
-                  : 'Direction probe r4 (research)',
-              style: const TextStyle(
-                  color: SoundscapeColors.ink,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 13)),
+          Text(
+            _r5Running
+                ? 'Round 5 — isolated stereo (research)'
+                : 'Direction probe r4 (research)',
+            style: const TextStyle(
+              color: SoundscapeColors.ink,
+              fontWeight: FontWeight.w700,
+              fontSize: 13,
+            ),
+          ),
           const SizedBox(height: 8),
           for (final k in present) ...[
             _probeBar(k, norm(_probeLevels[k]), _probeLevels[k]),
@@ -339,8 +400,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           const SizedBox(height: 6),
           // Round-4 phase markers: tap while sounding so the logcat
           // analysis aligns exactly with each protocol phase.
-          const Text('Mark phase (tap while sounding):',
-              style: TextStyle(color: SoundscapeColors.muted, fontSize: 12)),
+          const Text(
+            'Mark phase (tap while sounding):',
+            style: TextStyle(color: SoundscapeColors.muted, fontSize: 12),
+          ),
           const SizedBox(height: 6),
           Wrap(
             spacing: 6,
@@ -348,9 +411,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             children: [
               for (final p in ['quiet', 'bottom', 'top', 'left', 'right'])
                 ActionChip(
-                  label: Text(p,
-                      style: const TextStyle(
-                          fontSize: 12, color: SoundscapeColors.ink)),
+                  label: Text(
+                    p,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: SoundscapeColors.ink,
+                    ),
+                  ),
                   backgroundColor: SoundscapeColors.surface,
                   side: const BorderSide(color: SoundscapeColors.line),
                   onPressed: () => debugPrint('PHASE $p MARK'),
@@ -358,9 +425,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ],
           ),
           const SizedBox(height: 8),
-          Text(verdict,
-              style:
-                  const TextStyle(color: SoundscapeColors.muted, fontSize: 13)),
+          Text(
+            verdict,
+            style: const TextStyle(color: SoundscapeColors.muted, fontSize: 13),
+          ),
         ],
       ),
     );
@@ -370,10 +438,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     return Row(
       children: [
         SizedBox(
-            width: 58,
-            child: Text(label,
-                style:
-                    const TextStyle(color: SoundscapeColors.muted, fontSize: 13))),
+          width: 58,
+          child: Text(
+            label,
+            style: const TextStyle(color: SoundscapeColors.muted, fontSize: 13),
+          ),
+        ),
         Expanded(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4),
@@ -382,19 +452,21 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               minHeight: 10,
               backgroundColor: SoundscapeColors.surface,
               valueColor: AlwaysStoppedAnimation(
-                  label == 'bottom'
-                      ? SoundscapeColors.farOrange
-                      : SoundscapeColors.accent),
+                label == 'bottom'
+                    ? SoundscapeColors.farOrange
+                    : SoundscapeColors.accent,
+              ),
             ),
           ),
         ),
         SizedBox(
-            width: 66,
-            child: Text(
-                db == null ? '--' : '${db.toStringAsFixed(1)} dB',
-                textAlign: TextAlign.right,
-                style:
-                    const TextStyle(color: SoundscapeColors.muted, fontSize: 13))),
+          width: 66,
+          child: Text(
+            db == null ? '--' : '${db.toStringAsFixed(1)} dB',
+            textAlign: TextAlign.right,
+            style: const TextStyle(color: SoundscapeColors.muted, fontSize: 13),
+          ),
+        ),
       ],
     );
   }
@@ -488,10 +560,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             child: Text(
                               _permissionBlocked
                                   ? 'The microphone is blocked.\n'
-                                      'Allow it in Settings to start.'
+                                        'Allow it in Settings to start.'
                                   : 'Press Start when you are ready.\n'
-                                      'You will feel and see the sounds '
-                                      'around you.',
+                                        'You will feel and see the sounds '
+                                        'around you.',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: SoundscapeColors.muted,
@@ -523,8 +595,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     // The label carries the state, not just the tint:
                     // a color change alone is not a readable signal.
                     TextButton.icon(
-                      onPressed: () => _session
-                          .setVibration(!_session.vibrationEnabled),
+                      onPressed: () =>
+                          _session.setVibration(!_session.vibrationEnabled),
                       icon: Icon(
                         Icons.vibration,
                         size: 18,
@@ -540,8 +612,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       ),
                       style: TextButton.styleFrom(
                         foregroundColor: SoundscapeColors.ink,
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         minimumSize: const Size(0, 40),
                         visualDensity: VisualDensity.compact,
                       ),
@@ -568,7 +639,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     value: _session.vibrationEnabled,
                     onChanged: (v) => _session.setVibration(v),
                     contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 18, vertical: 2),
+                      horizontal: 18,
+                      vertical: 2,
+                    ),
                     title: const Text(
                       'Vibrate on sounds',
                       style: TextStyle(
@@ -580,7 +653,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     subtitle: const Text(
                       'A buzz you can feel, for every sound detected.',
                       style: TextStyle(
-                          color: SoundscapeColors.muted, fontSize: 13),
+                        color: SoundscapeColors.muted,
+                        fontSize: 13,
+                      ),
                     ),
                     activeThumbColor: SoundscapeColors.accent,
                   ),
@@ -606,9 +681,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     disabledBackgroundColor: SoundscapeColors.surfaceMuted,
                     foregroundColor: SoundscapeColors.surface,
                     textStyle: const TextStyle(
-                        fontSize: 21, fontWeight: FontWeight.w700),
+                      fontSize: 21,
+                      fontWeight: FontWeight.w700,
+                    ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                   child: Text(active ? 'Stop' : 'Start'),
                 ),
@@ -623,9 +701,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     side: const BorderSide(color: SoundscapeColors.line),
                     textStyle: const TextStyle(fontSize: 14),
                   ),
-                  child: Text(_r5Running
-                      ? 'Stop R5 stereo test'
-                      : 'R5 stereo test (research)'),
+                  child: Text(
+                    _r5Running
+                        ? 'Stop R5 stereo test'
+                        : 'R5 stereo test (research)',
+                  ),
                 ),
               const SizedBox(height: 18),
             ],

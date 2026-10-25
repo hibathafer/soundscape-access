@@ -1,6 +1,6 @@
 name: soundscape_access
-description: "On-device soundscape accessor for blind and low-vision users —
-  turns the sounds around you into a live visual pulse and vibration."
+description: "On-device sound awareness app for deaf and hard-of-hearing users —
+  turns selected sounds into a live visual pulse and optional vibration."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

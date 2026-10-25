@@ -16,13 +16,13 @@ status: approved
 
 The app is one Flutter program (written in Dart) that runs on the phone. It has five simple parts that talk to each other:
 
-1. **The ears (Audio Capture)** — a small piece that keeps listening while the session runs and passes a slice of what it hears to the next part, many times per second.
-2. **The name-giver (Sound Classifier)** — a tiny AI model called **YAMNet** that lives *inside the phone*. It hears a slice and answers: "this sounds like a car / speech / a door / an alarm / birds / I don't know," with a confidence number. Nothing leaves the phone — free, works offline, private.
+1. **The ears (Audio Capture)** — a small piece that captures audio while the session runs and passes overlapping slices to the next part.
+2. **The name-giver (Sound Classifier)** — the bundled **YAMNet TensorFlow Lite** model runs on the phone. It scores 521 sound labels, which the app maps to five categories or an honest Unknown result. Audio classification is local; the app has no server or cloud-classification integration. Scores are not calibrated probabilities and do not guarantee correct identification.
 3. **The behavior reader (Sound Behavior Analyzer)** — watches how the level of the sound changes over time and describes its *behavior*: did it start suddenly (a bang) or gently (speech building)? is it repeating (knocking, beeps) or continuous (engine, voices)? is it fading away? *This replaced the original "compass" — four rounds of on-device experiments proved this phone gives apps one mixed audio signal with no direction in it (the full evidence trail is in `Decisions and Open Issues`), so we describe **how** the sound behaves instead of pretending to know **where** it came from. We never fake the direction.*
-4. **The brain (Session Controller)** — decides when a session starts and stops, applies the rules: known sound → colored bubble, unknown → white "?" bubble, vibration only when the user turned it on, and tries to keep listening after the user leaves the app (with the approved fallback: the app stays in front if the phone refuses).
+4. **The brain (Session Controller)** — decides when a session starts and stops, applies the rules: known sound → category artwork, unknown → neutral "?" artwork, vibration only when the user turned it on, and attempts Android background capture with a foreground-session fallback. Background operation is not guaranteed on every device.
 5. **The face (Pulse + Bubbles UI)** — the screen part everyone sees: the pulse that ignites at the center and expands outward with each sound, the swipeable icon bubbles, the two buttons.
 
-**Why this shape and nothing more elaborate:** everything runs on the phone — no servers, no accounts, no internet, no keys, no cost. A proof of concept must start instantly and record cleanly for the demo video, and the audience we serve deserves sounds that don't leave their device.
+**Why this shape and nothing more elaborate:** audio inference runs on the phone; the app has no server, account, API key, or cloud-classification integration. A proof of concept must start simply and record cleanly for the demo video, and ambient audio is not uploaded by the app.
 
 ## The Core Journey Through the System
 
@@ -34,7 +34,7 @@ PRD ref: `prd.md > The Core Journey`.
 3. **User presses Start** → Session Controller: sessionActive = true → toast **"Working now"** → Audio Capture begins streaming PCM slices.
 4. **User leaves the app** → Session Controller attempts the Android **foreground service (type: microphone)** so capture continues; if the phone refuses or kills it → approved fallback: session continues with the app in front (`prd.md > Open Questions`).
 5. **Each audio slice** flows two ways, in parallel:
-   - → **Sound Classifier (YAMNet)** → category + confidence. Confident result → mapped to one of the five categories; weak/unknown → white "?" (`prd.md > Unknown sounds`).
+   - → **Sound Classifier (YAMNet)** → category + score. Confident result → mapped to one of the five categories; weak/unknown → neutral "?" (`prd.md > Unknown sounds`).
    - → **Sound Behavior Analyzer** → onset (sudden/gradual), rhythm (repeating/continuous), strength from the level stream.
 6. **Results merge** in the Session Controller into a *sound event* {category, confidence, strength, color, onset, rhythm} → **Pulse + Bubbles UI**: the center-expanding pulse ignites (brightness/size ← strength, color ← loudness, shape ← onset/rhythm), icon bubble appears (swipeable); two sounds → two events, both shown (`prd.md > Simultaneous sounds`).
 7. **Vibration toggle on** → Vibration Service buzzes on captured events (`prd.md > Vibration (manual, simple)`).
@@ -44,7 +44,7 @@ PRD ref: `prd.md > The Core Journey`.
 
 | Choice | What it is | Why | Tradeoff accepted |
 |---|---|---|---|
-| **Flutter + Dart** (learner's choice) | One codebase → Android + iOS; UI framework | Learner: "I want to settle on one language and develop myself" | Platform-specific features (mic, vibration, background) need plugins/bridges — more moving parts than pure native |
+| **Flutter + Dart** (learner's choice) | UI and application framework; this project targets Android | Learner: "I want to settle on one language and develop myself" | Platform-specific features (mic, vibration, background) need plugins/bridges — more moving parts than pure native |
 | **YAMNet via `tflite_flutter`** (learner-agreed) | On-device sound classification model (TensorFlow Lite) | Free, offline, private; classes cover our five categories | Medium accuracy — proves the idea, not perfect on every device |
 | **Android (Kotlin) bridge in `android/`** | Host-side code for mic capture + foreground service | Android 14 requires real service/permission plumbing Flutter can't do alone | Some logic lives outside Dart — documented below |
 | **`vibration` package** | Simple on/off haptics | Matches the "manual, simple" decision; no patterns | None for this scope |
@@ -52,16 +52,16 @@ PRD ref: `prd.md > The Core Journey`.
 Documentation links:
 - Flutter: https://docs.flutter.dev · Dart: https://dart.dev/language
 - `tflite_flutter`: https://pub.dev/packages/tflite_flutter
-- YAMNet (model card): https://www.tensorflow.org/hub/tfhub/dev/google/yamnet — **unverified: a ready-to-use `.tflite` file and its labels file; confirm availability/size in the first build step; alternative = convert the SavedModel ourselves (flagged in `Important Failure Modes`).**
+- YAMNet (model card): https://www.tensorflow.org/hub/tfhub/dev/google/yamnet — the project bundles `assets/model/yamnet_mediapipe.tflite` (4,126,810 bytes) and the index-aligned `assets/model/labels.txt`; both are declared as Flutter assets. The model is loaded from the app bundle by `YamnetClassifier`, not downloaded at runtime.
 - `vibration`: https://pub.dev/packages/vibration
 - Foreground service types (Android 14, `microphone`): https://developer.android.com/guide/components/foreground-services
 - Recording audio from selected mic sources (Android `AudioRecord`): https://developer.android.com/reference/android/media/AudioRecord
 
-**Unverified — check early in the build:** exact package versions; whether individual (unmerged) microphone streams are selectable on the Xiaomi 12T Pro; Android 14's "start foreground service with microphone type only from foreground" rule as implemented.
+**Verified in the current project:** package constraints are in `pubspec.yaml` and resolved versions in `pubspec.lock`; the model and labels are present and wired as assets; the Android manifest declares a microphone foreground service and the app starts it from the foreground. Physical-device behavior and background survival still require device-level verification; Android and manufacturer power-management policies may prevent continued capture.
 
 ## Where It Runs and How Someone Tries It
 
-- **Runtime:** Android app on a real phone. Test device: **Xiaomi 12T Pro, Android 14 (SDK 34)**, connected via USB debugging (verified present: Flutter SDK + ADB on the dev machine). An emulator may be used for pure UI work — it has no real microphone, so **pulse and classification tests run on the real device**.
+- **Runtime:** Android app. The documented test device is **Xiaomi 12T Pro, Android 14 (SDK 34)**. An emulator can be used for UI checks. Automated classification tests use synthetic score vectors; real microphone and classification behavior require a physical-device check.
 - **Start (developer):** connect the phone → `flutter run` → app installs and opens.
 - **Start (for the demo video / a reviewer):** `flutter build apk` → install the APK on the phone → open **Soundscape Access** → press Start.
 - **Demo recording:** local screen recording of the phone (no deployment needed). Submission requires **a short demo video + a public GitHub repository**; deployment is optional and not chosen here (can be revisited in `6-ship`).
@@ -73,7 +73,7 @@ Carried forward from `prd.md > Look and Feel` and `scope.md > Inspiration & Iden
 - ~~**Dark, near-black surface** (e.g. deep blue-black like `#0F1720`) so light is the hero; Flutter Material 3 **dark theme** with custom colors can fully honor this.~~ **Revised 2026-10-22 (learner): shipped as a light theme.** `lib/theme.dart` uses a soft off-white canvas `#F4F7F6` with dark ink `#10201F`, teal accents, and the same proximity semantics restated for a light canvas. Reason recorded in `checklist.md > Revisions` — the dark surface read as clinical, and a light canvas let the pulse stay the only bright thing on screen. Flutter Material 3 light theme with custom colors honors the rest of the intent unchanged.
 - **Warm, friendly character:** rounded shapes, calm spacing, plain supportive copy ("Working now"), no alarm-red UI chrome; color is used for data, not to frighten.
 - **Fairly large, clear type:** default Material text scaled up; glanceable labels.
-- **Color semantics (exact values to implement):** proximity red ≈ `#E2574C`, farther orange ≈ `#F4B942`, unknown white `#FFFFFF`; the flash is a soft edge glow/gradient whose position and strength always carry the same information as the color. **Revised 2026-10-22 with the light canvas:** the shipped values live in `lib/theme.dart` — very close red `#CE4338` (4.7:1 on white, safe as text or fill), farther orange `#C67C15` (3.3:1: a dot/fill colour, not body text), and unknown is now a quiet neutral gray `#7E9995` instead of white, because pure white is invisible on a light canvas. The neutral sits deliberately outside the proximity scale so it can never read as "close" or "far". The flash remains a soft mist whose brightness and shape always carry the same information as the color.
+- **Color semantics:** the current `lib/theme.dart` maps strong level to red `#CE4338`, moderate level to orange `#C67C15`, and the low/unspecified level bucket to neutral gray `#7E9995` (shown as "Unknown" in the color key). This level bucket is separate from the classifier's Unknown category. Color is paired with text and pulse shape/size; it does not indicate direction or measured distance.
 - Stack constraint: Flutter themes cover all of the above; no design tooling beyond code is needed.
 
 ## Components
@@ -87,7 +87,9 @@ Keeps the microphone open for the session; streams short PCM slices (mono, 16 kH
 PRD ref: `prd.md > Features and Behavior > Sound capture and classification (session-based)`, `prd.md > States and Boundaries > First use`.
 
 ### Sound Classifier (YAMNet, on-device)
-Loads the TFLite model + labels from `assets/model/`; per slice returns scores → mapped to exactly five categories: cars/traffic, speech, door/knock, alarm/bell/beep, birds/nature. Below confidence threshold → **unknown**. Threshold is an implementation constant, tuned during the build against real sounds (not a learner decision).
+Loads `assets/model/yamnet_mediapipe.tflite` and 521 index-aligned labels from `assets/model/labels.txt`. It receives 15,600 mono PCM samples at 16 kHz (0.975 seconds) and produces 521 scores. Capture advances by approximately 8,000 samples (0.5 seconds) between windows. The normal category threshold is `0.35`; each named category uses the peak score among its mapped labels. Categories are cars/traffic, speech, door/knock, alarm/bell/beep, and birds/nature. A skipped inference is not Unknown; a completed score vector with no category above threshold resolves to Unknown.
+
+Door-only temporal fallback: for each completed score vector, Knock (YAMNet label index 353) is a candidate when its score is at least `0.12` and greater than Tap (index 354). Two candidates within the rolling last three completed inference windows add a Door event once on the false-to-true confirmation transition. It does not alter the global threshold or other category mappings. Confirmation history resets on null/skipped inference, stop, and fresh capture start. This is a heuristic, not a guarantee against false positives.
 PRD ref: `prd.md > Sound capture and classification`, `prd.md > Unknown sounds`.
 
 ### Sound Behavior Analyzer
@@ -150,7 +152,7 @@ soundscape-access/
 │   │   └── vibration_service.dart
 │   └── theme.dart              # colors: red/orange/neutral semantics, light palette
 ├── assets/
-│   ├── model/                  # yamnet.tflite + labels.txt (verified in build step 1)
+│   ├── model/                  # yamnet_mediapipe.tflite + labels.txt (bundled)
 │   └── samples/                # demo sounds (labeled sample data)
 ├── test/                       # tests for classifier mapping, session rules
 ├── devpost/                    # Devpost learning workspace (learner-profile.md gitignored)
@@ -163,27 +165,27 @@ The learner should be able to read this tree and know where everything lives; `5
 
 ## External Services and Dependencies
 
-**None external.** No servers, no APIs, no accounts, no keys, no paid or rate-limited services — cost: **$0**, limits: **none**. Everything else is a bundled library or asset:
+**No external runtime services.** The app has no server, cloud API, account, or API key integration. Audio inference uses the bundled model locally. Flutter packages and OS APIs are dependencies, not external runtime services:
 
 | Dependency | Type | Link | Notes |
 |---|---|---|---|
 | Flutter SDK / Dart | toolchain | docs.flutter.dev | Installed on the dev machine (verified) |
 | `tflite_flutter` | pub package | pub.dev/packages/tflite_flutter | version to pin at build |
-| YAMNet model | bundled asset (Apache-2.0) | tensorflow.org/hub/tfhub/dev/google/yamnet | availability of a `.tflite` copy unverified — see failure modes |
+| YAMNet model + labels | bundled asset | tensorflow.org/hub/tfhub/dev/google/yamnet | `assets/model/yamnet_mediapipe.tflite` and `labels.txt`; runtime loading is local |
 | `vibration` | pub package | pub.dev/packages/vibration | — |
 | Android AudioRecord / FGS APIs | OS built-in | developer.android.com | no key needed |
 
 ## Important Failure Modes
 
 - **Microphone permission denied** → friendly message + button opening device settings (as agreed in the PRD); app stays usable for nothing else. (`prd.md > Permission denied`)
-- **Classifier unsure / silent environment** → no bubble for silence; white "?" bubble when a sound exists but can't be named — never a crash, never a hidden sound. (`prd.md > Unknown sounds`)
+- **Classifier unsure / silent environment** → no bubble for silence; neutral "?" artwork when a completed sound inference cannot be named — never a crash, never a hidden sound. A skipped inference is not an Unknown result. (`prd.md > Unknown sounds`)
 - **Background capture refused/killed (Xiaomi MIUI/HyperOS)** → approved fallback: session keeps running with the app in front; setup note (Autostart/battery exemption) documented in `Where It Runs`. (`prd.md > Open Questions`)
 - **Two-mic direction not available on this device** → **resolved (negative) after four experiment rounds**; the kernel was revised by learner decision to the sound-behavior vocabulary (center pulse, strength, color, onset, rhythm) — direction is never faked. Evidence and the full decision trail: `Decisions and Open Issues` below, `checklist.md > Revisions`, `probe_log*.txt`.
-- **YAMNet `.tflite` file unavailable/incompatible** → convert from the TensorFlow Hub model ourselves, or swap to an equally small sound-classification model — decide in build step 1, before UI work.
+- **Bundled model missing or fails to load** → classification cannot name sounds and falls back to Unknown; the pulse can still work. The current model and labels are present in the repository, but successful execution on every device is not guaranteed.
 
 ## What Was Simplified and Why
 
-- **On-device YAMNet** instead of a cloud classification API — learner-agreed: free, offline, private; a cloud option stays a possible later enhancement only if the core succeeds and time remains.
+- **On-device YAMNet** instead of a cloud classification API — learner-agreed: local inference without sending ambient audio to a server; a cloud option is outside this version.
 - **No persistence at all** instead of settings/history — the PRD stores nothing; restart = fresh session.
 - **One screen, no navigation/settings** — the whole product is one loop; a settings surface is a later enhancement.
 - **Bundled labeled sample sounds** for the demo instead of depending on live traffic outside — the demo must work in a recording on demand (samples are labeled as sample data; the live path remains real and primary).
@@ -200,13 +202,12 @@ The learner should be able to read this tree and know where everything lives; `5
 
 **Implementation details derived from those decisions:** the packages, file layout, category threshold, and event shape above — implementation choices, not learner decisions.
 
-**One useful unknown (agreed investigation):**
-- **Can this app hear the two microphones separately on the Xiaomi 12T Pro, and is the level difference usable for direction?** Clarified by: build step 1 — record from selected mic sources while a sound comes from a known side, compare levels on screen. Evidence needed: a repeatable per-mic level difference (top/bottom first; left/right assessed separately). If unavailable → the agreed plan-revision conversation, options presented honestly (never fake the kernel). Record the outcome here during the build.
+**Answered investigation (historical):**
+- **Can this app hear the two microphones separately on the Xiaomi 12T Pro, and is the level difference usable for direction?** This was investigated in four on-device rounds and answered no for that device/API path. The original directional kernel was removed by learner decision; the app describes sound behavior instead. The historical experiments below remain as evidence, not as open work.
 - **OUTCOME (2026-10-18/19, slice 2): ANSWERED — NO. Four rounds of on-device experiments on the Xiaomi 12T Pro (Android 14) confirm no directional signal is obtainable by a normal app.** Round 1: `MIC` + `CAMCORDER`, 220 samples — sustained loud near-field sound gave ~0.0–0.2 dB between sources; louder side near-random (48 vs 46). Round 2: widened to five inputs (`CAMCORDER`, `MIC`, `VOICE_RECOGNITION`, `UNPROCESSED` which bypasses AGC, and stereo L/R channels), 446 samples — stereo left == right in 446/446; during sustained loud sound (avg ≥ 65 dB) every pair within ~0.9 dB mean; large spreads (up to 25.8 dB) occurred only at sound onsets/offsets and the "loudest" source flipped between consecutive 100 ms samples — timing skew between capture buffers, not spatial information. Round 3 (device-selection avenue): `AudioManager.getDevices()` exposed **two physical `TYPE_BUILTIN_MIC` devices (id 17, id 19)**, but when two captures ran together the policy pinned both to one device; the parallel-capture offset was a constant ~8–10 dB that never flipped with sound position — independent AGC instances on one mixed signal. Round 4 (source × device matrix, learner-run protocol with per-phase marker taps): all four sources (`MIC`, `CAMCORDER`, `VOICE_RECOGNITION`, `UNPROCESSED`) plus a no-preference reference routed to the **same single device**; per-phase source-vs-reference differences were **within ±0.2 dB in every phase** (quiet/top/bottom/left/right; ~940 timestamped samples). Also learned: with concurrent captures the policy honors only the first capture's device preference — both physical mics are never exposed simultaneously. Evidence: `probe_log.txt`, `probe_log_r2.txt`, `probe_log_r3.txt`, `probe_log_r4.txt` (timestamped, incl. `MicProbe` routing logs and `PHASE` markers).
 - **KERNEL DECISION (2026-10-19, learner): direction removed; the kernel becomes the sound-behavior vocabulary.** After reviewing the four-round evidence, the learner chose to keep building the honest core rather than drop it: a center-expanding **pulse** whose brightness/size follow the sound's strength, color follows loudness (red very loud / orange moderate — an honest closeness proxy, no direction claimed), and whose **onset shape** (sudden sharp flash vs soft fade-in), **rhythm** (re-strike rings for knocks/beeps vs one sustained pulse), and **fade-out** describe how the sound behaves — all measured from the real level stream by the Sound Behavior Analyzer, never guessed. Learner's words: "this is a learning hackathon and the value is building something real and effective." The direction research stands as a documented finding (reproducible protocol + logs), not a failure.
 
 **Still unresolved (carryover):**
-- `prd.md > Open Questions` — background capture feasibility: approach now specified (FGS type `microphone` from foreground; fallback foreground session); device verification happens in `5-build`.
-- YAMNet `.tflite` asset availability — resolve in build step 1.
+- `prd.md > Open Questions` — verify background capture and fallback behavior on the target Xiaomi device; code and manifest are present, but device-specific survival has not been established by the current automated tests.
 - `prd.md` labeled assumptions (toggle stop, denied-permission copy, quiet-state presentation) — trivial, confirmed at review unless changed.
 - *Twinkling Watermelon* reference link — cosmetic.

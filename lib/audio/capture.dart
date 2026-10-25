@@ -26,6 +26,8 @@ class AudioCapture {
 
   /// The on-device model; loaded once in [start], reused across sessions.
   final YamnetClassifier classifier;
+  final _doorKnockConfirmation = DoorKnockConfirmation();
+  int _captureGeneration = 0;
 
   final _recorder = AudioRecorder();
   StreamSubscription<Amplitude>? _ampSub;
@@ -61,6 +63,8 @@ class AudioCapture {
 
   Future<bool> start() async {
     if (_wantCapture) return true;
+    _captureGeneration++;
+    _doorKnockConfirmation.reset();
     if (!await _recorder.hasPermission()) return false;
 
     // The model is a bundled asset: this is a local load, never a download.
@@ -209,28 +213,35 @@ class AudioCapture {
     }
     if (peak < _silencePeak) return; // digital-ish silence: nothing to name
 
-    _nameWindow(window, peak);
+    _nameWindow(window, peak, _captureGeneration);
   }
 
-  Future<void> _nameWindow(Float32List window, double peak) async {
+  Future<void> _nameWindow(
+    Float32List window,
+    double peak,
+    int generation,
+  ) async {
     // One inference per window; the guesses come straight from its scores.
     final scores = await classifier.scores(window);
-    if (!_wantCapture) return; // session ended while we were inferring
+    if (generation != _captureGeneration) return;
+    if (!_wantCapture || scores == null) {
+      _doorKnockConfirmation.reset();
+      return; // a skipped inference is not an unknown sound
+    }
+    final guesses = guessesFromScores(scores).toList();
+    final knockGuess = _doorKnockConfirmation.addScores(scores);
+    if (knockGuess != null &&
+        !guesses.any((guess) => guess.category == SoundCategory.door)) {
+      guesses.removeWhere((guess) => guess.category == SoundCategory.unknown);
+      guesses.add(knockGuess);
+    }
+
+    debugPrint(classifier.diagnosticSummary(scores));
 
     // dBFS -> the same 0..1 scale the pulse uses, so a bubble's red/orange
     // means exactly what the pulse's red/orange means (prd.md > proximity).
     final db = peak <= 1e-4 ? -80.0 : 20.0 * math.log(peak) / math.ln10;
     final strength = ((db + 60) / 60).clamp(0.0, 1.0);
-
-    // Model unavailable/not ready: still say "a sound is here, unnamed"
-    // (prd.md > Unknown sounds) rather than say nothing.
-    final guesses =
-        scores == null ? const <CategoryGuess>[] : guessesFromScores(scores);
-    if (guesses.isEmpty) {
-      _session.onSound(SoundCategory.unknown, 0.0, strength.toDouble());
-      debugPrint('CLS unknown (no model) lvl=${strength.toStringAsFixed(2)}');
-      return;
-    }
 
     for (final g in guesses) {
       _session.onSound(g.category, g.confidence, strength.toDouble());
@@ -238,8 +249,7 @@ class AudioCapture {
     debugPrint(
       'CLS ${guesses.map((g) => g.category.name).join('+')} '
       'conf=${guesses.first.confidence.toStringAsFixed(2)} '
-      'lvl=${strength.toStringAsFixed(2)} '
-      '${scores == null ? '' : 'top=${classifier.topLabel(scores)}'}',
+      'lvl=${strength.toStringAsFixed(2)}',
     );
   }
 
@@ -247,6 +257,8 @@ class AudioCapture {
     // Stop wanting sound first: teardown raises end-of-stream callbacks, and
     // those must not schedule a reopen.
     _wantCapture = false;
+    _captureGeneration++;
+    _doorKnockConfirmation.reset();
     _watchdog?.cancel();
     _watchdog = null;
     _session.onLevel(0);
@@ -255,6 +267,8 @@ class AudioCapture {
 
   void dispose() {
     _wantCapture = false;
+    _captureGeneration++;
+    _doorKnockConfirmation.reset();
     _watchdog?.cancel();
     _watchdog = null;
     _ampSub?.cancel();
