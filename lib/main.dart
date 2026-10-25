@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'theme.dart';
-import 'ui/home_screen.dart';
+import 'ui/splash_screen.dart';
 
 void main() => runApp(const SoundscapeApp());
 
@@ -33,7 +33,7 @@ class SoundscapeApp extends StatelessWidget {
           bodyMedium: TextStyle(fontSize: 16, color: SoundscapeColors.ink),
         ),
       ),
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
