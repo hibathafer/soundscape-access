@@ -12,6 +12,20 @@ is not uploaded by the app.
 
 ---
 
+## App Interface
+
+<p align="center">
+  <img src="docs/screenshots/01_ready_screen.jpg" width="30%" alt="Ready Screen" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/screenshots/02_vibration_toggle.jpg" width="30%" alt="Vibration Toggle and Status" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/screenshots/03_listening_pulse.jpg" width="30%" alt="Active Listening Pulse with Artwork" />
+</p>
+
+*From left to right: (1) Setup screen with Start button and colour key, (2) Optional vibration toggle and background session notification, (3) Live session showing visual pulse and detected sound artwork (with fallback).*
+
+---
+
 ## The problem
 
 A person who cannot reliably hear the room may miss sounds that are
